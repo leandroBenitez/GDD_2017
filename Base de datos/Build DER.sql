@@ -1,153 +1,222 @@
-Create Table Dim_Funcionalidad
-(
-	Funcionalidad_Id int PRIMARY KEY IDENTITY(1,1),
-	Funcionalidad_Desc nvarchar(250)
-)
+--Drop de tablas
+IF OBJECT_ID('PAGO_AGIL.Rl_DevolucioxFactura', 'U') IS NOT NULL 
+  DROP TABLE PAGO_AGIL.Rl_DevolucioxFactura;
 
-Create Table Dim_Rol
+IF OBJECT_ID('PAGO_AGIL.RL_PagoxFactura', 'U') IS NOT NULL 
+  DROP TABLE PAGO_AGIL.RL_PagoxFactura;
+  
+IF OBJECT_ID('PAGO_AGIL.RL_UsuarioxSucursal', 'U') IS NOT NULL 
+  DROP TABLE PAGO_AGIL.RL_UsuarioxSucursal;
+
+IF OBJECT_ID('PAGO_AGIL.Ft_Pago', 'U') IS NOT NULL 
+  DROP TABLE PAGO_AGIL.Ft_Pago;
+
+IF OBJECT_ID('PAGO_AGIL.Ft_Devolucion', 'U') IS NOT NULL 
+  DROP TABLE PAGO_AGIL.Ft_Devolucion;
+  
+IF OBJECT_ID('PAGO_AGIL.Dim_Motivo_Dev', 'U') IS NOT NULL 
+  DROP TABLE PAGO_AGIL.Dim_Motivo_Dev;
+
+IF OBJECT_ID('PAGO_AGIL.Dim_Sucursal', 'U') IS NOT NULL 
+  DROP TABLE PAGO_AGIL.Dim_Sucursal;
+
+IF OBJECT_ID('PAGO_AGIL.Dim_FormaPago', 'U') IS NOT NULL 
+  DROP TABLE PAGO_AGIL.Dim_FormaPago;
+
+IF OBJECT_ID('PAGO_AGIL.Lk_Item_Factura', 'U') IS NOT NULL 
+  DROP TABLE PAGO_AGIL.Lk_Item_Factura;
+
+IF OBJECT_ID('PAGO_AGIL.Lk_Factura', 'U') IS NOT NULL 
+  DROP TABLE PAGO_AGIL.Lk_Factura;
+
+IF OBJECT_ID('PAGO_AGIL.Ft_Rendicion', 'U') IS NOT NULL 
+  DROP TABLE PAGO_AGIL.Ft_Rendicion;
+
+IF OBJECT_ID('PAGO_AGIL.Dim_Empresa', 'U') IS NOT NULL 
+  DROP TABLE PAGO_AGIL.Dim_Empresa;
+
+IF OBJECT_ID('PAGO_AGIL.Dim_Rubro', 'U') IS NOT NULL 
+  DROP TABLE PAGO_AGIL.Dim_Rubro;
+
+IF OBJECT_ID('PAGO_AGIL.Lk_Cliente', 'U') IS NOT NULL 
+  DROP TABLE PAGO_AGIL.Lk_Cliente;
+
+IF OBJECT_ID('PAGO_AGIL.Lg_Loggin_Incorrecto', 'U') IS NOT NULL 
+  DROP TABLE PAGO_AGIL.Lg_Loggin_Incorrecto;
+
+IF OBJECT_ID('PAGO_AGIL.Rl_RolxUsuario', 'U') IS NOT NULL 
+  DROP TABLE PAGO_AGIL.Rl_RolxUsuario;
+
+IF OBJECT_ID('PAGO_AGIL.Lk_Usuario', 'U') IS NOT NULL 
+  DROP TABLE PAGO_AGIL.Lk_Usuario;
+
+IF OBJECT_ID('PAGO_AGIL.Rl_RolxFuncionalidad', 'U') IS NOT NULL 
+  DROP TABLE PAGO_AGIL.Rl_RolxFuncionalidad;
+
+IF OBJECT_ID('PAGO_AGIL.Dim_Funcionalidad', 'U') IS NOT NULL 
+  DROP TABLE PAGO_AGIL.Dim_Funcionalidad;
+
+IF OBJECT_ID('PAGO_AGIL.Dim_Rol', 'U') IS NOT NULL 
+  DROP TABLE PAGO_AGIL.Dim_Rol;
+Go
+
+--Creacion de tablas
+Create Table PAGO_AGIL.Dim_Rol
 (
 	Rol_Id int PRIMARY KEY IDENTITY(1,1),
 	Rol_Desc nvarchar(255),
 	Rol_Habilitado bit default 1--true
 )
 
-Create Table Rl_Rol_Funcionalidad
+Create Table PAGO_AGIL.Dim_Funcionalidad
 (
-	Rol_Id int FOREIGN KEY REFERENCES Dim_Rol(Rol_Id),
-	Funcionalidad_Id int FOREIGN KEY REFERENCES Dim_Funcionalidad(Funcionalidad_Id)
+	Funcionalidad_Id int PRIMARY KEY IDENTITY(1,1),
+	Funcionalidad_Desc nvarchar(250)
 )
 
-Create Table Lk_Usuario
+Create Table PAGO_AGIL.Rl_RolxFuncionalidad
+(
+	Rol_Id int FOREIGN KEY REFERENCES PAGO_AGIL.Dim_Rol(Rol_Id),
+	Funcionalidad_Id int FOREIGN KEY REFERENCES PAGO_AGIL.Dim_Funcionalidad(Funcionalidad_Id)
+)
+
+Create Table PAGO_AGIL.Lk_Usuario
 (
 	Usuario_Id int PRIMARY KEY IDENTITY(1,1),
 	Usuario_Name nvarchar(250),
 	Usuario_Password nvarchar(250),
-	usuario_Habilitado bit default 1--true
+	Usuario_Habilitado bit default 1--true
 )
 
-Create Table Rl_Rol_Usuario
+Create Table PAGO_AGIL.Rl_RolxUsuario
 (
-	Rol_Id int FOREIGN KEY REFERENCES Dim_Rol(Rol_Id),
-	Usuario_Id int FOREIGN KEY REFERENCES Lk_Usuario(Usuario_Id)
+	Rol_Id int FOREIGN KEY REFERENCES PAGO_AGIL.Dim_Rol(Rol_Id),
+	Usuario_Id int FOREIGN KEY REFERENCES PAGO_AGIL.Lk_Usuario(Usuario_Id)
 )
 
-Create Table Lg_Loggin
+Create Table PAGO_AGIL.Lg_Loggin_Incorrecto
 (
 	Loggin_Id int PRIMARY KEY IDENTITY(1,1),
-	Loggin_Usuario_Id int FOREIGN KEY REFERENCES Lk_Usuario(Usuario_Id),
+	Loggin_Usuario_Id int FOREIGN KEY REFERENCES PAGO_AGIL.Lk_Usuario(Usuario_Id),
 	Loggin_Fecha datetime
 )
 
-Create Table Lk_Cliente
+Create Table PAGO_AGIL.Lk_Cliente
 (
-	Cliente_Dni int PRIMARY KEY,
+	Cliente_Id int PRIMARY KEY IDENTITY(1,1),
+	Cliente_Dni int,
 	Cliente_Apellido nvarchar(255),
 	Cliente_Nombre nvarchar(255),
+	Cliente_Telefono nvarchar(255),
 	Cliente_Fecha_Nac datetime,
-	Cliente_Mail nvarchar(255),
+	Cliente_Mail nvarchar(255) UNIQUE,
 	Cliente_Direccion nvarchar(255),
-	Cliente_Codigo_Postal nvarchar(255)
+	Cliente_Codigo_Postal nvarchar(255),
+	Cliente_Habilitado bit default 1--true
 )
 
-Create Table Dim_Rubro
+Create Table PAGO_AGIL.Dim_Rubro
 (
 	Rubro_Id int PRIMARY KEY,
 	Rubro_Descripcion nvarchar(50)
 )
 
-Create Table Dim_Empresa
+Create Table PAGO_AGIL.Dim_Empresa
 (
 	Empresa_Id int PRIMARY KEY,
 	Empresa_Nombre nvarchar(255),
 	Empresa_Cuit nvarchar(50),
 	Empresa_Direccion nvarchar(255),
-	Empresa_Rubro_Id int FOREIGN KEY REFERENCES Dim_Rubro(Rubro_Id)
+	Empresa_Rubro_Id int FOREIGN KEY REFERENCES PAGO_AGIL.Dim_Rubro(Rubro_Id),
+	Empresa_Habilitado bit default 1--true
 )
 
-Create Table Lk_Factura
+Create Table PAGO_AGIL.Ft_Rendicion
 (
-	Factura_Nro int PRIMARY KEY,
-	Factura_Fecha datetime,
+	Rendicion_Id int PRIMARY KEY,
+	Rendicion_Fecha datetime,
+	Rendicion_nfacturas bit,
+	Rendicion_ItemNro int,
+	Rendicion_Comision numeric(18,2),
+	Rendicion_Total numeric(18,2),
+	Rendicion_Resp_Id int FOREIGN KEY REFERENCES PAGO_AGIL.Lk_Usuario(Usuario_Id)
+)
+
+Create Table PAGO_AGIL.Lk_Factura
+(
+	Factura_Id int PRIMARY KEY IDENTITY(1,1),
+	Factura_Nro int,
+	Factura_Fecha_Alta datetime,
 	Factura_Total numeric(18,2),
 	Factura_Fecha_Vencimiento datetime,
-	Factura_Cliente_Id int FOREIGN KEY REFERENCES Lk_Cliente(Cliente_Dni),
-	Factura_Empresa_Id int FOREIGN KEY REFERENCES Dim_Empresa(Empresa_Id)
+	Factura_Cliente_Id int FOREIGN KEY REFERENCES PAGO_AGIL.Lk_Cliente(Cliente_Id),
+	Factura_Empresa_Id int FOREIGN KEY REFERENCES PAGO_AGIL.Dim_Empresa(Empresa_Id),
+	Factura_Rendicion_Id int FOREIGN KEY REFERENCES PAGO_AGIL.Ft_Rendicion(Rendicion_Id)
 )
 
-Create Table Lk_Item_Factura
+Create Table PAGO_AGIL.Lk_Item_Factura
 (
-	Item_Nro int PRIMARY KEY,
+	Item_Id int PRIMARY KEY,
 	Item_Cantidad int,
 	Item_Monto numeric(18,2),
-	Item_Factura_Nro int FOREIGN KEY REFERENCES Lk_Factura(Factura_Nro)
+	Item_Factura_Nro int FOREIGN KEY REFERENCES PAGO_AGIL.Lk_Factura(Factura_Id)
 )
 
-Create Table Dim_FormaPago
+Create Table PAGO_AGIL.Dim_FormaPago
 (
 	FormaPago_Id int PRIMARY KEY,
 	FormaPago_Desc nvarchar(255)
 )
 
-Create Table Dim_Sucursal
+Create Table PAGO_AGIL.Dim_Sucursal
 (
 	Sucursal_Id int PRIMARY KEY,
 	Sucursal_Nombre nvarchar(50),
 	Sucursal_Direccion nvarchar(50),
-	Sucursal_Codigo_Postal int
+	Sucursal_Codigo_Postal int,
+	Sucursal_Habilitado bit default 1 -- true
 )
 
-Create Table Dim_Motivo_Dev
+Create Table PAGO_AGIL.Dim_Motivo_Dev
 (
 	Motivo_Dev_Id int PRIMARY KEY IDENTITY(1,1),
 	Motivo_Dev_Desc nvarchar(255)
 )
 
-Create Table Ft_Devolucion
+Create Table PAGO_AGIL.Ft_Devolucion
 (
 	Devolucion_Id int PRIMARY KEY IDENTITY (1,1),
-	Devolucion_Motivo_Id int FOREIGN KEY REFERENCES Dim_Motivo_Dev(Motivo_Dev_Id),
+	Devolucion_Motivo_Id int FOREIGN KEY REFERENCES PAGO_AGIL.Dim_Motivo_Dev(Motivo_Dev_Id),
 	Devolucion_Fecha datetime,
-	Devolucion_Resp_Id int FOREIGN KEY REFERENCES Lk_Usuario(Usuario_Id)
+	Devolucion_Resp_Id int FOREIGN KEY REFERENCES PAGO_AGIL.Lk_Usuario(Usuario_Id)
 )
 
-Create Table Ft_Pago
+Create Table PAGO_AGIL.Ft_Pago
 (
-	Pago_Nro int PRIMARY KEY,
+	Pago_Id int PRIMARY KEY,
 	Pago_Fecha datetime,
-	Pago_Factura_Id int FOREIGN KEY REFERENCES Lk_Factura(Factura_Nro),
 	Pago_Item_nro int,
 	Pago_Total numeric(18, 2),
-	Pago_FormaPago_Id int FOREIGN KEY REFERENCES Dim_FormaPago(FormaPago_Id),
-	Pago_Sucursal_Id int FOREIGN KEY REFERENCES Dim_Sucursal(Sucursal_Id),
-	Pago_Dev int FOREIGN KEY REFERENCES Ft_Devolucion(Devolucion_Id) NULL,
-	Pago_Resp_Id int FOREIGN KEY REFERENCES Lk_Usuario(Usuario_Id)
+	Pago_FormaPago_Id int FOREIGN KEY REFERENCES PAGO_AGIL.Dim_FormaPago(FormaPago_Id),
+	Pago_Sucursal_Id int FOREIGN KEY REFERENCES PAGO_AGIL.Dim_Sucursal(Sucursal_Id),
+	Pago_Resp_Id int FOREIGN KEY REFERENCES PAGO_AGIL.Lk_Usuario(Usuario_Id)
 )
 
-Create Table Ft_Rendicion
+Create Table PAGO_AGIL.RL_UsuarioxSucursal
 (
-	Rendicion_Nro int PRIMARY KEY,
-	Rendicion_Fecha datetime,
-	ItemRendicion_nro int,
-	ItemRendicion_Importe numeric(18,2),
-	Rendicion_Factura_Nro int FOREIGN KEY REFERENCES Lk_Factura(Factura_Nro),
-	Rendicion_Dev int FOREIGN KEY REFERENCES Ft_Devolucion(Devolucion_Id) NULL,
-	Rendicion_Resp_Id int FOREIGN KEY REFERENCES Lk_Usuario(Usuario_Id)
+	Id_usuario int FOREIGN KEY REFERENCES PAGO_AGIL.Lk_Usuario(Usuario_Id),
+	Id_Sucursal int FOREIGN KEY REFERENCES PAGO_AGIL.Dim_Sucursal(Sucursal_Id)
 )
 
-Drop Table Ft_Rendicion
-Drop Table Ft_Pago
-Drop Table Ft_Devolucion
-Drop Table Dim_Motivo_Dev
-Drop Table Dim_Sucursal
-Drop Table Dim_FormaPago
-Drop Table Lk_Item_Factura
-Drop Table Lk_Factura
-Drop Table Dim_Empresa
-Drop Table Dim_Rubro
-Drop Table Lk_Cliente
-Drop Table Lg_Loggin
-Drop Table Rl_Rol_Usuario
-Drop Table Lk_Usuario
-Drop Table Rl_Rol_Funcionalidad
-Drop Table Dim_Rol
-Drop Table Dim_Funcionalidad
+Create Table PAGO_AGIL.RL_PagoxFactura
+(
+	Id_Factura int FOREIGN KEY REFERENCES PAGO_AGIL.Lk_Factura(Factura_Id),
+	Id_Pago int FOREIGN KEY REFERENCES PAGO_AGIL.Ft_Pago(Pago_Id)
+)
+
+Create Table PAGO_AGIL.Rl_DevolucioxFactura
+(
+	Id_Devolucion int FOREIGN KEY REFERENCES PAGO_AGIL.Ft_Devolucion(Devolucion_Id),
+	Id_Factura int FOREIGN KEY REFERENCES PAGO_AGIL.Lk_Factura(Factura_Id)
+)
+Go
