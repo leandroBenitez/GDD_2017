@@ -109,7 +109,7 @@ Create Table PAGO_AGIL.Lk_Cliente
 	Cliente_Nombre nvarchar(255),
 	Cliente_Telefono nvarchar(255),
 	Cliente_Fecha_Nac datetime,
-	Cliente_Mail nvarchar(255) UNIQUE,
+	Cliente_Mail nvarchar(255),
 	Cliente_Direccion nvarchar(255),
 	Cliente_Codigo_Postal nvarchar(255),
 	Cliente_Habilitado bit default 1--true
@@ -123,9 +123,9 @@ Create Table PAGO_AGIL.Dim_Rubro
 
 Create Table PAGO_AGIL.Dim_Empresa
 (
-	Empresa_Id int PRIMARY KEY,
+	Empresa_Id int PRIMARY KEY IDENTITY(1,1),
 	Empresa_Nombre nvarchar(255),
-	Empresa_Cuit nvarchar(50),
+	Empresa_Cuit nvarchar(50) UNIQUE,
 	Empresa_Direccion nvarchar(255),
 	Empresa_Rubro_Id int FOREIGN KEY REFERENCES PAGO_AGIL.Dim_Rubro(Rubro_Id),
 	Empresa_Habilitado bit default 1--true
@@ -220,3 +220,51 @@ Create Table PAGO_AGIL.Rl_DevolucioxFactura
 	Id_Factura int FOREIGN KEY REFERENCES PAGO_AGIL.Lk_Factura(Factura_Id)
 )
 Go
+
+--Carga de roles
+Insert into PAGO_AGIL.Dim_Rol (Rol_Desc)
+Values	('Administrador')
+
+--Carga de funcionalidades
+Insert into PAGO_AGIL.Dim_Funcionalidad (Funcionalidad_Desc)
+Values ('Logging')
+
+--Carga de Roles x Usuario
+Insert into PAGO_AGIL.Rl_RolxFuncionalidad (Rol_Id, Funcionalidad_Id)
+Values (1,1)
+
+--Carga de Usuarios
+Insert into PAGO_AGIL.Lk_Usuario (Usuario_Name, Usuario_Password)
+Select 'maru', HASHBYTES('SHA2_256','maru')
+
+--Carga de Rol x Usuario
+Insert into PAGO_AGIL.Rl_RolxUsuario (Rol_Id, Usuario_Id)
+Values (1,1)
+
+--Carga de Clientes
+insert into PAGO_AGIL.Lk_Cliente (Cliente_Dni, Cliente_Apellido, Cliente_Nombre, Cliente_Fecha_Nac, Cliente_Mail, Cliente_Direccion, Cliente_Codigo_Postal)
+Select distinct [Cliente-Dni],[Cliente-Apellido],[Cliente-Nombre],[Cliente-Fecha_Nac],Cliente_Mail,Cliente_Direccion, Cliente_Codigo_Postal  from gd_esquema.Maestra
+
+--Carga de Rubro
+INSERT INTO PAGO_AGIL.Dim_Rubro (Rubro_Id ,	Rubro_Descripcion)
+SELECT DISTINCT Empresa_Rubro, Rubro_Descripcion FROM gd_esquema.Maestra
+
+--Carga de Empresa
+insert into PAGO_AGIL.Dim_Empresa (Empresa_Nombre,Empresa_Cuit,Empresa_Direccion,Empresa_Rubro_Id)
+select distinct Empresa_Nombre, Empresa_Cuit,Empresa_Direccion,Empresa_Rubro from gd_esquema.Maestra
+
+--Carga de Rendicion
+insert into PAGO_AGIL.Ft_Rendicion (Rendicion_Id, Rendicion_Fecha, Rendicion_nfacturas, Rendicion_ItemNro, Rendicion_Comision, Rendicion_Total)
+Select	Rendicion_Nro
+		,Rendicion_Fecha
+		,Count(Distinct Nro_Factura) as Cant_Facturas
+		,ItemRendicion_nro
+		,ItemRendicion_Importe
+		,(Select SUM(distinct Factura_Total) from gd_esquema.Maestra as aux where aux.Rendicion_Nro = main.Rendicion_Nro) as Monto_Total
+from gd_esquema.Maestra as main
+where Rendicion_Nro is not null
+group by Rendicion_Nro
+		,Rendicion_Fecha
+		,ItemRendicion_nro
+		,ItemRendicion_Importe
+
