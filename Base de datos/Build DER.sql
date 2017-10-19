@@ -1,3 +1,7 @@
+USE GD2C2017 
+
+GO
+
 --Drop de tablas
 IF OBJECT_ID('PAGO_AGIL.Rl_DevolucioxFactura', 'U') IS NOT NULL 
   DROP TABLE PAGO_AGIL.Rl_DevolucioxFactura;
@@ -60,6 +64,16 @@ IF OBJECT_ID('PAGO_AGIL.Dim_Rol', 'U') IS NOT NULL
   DROP TABLE PAGO_AGIL.Dim_Rol;
 Go
 
+--Creacion de Schema
+
+IF EXISTS (SELECT * FROM sys.schemas WHERE name='PAGO_AGIL')
+	DROP SCHEMA [PAGO_AGIL]
+GO
+
+CREATE SCHEMA PAGO_AGIL AUTHORIZATION gd
+
+GO
+
 --Creacion de tablas
 Create Table PAGO_AGIL.Dim_Rol
 (
@@ -84,7 +98,7 @@ Create Table PAGO_AGIL.Lk_Usuario
 (
 	Usuario_Id int PRIMARY KEY IDENTITY(1,1),
 	Usuario_Name nvarchar(250),
-	Usuario_Password nvarchar(250),
+	Usuario_Password varbinary(32),
 	Usuario_Habilitado bit default 1--true
 )
 
@@ -156,7 +170,7 @@ Create Table PAGO_AGIL.Lk_Factura
 
 Create Table PAGO_AGIL.Lk_Item_Factura
 (
-	Item_Id int PRIMARY KEY,
+	Item_Id int PRIMARY KEY IDENTITY(1,1),
 	Item_Cantidad int,
 	Item_Monto numeric(18,2),
 	Item_Factura_Nro int FOREIGN KEY REFERENCES PAGO_AGIL.Lk_Factura(Factura_Id)
@@ -164,7 +178,7 @@ Create Table PAGO_AGIL.Lk_Item_Factura
 
 Create Table PAGO_AGIL.Dim_FormaPago
 (
-	FormaPago_Id int PRIMARY KEY,
+	FormaPago_Id int PRIMARY KEY IDENTITY(1,1),
 	FormaPago_Desc nvarchar(255)
 )
 
@@ -223,19 +237,33 @@ Go
 
 --Carga de roles
 Insert into PAGO_AGIL.Dim_Rol (Rol_Desc)
-Values	('Administrador')
+Values	('Administrador'),
+		('Cobrador')
+
 
 --Carga de funcionalidades
 Insert into PAGO_AGIL.Dim_Funcionalidad (Funcionalidad_Desc)
-Values ('Logging')
+Values	('Logging'),
+	('ABM de Rol'),
+	('Login y Seguridad'),
+	('Registro de Usuario'),
+	('ABM de Cliente'),
+	('ABM de Empresa'),
+	('ABM de Sucursal'),
+	('ABM Facturas'),
+	('Registro de Pago de Facturas'),
+	('Rendición de Facturas cobradas'),
+	('Listado Estadístico')
 
---Carga de Roles x Usuario
+
+--Carga de Roles x Funcionalidad
 Insert into PAGO_AGIL.Rl_RolxFuncionalidad (Rol_Id, Funcionalidad_Id)
-Values (1,1)
+Values (1,1),(2,1)
 
 --Carga de Usuarios
 Insert into PAGO_AGIL.Lk_Usuario (Usuario_Name, Usuario_Password)
-Select 'maru', HASHBYTES('SHA2_256','maru')
+Select 'admin', HASHBYTES('SHA2_256','w23e')
+
 
 --Carga de Rol x Usuario
 Insert into PAGO_AGIL.Rl_RolxUsuario (Rol_Id, Usuario_Id)
@@ -268,3 +296,32 @@ group by Rendicion_Nro
 		,ItemRendicion_nro
 		,ItemRendicion_Importe
 
+--Carga de Forma de Pago
+
+Insert into PAGO_AGIL.Dim_FormaPago (FormaPago_Desc)
+select distinct FormaPagoDescripcion from gd_esquema.Maestra
+where FormaPagoDescripcion is not null
+
+--Carga de Factura
+
+Insert into PAGO_AGIL.Lk_Factura (Factura_Nro,Factura_Fecha_Alta,Factura_Total,Factura_Fecha_Vencimiento,Factura_Cliente_Id,Factura_Empresa_Id,Factura_Rendicion_Id)
+select distinct Nro_Factura,
+		Factura_Fecha,
+		Factura_Total,
+		Factura_Fecha_Vencimiento,
+		(select Cliente_Id from PAGO_AGIL.Lk_Cliente as aux where aux.Cliente_Dni = main.[Cliente-Dni]) as cliente_id,
+		(select Empresa_Id from PAGO_AGIL.Dim_Empresa as aux where aux.Empresa_Cuit = main.Empresa_Cuit) as empresa_id,
+		(select top 1 Rendicion_Nro from gd_esquema.Maestra as aux where aux.Nro_Factura = main.Nro_Factura order by Rendicion_Nro desc) as rendicion
+from gd_esquema.Maestra as main
+
+--Carga de Item Factura
+
+Insert into PAGO_AGIL.Lk_Item_Factura (Item_Cantidad,Item_Monto,Item_Factura_Nro)
+select distinct ItemFactura_Cantidad,
+				ItemFactura_Monto,
+				(select Factura_Id from PAGO_AGIL.Lk_Factura as aux where aux.Factura_Nro = main.Nro_Factura) as factura_id
+from gd_esquema.Maestra as main
+
+--Carga de Motivo Devolucion
+Insert into  PAGO_AGIL.Dim_Motivo_Dev (Motivo_Dev_Desc) 
+values ('Motivo devolucion inventado 1')
