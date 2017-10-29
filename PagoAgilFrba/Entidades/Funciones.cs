@@ -24,7 +24,7 @@ namespace PagoAgilFrba.Entidades
             SqlDataReader dReader;
             try
             {
-                Conexion cn = new Conexion();
+                conexion cn = new conexion();
                 cn.abrir_conexion();
 
                 SqlCommand query = new SqlCommand(consulta, cn.abrir_conexion());
@@ -47,7 +47,7 @@ namespace PagoAgilFrba.Entidades
             try
             {
                 DataTable dtable = new DataTable();
-                Conexion conection = new Conexion();
+                conexion conection = new conexion();
                 SqlCommand query = new SqlCommand(nombreSP, conection.abrir_conexion());
                 query.CommandType = CommandType.StoredProcedure;
 
@@ -68,7 +68,7 @@ namespace PagoAgilFrba.Entidades
             try
             {
                 SqlDataReader dReader;
-                Conexion cn = new Conexion();
+                conexion cn = new conexion();
 
                 SqlCommand query = new SqlCommand(consulta, cn.abrir_conexion());
                 dReader = query.ExecuteReader();
@@ -87,7 +87,7 @@ namespace PagoAgilFrba.Entidades
             try
             {
                 DataTable dtable = new DataTable();
-                Conexion conection = new Conexion();
+                conexion conection = new conexion();
                 SqlCommand query = new SqlCommand(nombreSP, conection.abrir_conexion());
                 query.CommandType = CommandType.StoredProcedure;
                 //paso lo parametros como array
@@ -106,7 +106,7 @@ namespace PagoAgilFrba.Entidades
 
         public static int ejec_SP_NOQUERY(string noquery, List<SqlParameter> lista)
         {
-            Conexion conection = new Conexion();
+            conexion conection = new conexion();
             SqlCommand query = new SqlCommand(noquery, conection.abrir_conexion());
             query.CommandType = CommandType.StoredProcedure;
             //paso lo parametros como array

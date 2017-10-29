@@ -12,7 +12,7 @@ using System.Xml.Linq;
 
 namespace PagoAgilFrba.Entidades
 {
-    class Conexion
+    class conexion
     {
         public static SqlConnection cn;
         public static SqlCommand cmd;

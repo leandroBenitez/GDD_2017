@@ -29,58 +29,104 @@
         private void InitializeComponent()
         {
             this.label1 = new System.Windows.Forms.Label();
-            this.comboBoxMalo = new System.Windows.Forms.ComboBox();
-            this.button1 = new System.Windows.Forms.Button();
-            this.textBox1 = new System.Windows.Forms.TextBox();
+            this.boton_validar = new System.Windows.Forms.Button();
+            this.textBox_User = new System.Windows.Forms.TextBox();
+            this.label2 = new System.Windows.Forms.Label();
+            this.label3 = new System.Windows.Forms.Label();
+            this.textBox_Password = new System.Windows.Forms.TextBox();
+            this.warning_user = new System.Windows.Forms.Label();
+            this.warning_password = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Font = new System.Drawing.Font("Comic Sans MS", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label1.Font = new System.Drawing.Font("Times New Roman", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label1.ForeColor = System.Drawing.Color.Maroon;
-            this.label1.Location = new System.Drawing.Point(30, 43);
+            this.label1.Location = new System.Drawing.Point(15, 9);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(188, 21);
+            this.label1.Size = new System.Drawing.Size(97, 24);
             this.label1.TabIndex = 1;
-            this.label1.Text = "ESTO ES ALGO MALOO";
+            this.label1.Text = "Pago Agil";
             // 
-            // comboBoxMalo
+            // boton_validar
             // 
-            this.comboBoxMalo.FormattingEnabled = true;
-            this.comboBoxMalo.Location = new System.Drawing.Point(110, 158);
-            this.comboBoxMalo.Name = "comboBoxMalo";
-            this.comboBoxMalo.Size = new System.Drawing.Size(303, 21);
-            this.comboBoxMalo.TabIndex = 2;
+            this.boton_validar.Location = new System.Drawing.Point(137, 150);
+            this.boton_validar.Name = "boton_validar";
+            this.boton_validar.Size = new System.Drawing.Size(120, 23);
+            this.boton_validar.TabIndex = 3;
+            this.boton_validar.Text = "Ingresar";
+            this.boton_validar.UseVisualStyleBackColor = true;
+            this.boton_validar.Click += new System.EventHandler(this.button1_Click);
             // 
-            // button1
+            // textBox_User
             // 
-            this.button1.Location = new System.Drawing.Point(277, 96);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(120, 23);
-            this.button1.TabIndex = 3;
-            this.button1.Text = "Buscar personas";
-            this.button1.UseVisualStyleBackColor = true;
-            this.button1.Click += new System.EventHandler(this.button1_Click);
+            this.textBox_User.Location = new System.Drawing.Point(104, 57);
+            this.textBox_User.Name = "textBox_User";
+            this.textBox_User.Size = new System.Drawing.Size(139, 20);
+            this.textBox_User.TabIndex = 4;
             // 
-            // textBox1
+            // label2
             // 
-            this.textBox1.Location = new System.Drawing.Point(53, 96);
-            this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(165, 20);
-            this.textBox1.TabIndex = 4;
+            this.label2.AutoSize = true;
+            this.label2.Location = new System.Drawing.Point(52, 60);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(46, 13);
+            this.label2.TabIndex = 5;
+            this.label2.Text = "Usuario:";
+            // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.Location = new System.Drawing.Point(34, 104);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(64, 13);
+            this.label3.TabIndex = 6;
+            this.label3.Text = "Contraseña:";
+            // 
+            // textBox_Password
+            // 
+            this.textBox_Password.Location = new System.Drawing.Point(104, 101);
+            this.textBox_Password.Name = "textBox_Password";
+            this.textBox_Password.Size = new System.Drawing.Size(139, 20);
+            this.textBox_Password.TabIndex = 7;
+            // 
+            // warning_user
+            // 
+            this.warning_user.AutoSize = true;
+            this.warning_user.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.warning_user.ForeColor = System.Drawing.Color.Red;
+            this.warning_user.Location = new System.Drawing.Point(102, 80);
+            this.warning_user.Name = "warning_user";
+            this.warning_user.Size = new System.Drawing.Size(141, 13);
+            this.warning_user.TabIndex = 8;
+            this.warning_user.Text = "Usuario incorrecto o invalido";
+            // 
+            // warning_password
+            // 
+            this.warning_password.AutoSize = true;
+            this.warning_password.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.warning_password.ForeColor = System.Drawing.Color.Red;
+            this.warning_password.Location = new System.Drawing.Point(118, 124);
+            this.warning_password.Name = "warning_password";
+            this.warning_password.Size = new System.Drawing.Size(111, 13);
+            this.warning_password.TabIndex = 9;
+            this.warning_password.Text = "Contraseña incorrecta";
             // 
             // Login
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(495, 205);
-            this.Controls.Add(this.textBox1);
-            this.Controls.Add(this.button1);
-            this.Controls.Add(this.comboBoxMalo);
+            this.ClientSize = new System.Drawing.Size(269, 185);
+            this.Controls.Add(this.warning_password);
+            this.Controls.Add(this.warning_user);
+            this.Controls.Add(this.textBox_Password);
+            this.Controls.Add(this.label3);
+            this.Controls.Add(this.label2);
+            this.Controls.Add(this.textBox_User);
+            this.Controls.Add(this.boton_validar);
             this.Controls.Add(this.label1);
             this.Name = "Login";
-            this.Text = "t";
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -89,8 +135,12 @@
         #endregion
 
         private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.ComboBox comboBoxMalo;
-        private System.Windows.Forms.Button button1;
-        private System.Windows.Forms.TextBox textBox1;
+        private System.Windows.Forms.Button boton_validar;
+        private System.Windows.Forms.TextBox textBox_User;
+        private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.Label label3;
+        private System.Windows.Forms.TextBox textBox_Password;
+        private System.Windows.Forms.Label warning_user;
+        private System.Windows.Forms.Label warning_password;
     }
 }
