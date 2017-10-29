@@ -184,7 +184,7 @@ Create Table PAGO_AGIL.Dim_FormaPago
 
 Create Table PAGO_AGIL.Dim_Sucursal
 (
-	Sucursal_Id int PRIMARY KEY,
+	Sucursal_Id int PRIMARY KEY , --IDENTITY (1,1)
 	Sucursal_Nombre nvarchar(50),
 	Sucursal_Direccion nvarchar(50),
 	Sucursal_Codigo_Postal int,
@@ -302,6 +302,34 @@ Insert into PAGO_AGIL.Dim_FormaPago (FormaPago_Desc)
 select distinct FormaPagoDescripcion from gd_esquema.Maestra
 where FormaPagoDescripcion is not null
 
+--Carga de Sucursal
+Insert into PAGO_AGIL.Dim_Sucursal (Sucursal_Nombre, Sucursal_Direccion, Sucursal_Codigo_Postal)
+select distinct maestra.Sucursal_Nombre
+		,maestra.Sucursal_Dirección
+		,maestra.Sucursal_Codigo_Postal
+from gd_esquema.Maestra as maestra
+where Sucursal_Nombre is not null
+
+--Carga de Motivo Devolucion
+Insert into  PAGO_AGIL.Dim_Motivo_Dev (Motivo_Dev_Desc) 
+values ('Motivo devolucion inventado 1')
+
+--Carga de Devoluciones
+Insert into PAGO_AGIL.Ft_Devolucion(Devolucion_Motivo_Id, Devolucion_Fecha, Devolucion_Resp_Id)
+Values (1, GETDATE(), 1)
+
+--Carga de Pago
+Insert into PAGO_AGIL.Ft_Pago(Pago_FormaPago_Id, Pago_Fecha, Pago_Item_nro, Pago_Total, Pago_FormaPago_Id, Pago_Sucursal_Id, Pago_Resp_Id)
+Select   distinct maestra.Pago_nro
+		,maestra.Pago_Fecha
+		,maestra.ItemPago_nro
+		,maestra.Total
+		,maestra.FormaPagoDescripcion
+		,(select aux.Sucursal_Id from PAGO_AGIL.Dim_Sucursal as aux where aux.Sucursal_Nombre = maestra.Sucursal_Nombre) as Sucursal_Id
+		,NULL as Responsable_Id
+from gd_esquema.Maestra as maestra
+where maestra.Pago_nro is not null
+
 --Carga de Factura
 
 Insert into PAGO_AGIL.Lk_Factura (Factura_Nro,Factura_Fecha_Alta,Factura_Total,Factura_Fecha_Vencimiento,Factura_Cliente_Id,Factura_Empresa_Id,Factura_Rendicion_Id)
@@ -322,6 +350,4 @@ select distinct ItemFactura_Cantidad,
 				(select Factura_Id from PAGO_AGIL.Lk_Factura as aux where aux.Factura_Nro = main.Nro_Factura) as factura_id
 from gd_esquema.Maestra as main
 
---Carga de Motivo Devolucion
-Insert into  PAGO_AGIL.Dim_Motivo_Dev (Motivo_Dev_Desc) 
-values ('Motivo devolucion inventado 1')
+
