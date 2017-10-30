@@ -24,33 +24,28 @@ namespace PagoAgilFrba.Login
 
         private void button1_Click(object sender, EventArgs e)
         {
-            string cadena = "Execute PAGO_AGIL.Login '" + textBox_User + "' '" + textBox_Password + "'";
+            string cadena = "Execute PAGO_AGIL.Login '" + textBox_User.Text + "', '" + textBox_Password.Text + "'";
 
             conexion connection = new conexion();
+            SqlCommand command = new SqlCommand();
 
-            SqlCommand command = new SqlCommand(cadena, connection);
-            connection.Open();
+            command.CommandText = cadena;
+            command.CommandType = CommandType.Text;
+            command.Connection = connection.abrir_conexion();
 
             try
             {
-                SqlDataReader reader = query.ExecuteReader();
-
-                if (reader.HasRows)
-                {
-                    Console.WriteLine("{0}",reader.GetString(0));
-                    MessageBox.Show(reader.GetString(0), "Informacion", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                }
-                else
-                {
-                    Console.WriteLine("Error al ejecutar consulta.");
-                }
-                reader.Close();
+                Object reader = command.ExecuteScalar();
+                string reultado = reader.ToString();
+                //reader.ToString();
+                MessageBox.Show(reader.ToString(), "Informacion", MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
-            catch
-            { 
-            
+            catch (Exception ex)
+            {
+                MessageBox.Show("Error: " + ex.Message);
             }
             //MessageBox.Show(resultado, "Informacion", MessageBoxButtons.OK, MessageBoxIcon.Information);
-        }
+            //connection.cerrar_conexion(connection);
+        }        
     }
 }

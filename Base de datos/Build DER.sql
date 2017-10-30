@@ -1,5 +1,4 @@
-USE GD2C2017 
-
+USE GD2C2017
 GO
 
 --Drop de tablas
@@ -64,15 +63,15 @@ IF OBJECT_ID('PAGO_AGIL.Dim_Rol', 'U') IS NOT NULL
   DROP TABLE PAGO_AGIL.Dim_Rol;
 Go
 
+/*
 --Creacion de Schema
-
-IF EXISTS (SELECT * FROM sys.schemas WHERE name='PAGO_AGIL')
+IF EXISTS (SELECT * FROM sys.schemas WHERE name = 'PAGO_AGIL')
 	DROP SCHEMA [PAGO_AGIL]
 GO
 
 CREATE SCHEMA PAGO_AGIL AUTHORIZATION gd
-
 GO
+*/
 
 --Creacion de tablas
 Create Table PAGO_AGIL.Dim_Rol
@@ -184,7 +183,7 @@ Create Table PAGO_AGIL.Dim_FormaPago
 
 Create Table PAGO_AGIL.Dim_Sucursal
 (
-	Sucursal_Id int PRIMARY KEY , --IDENTITY (1,1)
+	Sucursal_Id int PRIMARY KEY IDENTITY (1,1),
 	Sucursal_Nombre nvarchar(50),
 	Sucursal_Direccion nvarchar(50),
 	Sucursal_Codigo_Postal int,
@@ -235,26 +234,25 @@ Create Table PAGO_AGIL.Rl_DevolucioxFactura
 )
 Go
 
+--Migracion de datos!!
 --Carga de roles
 Insert into PAGO_AGIL.Dim_Rol (Rol_Desc)
 Values	('Administrador'),
 		('Cobrador')
 
-
 --Carga de funcionalidades
 Insert into PAGO_AGIL.Dim_Funcionalidad (Funcionalidad_Desc)
 Values	('Logging'),
-	('ABM de Rol'),
-	('Login y Seguridad'),
-	('Registro de Usuario'),
-	('ABM de Cliente'),
-	('ABM de Empresa'),
-	('ABM de Sucursal'),
-	('ABM Facturas'),
-	('Registro de Pago de Facturas'),
-	('Rendición de Facturas cobradas'),
-	('Listado Estadístico')
-
+		('ABM de Rol'),
+		('Login y Seguridad'),
+		('Registro de Usuario'),
+		('ABM de Cliente'),
+		('ABM de Empresa'),
+		('ABM de Sucursal'),
+		('ABM Facturas'),
+		('Registro de Pago de Facturas'),
+		('Rendición de Facturas cobradas'),
+		('Listado Estadístico')
 
 --Carga de Roles x Funcionalidad
 Insert into PAGO_AGIL.Rl_RolxFuncionalidad (Rol_Id, Funcionalidad_Id)
@@ -263,7 +261,6 @@ Values (1,1),(2,1)
 --Carga de Usuarios
 Insert into PAGO_AGIL.Lk_Usuario (Usuario_Name, Usuario_Password)
 Select 'admin', HASHBYTES('SHA2_256','w23e')
-
 
 --Carga de Rol x Usuario
 Insert into PAGO_AGIL.Rl_RolxUsuario (Rol_Id, Usuario_Id)
@@ -297,7 +294,6 @@ group by Rendicion_Nro
 		,ItemRendicion_Importe
 
 --Carga de Forma de Pago
-
 Insert into PAGO_AGIL.Dim_FormaPago (FormaPago_Desc)
 select distinct FormaPagoDescripcion from gd_esquema.Maestra
 where FormaPagoDescripcion is not null
@@ -319,19 +315,24 @@ Insert into PAGO_AGIL.Ft_Devolucion(Devolucion_Motivo_Id, Devolucion_Fecha, Devo
 Values (1, GETDATE(), 1)
 
 --Carga de Pago
-Insert into PAGO_AGIL.Ft_Pago(Pago_FormaPago_Id, Pago_Fecha, Pago_Item_nro, Pago_Total, Pago_FormaPago_Id, Pago_Sucursal_Id, Pago_Resp_Id)
+Insert into PAGO_AGIL.Ft_Pago(	 Pago_Id
+								,Pago_Fecha
+								,Pago_Item_nro
+								,Pago_Total
+								,Pago_FormaPago_Id
+								,Pago_Sucursal_Id
+								,Pago_Resp_Id	)
 Select   distinct maestra.Pago_nro
 		,maestra.Pago_Fecha
 		,maestra.ItemPago_nro
 		,maestra.Total
-		,maestra.FormaPagoDescripcion
+		,(select fp.FormaPago_Id from PAGO_AGIL.Dim_FormaPago as fp where maestra.FormaPagoDescripcion = fp.FormaPago_Desc) as FormaPago_Id
 		,(select aux.Sucursal_Id from PAGO_AGIL.Dim_Sucursal as aux where aux.Sucursal_Nombre = maestra.Sucursal_Nombre) as Sucursal_Id
 		,NULL as Responsable_Id
 from gd_esquema.Maestra as maestra
 where maestra.Pago_nro is not null
 
 --Carga de Factura
-
 Insert into PAGO_AGIL.Lk_Factura (Factura_Nro,Factura_Fecha_Alta,Factura_Total,Factura_Fecha_Vencimiento,Factura_Cliente_Id,Factura_Empresa_Id,Factura_Rendicion_Id)
 select distinct Nro_Factura,
 		Factura_Fecha,
@@ -343,11 +344,57 @@ select distinct Nro_Factura,
 from gd_esquema.Maestra as main
 
 --Carga de Item Factura
-
 Insert into PAGO_AGIL.Lk_Item_Factura (Item_Cantidad,Item_Monto,Item_Factura_Nro)
 select distinct ItemFactura_Cantidad,
 				ItemFactura_Monto,
 				(select Factura_Id from PAGO_AGIL.Lk_Factura as aux where aux.Factura_Nro = main.Nro_Factura) as factura_id
 from gd_esquema.Maestra as main
+
+--Creacion de Stored Procedures
+--Procedimiento para verificar entrada a sistema
+IF object_id('PAGO_AGIL.Login') IS NOT NULL
+    Drop Procedure PAGO_AGIL.Login
+GO
+
+Create Procedure [PAGO_AGIL].[Login] (@user varchar(100), @pass varchar(100))
+as
+Declare @usuario int = 0
+Declare @password int = 0
+Declare @habilitado int = 0
+
+Select	@usuario = Usuario_Id,
+		@habilitado = Usuario_Habilitado
+from PAGO_AGIL.Lk_Usuario 
+where	Usuario_Name like @user 
+
+Select @password = 1
+from PAGO_AGIL.Lk_Usuario
+where	Usuario_Name like @user
+	and	Usuario_Password like @pass--HASHBYTES('SHA2_256',@pass) 
+
+If @usuario = 0
+	Select 'Inexistente' as Resultado
+Else If @habilitado = 0
+	Select 'Inhabilitado' as Resultado 
+Else If @usuario <> 0 and @password = 0 and @habilitado = 1
+Begin
+	Insert into PAGO_AGIL.Lg_Loggin_Incorrecto (Loggin_Usuario_Id, Loggin_Fecha)
+	Select @usuario, Getdate()
+	Select 'Invalido' as Resultado
+
+	If 3 = (Select Count(1) from PAGO_AGIL.Lg_Loggin_Incorrecto where Loggin_Usuario_Id = @usuario)
+	Begin
+		Update PAGO_AGIL.Lk_Usuario
+		Set Usuario_Habilitado = 0
+		where Usuario_Id = @usuario
+	End
+End
+Else
+Begin
+	Delete from PAGO_AGIL.Lg_Loggin_Incorrecto where Loggin_Usuario_Id = @usuario
+	Select 'Valido' as Resultado
+End
+
+GO
 
 
