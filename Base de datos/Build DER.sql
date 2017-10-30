@@ -370,7 +370,7 @@ where	Usuario_Name like @user
 Select @password = 1
 from PAGO_AGIL.Lk_Usuario
 where	Usuario_Name like @user
-	and	Usuario_Password like @pass--HASHBYTES('SHA2_256',@pass) 
+	and	Usuario_Password like HASHBYTES('SHA2_256',@pass) 
 
 If @usuario = 0
 	Select 'Inexistente' as Resultado
@@ -396,5 +396,3 @@ Begin
 End
 
 GO
-
-
