@@ -242,17 +242,14 @@ Values	('Administrador'),
 
 --Carga de funcionalidades
 Insert into PAGO_AGIL.Dim_Funcionalidad (Funcionalidad_Desc)
-Values	('Logging'),
-		('ABM de Rol'),
-		('Login y Seguridad'),
-		('Registro de Usuario'),
+Values	('ABM de Rol'),
 		('ABM de Cliente'),
 		('ABM de Empresa'),
 		('ABM de Sucursal'),
 		('ABM Facturas'),
 		('Registro de Pago de Facturas'),
-		('Rendición de Facturas cobradas'),
-		('Listado Estadístico')
+		('Rendicion de Facturas cobradas'),
+		('Listado Estadistico')
 
 --Carga de Roles x Funcionalidad
 Insert into PAGO_AGIL.Rl_RolxFuncionalidad (Rol_Id, Funcionalidad_Id)
@@ -349,6 +346,49 @@ select distinct ItemFactura_Cantidad,
 				ItemFactura_Monto,
 				(select Factura_Id from PAGO_AGIL.Lk_Factura as aux where aux.Factura_Nro = main.Nro_Factura) as factura_id
 from gd_esquema.Maestra as main
+
+--Creacion de Views
+--Vista con informacion de usuario y roles
+IF EXISTS(select * FROM sys.views where name = 'PAGO_AGIL.Vw_User_Info')
+	Drop View PAGO_AGIL.Vw_User_Info
+Go
+
+Create View PAGO_AGIL.Vw_User_Info
+as
+Select	 rol.Rol_Desc Rol
+		,fun.Funcionalidad_Desc Funcionalidad
+		,usu.Usuario_Name Usuario
+from PAGO_AGIL.Dim_Rol rol
+inner join PAGO_AGIL.Rl_RolxFuncionalidad rl_fun
+	on rol.Rol_Id = rl_fun.Rol_Id
+	inner join PAGO_AGIL.Dim_Funcionalidad fun
+		on rl_fun.Funcionalidad_Id = fun.Funcionalidad_Id
+inner join PAGO_AGIL.Rl_RolxUsuario rl_us
+	on rol.Rol_Id = rl_us.Rol_Id
+	inner join PAGO_AGIL.Lk_Usuario usu
+		on rl_us.Usuario_Id = usu.Usuario_Id
+where	rol.Rol_Habilitado = 1
+	and usu.Usuario_Habilitado = 1
+GO
+
+--Vista con informacion de Empresas
+IF EXISTS(select * FROM sys.views where name = 'PAGO_AGIL.Vw_Empresa')
+	Drop View PAGO_AGIL.Vw_Empresa
+Go
+
+Create view PAGO_AGIL.Vw_Empresa 
+As
+Select   emp.Empresa_Id
+		,emp.Empresa_Nombre
+		,emp.Empresa_Cuit
+		,emp.Empresa_Direccion
+		,rub.Rubro_Descripcion as Rubro
+		,case emp.Empresa_Habilitado when 0 then 'Inhabilitado'
+		else 'Habilitado' end as Habilitado
+from PAGO_AGIL.Dim_Empresa as emp
+inner join PAGO_AGIL.Dim_Rubro as rub
+	on rub.Rubro_Id = emp.Empresa_Rubro_Id
+GO
 
 --Creacion de Stored Procedures
 --Procedimiento para verificar entrada a sistema

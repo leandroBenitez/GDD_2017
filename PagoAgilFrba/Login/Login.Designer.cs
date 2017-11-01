@@ -97,11 +97,11 @@
             this.warning_user.AutoSize = true;
             this.warning_user.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.warning_user.ForeColor = System.Drawing.Color.Red;
-            this.warning_user.Location = new System.Drawing.Point(102, 80);
+            this.warning_user.Location = new System.Drawing.Point(134, 80);
             this.warning_user.Name = "warning_user";
-            this.warning_user.Size = new System.Drawing.Size(141, 13);
+            this.warning_user.Size = new System.Drawing.Size(93, 13);
             this.warning_user.TabIndex = 8;
-            this.warning_user.Text = "Usuario incorrecto o invalido";
+            this.warning_user.Text = "Usuario incorrecto";
             // 
             // warning_password
             // 
