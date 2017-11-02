@@ -1,77 +1,93 @@
 USE GD2C2017
-GO
+Go
+
+--Borrado de Stored Procedures
+IF OBJECT_ID('PAGO_AGIL.Login') IS NOT NULL
+	DROP PROCEDURE PAGO_AGIL.Login;
+Go
+
+--Borrado de Vistas
+IF OBJECT_ID('PAGO_AGIL.Vw_Rendidos') IS NOT NULL
+    DROP VIEW PAGO_AGIL.Vw_Rendidos;
+
+IF OBJECT_ID('PAGO_AGIL.Vw_User_Info') IS NOT NULL
+    DROP VIEW PAGO_AGIL.Vw_User_Info;
+
+IF OBJECT_ID('PAGO_AGIL.Vw_Empresa') IS NOT NULL
+    DROP VIEW PAGO_AGIL.Vw_Empresa;
+Go
 
 --Drop de tablas
 IF OBJECT_ID('PAGO_AGIL.Rl_DevolucioxFactura', 'U') IS NOT NULL 
-  DROP TABLE PAGO_AGIL.Rl_DevolucioxFactura;
+	DROP TABLE PAGO_AGIL.Rl_DevolucioxFactura;
 
 IF OBJECT_ID('PAGO_AGIL.RL_PagoxFactura', 'U') IS NOT NULL 
-  DROP TABLE PAGO_AGIL.RL_PagoxFactura;
+	DROP TABLE PAGO_AGIL.RL_PagoxFactura;
   
 IF OBJECT_ID('PAGO_AGIL.RL_UsuarioxSucursal', 'U') IS NOT NULL 
-  DROP TABLE PAGO_AGIL.RL_UsuarioxSucursal;
+	DROP TABLE PAGO_AGIL.RL_UsuarioxSucursal;
 
 IF OBJECT_ID('PAGO_AGIL.Ft_Pago', 'U') IS NOT NULL 
-  DROP TABLE PAGO_AGIL.Ft_Pago;
+	DROP TABLE PAGO_AGIL.Ft_Pago;
 
 IF OBJECT_ID('PAGO_AGIL.Ft_Devolucion', 'U') IS NOT NULL 
-  DROP TABLE PAGO_AGIL.Ft_Devolucion;
+	DROP TABLE PAGO_AGIL.Ft_Devolucion;
   
 IF OBJECT_ID('PAGO_AGIL.Dim_Motivo_Dev', 'U') IS NOT NULL 
-  DROP TABLE PAGO_AGIL.Dim_Motivo_Dev;
+	DROP TABLE PAGO_AGIL.Dim_Motivo_Dev;
 
 IF OBJECT_ID('PAGO_AGIL.Dim_Sucursal', 'U') IS NOT NULL 
-  DROP TABLE PAGO_AGIL.Dim_Sucursal;
+	DROP TABLE PAGO_AGIL.Dim_Sucursal;
 
 IF OBJECT_ID('PAGO_AGIL.Dim_FormaPago', 'U') IS NOT NULL 
-  DROP TABLE PAGO_AGIL.Dim_FormaPago;
+	DROP TABLE PAGO_AGIL.Dim_FormaPago;
 
 IF OBJECT_ID('PAGO_AGIL.Lk_Item_Factura', 'U') IS NOT NULL 
-  DROP TABLE PAGO_AGIL.Lk_Item_Factura;
+	DROP TABLE PAGO_AGIL.Lk_Item_Factura;
 
 IF OBJECT_ID('PAGO_AGIL.Lk_Factura', 'U') IS NOT NULL 
-  DROP TABLE PAGO_AGIL.Lk_Factura;
+	DROP TABLE PAGO_AGIL.Lk_Factura;
 
 IF OBJECT_ID('PAGO_AGIL.Ft_Rendicion', 'U') IS NOT NULL 
-  DROP TABLE PAGO_AGIL.Ft_Rendicion;
+	DROP TABLE PAGO_AGIL.Ft_Rendicion;
 
 IF OBJECT_ID('PAGO_AGIL.Dim_Empresa', 'U') IS NOT NULL 
-  DROP TABLE PAGO_AGIL.Dim_Empresa;
+	DROP TABLE PAGO_AGIL.Dim_Empresa;
 
 IF OBJECT_ID('PAGO_AGIL.Dim_Rubro', 'U') IS NOT NULL 
-  DROP TABLE PAGO_AGIL.Dim_Rubro;
+	DROP TABLE PAGO_AGIL.Dim_Rubro;
 
 IF OBJECT_ID('PAGO_AGIL.Lk_Cliente', 'U') IS NOT NULL 
-  DROP TABLE PAGO_AGIL.Lk_Cliente;
+	DROP TABLE PAGO_AGIL.Lk_Cliente;
 
 IF OBJECT_ID('PAGO_AGIL.Lg_Loggin_Incorrecto', 'U') IS NOT NULL 
-  DROP TABLE PAGO_AGIL.Lg_Loggin_Incorrecto;
+	DROP TABLE PAGO_AGIL.Lg_Loggin_Incorrecto;
 
 IF OBJECT_ID('PAGO_AGIL.Rl_RolxUsuario', 'U') IS NOT NULL 
-  DROP TABLE PAGO_AGIL.Rl_RolxUsuario;
+	DROP TABLE PAGO_AGIL.Rl_RolxUsuario;
 
 IF OBJECT_ID('PAGO_AGIL.Lk_Usuario', 'U') IS NOT NULL 
-  DROP TABLE PAGO_AGIL.Lk_Usuario;
+	DROP TABLE PAGO_AGIL.Lk_Usuario;
 
 IF OBJECT_ID('PAGO_AGIL.Rl_RolxFuncionalidad', 'U') IS NOT NULL 
-  DROP TABLE PAGO_AGIL.Rl_RolxFuncionalidad;
+	DROP TABLE PAGO_AGIL.Rl_RolxFuncionalidad;
 
 IF OBJECT_ID('PAGO_AGIL.Dim_Funcionalidad', 'U') IS NOT NULL 
-  DROP TABLE PAGO_AGIL.Dim_Funcionalidad;
+	DROP TABLE PAGO_AGIL.Dim_Funcionalidad;
 
 IF OBJECT_ID('PAGO_AGIL.Dim_Rol', 'U') IS NOT NULL 
-  DROP TABLE PAGO_AGIL.Dim_Rol;
+	DROP TABLE PAGO_AGIL.Dim_Rol;
 Go
 
-/*
---Creacion de Schema
-IF EXISTS (SELECT * FROM sys.schemas WHERE name = 'PAGO_AGIL')
-	DROP SCHEMA [PAGO_AGIL]
-GO
+--Borrado de Schema
+IF EXISTS (SELECT 'exists' FROM sys.schemas WHERE name = 'PAGO_AGIL')
+	DROP SCHEMA PAGO_AGIL;
+Go
 
+--------------CREACION DE OBJETOS DE BASE DE DATOS---------------
+--Creacion de Schema
 CREATE SCHEMA PAGO_AGIL AUTHORIZATION gd
-GO
-*/
+Go
 
 --Creacion de tablas
 Create Table PAGO_AGIL.Dim_Rol
@@ -234,7 +250,7 @@ Create Table PAGO_AGIL.Rl_DevolucioxFactura
 )
 Go
 
---Migracion de datos!!
+--Migracion de datos
 --Carga de roles
 Insert into PAGO_AGIL.Dim_Rol (Rol_Desc)
 Values	('Administrador'),
@@ -253,30 +269,36 @@ Values	('ABM de Rol'),
 
 --Carga de Roles x Funcionalidad
 Insert into PAGO_AGIL.Rl_RolxFuncionalidad (Rol_Id, Funcionalidad_Id)
-Values (1,1),(2,1)
+Values	 (1,1),(1,2),(1,3),(1,4),(1,5),(1,6),(1,7),(1,8) --Administrador
+			  ,(2,2),(2,3)		,(2,5),(2,6),(2,7),(2,8) --Cobrador
 
 --Carga de Usuarios
 Insert into PAGO_AGIL.Lk_Usuario (Usuario_Name, Usuario_Password)
-Select 'admin', HASHBYTES('SHA2_256','w23e')
+Values	 ('admin', HASHBYTES('SHA2_256','w23e'))
+		,('user', HASHBYTES('SHA2_256','user'))
 
 --Carga de Rol x Usuario
 Insert into PAGO_AGIL.Rl_RolxUsuario (Rol_Id, Usuario_Id)
-Values (1,1)
+Values	 (1,1),(2,1) --Admin
+		,(2,2)		 --User
 
 --Carga de Clientes
-insert into PAGO_AGIL.Lk_Cliente (Cliente_Dni, Cliente_Apellido, Cliente_Nombre, Cliente_Fecha_Nac, Cliente_Mail, Cliente_Direccion, Cliente_Codigo_Postal)
-Select distinct [Cliente-Dni],[Cliente-Apellido],[Cliente-Nombre],[Cliente-Fecha_Nac],Cliente_Mail,Cliente_Direccion, Cliente_Codigo_Postal  from gd_esquema.Maestra
+Insert into PAGO_AGIL.Lk_Cliente (Cliente_Dni, Cliente_Apellido, Cliente_Nombre, Cliente_Fecha_Nac, Cliente_Mail, Cliente_Direccion, Cliente_Codigo_Postal)
+Select distinct [Cliente-Dni],[Cliente-Apellido],[Cliente-Nombre],[Cliente-Fecha_Nac],Cliente_Mail,Cliente_Direccion, Cliente_Codigo_Postal  
+from gd_esquema.Maestra
 
 --Carga de Rubro
 INSERT INTO PAGO_AGIL.Dim_Rubro (Rubro_Id ,	Rubro_Descripcion)
-SELECT DISTINCT Empresa_Rubro, Rubro_Descripcion FROM gd_esquema.Maestra
+SELECT DISTINCT Empresa_Rubro, Rubro_Descripcion 
+FROM gd_esquema.Maestra
 
 --Carga de Empresa
 insert into PAGO_AGIL.Dim_Empresa (Empresa_Nombre,Empresa_Cuit,Empresa_Direccion,Empresa_Rubro_Id)
-select distinct Empresa_Nombre, Empresa_Cuit,Empresa_Direccion,Empresa_Rubro from gd_esquema.Maestra
+select distinct Empresa_Nombre, Empresa_Cuit,Empresa_Direccion,Empresa_Rubro 
+from gd_esquema.Maestra
 
 --Carga de Rendicion
-insert into PAGO_AGIL.Ft_Rendicion (Rendicion_Id, Rendicion_Fecha, Rendicion_nfacturas, Rendicion_ItemNro, Rendicion_Comision, Rendicion_Total)
+Insert into PAGO_AGIL.Ft_Rendicion (Rendicion_Id, Rendicion_Fecha, Rendicion_nfacturas, Rendicion_ItemNro, Rendicion_Comision, Rendicion_Total)
 Select	Rendicion_Nro
 		,Rendicion_Fecha
 		,Count(Distinct Nro_Factura) as Cant_Facturas
@@ -292,7 +314,8 @@ group by Rendicion_Nro
 
 --Carga de Forma de Pago
 Insert into PAGO_AGIL.Dim_FormaPago (FormaPago_Desc)
-select distinct FormaPagoDescripcion from gd_esquema.Maestra
+select distinct FormaPagoDescripcion 
+from gd_esquema.Maestra
 where FormaPagoDescripcion is not null
 
 --Carga de Sucursal
@@ -305,7 +328,7 @@ where Sucursal_Nombre is not null
 
 --Carga de Motivo Devolucion
 Insert into  PAGO_AGIL.Dim_Motivo_Dev (Motivo_Dev_Desc) 
-values ('Motivo devolucion inventado 1')
+values	 ('Motivo devolucion inventado 1')
 
 --Carga de Devoluciones
 Insert into PAGO_AGIL.Ft_Devolucion(Devolucion_Motivo_Id, Devolucion_Fecha, Devolucion_Resp_Id)
@@ -347,12 +370,68 @@ select distinct ItemFactura_Cantidad,
 				(select Factura_Id from PAGO_AGIL.Lk_Factura as aux where aux.Factura_Nro = main.Nro_Factura) as factura_id
 from gd_esquema.Maestra as main
 
---Creacion de Views
---Vista con informacion de usuario y roles
-IF EXISTS(select * FROM sys.views where name = 'PAGO_AGIL.Vw_User_Info')
-	Drop View PAGO_AGIL.Vw_User_Info
+--Carga de Pagos x Factura
+Insert into PAGO_AGIL.RL_PagoxFactura (Id_Factura, Id_Pago)
+Select distinct fac.Factura_Id, pag.Pago_Id 
+from gd_esquema.Maestra as main
+inner join PAGO_AGIL.Ft_Pago as pag
+	on main.Pago_nro = pag.Pago_Id
+inner join PAGO_AGIL.Lk_Factura as fac
+	on main.Nro_Factura = fac.Factura_Nro
+where main.Pago_nro is not null
+
+--Carga de Usuarios x Sucursal
+Insert into PAGO_AGIL.RL_UsuarioxSucursal (Id_Sucursal, Id_usuario)
+Select Sucursal_Id, Usuario_Id 
+from PAGO_AGIL.Dim_Sucursal, PAGO_AGIL.Lk_Usuario
 Go
 
+--Impresion de resumen de migracion
+Declare @var_Dim_Rol int = (Select Count(1) from PAGO_AGIL.Dim_Rol)
+Declare @var_Dim_Funcionalidad int = (Select Count(1) from PAGO_AGIL.Dim_Funcionalidad)
+Declare @var_Rl_RolxFuncionalidad int = (Select Count(1) from PAGO_AGIL.Rl_RolxFuncionalidad)
+Declare @var_Lk_Usuario int = (Select Count(1) from PAGO_AGIL.Lk_Usuario)
+Declare @var_Rl_RolxUsuario int = (Select Count(1) from PAGO_AGIL.Rl_RolxUsuario)
+Declare @var_Lg_Loggin_Incorrecto int = (Select Count(1) from PAGO_AGIL.Lg_Loggin_Incorrecto)
+Declare @var_Lk_Cliente int = (Select Count(1) from PAGO_AGIL.Lk_Cliente)
+Declare @var_Dim_Rubro int = (Select Count(1) from PAGO_AGIL.Dim_Rubro)
+Declare @var_Dim_Empresa int = (Select Count(1) from PAGO_AGIL.Dim_Empresa)
+Declare @var_Ft_Rendicion int = (Select Count(1) from PAGO_AGIL.Ft_Rendicion)
+Declare @var_Lk_Factura int = (Select Count(1) from PAGO_AGIL.Lk_Factura)
+Declare @var_Lk_Item_Factura int = (Select Count(1) from PAGO_AGIL.Lk_Item_Factura)
+Declare @var_Dim_FormaPago int = (Select Count(1) from PAGO_AGIL.Dim_FormaPago)
+Declare @var_Dim_Sucursal int = (Select Count(1) from PAGO_AGIL.Dim_Sucursal)
+Declare @var_Dim_Motivo_Dev int = (Select Count(1) from PAGO_AGIL.Dim_Motivo_Dev)
+Declare @var_Ft_Devolucion int = (Select Count(1) from PAGO_AGIL.Ft_Devolucion)
+Declare @var_Ft_Pago int = (Select Count(1) from PAGO_AGIL.Ft_Pago)
+Declare @var_RL_UsuarioxSucursal int = (Select Count(1) from PAGO_AGIL.RL_UsuarioxSucursal)
+Declare @var_RL_PagoxFactura int = (Select Count(1) from PAGO_AGIL.RL_PagoxFactura)
+Declare @var_Rl_DevolucioxFactura int = (Select Count(1) from PAGO_AGIL.Rl_DevolucioxFactura)
+
+Print 'Registros insertados en PAGO_AGIL.Dim_Rol: ' + CAST(@var_Dim_Rol AS VARCHAR)
+Print 'Registros insertados en PAGO_AGIL.Dim_Funcionalidad: ' + CAST(@var_Dim_Funcionalidad AS VARCHAR)
+Print 'Registros insertados en PAGO_AGIL.Rl_RolxFuncionalidad: ' + CAST(@var_Rl_RolxFuncionalidad AS VARCHAR)
+Print 'Registros insertados en PAGO_AGIL.Lk_Usuario: ' + CAST(@var_Lk_Usuario AS VARCHAR)
+Print 'Registros insertados en PAGO_AGIL.Rl_RolxUsuario: ' + CAST(@var_Rl_RolxUsuario AS VARCHAR)
+Print 'Registros insertados en PAGO_AGIL.Lg_Loggin_Incorrecto: ' + CAST(@var_Lg_Loggin_Incorrecto AS VARCHAR)
+Print 'Registros insertados en PAGO_AGIL.Lk_Cliente: ' + CAST(@var_Lk_Cliente AS VARCHAR)
+Print 'Registros insertados en PAGO_AGIL.Dim_Rubro: ' + CAST(@var_Dim_Rubro AS VARCHAR)
+Print 'Registros insertados en PAGO_AGIL.Dim_Empresa: ' + CAST(@var_Dim_Empresa AS VARCHAR)
+Print 'Registros insertados en PAGO_AGIL.Ft_Rendicion: ' + CAST(@var_Ft_Rendicion AS VARCHAR)
+Print 'Registros insertados en PAGO_AGIL.Lk_Factura: ' + CAST(@var_Lk_Factura AS VARCHAR)
+Print 'Registros insertados en PAGO_AGIL.Lk_Item_Factura: ' + CAST(@var_Lk_Item_Factura AS VARCHAR)
+Print 'Registros insertados en PAGO_AGIL.Dim_FormaPago: ' + CAST(@var_Dim_FormaPago AS VARCHAR)
+Print 'Registros insertados en PAGO_AGIL.Dim_Sucursal: ' + CAST(@var_Dim_Sucursal AS VARCHAR)
+Print 'Registros insertados en PAGO_AGIL.Dim_Motivo_Dev: ' + CAST(@var_Dim_Motivo_Dev AS VARCHAR)
+Print 'Registros insertados en PAGO_AGIL.Ft_Devolucion: ' + CAST(@var_Ft_Devolucion AS VARCHAR)
+Print 'Registros insertados en PAGO_AGIL.Ft_Pago: ' + CAST(@var_Ft_Pago AS VARCHAR)
+Print 'Registros insertados en PAGO_AGIL.RL_UsuarioxSucursal: ' + CAST(@var_RL_UsuarioxSucursal AS VARCHAR)
+Print 'Registros insertados en PAGO_AGIL.RL_PagoxFactura: ' + CAST(@var_RL_PagoxFactura AS VARCHAR)
+Print 'Registros insertados en PAGO_AGIL.Rl_DevolucioxFactura: ' + CAST(@var_Rl_DevolucioxFactura AS VARCHAR)
+Go
+
+--Creacion de Views
+--Creacion de vista con informacion de funcionalidades x usuario
 Create View PAGO_AGIL.Vw_User_Info
 as
 Select	 rol.Rol_Desc Rol
@@ -369,13 +448,9 @@ inner join PAGO_AGIL.Rl_RolxUsuario rl_us
 		on rl_us.Usuario_Id = usu.Usuario_Id
 where	rol.Rol_Habilitado = 1
 	and usu.Usuario_Habilitado = 1
-GO
-
---Vista con informacion de Empresas
-IF EXISTS(select * FROM sys.views where name = 'PAGO_AGIL.Vw_Empresa')
-	Drop View PAGO_AGIL.Vw_Empresa
 Go
 
+--Vista con informacion de Empresas
 Create view PAGO_AGIL.Vw_Empresa 
 As
 Select   emp.Empresa_Id
@@ -388,14 +463,37 @@ Select   emp.Empresa_Id
 from PAGO_AGIL.Dim_Empresa as emp
 inner join PAGO_AGIL.Dim_Rubro as rub
 	on rub.Rubro_Id = emp.Empresa_Rubro_Id
-GO
+Go
+
+--Vista con informacion de rendiciones
+Create view PAGO_AGIL.Vw_Rendidos
+as
+Select	 emp.Empresa_Id
+		,emp.Empresa_Nombre
+		,emp.Empresa_Cuit
+		,Convert(char(7), fac.Factura_Fecha_Vencimiento, 126) as Periodo
+		,Count(Distinct fac.Factura_Nro) as Cant_Facturas
+		,'$' + Cast(Sum(Factura_Total) as varchar) as Total
+		,(Select TOP 1 Case aux_ren.Rendicion_Id when null then 'Sin rendir' else 'Rendida' END
+			from PAGO_AGIL.Ft_Rendicion as aux_ren
+			inner join PAGO_AGIL.Lk_Factura as aux_fac
+				on aux_ren.Rendicion_Id = aux_fac.Factura_Rendicion_Id	
+			where Convert(char(7), fac.Factura_Fecha_Vencimiento, 126) = Convert(char(7), fac.Factura_Fecha_Vencimiento, 126)	) as Rendida
+from PAGO_AGIL.Dim_Empresa as emp
+inner join PAGO_AGIL.Lk_Factura as fac
+	on emp.Empresa_Id = fac.Factura_Empresa_Id
+	inner join PAGO_AGIL.RL_PagoxFactura as pag
+		on fac.Factura_Id = pag.Id_Factura
+group by emp.Empresa_Id
+		,emp.Empresa_Nombre
+		,emp.Empresa_Cuit
+		,Convert(char(7), fac.Factura_Fecha_Vencimiento, 126)
+--order by emp.Empresa_Id
+--		,Periodo
+Go
 
 --Creacion de Stored Procedures
 --Procedimiento para verificar entrada a sistema
-IF object_id('PAGO_AGIL.Login') IS NOT NULL
-    Drop Procedure PAGO_AGIL.Login
-GO
-
 Create Procedure [PAGO_AGIL].[Login] (@user varchar(100), @pass varchar(100))
 as
 Declare @usuario int = 0
@@ -435,4 +533,4 @@ Begin
 	Select 'Valido' as Resultado
 End
 
-GO
+Go

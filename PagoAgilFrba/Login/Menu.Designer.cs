@@ -138,6 +138,7 @@
             this.button_rendir.TabIndex = 9;
             this.button_rendir.Text = "Rendir Facturas";
             this.button_rendir.UseVisualStyleBackColor = true;
+            this.button_rendir.Click += new System.EventHandler(this.button_rendir_Click);
             // 
             // button_salir
             // 

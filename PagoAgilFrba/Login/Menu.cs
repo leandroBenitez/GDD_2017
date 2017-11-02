@@ -32,7 +32,7 @@ namespace PagoAgilFrba.Login
         private void habilitar_botones()
         {
             button_pagar.Hide();//  .Visible = false;
-            button_rendir.Hide();//  .Visible = false;
+            //button_rendir.Hide();//  .Visible = false;
             button_abm_cliente.Hide();//  .Visible = false;
             button_abm_empresa.Hide();//  .Visible = false;
             button_abm_facturas.Hide();//  .Visible = false;
@@ -106,6 +106,13 @@ namespace PagoAgilFrba.Login
         {
             //this.Close();
             System.Windows.Forms.Application.Exit();
+        }
+
+        private void button_rendir_Click(object sender, EventArgs e)
+        {
+            PagoAgilFrba.Rendicion.Rendicion rendicion = new PagoAgilFrba.Rendicion.Rendicion(menu_user, menu_fecha, this);
+            this.Hide();
+            rendicion.Show();
         }
     }
 }
