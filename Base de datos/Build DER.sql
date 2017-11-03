@@ -6,6 +6,11 @@ IF OBJECT_ID('PAGO_AGIL.Login') IS NOT NULL
 	DROP PROCEDURE PAGO_AGIL.Login;
 Go
 
+IF OBJECT_ID('PAGO_AGIL.agregar_sucursal') IS NOT NULL
+DROP PROCEDURE [PAGO_AGIL].agregar_sucursal
+
+GO
+
 --Borrado de Vistas
 IF OBJECT_ID('PAGO_AGIL.Vw_Rendidos') IS NOT NULL
     DROP VIEW PAGO_AGIL.Vw_Rendidos;
@@ -613,3 +618,17 @@ begin
 end
 
 Go
+
+-- Alta Sucursal
+
+Create procedure [PAGO_AGIL].agregar_sucursal (@nombre nvarchar(50),@direccion nvarchar(50),@cp int)
+as 
+
+	if exists(select * from PAGO_AGIL.Dim_Sucursal s where s.Sucursal_Codigo_Postal = @cp )
+		select -1 -- Ya existe una sucursal con ese CP
+	else 
+		insert into PAGO_AGIL.Dim_Sucursal (Sucursal_Nombre,Sucursal_Direccion,Sucursal_Codigo_Postal,Sucursal_Habilitado)
+		values (@nombre,@direccion,@cp,1)
+		select 1
+
+GO
