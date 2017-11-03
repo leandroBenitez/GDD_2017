@@ -534,3 +534,82 @@ Begin
 End
 
 Go
+
+-- Registro de Pago, faltan cosas
+Create Procedure [PAGO_AGIL].[Pago]  (@empresa varchar(100)
+										,@fecha_pago varchar(10)
+										,@cliente varchar(100)
+										,@user varchar(100)
+										,@fecha_venc varchar(10)
+										,@importe int
+										,@nro_factura int
+										,@sucursal varchar(100))
+as
+
+declare @fecha_valida int = 1
+declare @empresa_activa int = 0
+declare @resultado varchar(100) = ''
+declare @factura_existente int = 0
+declare @pago_id int
+declare @f_ven date
+declare @f_pag date
+
+Select @empresa_activa = 1 from PAGO_AGIL.Dim_Empresa as emp
+where emp.Empresa_Nombre like @empresa
+	and emp.Empresa_Habilitado = 1
+
+if @empresa_activa = 0
+begin
+	set @resultado = ' Empresa Inactiva'
+end
+
+Select @factura_existente = 1 from PAGO_AGIL.Lk_Factura as fact
+inner join PAGO_AGIL.Dim_Empresa as emp
+	on emp.Empresa_Id = fact.Factura_Empresa_Id
+inner join PAGO_AGIL.Lk_Cliente as cli
+	on cli.Cliente_Id = fact.Factura_Cliente_Id
+where fact.Factura_Nro = @nro_factura
+	and emp.Empresa_Nombre like @empresa
+	and (cli.Cliente_Nombre + ' ' + cli.Cliente_Apellido) = @cliente
+
+if @factura_existente = 0
+begin
+	set @resultado = @resultado + ' Factura inexistente'
+end
+
+set @f_pag = convert(date, @fecha_pago, 101)
+set @f_ven = convert(date, @fecha_venc, 101)
+
+if(@f_ven < @f_pag)
+begin
+	set @fecha_valida = 0
+	set @resultado = @resultado + ' Factura vencida'
+end
+
+if(@fecha_valida = 0 or @empresa_activa = 0 or @factura_existente = 0)
+begin
+	set @resultado = 'Error:' + @resultado 
+end
+
+if(@resultado not like 'Error%')
+begin
+	select @pago_id = count(1) - 1 from PAGO_AGIL.Ft_Pago
+	insert into PAGO_AGIL.Ft_Pago(	 Pago_Id
+									,Pago_Fecha
+									,Pago_Item_nro
+									,Pago_Total
+									,Pago_FormaPago_Id
+									,Pago_Sucursal_Id
+									,Pago_Resp_Id)
+	values  (@pago_id
+			,@f_pag
+			,null
+			,@importe
+			,(select suc.Sucursal_Id from PAGO_AGIL.Dim_Sucursal as suc
+				where suc.Sucursal_Nombre like @sucursal)
+			,(select us.Usuario_Id from PAGO_AGIL.Lk_Usuario as us
+				where us.Usuario_Name like @user)
+			) 
+end
+
+Go

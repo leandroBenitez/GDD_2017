@@ -18,7 +18,7 @@ namespace PagoAgilFrba
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
             //Application.Run(new PagoAgilFrba.Login.Login());
-            Application.Run(new PagoAgilFrba.Login.Login());
+           Application.Run(new PagoAgilFrba.RegistroPago.RegistroPago("Fecha Sistema", "Sucrsal"));
         }
     }
 }
