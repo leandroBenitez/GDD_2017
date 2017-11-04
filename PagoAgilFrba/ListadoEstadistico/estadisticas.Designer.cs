@@ -45,7 +45,12 @@
             this.comboBox1 = new System.Windows.Forms.ComboBox();
             this.label2 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
+            this.dataGridMontoRendido = new System.Windows.Forms.DataGridView();
+            this.Empresa_Nombre = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.rubro = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.monto_rendido = new System.Windows.Forms.DataGridViewTextBoxColumn();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridCantPagos)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridMontoRendido)).BeginInit();
             this.SuspendLayout();
             // 
             // dataGridCantPagos
@@ -109,6 +114,7 @@
             this.button2.TabIndex = 3;
             this.button2.Text = "Top 5 empresas con mayor monto rendido";
             this.button2.UseVisualStyleBackColor = true;
+            this.button2.Click += new System.EventHandler(this.button2_Click);
             // 
             // button3
             // 
@@ -214,11 +220,40 @@
             this.label3.Text = "label3";
             this.label3.Visible = false;
             // 
+            // dataGridMontoRendido
+            // 
+            this.dataGridMontoRendido.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dataGridMontoRendido.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.Empresa_Nombre,
+            this.rubro,
+            this.monto_rendido});
+            this.dataGridMontoRendido.Location = new System.Drawing.Point(39, 221);
+            this.dataGridMontoRendido.Name = "dataGridMontoRendido";
+            this.dataGridMontoRendido.Size = new System.Drawing.Size(445, 132);
+            this.dataGridMontoRendido.TabIndex = 13;
+            this.dataGridMontoRendido.Visible = false;
+            // 
+            // Empresa_Nombre
+            // 
+            this.Empresa_Nombre.HeaderText = "Empresa_Nombre";
+            this.Empresa_Nombre.Name = "Empresa_Nombre";
+            // 
+            // rubro
+            // 
+            this.rubro.HeaderText = "rubro";
+            this.rubro.Name = "rubro";
+            // 
+            // monto_rendido
+            // 
+            this.monto_rendido.HeaderText = "monto_rendido";
+            this.monto_rendido.Name = "monto_rendido";
+            // 
             // estadisticas
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(524, 407);
+            this.Controls.Add(this.dataGridMontoRendido);
             this.Controls.Add(this.label3);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.comboBox1);
@@ -235,6 +270,7 @@
             this.Name = "estadisticas";
             this.Text = "Form1";
             ((System.ComponentModel.ISupportInitialize)(this.dataGridCantPagos)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridMontoRendido)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -259,5 +295,9 @@
         private System.Windows.Forms.ComboBox comboBox1;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label label3;
+        private System.Windows.Forms.DataGridView dataGridMontoRendido;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Empresa_Nombre;
+        private System.Windows.Forms.DataGridViewTextBoxColumn rubro;
+        private System.Windows.Forms.DataGridViewTextBoxColumn monto_rendido;
     }
 }

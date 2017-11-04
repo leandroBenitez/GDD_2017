@@ -23,6 +23,7 @@ namespace PagoAgilFrba.ListadoEstadistico
         {
             string fechaInicio;
             string fechaFin;
+            dataGridMontoRendido.Visible=false;
             dataGridCantPagos.Visible = true;
             switch (label1.Text)
             {
@@ -119,6 +120,81 @@ namespace PagoAgilFrba.ListadoEstadistico
             }
 
             dataGridCantPagos.Rows.AddRange(filas.ToArray());
+        }
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+            string fechaInicio;
+            string fechaFin;
+            dataGridMontoRendido.Visible = true;
+            switch (label1.Text)
+            {
+                case "1":
+                    fechaInicio = comboBox1.Text + "-01-01";
+                    fechaFin = comboBox1.Text + "-03-31";
+                    label2.Text = fechaInicio;
+                    label3.Text = fechaFin;
+                    break;
+                case "2":
+                    fechaInicio = comboBox1.Text + "-04-01";
+                    fechaFin = comboBox1.Text + "-06-30";
+                    label2.Text = fechaInicio;
+                    label3.Text = fechaFin;
+                    break;
+                case "3":
+                    fechaInicio = comboBox1.Text + "-07-01";
+                    fechaFin = comboBox1.Text + "-09-30";
+                    label2.Text = fechaInicio;
+                    label3.Text = fechaFin;
+                    break;
+                case "4":
+                    fechaInicio = comboBox1.Text + "-10-01";
+                    fechaFin = comboBox1.Text + "-12-31";
+                    label2.Text = fechaInicio;
+                    label3.Text = fechaFin;
+                    break;
+                default: MessageBox.Show("Debe seleccionar un trimestre");
+                    break;
+            }
+            string consulta = "Execute topMontoRendido '" + label2.Text + "', '" + label3.Text + "'";
+            conexion connection = new conexion();
+            SqlCommand command = new SqlCommand();
+
+            command.CommandText = consulta;
+            command.CommandType = CommandType.Text;
+            command.Connection = connection.abrir_conexion();
+
+            try
+            {
+                SqlDataReader reader = command.ExecuteReader();
+                cargar_datos2(reader);
+                connection.cerrar_conexion(command.Connection);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Error: " + ex.Message);
+            }
+
+        }
+
+        private void cargar_datos2(SqlDataReader datos)
+        {
+            dataGridMontoRendido.Rows.Clear();
+
+            List<DataGridViewRow> filas = new List<DataGridViewRow>();
+            Object[] columnas = new Object[3];
+
+            while (datos.Read())
+            {
+                columnas[0] = datos["Empresa_Nombre"].ToString();
+                columnas[1] = datos["rubro"].ToString();
+                columnas[2] = datos["monto_rendido"].ToString();
+
+                filas.Add(new DataGridViewRow());
+                filas[filas.Count - 1].CreateCells(dataGridMontoRendido, columnas);
+            }
+
+            dataGridMontoRendido.Rows.AddRange(filas.ToArray());
         }
     }
 }
