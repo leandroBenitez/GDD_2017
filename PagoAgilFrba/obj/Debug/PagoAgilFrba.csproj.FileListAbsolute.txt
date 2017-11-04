@@ -46,10 +46,8 @@ C:\Users\Fabrizio\Documents\GitHub\GDD_2017\PagoAgilFrba\obj\Debug\PagoAgilFrba.
 C:\Users\Fabrizio\Documents\GitHub\GDD_2017\PagoAgilFrba\bin\Debug\PagoAgilFrba.exe
 C:\Users\Fabrizio\Documents\GitHub\GDD_2017\PagoAgilFrba\bin\Debug\PagoAgilFrba.pdb
 C:\Users\Fabrizio\Documents\GitHub\GDD_2017\PagoAgilFrba\obj\Debug\PagoAgilFrba.csprojResolveAssemblyReference.cache
-C:\Users\Fabrizio\Documents\GitHub\GDD_2017\PagoAgilFrba\obj\Debug\PagoAgilFrba.AbmEmpresa.Alta_Modificacion.resources
 C:\Users\Fabrizio\Documents\GitHub\GDD_2017\PagoAgilFrba\obj\Debug\PagoAgilFrba.AbmEmpresa.Buscador_Empresa.resources
 C:\Users\Fabrizio\Documents\GitHub\GDD_2017\PagoAgilFrba\obj\Debug\PagoAgilFrba.AbmFactura.Alta.resources
-C:\Users\Fabrizio\Documents\GitHub\GDD_2017\PagoAgilFrba\obj\Debug\PagoAgilFrba.AbmFactura.Form1.resources
 C:\Users\Fabrizio\Documents\GitHub\GDD_2017\PagoAgilFrba\obj\Debug\PagoAgilFrba.AbmSucursal.Alta.resources
 C:\Users\Fabrizio\Documents\GitHub\GDD_2017\PagoAgilFrba\obj\Debug\PagoAgilFrba.AbmSucursal.Baja.resources
 C:\Users\Fabrizio\Documents\GitHub\GDD_2017\PagoAgilFrba\obj\Debug\PagoAgilFrba.AbmSucursal.auxiliarModificacion.resources
@@ -97,3 +95,7 @@ C:\Users\Matucha\Documents\1-UTN\GDD\2C-2017\GDD_2017\PagoAgilFrba\obj\Debug\Pag
 C:\Users\Matucha\Documents\1-UTN\GDD\2C-2017\GDD_2017\PagoAgilFrba\obj\Debug\PagoAgilFrba.csproj.GenerateResource.Cache
 C:\Users\Matucha\Documents\1-UTN\GDD\2C-2017\GDD_2017\PagoAgilFrba\obj\Debug\PagoAgilFrba.exe
 C:\Users\Matucha\Documents\1-UTN\GDD\2C-2017\GDD_2017\PagoAgilFrba\obj\Debug\PagoAgilFrba.pdb
+C:\Users\Fabrizio\Documents\GitHub\GDD_2017\PagoAgilFrba\obj\Debug\PagoAgilFrba.AbmEmpresa.Alta.resources
+C:\Users\Fabrizio\Documents\GitHub\GDD_2017\PagoAgilFrba\obj\Debug\PagoAgilFrba.AbmEmpresa.Modificacion.resources
+C:\Users\Fabrizio\Documents\GitHub\GDD_2017\PagoAgilFrba\obj\Debug\PagoAgilFrba.AbmFactura.item.resources
+C:\Users\Fabrizio\Documents\GitHub\GDD_2017\PagoAgilFrba\obj\Debug\PagoAgilFrba.AbmFactura.Modificar.resources

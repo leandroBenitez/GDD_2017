@@ -111,6 +111,7 @@
             this.botonTopFacturasEmpresa.TabIndex = 2;
             this.botonTopFacturasEmpresa.Text = "Top 5 factruras cobradas por empresa";
             this.botonTopFacturasEmpresa.UseVisualStyleBackColor = true;
+            this.botonTopFacturasEmpresa.Click += new System.EventHandler(this.botonTopFacturasEmpresa_Click);
             // 
             // button2
             // 

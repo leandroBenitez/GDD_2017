@@ -75,17 +75,23 @@
     <Compile Include="AbmCliente1\mainABMClie.Designer.cs">
       <DependentUpon>mainABMClie.cs</DependentUpon>
     </Compile>
-    <Compile Include="AbmEmpresa\Alta-Modificacion.cs">
+    <Compile Include="AbmEmpresa\Alta.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="AbmEmpresa\Alta-Modificacion.Designer.cs">
-      <DependentUpon>Alta-Modificacion.cs</DependentUpon>
+    <Compile Include="AbmEmpresa\Alta.Designer.cs">
+      <DependentUpon>Alta.cs</DependentUpon>
     </Compile>
     <Compile Include="AbmEmpresa\Buscador Empresa.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="AbmEmpresa\Buscador Empresa.Designer.cs">
       <DependentUpon>Buscador Empresa.cs</DependentUpon>
+    </Compile>
+    <Compile Include="AbmEmpresa\Modificacion.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="AbmEmpresa\Modificacion.Designer.cs">
+      <DependentUpon>Modificacion.cs</DependentUpon>
     </Compile>
     <Compile Include="AbmFactura\Alta.cs">
       <SubType>Form</SubType>
@@ -201,11 +207,14 @@
     <EmbeddedResource Include="AbmCliente1\mainABMClie.resx">
       <DependentUpon>mainABMClie.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="AbmEmpresa\Alta-Modificacion.resx">
-      <DependentUpon>Alta-Modificacion.cs</DependentUpon>
+    <EmbeddedResource Include="AbmEmpresa\Alta.resx">
+      <DependentUpon>Alta.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="AbmEmpresa\Buscador Empresa.resx">
       <DependentUpon>Buscador Empresa.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="AbmEmpresa\Modificacion.resx">
+      <DependentUpon>Modificacion.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="AbmFactura\Alta.resx">
       <DependentUpon>Alta.cs</DependentUpon>

@@ -271,5 +271,10 @@ namespace PagoAgilFrba.ListadoEstadistico
 
             dataGridPorcentajePago.Rows.AddRange(filas.ToArray());
         }
+
+        private void botonTopFacturasEmpresa_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }
