@@ -99,6 +99,12 @@
     <Compile Include="AbmFactura\item.Designer.cs">
       <DependentUpon>item.cs</DependentUpon>
     </Compile>
+    <Compile Include="AbmFactura\Modificar.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="AbmFactura\Modificar.Designer.cs">
+      <DependentUpon>Modificar.cs</DependentUpon>
+    </Compile>
     <Compile Include="AbmRol\Form1.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -206,6 +212,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="AbmFactura\item.resx">
       <DependentUpon>item.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="AbmFactura\Modificar.resx">
+      <DependentUpon>Modificar.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="AbmSucursal\Alta.resx">
       <DependentUpon>Alta.cs</DependentUpon>

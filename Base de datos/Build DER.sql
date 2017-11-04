@@ -36,6 +36,19 @@ DROP PROCEDURE [PAGO_AGIL].Pago
 
 Go
 
+IF OBJECT_ID('PAGO_AGIL.alta_factura') IS NOT NULL
+DROP PROCEDURE [PAGO_AGIL].alta_factura
+
+GO
+
+IF OBJECT_ID('PAGO_AGIL.alta_item_fact') IS NOT NULL
+DROP PROCEDURE [PAGO_AGIL].alta_item_fact
+Go
+
+IF OBJECT_ID('PAGO_AGIL.calcular_fact_total') IS NOT NULL
+DROP PROCEDURE [PAGO_AGIL].calcular_fact_total
+Go
+
 --Borrado de Vistas
 IF OBJECT_ID('PAGO_AGIL.Vw_Rendidos') IS NOT NULL
     DROP VIEW PAGO_AGIL.Vw_Rendidos;
@@ -662,6 +675,8 @@ as
 		end
 GO
 
+-- Modificar Sucursal
+
 Create procedure [PAGO_AGIL].modificar_sucursal (@nombreant nvarchar(50),@direccionant nvarchar(50),@cpant int,@nombrenuev nvarchar(50),@direccionnuev nvarchar(50),@cpnuev int,@habilitar bit)
 as 	
 	declare @actualizarnombre nvarchar(50);	
@@ -767,3 +782,59 @@ end
 Select @resultado as Resultado
 
 GO
+
+
+-- Alta Factura
+
+Create procedure [PAGO_AGIL].alta_factura  (@nro int, @alta varchar(50),@venc varchar(50),@empr nvarchar(100),@clie nvarchar(100))
+as
+	declare @dtalta datetime
+	declare @dtvenc datetime
+
+	set @dtalta = CONVERT(datetime,@alta,103)
+	set @dtvenc= CONVERT(datetime,@venc,103)
+
+	if exists(select top 1 * from PAGO_AGIL.Lk_Factura where Factura_Nro= @nro)
+		return -1 -- Nro de Factura existente 
+	else
+		begin
+			if (@dtvenc <= @dtalta)
+				return -2 -- Fecha vencimiento anterior a la alta
+			else
+				begin
+					declare @clienteID int
+					declare @empresaID int
+					declare @retorno int
+
+					select @clienteID=Cliente_Id from PAGO_AGIL.Lk_Cliente where (Cliente_Nombre+','+Cliente_Apellido) = @clie
+					select @empresaID=Empresa_Id from PAGO_AGIL.Dim_Empresa where Empresa_Nombre = @empr 
+
+					insert into PAGO_AGIL.Lk_Factura(Factura_Nro,Factura_Fecha_Alta,Factura_Fecha_Vencimiento,Factura_Empresa_Id,Factura_Cliente_Id)
+					values (@nro,@dtalta,@dtvenc,@empresaID,@clienteID)
+
+					set @retorno = SCOPE_IDENTITY()
+					return @retorno -- Exitos
+				end
+		end
+Go
+
+-- Alta Item Factura
+
+create procedure [PAGO_AGIL].alta_item_fact  (@cant int,@monto varchar(50),@idfac int)
+as
+	declare @montor numeric(18,2)
+	set @montor = CONVERT(numeric(18,2),@monto)
+	insert into PAGO_AGIL.Lk_Item_Factura(Item_Cantidad,Item_Monto,Item_Factura_Nro) values (@cant,@montor,@idfac)
+
+Go
+
+-- Update monto factura total
+create procedure [PAGO_AGIL].calcular_fact_total  (@idfac int)
+as
+	declare @monto numeric(18,2)
+	select @monto = sum(Item_Monto) from PAGO_AGIL.Lk_Item_Factura where Item_Factura_Nro = @idfac
+	
+	update PAGO_AGIL.Lk_Factura
+		set Factura_Total = @monto
+		where Factura_Id = @idfac
+go
