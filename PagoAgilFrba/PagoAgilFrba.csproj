@@ -45,11 +45,17 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="AbmCliente\Form1.cs">
+    <Compile Include="AbmCliente1\busqueda.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="AbmCliente\Form1.Designer.cs">
-      <DependentUpon>Form1.cs</DependentUpon>
+    <Compile Include="AbmCliente1\busqueda.Designer.cs">
+      <DependentUpon>busqueda.cs</DependentUpon>
+    </Compile>
+    <Compile Include="AbmCliente1\mainABMClie.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="AbmCliente1\mainABMClie.Designer.cs">
+      <DependentUpon>mainABMClie.cs</DependentUpon>
     </Compile>
     <Compile Include="AbmEmpresa\Alta-Modificacion.cs">
       <SubType>Form</SubType>
@@ -113,6 +119,11 @@
     </Compile>
     <Compile Include="Entidades\conexion.cs" />
     <Compile Include="Entidades\Funciones.cs" />
+    <Compile Include="GD2C2017DataSet.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>GD2C2017DataSet.xsd</DependentUpon>
+    </Compile>
     <Compile Include="ListadoEstadistico\Form1.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -151,6 +162,12 @@
     <Compile Include="Rendicion\Rendicion.Designer.cs">
       <DependentUpon>Rendicion.cs</DependentUpon>
     </Compile>
+    <EmbeddedResource Include="AbmCliente1\busqueda.resx">
+      <DependentUpon>busqueda.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="AbmCliente1\mainABMClie.resx">
+      <DependentUpon>mainABMClie.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="AbmEmpresa\Alta-Modificacion.resx">
       <DependentUpon>Alta-Modificacion.cs</DependentUpon>
     </EmbeddedResource>
@@ -202,6 +219,17 @@
     <EmbeddedResource Include="Rendicion\Rendicion.resx">
       <DependentUpon>Rendicion.cs</DependentUpon>
     </EmbeddedResource>
+    <None Include="GD2C2017DataSet.xsc">
+      <DependentUpon>GD2C2017DataSet.xsd</DependentUpon>
+    </None>
+    <None Include="GD2C2017DataSet.xsd">
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>GD2C2017DataSet.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="GD2C2017DataSet.xss">
+      <DependentUpon>GD2C2017DataSet.xsd</DependentUpon>
+    </None>
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
