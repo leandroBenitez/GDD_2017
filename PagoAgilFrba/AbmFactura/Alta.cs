@@ -44,7 +44,21 @@ namespace PagoAgilFrba.AbmFactura
                 MessageBox.Show("no puede haber campos sin completar", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);            
             }else
             {
+                if (int.Parse(factnro.Text) <= 0)
+                {
+                    MessageBox.Show("El numero de factura debe ser mayor a cero", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);            
+            
+                }
+                else if (itcount == 0)
+                {
+                    MessageBox.Show("La factura debe tene al menos 1 item", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
 
+                }
+                else
+                {
+
+                }
+                
             }
 
         }
