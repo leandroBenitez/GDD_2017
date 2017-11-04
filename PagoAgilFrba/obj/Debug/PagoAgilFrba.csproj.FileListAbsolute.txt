@@ -86,3 +86,4 @@ C:\Users\Fabrizio\Documents\GitHub\GDD_2017\PagoAgilFrba\obj\Debug\PagoAgilFrba.
 C:\Users\Fabrizio\Documents\GitHub\GDD_2017\PagoAgilFrba\obj\Debug\PagoAgilFrba.csproj.GenerateResource.Cache
 C:\Users\Fabrizio\Documents\GitHub\GDD_2017\PagoAgilFrba\obj\Debug\PagoAgilFrba.AbmCliente1.busqueda.resources
 C:\Users\Fabrizio\Documents\GitHub\GDD_2017\PagoAgilFrba\obj\Debug\PagoAgilFrba.AbmCliente1.mainABMClie.resources
+C:\Users\Fabrizio\Documents\GitHub\GDD_2017\PagoAgilFrba\obj\Debug\PagoAgilFrba.AbmCliente1.nuevoCliente.resources
