@@ -57,6 +57,9 @@
             this.Cliente_Direccion = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Cliente_Codigo_Postal = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Cliente_Habilitado = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.fechaNac = new System.Windows.Forms.TextBox();
+            this.monthCalendar1 = new System.Windows.Forms.MonthCalendar();
+            this.button1 = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.SuspendLayout();
             // 
@@ -285,11 +288,41 @@
             this.Cliente_Habilitado.HeaderText = "Cliente_Habilitado";
             this.Cliente_Habilitado.Name = "Cliente_Habilitado";
             // 
+            // fechaNac
+            // 
+            this.fechaNac.Location = new System.Drawing.Point(48, 239);
+            this.fechaNac.Name = "fechaNac";
+            this.fechaNac.Size = new System.Drawing.Size(114, 20);
+            this.fechaNac.TabIndex = 41;
+            this.fechaNac.TextChanged += new System.EventHandler(this.fechaNac_Click);
+            // 
+            // monthCalendar1
+            // 
+            this.monthCalendar1.Location = new System.Drawing.Point(165, 142);
+            this.monthCalendar1.MaxSelectionCount = 1;
+            this.monthCalendar1.Name = "monthCalendar1";
+            this.monthCalendar1.TabIndex = 42;
+            this.monthCalendar1.Visible = false;
+            this.monthCalendar1.DateChanged += new System.Windows.Forms.DateRangeEventHandler(this.monthCalendar1_DateChanged);
+            // 
+            // button1
+            // 
+            this.button1.Location = new System.Drawing.Point(51, 263);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(110, 28);
+            this.button1.TabIndex = 43;
+            this.button1.Text = "Elegir fecha";
+            this.button1.UseVisualStyleBackColor = true;
+            this.button1.Click += new System.EventHandler(this.button1_Click_1);
+            // 
             // busqueda
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(626, 489);
+            this.Controls.Add(this.button1);
+            this.Controls.Add(this.monthCalendar1);
+            this.Controls.Add(this.fechaNac);
             this.Controls.Add(this.botonBuscar);
             this.Controls.Add(this.comboHabilitado);
             this.Controls.Add(this.codPostal);
@@ -349,5 +382,8 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn Cliente_Direccion;
         private System.Windows.Forms.DataGridViewTextBoxColumn Cliente_Codigo_Postal;
         private System.Windows.Forms.DataGridViewTextBoxColumn Cliente_Habilitado;
+        private System.Windows.Forms.TextBox fechaNac;
+        private System.Windows.Forms.MonthCalendar monthCalendar1;
+        private System.Windows.Forms.Button button1;
     }
 }

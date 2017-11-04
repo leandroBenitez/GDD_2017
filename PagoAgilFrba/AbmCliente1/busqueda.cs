@@ -134,5 +134,21 @@ namespace PagoAgilFrba.AbmCliente1
             direccion.Text = "";
             codPostal.Text = "";
         }
+
+        private void fechaNac_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void monthCalendar1_DateChanged(object sender, DateRangeEventArgs e)
+        {
+            //fechaNac.Text = monthCalendar1.DateSelected.ToString();
+
+        }
+
+        private void button1_Click_1(object sender, EventArgs e)
+        {
+            monthCalendar1.Visible = true;
+        }
     }
 }
