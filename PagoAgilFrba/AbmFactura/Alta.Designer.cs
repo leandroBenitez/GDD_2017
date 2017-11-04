@@ -60,6 +60,7 @@
             // 
             // clientes
             // 
+            this.clientes.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.clientes.FormattingEnabled = true;
             this.clientes.Location = new System.Drawing.Point(151, 56);
             this.clientes.Name = "clientes";
@@ -86,6 +87,7 @@
             // 
             // empresas
             // 
+            this.empresas.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.empresas.FormattingEnabled = true;
             this.empresas.Location = new System.Drawing.Point(151, 94);
             this.empresas.Name = "empresas";
@@ -150,6 +152,7 @@
             this.items.TabIndex = 11;
             this.items.Text = "Agregar Item";
             this.items.UseVisualStyleBackColor = true;
+            this.items.Click += new System.EventHandler(this.items_Click);
             // 
             // label7
             // 
@@ -195,6 +198,7 @@
             this.cancelar.TabIndex = 16;
             this.cancelar.Text = "Cancelar";
             this.cancelar.UseVisualStyleBackColor = true;
+            this.cancelar.Click += new System.EventHandler(this.cancelar_Click);
             // 
             // agregar
             // 
@@ -252,9 +256,9 @@
         private System.Windows.Forms.DateTimePicker factvenc;
         private System.Windows.Forms.Button items;
         private System.Windows.Forms.Label label7;
-        private System.Windows.Forms.Label itemcount;
+        public System.Windows.Forms.Label itemcount;
         private System.Windows.Forms.Label label9;
-        private System.Windows.Forms.TextBox facttotal;
+        public System.Windows.Forms.TextBox facttotal;
         private System.Windows.Forms.Button cancelar;
         private System.Windows.Forms.Button agregar;
     }

@@ -21,8 +21,8 @@ namespace PagoAgilFrba
           // Application.Run(new PagoAgilFrba.RegistroPago.RegistroPago("Fecha Sistema", "Sucrsal"));
           // Application.Run(new PagoAgilFrba.AbmSucursal.Menu());
             //Application.Run(new PagoAgilFrba.AbmEmpresa.Buscador_Empresa());
-            //Application.Run(new PagoAgilFrba.AbmFactura.Alta());
-            Application.Run(new PagoAgilFrba.ListadoEstadistico.estadisticas());
+            Application.Run(new PagoAgilFrba.AbmFactura.Alta(new PagoAgilFrba.Login.Login()));
+           // Application.Run(new PagoAgilFrba.ListadoEstadistico.estadisticas());
         }
     }
 }
