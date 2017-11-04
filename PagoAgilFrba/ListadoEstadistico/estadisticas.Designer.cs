@@ -54,6 +54,7 @@
             this.ApellidoCliente = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.NombreCliente = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.porcentaje_pago = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.textBox1 = new System.Windows.Forms.TextBox();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridCantPagos)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridMontoRendido)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridPorcentajePago)).BeginInit();
@@ -67,7 +68,7 @@
             this.Cliente_Apellido,
             this.Cliente_Dni,
             this.cantidad_pagos});
-            this.dataGridCantPagos.Location = new System.Drawing.Point(39, 221);
+            this.dataGridCantPagos.Location = new System.Drawing.Point(39, 218);
             this.dataGridCantPagos.Name = "dataGridCantPagos";
             this.dataGridCantPagos.Size = new System.Drawing.Size(443, 130);
             this.dataGridCantPagos.TabIndex = 0;
@@ -235,7 +236,7 @@
             this.Empresa_Nombre,
             this.rubro,
             this.monto_rendido});
-            this.dataGridMontoRendido.Location = new System.Drawing.Point(39, 221);
+            this.dataGridMontoRendido.Location = new System.Drawing.Point(39, 223);
             this.dataGridMontoRendido.Name = "dataGridMontoRendido";
             this.dataGridMontoRendido.Size = new System.Drawing.Size(445, 132);
             this.dataGridMontoRendido.TabIndex = 13;
@@ -290,12 +291,19 @@
             this.porcentaje_pago.HeaderText = "porcentaje_pago";
             this.porcentaje_pago.Name = "porcentaje_pago";
             // 
+            // textBox1
+            // 
+            this.textBox1.Location = new System.Drawing.Point(70, 27);
+            this.textBox1.Name = "textBox1";
+            this.textBox1.Size = new System.Drawing.Size(185, 20);
+            this.textBox1.TabIndex = 15;
+            // 
             // estadisticas
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(524, 407);
-            this.Controls.Add(this.dataGridPorcentajePago);
+            this.Controls.Add(this.textBox1);
             this.Controls.Add(this.dataGridMontoRendido);
             this.Controls.Add(this.label3);
             this.Controls.Add(this.label2);
@@ -310,6 +318,7 @@
             this.Controls.Add(this.botonTopFacturasEmpresa);
             this.Controls.Add(this.botonTopPagos);
             this.Controls.Add(this.dataGridCantPagos);
+            this.Controls.Add(this.dataGridPorcentajePago);
             this.Name = "estadisticas";
             this.Text = "Form1";
             ((System.ComponentModel.ISupportInitialize)(this.dataGridCantPagos)).EndInit();
@@ -348,5 +357,6 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn ApellidoCliente;
         private System.Windows.Forms.DataGridViewTextBoxColumn NombreCliente;
         private System.Windows.Forms.DataGridViewTextBoxColumn porcentaje_pago;
+        private System.Windows.Forms.TextBox textBox1;
     }
 }

@@ -201,7 +201,8 @@ namespace PagoAgilFrba.ListadoEstadistico
         {
             string fechaInicio;
             string fechaFin;
-            dataGridMontoRendido.Visible = true;
+            dataGridMontoRendido.Visible = false;
+            dataGridPorcentajePago.Visible = true;
             switch (label1.Text)
             {
                 case "1":
@@ -231,14 +232,14 @@ namespace PagoAgilFrba.ListadoEstadistico
                 default: MessageBox.Show("Debe seleccionar un trimestre");
                     break;
             }
-            string consulta = "Execute topMontoRendido '" + label2.Text + "', '" + label3.Text + "'";
+            string consulta = "Execute topPorcentajePago '" + label2.Text + "', '" + label3.Text + "'";
             conexion connection = new conexion();
             SqlCommand command = new SqlCommand();
 
             command.CommandText = consulta;
             command.CommandType = CommandType.Text;
             command.Connection = connection.abrir_conexion();
-
+            textBox1.Text = consulta;
             try
             {
                 SqlDataReader reader = command.ExecuteReader();
