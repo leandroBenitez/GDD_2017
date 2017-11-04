@@ -891,7 +891,7 @@ create procedure topPorcentajePago(@fechaInicio date, @fechaFin date) as
 		inner join PAGO_AGIL.Lk_Cliente as clie on clie.Cliente_Id = fact.Factura_Cliente_Id
 		inner join PAGO_AGIL.RL_PagoxFactura as pagofact on (fact.Factura_Id = pagofact.Id_Factura AND pagofact.Id_Pago is not null)
 		where convert(date,fact.Factura_Fecha_Alta) between @fechaInicio and @fechaFin
-		order by porcentaje_pago desc
+			order by porcentaje_pago desc
 	end
 go
 ;
