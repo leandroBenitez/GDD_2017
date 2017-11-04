@@ -147,5 +147,10 @@ namespace PagoAgilFrba.Login
                 MessageBox.Show("Error: " + ex.Message);
             }
         }
+
+        private void Login_Load(object sender, EventArgs e)
+        {
+
+        }
     }
 }

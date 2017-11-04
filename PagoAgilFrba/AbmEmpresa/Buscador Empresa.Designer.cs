@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             this.textBox_nombre = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
@@ -42,7 +43,17 @@
             this.Direccion = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Rubro = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Habilitada = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.vwEmpresaBindingSource = new System.Windows.Forms.BindingSource(this.components);
+            this.dimEmpresaBindingSource = new System.Windows.Forms.BindingSource(this.components);
+            this.gD2C2017DataSetBindingSource = new System.Windows.Forms.BindingSource(this.components);
+            this.gD2C2017DataSet = new PagoAgilFrba.GD2C2017DataSet();
+            this.vw_EmpresaTableAdapter = new PagoAgilFrba.GD2C2017DataSetTableAdapters.Vw_EmpresaTableAdapter();
+            this.dim_EmpresaTableAdapter = new PagoAgilFrba.GD2C2017DataSetTableAdapters.Dim_EmpresaTableAdapter();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.vwEmpresaBindingSource)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dimEmpresaBindingSource)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.gD2C2017DataSetBindingSource)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.gD2C2017DataSet)).BeginInit();
             this.SuspendLayout();
             // 
             // textBox_nombre
@@ -122,6 +133,7 @@
             this.dataGridView.ReadOnly = true;
             this.dataGridView.Size = new System.Drawing.Size(539, 150);
             this.dataGridView.TabIndex = 7;
+            this.dataGridView.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView_CellContentClick);
             // 
             // Id_empresa
             // 
@@ -160,6 +172,34 @@
             this.Habilitada.Name = "Habilitada";
             this.Habilitada.ReadOnly = true;
             // 
+            // vwEmpresaBindingSource
+            // 
+            this.vwEmpresaBindingSource.DataMember = "Vw_Empresa";
+            this.vwEmpresaBindingSource.DataSource = this.gD2C2017DataSetBindingSource;
+            // 
+            // dimEmpresaBindingSource
+            // 
+            this.dimEmpresaBindingSource.DataMember = "Dim_Empresa";
+            this.dimEmpresaBindingSource.DataSource = this.gD2C2017DataSetBindingSource;
+            // 
+            // gD2C2017DataSetBindingSource
+            // 
+            this.gD2C2017DataSetBindingSource.DataSource = this.gD2C2017DataSet;
+            this.gD2C2017DataSetBindingSource.Position = 0;
+            // 
+            // gD2C2017DataSet
+            // 
+            this.gD2C2017DataSet.DataSetName = "GD2C2017DataSet";
+            this.gD2C2017DataSet.SchemaSerializationMode = System.Data.SchemaSerializationMode.IncludeSchema;
+            // 
+            // vw_EmpresaTableAdapter
+            // 
+            this.vw_EmpresaTableAdapter.ClearBeforeFill = true;
+            // 
+            // dim_EmpresaTableAdapter
+            // 
+            this.dim_EmpresaTableAdapter.ClearBeforeFill = true;
+            // 
             // Buscador_Empresa
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -175,7 +215,12 @@
             this.Controls.Add(this.textBox_nombre);
             this.Name = "Buscador_Empresa";
             this.Text = "Pago Agil";
+            this.Load += new System.EventHandler(this.Buscador_Empresa_Load);
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.vwEmpresaBindingSource)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dimEmpresaBindingSource)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.gD2C2017DataSetBindingSource)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.gD2C2017DataSet)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -197,5 +242,11 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn Direccion;
         private System.Windows.Forms.DataGridViewTextBoxColumn Rubro;
         private System.Windows.Forms.DataGridViewTextBoxColumn Habilitada;
+        private System.Windows.Forms.BindingSource gD2C2017DataSetBindingSource;
+        private GD2C2017DataSet gD2C2017DataSet;
+        private System.Windows.Forms.BindingSource vwEmpresaBindingSource;
+        private GD2C2017DataSetTableAdapters.Vw_EmpresaTableAdapter vw_EmpresaTableAdapter;
+        private System.Windows.Forms.BindingSource dimEmpresaBindingSource;
+        private GD2C2017DataSetTableAdapters.Dim_EmpresaTableAdapter dim_EmpresaTableAdapter;
     }
 }

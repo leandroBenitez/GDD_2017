@@ -78,5 +78,19 @@ namespace PagoAgilFrba.AbmEmpresa
 
             dataGridView.Rows.AddRange(filas.ToArray());
         }
+
+        private void Buscador_Empresa_Load(object sender, EventArgs e)
+        {
+            // TODO: esta línea de código carga datos en la tabla 'gD2C2017DataSet.Dim_Empresa' Puede moverla o quitarla según sea necesario.
+            this.dim_EmpresaTableAdapter.Fill(this.gD2C2017DataSet.Dim_Empresa);
+            // TODO: esta línea de código carga datos en la tabla 'gD2C2017DataSet.Vw_Empresa' Puede moverla o quitarla según sea necesario.
+            this.vw_EmpresaTableAdapter.Fill(this.gD2C2017DataSet.Vw_Empresa);
+
+        }
+
+        private void dataGridView_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+
+        }
     }
 }
