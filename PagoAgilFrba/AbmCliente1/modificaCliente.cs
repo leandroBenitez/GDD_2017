@@ -184,5 +184,22 @@ namespace PagoAgilFrba.AbmCliente1
                 MessageBox.Show("Error: " + ex.Message);
             }
         }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            monthCalendar1.Visible = true;
+            button2.Visible = true;
+        }
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+            monthCalendar1.Visible = false;
+            button2.Visible = false;
+        }
+
+        private void monthCalendar1_DateChanged(object sender, DateRangeEventArgs e)
+        {
+            fechaNac.Text = monthCalendar1.SelectionStart.Date.ToString();
+        }
     }
 }

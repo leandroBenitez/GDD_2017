@@ -28,7 +28,6 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.label11 = new System.Windows.Forms.Label();
             this.fechaNac = new System.Windows.Forms.TextBox();
             this.dniBuscado = new System.Windows.Forms.TextBox();
             this.label10 = new System.Windows.Forms.Label();
@@ -62,17 +61,11 @@
             this.Cliente_Direccion = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Cliente_Codigo_Postal = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Cliente_Habilitado = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.button2 = new System.Windows.Forms.Button();
+            this.button1 = new System.Windows.Forms.Button();
+            this.monthCalendar1 = new System.Windows.Forms.MonthCalendar();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.SuspendLayout();
-            // 
-            // label11
-            // 
-            this.label11.AutoSize = true;
-            this.label11.Location = new System.Drawing.Point(283, 246);
-            this.label11.Name = "label11";
-            this.label11.Size = new System.Drawing.Size(41, 13);
-            this.label11.TabIndex = 70;
-            this.label11.Text = "label11";
             // 
             // fechaNac
             // 
@@ -332,12 +325,44 @@
             this.Cliente_Habilitado.HeaderText = "Cliente_Habilitado";
             this.Cliente_Habilitado.Name = "Cliente_Habilitado";
             // 
+            // button2
+            // 
+            this.button2.Location = new System.Drawing.Point(358, 99);
+            this.button2.Name = "button2";
+            this.button2.Size = new System.Drawing.Size(26, 31);
+            this.button2.TabIndex = 74;
+            this.button2.Text = "X";
+            this.button2.UseVisualStyleBackColor = true;
+            this.button2.Visible = false;
+            this.button2.Click += new System.EventHandler(this.button2_Click);
+            // 
+            // button1
+            // 
+            this.button1.Location = new System.Drawing.Point(63, 247);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(110, 28);
+            this.button1.TabIndex = 73;
+            this.button1.Text = "Elegir fecha";
+            this.button1.UseVisualStyleBackColor = true;
+            this.button1.Click += new System.EventHandler(this.button1_Click);
+            // 
+            // monthCalendar1
+            // 
+            this.monthCalendar1.Location = new System.Drawing.Point(176, 126);
+            this.monthCalendar1.MaxSelectionCount = 1;
+            this.monthCalendar1.Name = "monthCalendar1";
+            this.monthCalendar1.TabIndex = 72;
+            this.monthCalendar1.Visible = false;
+            this.monthCalendar1.DateChanged += new System.Windows.Forms.DateRangeEventHandler(this.monthCalendar1_DateChanged);
+            // 
             // modificaCliente
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(648, 457);
-            this.Controls.Add(this.label11);
+            this.Controls.Add(this.button2);
+            this.Controls.Add(this.button1);
+            this.Controls.Add(this.monthCalendar1);
             this.Controls.Add(this.fechaNac);
             this.Controls.Add(this.dniBuscado);
             this.Controls.Add(this.label10);
@@ -372,7 +397,6 @@
 
         #endregion
 
-        private System.Windows.Forms.Label label11;
         private System.Windows.Forms.TextBox fechaNac;
         private System.Windows.Forms.TextBox dniBuscado;
         private System.Windows.Forms.Label label10;
@@ -406,5 +430,8 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn Cliente_Direccion;
         private System.Windows.Forms.DataGridViewTextBoxColumn Cliente_Codigo_Postal;
         private System.Windows.Forms.DataGridViewTextBoxColumn Cliente_Habilitado;
+        private System.Windows.Forms.Button button2;
+        private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.MonthCalendar monthCalendar1;
     }
 }

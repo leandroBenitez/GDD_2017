@@ -70,6 +70,11 @@ namespace PagoAgilFrba.AbmCliente1
                 consulta = consulta + "and Cliente_Codigo_Postal LIKE '%" + codPostal.Text + "%' ";
             }
 
+            if (!string.IsNullOrWhiteSpace(fechaNac.Text))
+            {
+                consulta = consulta + "and Cliente_Fecha_Nac LIKE '%" + fechaNac.Text + "%' ";
+            }
+
 
             if (comboHabilitado.SelectedIndex != -1)
             {
@@ -143,12 +148,21 @@ namespace PagoAgilFrba.AbmCliente1
         private void monthCalendar1_DateChanged(object sender, DateRangeEventArgs e)
         {
             //fechaNac.Text = monthCalendar1.DateSelected.ToString();
+            fechaNac.Text = monthCalendar1.SelectionStart.Date.ToString();
 
         }
 
         private void button1_Click_1(object sender, EventArgs e)
         {
             monthCalendar1.Visible = true;
+            button2.Visible = true;
         }
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+            monthCalendar1.Visible = false;
+            button2.Visible = false;
+        }
+
     }
 }
