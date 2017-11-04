@@ -168,6 +168,7 @@
             this.Controls.Add(this.button_abm_rol);
             this.Controls.Add(this.label_usuario);
             this.Controls.Add(this.label_fecha);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.Name = "Menu";
             this.Text = "Pago Agil";
             this.ResumeLayout(false);

@@ -117,18 +117,18 @@
             // 
             // button_modificacion
             // 
-            this.button_modificacion.Location = new System.Drawing.Point(58, 263);
+            this.button_modificacion.Location = new System.Drawing.Point(55, 263);
             this.button_modificacion.Name = "button_modificacion";
-            this.button_modificacion.Size = new System.Drawing.Size(75, 23);
+            this.button_modificacion.Size = new System.Drawing.Size(78, 23);
             this.button_modificacion.TabIndex = 9;
             this.button_modificacion.Text = "Modificar";
             this.button_modificacion.UseVisualStyleBackColor = true;
             // 
             // button_alta
             // 
-            this.button_alta.Location = new System.Drawing.Point(226, 263);
+            this.button_alta.Location = new System.Drawing.Point(58, 263);
             this.button_alta.Name = "button_alta";
-            this.button_alta.Size = new System.Drawing.Size(75, 23);
+            this.button_alta.Size = new System.Drawing.Size(78, 23);
             this.button_alta.TabIndex = 10;
             this.button_alta.Text = "Alta";
             this.button_alta.UseVisualStyleBackColor = true;
@@ -149,6 +149,7 @@
             this.Controls.Add(this.textBox_direccion);
             this.Controls.Add(this.textBox_cuit);
             this.Controls.Add(this.textBox_nombre);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.Name = "Alta_Modificacion";
             this.Text = "Alta_Modificacion";
             this.ResumeLayout(false);

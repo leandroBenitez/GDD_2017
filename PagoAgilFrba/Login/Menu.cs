@@ -32,7 +32,7 @@ namespace PagoAgilFrba.Login
         private void habilitar_botones()
         {
             button_pagar.Hide();//  .Visible = false;
-            //button_rendir.Hide();//  .Visible = false;
+            button_rendir.Hide();//  .Visible = false;
             button_abm_cliente.Hide();//  .Visible = false;
             button_abm_empresa.Hide();//  .Visible = false;
             button_abm_facturas.Hide();//  .Visible = false;
@@ -70,34 +70,37 @@ namespace PagoAgilFrba.Login
             {
                 funcion = lista[0].ToString();
 
-                switch (funcion)
+                if (funcion == "ABM de Rol")
                 {
-                    case "ABM de Rol":
-                        button_abm_rol.Show();// .Visible = true;
-                        return;
-                    case "ABM de Cliente":
-                        button_abm_cliente.Show();// .Visible = true;
-                        return;
-                    case "ABM de Empresa":
-                        button_abm_empresa.Show();// .Visible = true;
-                        return;
-                    case "ABM de Sucursal":
-                        button_abm_sucursal.Show();// .Visible = true;
-                        return;
-                    case "ABM Facturas":
-                        button_abm_facturas.Show();// .Visible = true;
-                        return;
-                    case "Registro de Pago de Facturas":
-                        button_pagar.Show();// .Visible = true;
-                        return;
-                    case "Rendicion de Facturas cobradas":
-                        button_rendir.Show();// .Visible = true;
-                        return;
-                    case "Listado Estadístico":
-                        button_estadisticas.Show();// .Visible = true;
-                        return;
-                    default: 
-                        return;
+                    button_abm_rol.Show();// .Visible = true;
+                }
+                else if (funcion == "ABM de Cliente")
+                {
+                    button_abm_cliente.Show();// .Visible = true;
+                }
+                else if (funcion == "ABM de Empresa")                        
+                {
+                    button_abm_empresa.Show();// .Visible = true;
+                }
+                else if (funcion == "ABM de Sucursal")
+                {
+                    button_abm_sucursal.Show();// .Visible = true;
+                }    
+                else if (funcion == "ABM Facturas")
+                {
+                    button_abm_facturas.Show();// .Visible = true;
+                }
+                else if (funcion == "Registro de Pago de Facturas")
+                {
+                    button_pagar.Show();// .Visible = true;
+                }    
+                else if (funcion == "Rendicion de Facturas cobradas")
+                {
+                    button_rendir.Show();// .Visible = true;
+                }
+                else if (funcion == "Listado Estadistico")
+                {
+                    button_estadisticas.Show();// .Visible = true;
                 }
             }
         }

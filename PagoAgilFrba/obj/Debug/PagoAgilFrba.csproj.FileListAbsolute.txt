@@ -7,19 +7,6 @@ C:\Users\CoreBI\Desktop\Tp GDD\TP Pago Facil Frba 1.0 - 2C 2017\Aplicacion Deskt
 C:\Users\CoreBI\Desktop\Tp GDD\TP Pago Facil Frba 1.0 - 2C 2017\Aplicacion Desktop\PagoAgilFrba\obj\Debug\PagoAgilFrba.exe
 C:\Users\CoreBI\Desktop\Tp GDD\TP Pago Facil Frba 1.0 - 2C 2017\Aplicacion Desktop\PagoAgilFrba\obj\Debug\PagoAgilFrba.pdb
 C:\Users\CoreBI\Desktop\Tp GDD\TP Pago Facil Frba 1.0 - 2C 2017\Aplicacion Desktop\PagoAgilFrba\obj\Debug\PagoAgilFrba.Login.Login.resources
-C:\Users\CoreBI\Desktop\Tp GDD\GDD_2017\PagoAgilFrba\bin\Debug\PagoAgilFrba.exe.config
-C:\Users\CoreBI\Desktop\Tp GDD\GDD_2017\PagoAgilFrba\obj\Debug\PagoAgilFrba.exe
-C:\Users\CoreBI\Desktop\Tp GDD\GDD_2017\PagoAgilFrba\obj\Debug\PagoAgilFrba.pdb
-C:\Users\CoreBI\Desktop\Tp GDD\GDD_2017\PagoAgilFrba\bin\Debug\PagoAgilFrba.exe
-C:\Users\CoreBI\Desktop\Tp GDD\GDD_2017\PagoAgilFrba\bin\Debug\PagoAgilFrba.pdb
-C:\Users\CoreBI\Desktop\Tp GDD\GDD_2017\PagoAgilFrba\obj\Debug\PagoAgilFrba.csprojResolveAssemblyReference.cache
-C:\Users\CoreBI\Desktop\Tp GDD\GDD_2017\PagoAgilFrba\obj\Debug\PagoAgilFrba.Login.Login.resources
-C:\Users\CoreBI\Desktop\Tp GDD\GDD_2017\PagoAgilFrba\obj\Debug\PagoAgilFrba.Properties.Resources.resources
-C:\Users\CoreBI\Desktop\Tp GDD\GDD_2017\PagoAgilFrba\obj\Debug\PagoAgilFrba.csproj.GenerateResource.Cache
-C:\Users\CoreBI\Desktop\Tp GDD\GDD_2017\PagoAgilFrba\obj\Debug\PagoAgilFrba.Login.Menu.resources
-C:\Users\CoreBI\Desktop\Tp GDD\GDD_2017\PagoAgilFrba\obj\Debug\PagoAgilFrba.Login.Roles.resources
-C:\Users\CoreBI\Desktop\Tp GDD\GDD_2017\PagoAgilFrba\obj\Debug\PagoAgilFrba.AbmEmpresa.Buscador_Empresa.resources
-C:\Users\CoreBI\Desktop\Tp GDD\GDD_2017\PagoAgilFrba\obj\Debug\PagoAgilFrba.Rendicion.Rendicion.resources
 C:\Users\susana\Documents\GitHub\GDD_2017\PagoAgilFrba\bin\Debug\PagoAgilFrba.exe.config
 C:\Users\susana\Documents\GitHub\GDD_2017\PagoAgilFrba\obj\Debug\PagoAgilFrba.exe
 C:\Users\susana\Documents\GitHub\GDD_2017\PagoAgilFrba\obj\Debug\PagoAgilFrba.pdb
@@ -34,3 +21,22 @@ C:\Users\susana\Documents\GitHub\GDD_2017\PagoAgilFrba\obj\Debug\PagoAgilFrba.Re
 C:\Users\susana\Documents\GitHub\GDD_2017\PagoAgilFrba\obj\Debug\PagoAgilFrba.csproj.GenerateResource.Cache
 C:\Users\susana\Documents\GitHub\GDD_2017\PagoAgilFrba\bin\Debug\PagoAgilFrba.exe
 C:\Users\susana\Documents\GitHub\GDD_2017\PagoAgilFrba\bin\Debug\PagoAgilFrba.pdb
+C:\Users\CoreBI\Desktop\Tp GDD\GDD_2017\PagoAgilFrba\obj\Debug\PagoAgilFrba.AbmEmpresa.Alta_Modificacion.resources
+C:\Users\CoreBI\Desktop\Tp GDD\GDD_2017\PagoAgilFrba\obj\Debug\PagoAgilFrba.AbmEmpresa.Buscador_Empresa.resources
+C:\Users\CoreBI\Desktop\Tp GDD\GDD_2017\PagoAgilFrba\obj\Debug\PagoAgilFrba.AbmSucursal.Alta.resources
+C:\Users\CoreBI\Desktop\Tp GDD\GDD_2017\PagoAgilFrba\obj\Debug\PagoAgilFrba.AbmSucursal.Baja.resources
+C:\Users\CoreBI\Desktop\Tp GDD\GDD_2017\PagoAgilFrba\obj\Debug\PagoAgilFrba.AbmSucursal.Modificar.resources
+C:\Users\CoreBI\Desktop\Tp GDD\GDD_2017\PagoAgilFrba\obj\Debug\PagoAgilFrba.AbmSucursal.Menu.resources
+C:\Users\CoreBI\Desktop\Tp GDD\GDD_2017\PagoAgilFrba\obj\Debug\PagoAgilFrba.Login.Login.resources
+C:\Users\CoreBI\Desktop\Tp GDD\GDD_2017\PagoAgilFrba\obj\Debug\PagoAgilFrba.Login.Menu.resources
+C:\Users\CoreBI\Desktop\Tp GDD\GDD_2017\PagoAgilFrba\obj\Debug\PagoAgilFrba.Login.Roles.resources
+C:\Users\CoreBI\Desktop\Tp GDD\GDD_2017\PagoAgilFrba\obj\Debug\PagoAgilFrba.Properties.Resources.resources
+C:\Users\CoreBI\Desktop\Tp GDD\GDD_2017\PagoAgilFrba\obj\Debug\PagoAgilFrba.RegistroPago.RegistroPago.resources
+C:\Users\CoreBI\Desktop\Tp GDD\GDD_2017\PagoAgilFrba\obj\Debug\PagoAgilFrba.Rendicion.Rendicion.resources
+C:\Users\CoreBI\Desktop\Tp GDD\GDD_2017\PagoAgilFrba\obj\Debug\PagoAgilFrba.csproj.GenerateResource.Cache
+C:\Users\CoreBI\Desktop\Tp GDD\GDD_2017\PagoAgilFrba\bin\Debug\PagoAgilFrba.exe.config
+C:\Users\CoreBI\Desktop\Tp GDD\GDD_2017\PagoAgilFrba\bin\Debug\PagoAgilFrba.exe
+C:\Users\CoreBI\Desktop\Tp GDD\GDD_2017\PagoAgilFrba\bin\Debug\PagoAgilFrba.pdb
+C:\Users\CoreBI\Desktop\Tp GDD\GDD_2017\PagoAgilFrba\obj\Debug\PagoAgilFrba.csprojResolveAssemblyReference.cache
+C:\Users\CoreBI\Desktop\Tp GDD\GDD_2017\PagoAgilFrba\obj\Debug\PagoAgilFrba.exe
+C:\Users\CoreBI\Desktop\Tp GDD\GDD_2017\PagoAgilFrba\obj\Debug\PagoAgilFrba.pdb

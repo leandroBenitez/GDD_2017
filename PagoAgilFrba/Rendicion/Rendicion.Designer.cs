@@ -240,6 +240,7 @@
             this.Controls.Add(this.textBox_cuit);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.textBox_nombre);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.Name = "Rendicion";
             this.Text = "Pago Agil";
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView)).EndInit();

@@ -127,6 +127,7 @@
             this.Controls.Add(this.textBox_User);
             this.Controls.Add(this.boton_validar);
             this.Controls.Add(this.label1);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.Name = "Login";
             this.ResumeLayout(false);
             this.PerformLayout();

@@ -51,7 +51,7 @@ namespace PagoAgilFrba.Rendicion
                 consulta = consulta + "and Rendida = 'Sin rendir' ";
             }
 
-            consulta = consulta + "order by Empresa_Id, Periodo";
+            consulta = consulta + "order by Empresa_Id, Periodo, Rendida";
 
             conexion connection = new conexion();
             SqlCommand command = new SqlCommand();
@@ -106,6 +106,8 @@ namespace PagoAgilFrba.Rendicion
             try
             {
                 DataGridViewRow fila = dataGridView.SelectedRows[0];
+
+                //int cantidad = dataGridView.SelectedRows.Count;
 
                 string id_empresa = fila.Cells["Id_empresa"].Value.ToString();
                 string periodo = fila.Cells["Periodo"].Value.ToString();

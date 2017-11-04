@@ -69,6 +69,7 @@
             this.Controls.Add(this.boton_ingresar);
             this.Controls.Add(this.combo_Roles);
             this.Controls.Add(this.label1);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.Name = "Roles";
             this.Text = "Pago Agil";
             this.ResumeLayout(false);
