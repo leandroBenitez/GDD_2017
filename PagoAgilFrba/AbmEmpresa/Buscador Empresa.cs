@@ -14,6 +14,13 @@ namespace PagoAgilFrba.AbmEmpresa
 {
     public partial class Buscador_Empresa : Form
     {
+        private int idEmp;
+        private string nombre;
+        private string cuit;
+        private string direccion;
+        private string rubro;
+        private bool habilitado;
+
         public Buscador_Empresa()
         {
             InitializeComponent();
@@ -78,5 +85,32 @@ namespace PagoAgilFrba.AbmEmpresa
 
             dataGridView.Rows.AddRange(filas.ToArray());
         }
+
+        private void button_modificar_Click(object sender, EventArgs e)
+        {
+            if (dataGridView.SelectedRows.Count == 0)
+            {
+                MessageBox.Show("Elija una empresa para modificar", "Informacion", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+            }
+            else
+            {
+                DataGridViewRow row = this.dataGridView.SelectedRows[0];
+                idEmp = int.Parse(row.Cells[0].Value.ToString());
+                nombre = row.Cells[1].Value.ToString();
+                cuit = row.Cells[2].Value.ToString();
+                direccion = row.Cells[3].Value.ToString();
+                rubro = row.Cells[4].Value.ToString();
+                if (row.Cells[3].Value.ToString().Equals("Habilitado"))
+                    habilitado = true;
+                else
+                    habilitado = false;
+                PagoAgilFrba.AbmEmpresa.Modificacion modificacion = new PagoAgilFrba.AbmEmpresa.Modificacion(idEmp, nombre, cuit, direccion, rubro, habilitado);
+                this.Hide();
+                modificacion.Show();
+
+            }
+            
+        }
+
     }
 }

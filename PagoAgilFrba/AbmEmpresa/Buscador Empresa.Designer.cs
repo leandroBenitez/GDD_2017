@@ -42,6 +42,8 @@
             this.Direccion = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Rubro = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Habilitada = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.button_modificar = new System.Windows.Forms.Button();
+            this.button_baja = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView)).BeginInit();
             this.SuspendLayout();
             // 
@@ -160,11 +162,32 @@
             this.Habilitada.Name = "Habilitada";
             this.Habilitada.ReadOnly = true;
             // 
+            // button_modificar
+            // 
+            this.button_modificar.Location = new System.Drawing.Point(142, 283);
+            this.button_modificar.Name = "button_modificar";
+            this.button_modificar.Size = new System.Drawing.Size(75, 37);
+            this.button_modificar.TabIndex = 8;
+            this.button_modificar.Text = "Modificar";
+            this.button_modificar.UseVisualStyleBackColor = true;
+            this.button_modificar.Click += new System.EventHandler(this.button_modificar_Click);
+            // 
+            // button_baja
+            // 
+            this.button_baja.Location = new System.Drawing.Point(359, 282);
+            this.button_baja.Name = "button_baja";
+            this.button_baja.Size = new System.Drawing.Size(75, 37);
+            this.button_baja.TabIndex = 9;
+            this.button_baja.Text = "Dar de Baja";
+            this.button_baja.UseVisualStyleBackColor = true;
+            // 
             // Buscador_Empresa
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(586, 306);
+            this.ClientSize = new System.Drawing.Size(586, 332);
+            this.Controls.Add(this.button_baja);
+            this.Controls.Add(this.button_modificar);
             this.Controls.Add(this.dataGridView);
             this.Controls.Add(this.button_buscar);
             this.Controls.Add(this.label3);
@@ -197,5 +220,7 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn Direccion;
         private System.Windows.Forms.DataGridViewTextBoxColumn Rubro;
         private System.Windows.Forms.DataGridViewTextBoxColumn Habilitada;
+        private System.Windows.Forms.Button button_modificar;
+        private System.Windows.Forms.Button button_baja;
     }
 }
