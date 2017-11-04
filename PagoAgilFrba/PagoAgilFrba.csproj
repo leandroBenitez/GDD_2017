@@ -51,6 +51,12 @@
     <Compile Include="AbmCliente1\busqueda.Designer.cs">
       <DependentUpon>busqueda.cs</DependentUpon>
     </Compile>
+    <Compile Include="AbmCliente1\bajaCliente.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="AbmCliente1\bajaCliente.Designer.cs">
+      <DependentUpon>bajaCliente.cs</DependentUpon>
+    </Compile>
     <Compile Include="AbmCliente1\nuevoCliente.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -168,6 +174,9 @@
     <Compile Include="Rendicion\Rendicion.Designer.cs">
       <DependentUpon>Rendicion.cs</DependentUpon>
     </Compile>
+    <EmbeddedResource Include="AbmCliente1\bajaCliente.resx">
+      <DependentUpon>bajaCliente.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="AbmCliente1\busqueda.resx">
       <DependentUpon>busqueda.cs</DependentUpon>
     </EmbeddedResource>

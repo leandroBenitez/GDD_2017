@@ -22,7 +22,7 @@ namespace PagoAgilFrba
           // Application.Run(new PagoAgilFrba.AbmSucursal.Menu());
             //Application.Run(new PagoAgilFrba.AbmEmpresa.Buscador_Empresa());
             //Application.Run(new PagoAgilFrba.AbmFactura.Alta());
-            Application.Run(new PagoAgilFrba.AbmCliente1.nuevoCliente());
+            Application.Run(new PagoAgilFrba.AbmCliente1.bajaCliente());
         }
     }
 }
