@@ -16,5 +16,33 @@ namespace PagoAgilFrba.AbmCliente1
         {
             InitializeComponent();
         }
+
+        private void button4_Click(object sender, EventArgs e)
+        {
+            AbmCliente1.busqueda frm = new AbmCliente1.busqueda();
+            frm.Show()
+            ;
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            AbmCliente1.nuevoCliente frm = new AbmCliente1.nuevoCliente();
+            frm.Show()
+            ;
+        }
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+            AbmCliente1.modificaCliente frm = new AbmCliente1.modificaCliente();
+            frm.Show()
+            ;
+        }
+
+        private void button3_Click(object sender, EventArgs e)
+        {
+            AbmCliente1.bajaCliente frm = new AbmCliente1.bajaCliente();
+            frm.Show()
+            ;
+        }
     }
 }

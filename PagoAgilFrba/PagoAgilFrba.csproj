@@ -57,6 +57,12 @@
     <Compile Include="AbmCliente1\bajaCliente.Designer.cs">
       <DependentUpon>bajaCliente.cs</DependentUpon>
     </Compile>
+    <Compile Include="AbmCliente1\modificaCliente.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="AbmCliente1\modificaCliente.Designer.cs">
+      <DependentUpon>modificaCliente.cs</DependentUpon>
+    </Compile>
     <Compile Include="AbmCliente1\nuevoCliente.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -136,11 +142,11 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>GD2C2017DataSet.xsd</DependentUpon>
     </Compile>
-    <Compile Include="ListadoEstadistico\Form1.cs">
+    <Compile Include="ListadoEstadistico\estadisticas.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="ListadoEstadistico\Form1.Designer.cs">
-      <DependentUpon>Form1.cs</DependentUpon>
+    <Compile Include="ListadoEstadistico\estadisticas.Designer.cs">
+      <DependentUpon>estadisticas.cs</DependentUpon>
     </Compile>
     <Compile Include="Login\Login.cs">
       <SubType>Form</SubType>
@@ -180,6 +186,9 @@
     <EmbeddedResource Include="AbmCliente1\busqueda.resx">
       <DependentUpon>busqueda.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="AbmCliente1\modificaCliente.resx">
+      <DependentUpon>modificaCliente.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="AbmCliente1\nuevoCliente.resx">
       <DependentUpon>nuevoCliente.cs</DependentUpon>
     </EmbeddedResource>
@@ -212,6 +221,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="AbmSucursal\Menu.resx">
       <DependentUpon>Menu.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ListadoEstadistico\estadisticas.resx">
+      <DependentUpon>estadisticas.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Login\Login.resx">
       <DependentUpon>Login.cs</DependentUpon>
