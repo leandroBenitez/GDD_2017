@@ -16,6 +16,26 @@ DROP PROCEDURE [PAGO_AGIL].modificar_sucursal
 
 Go
 
+IF OBJECT_ID('PAGO_AGIL.Modificar_Empresa') IS NOT NULL
+DROP PROCEDURE [PAGO_AGIL].Modificar_Empresa
+
+Go
+
+IF OBJECT_ID('PAGO_AGIL.Alta_Empresa') IS NOT NULL
+DROP PROCEDURE [PAGO_AGIL].Alta_Empresa
+
+Go
+
+IF OBJECT_ID('PAGO_AGIL.Baja_Empresa') IS NOT NULL
+DROP PROCEDURE [PAGO_AGIL].Baja_Empresa
+
+Go
+
+IF OBJECT_ID('PAGO_AGIL.Pago') IS NOT NULL
+DROP PROCEDURE [PAGO_AGIL].Pago
+
+Go
+
 --Borrado de Vistas
 IF OBJECT_ID('PAGO_AGIL.Vw_Rendidos') IS NOT NULL
     DROP VIEW PAGO_AGIL.Vw_Rendidos;
@@ -546,14 +566,15 @@ End
 Go
 
 -- Registro de Pago, faltan cosas
-Create Procedure [PAGO_AGIL].[Pago]  (@empresa varchar(100)
-										,@fecha_pago varchar(10)
-										,@cliente varchar(100)
-										,@user varchar(100)
-										,@fecha_venc varchar(10)
-										,@importe int
-										,@nro_factura int
-										,@sucursal varchar(100))
+Create Procedure PAGO_AGIL.Pago  (   @empresa varchar(100)
+									,@fecha_pago varchar(10)
+									,@cliente varchar(100)
+									,@user varchar(100)
+									,@fecha_venc varchar(10)
+									,@importe int
+									,@nro_factura int
+									,@sucursal varchar(100)
+									,@forma_pago varchar(100))
 as
 
 declare @fecha_valida int = 1
@@ -615,6 +636,8 @@ begin
 			,@f_pag
 			,null
 			,@importe
+			,(select form.FormaPago_Id from PAGO_AGIL.Dim_FormaPago as form
+				where form.FormaPago_Desc like @forma_pago)
 			,(select suc.Sucursal_Id from PAGO_AGIL.Dim_Sucursal as suc
 				where suc.Sucursal_Nombre like @sucursal)
 			,(select us.Usuario_Id from PAGO_AGIL.Lk_Usuario as us
@@ -672,3 +695,75 @@ as
 				end
 		end
 Go
+
+--Modificar Empresa
+
+Create Procedure PAGO_AGIL.Modificar_Empresa  (@id int
+												,@nombre varchar(100)
+												,@direccion varchar(100)
+												,@cuit varchar(100)
+												,@rubro varchar(100)
+												,@habilitada bit)
+as
+
+declare @cuit_valido int = 1
+declare @resultado varchar(100) = 'OK'
+
+Select @cuit_valido = 0 from PAGO_AGIL.Dim_Empresa as emp
+where emp.Empresa_Cuit like @cuit and emp.Empresa_Id != @id
+
+if @cuit_valido = 0
+begin
+	set @resultado = 'Error: CUIT duplicado'
+end
+else
+begin
+	update emp
+		set  emp.Empresa_Nombre = @nombre
+			,emp.Empresa_Cuit = @cuit
+			,emp.Empresa_Rubro_Id = rub.Rubro_Id
+			,emp.Empresa_Direccion = @direccion
+			,emp.Empresa_Habilitado = @habilitada
+	    from PAGO_AGIL.Dim_Empresa as emp
+		inner join PAGO_AGIL.Dim_Rubro as rub
+			on rub.Rubro_Descripcion like @rubro
+		where emp.Empresa_Id = @id
+end
+
+GO
+
+--Dar de Alta Empresa
+
+Create Procedure PAGO_AGIL.Alta_Empresa  (@nombre varchar(100)
+											,@direccion varchar(100)
+											,@cuit varchar(100)
+											,@rubro varchar(100))
+as
+
+declare @cuit_valido int = 1
+declare @resultado varchar(100)
+
+Select @cuit_valido = 0 from PAGO_AGIL.Dim_Empresa as emp
+where emp.Empresa_Cuit like @cuit
+
+if @cuit_valido = 0
+begin
+	set @resultado = 'Error: CUIT duplicado'
+end
+else
+begin
+	insert into PAGO_AGIL.Dim_Empresa (Empresa_Nombre
+									  ,Empresa_Cuit
+									  ,Empresa_Direccion
+									  ,Empresa_Rubro_Id)
+	values  (@nombre
+			,@cuit
+			,@direccion
+			,(select rub.Rubro_Id from PAGO_AGIL.Dim_Rubro as rub
+				where rub.Rubro_Descripcion like @rubro)
+			)
+end
+
+Select @resultado as Resultado
+
+GO

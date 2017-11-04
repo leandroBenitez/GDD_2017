@@ -1,6 +1,6 @@
 ﻿namespace PagoAgilFrba.AbmEmpresa
 {
-    partial class Alta_Modificacion
+    partial class Modificacion
     {
         /// <summary>
         /// Required designer variable.
@@ -29,7 +29,6 @@
         private void InitializeComponent()
         {
             this.textBox_nombre = new System.Windows.Forms.TextBox();
-            this.textBox_cuit = new System.Windows.Forms.TextBox();
             this.textBox_direccion = new System.Windows.Forms.TextBox();
             this.comboBox_rubro = new System.Windows.Forms.ComboBox();
             this.label1 = new System.Windows.Forms.Label();
@@ -38,28 +37,26 @@
             this.label4 = new System.Windows.Forms.Label();
             this.label5 = new System.Windows.Forms.Label();
             this.button_modificacion = new System.Windows.Forms.Button();
-            this.button_alta = new System.Windows.Forms.Button();
+            this.label7 = new System.Windows.Forms.Label();
+            this.label6 = new System.Windows.Forms.Label();
+            this.textBox_cuit_medio = new System.Windows.Forms.TextBox();
+            this.textBox_cuit_fin = new System.Windows.Forms.TextBox();
+            this.textBox_cuit_in = new System.Windows.Forms.TextBox();
+            this.checkBox_habilitada = new System.Windows.Forms.CheckBox();
             this.SuspendLayout();
             // 
             // textBox_nombre
             // 
             this.textBox_nombre.Location = new System.Drawing.Point(166, 73);
             this.textBox_nombre.Name = "textBox_nombre";
-            this.textBox_nombre.Size = new System.Drawing.Size(172, 20);
+            this.textBox_nombre.Size = new System.Drawing.Size(184, 20);
             this.textBox_nombre.TabIndex = 0;
-            // 
-            // textBox_cuit
-            // 
-            this.textBox_cuit.Location = new System.Drawing.Point(166, 115);
-            this.textBox_cuit.Name = "textBox_cuit";
-            this.textBox_cuit.Size = new System.Drawing.Size(172, 20);
-            this.textBox_cuit.TabIndex = 1;
             // 
             // textBox_direccion
             // 
             this.textBox_direccion.Location = new System.Drawing.Point(166, 155);
             this.textBox_direccion.Name = "textBox_direccion";
-            this.textBox_direccion.Size = new System.Drawing.Size(172, 20);
+            this.textBox_direccion.Size = new System.Drawing.Size(184, 20);
             this.textBox_direccion.TabIndex = 2;
             // 
             // comboBox_rubro
@@ -67,7 +64,7 @@
             this.comboBox_rubro.FormattingEnabled = true;
             this.comboBox_rubro.Location = new System.Drawing.Point(166, 193);
             this.comboBox_rubro.Name = "comboBox_rubro";
-            this.comboBox_rubro.Size = new System.Drawing.Size(172, 21);
+            this.comboBox_rubro.Size = new System.Drawing.Size(184, 21);
             this.comboBox_rubro.TabIndex = 3;
             // 
             // label1
@@ -117,28 +114,74 @@
             // 
             // button_modificacion
             // 
-            this.button_modificacion.Location = new System.Drawing.Point(55, 263);
+            this.button_modificacion.Location = new System.Drawing.Point(145, 272);
             this.button_modificacion.Name = "button_modificacion";
             this.button_modificacion.Size = new System.Drawing.Size(78, 23);
             this.button_modificacion.TabIndex = 9;
             this.button_modificacion.Text = "Modificar";
             this.button_modificacion.UseVisualStyleBackColor = true;
+            this.button_modificacion.Click += new System.EventHandler(this.button_modificacion_Click);
             // 
-            // button_alta
+            // label7
             // 
-            this.button_alta.Location = new System.Drawing.Point(58, 263);
-            this.button_alta.Name = "button_alta";
-            this.button_alta.Size = new System.Drawing.Size(78, 23);
-            this.button_alta.TabIndex = 10;
-            this.button_alta.Text = "Alta";
-            this.button_alta.UseVisualStyleBackColor = true;
+            this.label7.AutoSize = true;
+            this.label7.Location = new System.Drawing.Point(311, 118);
+            this.label7.Name = "label7";
+            this.label7.Size = new System.Drawing.Size(10, 13);
+            this.label7.TabIndex = 19;
+            this.label7.Text = "-";
             // 
-            // Alta_Modificacion
+            // label6
+            // 
+            this.label6.AutoSize = true;
+            this.label6.Location = new System.Drawing.Point(197, 118);
+            this.label6.Name = "label6";
+            this.label6.Size = new System.Drawing.Size(10, 13);
+            this.label6.TabIndex = 18;
+            this.label6.Text = "-";
+            // 
+            // textBox_cuit_medio
+            // 
+            this.textBox_cuit_medio.Location = new System.Drawing.Point(213, 115);
+            this.textBox_cuit_medio.Name = "textBox_cuit_medio";
+            this.textBox_cuit_medio.Size = new System.Drawing.Size(92, 20);
+            this.textBox_cuit_medio.TabIndex = 17;
+            // 
+            // textBox_cuit_fin
+            // 
+            this.textBox_cuit_fin.Location = new System.Drawing.Point(324, 115);
+            this.textBox_cuit_fin.Name = "textBox_cuit_fin";
+            this.textBox_cuit_fin.Size = new System.Drawing.Size(26, 20);
+            this.textBox_cuit_fin.TabIndex = 16;
+            // 
+            // textBox_cuit_in
+            // 
+            this.textBox_cuit_in.Location = new System.Drawing.Point(165, 115);
+            this.textBox_cuit_in.Name = "textBox_cuit_in";
+            this.textBox_cuit_in.Size = new System.Drawing.Size(26, 20);
+            this.textBox_cuit_in.TabIndex = 15;
+            // 
+            // checkBox_habilitada
+            // 
+            this.checkBox_habilitada.AutoSize = true;
+            this.checkBox_habilitada.Location = new System.Drawing.Point(166, 233);
+            this.checkBox_habilitada.Name = "checkBox_habilitada";
+            this.checkBox_habilitada.Size = new System.Drawing.Size(73, 17);
+            this.checkBox_habilitada.TabIndex = 21;
+            this.checkBox_habilitada.Text = "Habilitada";
+            this.checkBox_habilitada.UseVisualStyleBackColor = true;
+            // 
+            // Modificacion
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(363, 335);
-            this.Controls.Add(this.button_alta);
+            this.ClientSize = new System.Drawing.Size(382, 335);
+            this.Controls.Add(this.checkBox_habilitada);
+            this.Controls.Add(this.label7);
+            this.Controls.Add(this.label6);
+            this.Controls.Add(this.textBox_cuit_medio);
+            this.Controls.Add(this.textBox_cuit_fin);
+            this.Controls.Add(this.textBox_cuit_in);
             this.Controls.Add(this.button_modificacion);
             this.Controls.Add(this.label5);
             this.Controls.Add(this.label4);
@@ -147,11 +190,10 @@
             this.Controls.Add(this.label1);
             this.Controls.Add(this.comboBox_rubro);
             this.Controls.Add(this.textBox_direccion);
-            this.Controls.Add(this.textBox_cuit);
             this.Controls.Add(this.textBox_nombre);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
-            this.Name = "Alta_Modificacion";
-            this.Text = "Alta_Modificacion";
+            this.Name = "Modificacion";
+            this.Text = "Pago Agil";
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -160,7 +202,6 @@
         #endregion
 
         private System.Windows.Forms.TextBox textBox_nombre;
-        private System.Windows.Forms.TextBox textBox_cuit;
         private System.Windows.Forms.TextBox textBox_direccion;
         private System.Windows.Forms.ComboBox comboBox_rubro;
         private System.Windows.Forms.Label label1;
@@ -169,6 +210,11 @@
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.Button button_modificacion;
-        private System.Windows.Forms.Button button_alta;
+        private System.Windows.Forms.Label label7;
+        private System.Windows.Forms.Label label6;
+        private System.Windows.Forms.TextBox textBox_cuit_medio;
+        private System.Windows.Forms.TextBox textBox_cuit_fin;
+        private System.Windows.Forms.TextBox textBox_cuit_in;
+        private System.Windows.Forms.CheckBox checkBox_habilitada;
     }
 }
