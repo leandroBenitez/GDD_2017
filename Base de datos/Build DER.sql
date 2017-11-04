@@ -838,3 +838,153 @@ as
 		set Factura_Total = @monto
 		where Factura_Id = @idfac
 go
+
+--Baja de un cliente
+create procedure bajaCliente(@dni int) as
+begin
+	declare @estadoActual int = (select Cliente_Habilitado from PAGO_AGIL.Lk_Cliente where Cliente_Dni = @dni)
+	if(@estadoActual = 1)
+		begin
+			update  PAGO_AGIL.Lk_Cliente 
+			set Cliente_Habilitado=0
+			where Cliente_Dni = @dni
+			select 'El cliente fue deshabilitado correctamente' as Resultado
+		end
+	else 
+		select 'El cliente ya se encuentra deshabilitado' as Resultado
+	end
+
+GO
+;
+
+-- Ranking monto rendido
+
+create procedure topMontoRendido (@fechaInicio date, @fechaFin date) as
+	begin
+		select top 5
+		emp.Empresa_Nombre as Empresa_Nombre,
+		rubro.Rubro_Descripcion as rubro,
+		sum(factura_total) as monto_rendido
+		from PAGO_AGIL.Lk_Factura as fact
+		inner join PAGO_AGIL.Dim_Empresa as emp on fact.Factura_Empresa_Id = emp.Empresa_Id
+		inner join PAGO_AGIL.Dim_Rubro as rubro on rubro.Rubro_Id = emp.Empresa_Rubro_Id
+		where convert(date, fact.Factura_Fecha_Alta) between @fechaInicio and @fechaFin
+		group by emp.Empresa_Nombre, Factura_Empresa_Id, rubro.Rubro_Descripcion
+	end
+go
+;
+
+--Ranking porcentaje de pago
+create procedure topPorcentajePago(@fechaInicio date, @fechaFin date) as 
+	begin
+		select top 5
+		clie.Cliente_Dni as Dni_Cliente,
+		clie.Cliente_Apellido as ApellidoCliente,
+		clie.Cliente_Nombre as NombreCliente,
+		(select count(1)
+			from PAGO_AGIL.Ft_Pago as pagoAux 
+			inner join PAGO_AGIL.Lk_Factura as factAux on factAux.Factura_Cliente_Id = pagofact.Id_Factura
+			inner join PAGO_AGIL.Lk_Cliente as clieAux on clieAux.Cliente_Id = factAux.Factura_Cliente_Id
+			where pagoAux.Pago_Id = pagofact.Id_Pago 
+			) / (select count(1) from PAGO_AGIL.Lk_Factura where Factura_Cliente_Id=clie.Cliente_Id) * 100 as porcentaje_pago
+		from PAGO_AGIL.Lk_Factura as fact
+		inner join PAGO_AGIL.Lk_Cliente as clie on clie.Cliente_Id = fact.Factura_Cliente_Id
+		inner join PAGO_AGIL.RL_PagoxFactura as pagofact on (fact.Factura_Id = pagofact.Id_Factura AND pagofact.Id_Pago is not null)
+		where convert(date,fact.Factura_Fecha_Alta) between @fechaInicio and @fechaFin
+	end
+go
+;
+
+-- Ranking cantidad de pagos
+create procedure topCantidadPagos(@fechaInicio date, @fechaFin date) as
+	begin
+		SELECT top 5
+		CLIE.Cliente_Nombre as Cliente_Nombre,
+		CLIE.Cliente_Apellido as Cliente_Apellido,
+		CLIE.Cliente_Dni as Cliente_Dni,
+		(select count(1) from PAGO_AGIL.Lk_Factura as aux_fact WHERE aux_fact.Factura_Cliente_Id=CLIE.Cliente_Id) as cantidad_pagos
+		from PAGO_AGIL.Lk_Factura FACT
+		inner join PAGO_AGIL.RL_PagoxFactura as PAGOF on (PAGOF.id_factura = FACT.Factura_Id AND PAGOF.Id_Pago is not null)
+		inner join PAGO_AGIL.Lk_Cliente as CLIE on FACT.Factura_Cliente_Id = CLIE.Cliente_Id
+		inner join PAGO_AGIL.Ft_Pago as PAGO on PAGOF.Id_Pago = PAGO.Pago_Id
+		where convert(date,PAGO.Pago_Fecha) between @fechaInicio and @fechaFin
+	end
+go
+;
+
+--Creacion de nuevo cliente
+
+create procedure nuevoCliente(@DNI int, @apellido nvarchar(255), @nombre nvarchar(255), 
+@telefono nvarchar(255), @fechaNac datetime, @mail nvarchar(255), @direccion nvarchar(255), @codigoPostal nvarchar(255), @habilitado int) as
+	begin
+		insert into PAGO_AGIL.Lk_Cliente(Cliente_Dni, Cliente_Apellido, Cliente_Nombre, Cliente_Telefono, Cliente_Fecha_Nac, 
+		Cliente_Mail, Cliente_Direccion, Cliente_Codigo_Postal, Cliente_Habilitado) 
+		values (@DNI, @apellido, @nombre, @telefono, @fechaNac, @mail, @direccion, @codigoPostal, @habilitado)
+		select 'Insertado correctamente' as Resultado
+	end
+	GO
+;
+
+-- Modificacion de cliente
+create procedure modificaCliente(@dni_buscado int, @DNI int, @apellido nvarchar(255), @nombre nvarchar(255), 
+@telefono nvarchar(255), @fechaNac datetime, @mail nvarchar(255), @direccion nvarchar(255), 
+@codigoPostal nvarchar(255), @habilitado int) as
+	begin
+		if @DNI is not null 
+			begin
+				update PAGO_AGIL.Lk_Cliente 
+				set Cliente_Dni = @DNI
+				where Cliente_Dni =@dni_buscado
+			end
+		if @apellido !=''
+			begin
+				update PAGO_AGIL.Lk_Cliente 
+				set Cliente_Apellido = @apellido
+				where Cliente_Dni =@dni_buscado
+			end
+		if @nombre !=''
+			begin
+				update PAGO_AGIL.Lk_Cliente 
+				set Cliente_Nombre = @nombre
+				where Cliente_Dni =@dni_buscado
+			end
+		if @telefono !=''
+			begin
+				update PAGO_AGIL.Lk_Cliente 
+				set Cliente_Telefono = @telefono
+				where Cliente_Dni =@dni_buscado
+			end
+		if @fechaNac !='' 
+			begin
+				update PAGO_AGIL.Lk_Cliente 
+				set Cliente_Fecha_Nac = @fechaNac
+				where Cliente_Dni =@dni_buscado
+			end
+		if @mail !=''
+			begin
+				update PAGO_AGIL.Lk_Cliente 
+				set Cliente_Mail = @mail
+				where Cliente_Dni =@dni_buscado
+			end
+		if @direccion !=''
+			begin
+				update PAGO_AGIL.Lk_Cliente 
+				set Cliente_Direccion = @direccion
+				where Cliente_Dni =@dni_buscado
+			end
+		if @codigoPostal !=''
+			begin
+				update PAGO_AGIL.Lk_Cliente 
+				set Cliente_Codigo_Postal = @codigoPostal
+				where Cliente_Dni =@dni_buscado
+			end
+		if @habilitado is not null 
+			begin
+				update PAGO_AGIL.Lk_Cliente 
+				set Cliente_Habilitado = @habilitado
+				where Cliente_Dni =@dni_buscado
+			end
+		select 'Cliente modificado con exito'
+	end
+go
+;

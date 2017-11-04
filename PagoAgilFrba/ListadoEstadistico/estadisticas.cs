@@ -261,10 +261,10 @@ namespace PagoAgilFrba.ListadoEstadistico
 
             while (datos.Read())
             {
-                columnas[0] = datos["Empresa_Nombre"].ToString();
-                columnas[1] = datos["rubro"].ToString();
-                columnas[2] = datos["monto_rendido"].ToString();
-                columnas[3] = datos["monto_rendido"].ToString();
+                columnas[0] = datos["Dni_Cliente"].ToString();
+                columnas[1] = datos["ApellidoCliente"].ToString();
+                columnas[2] = datos["NombreCliente"].ToString();
+                columnas[3] = datos["porcentaje_pago"].ToString();
                 filas.Add(new DataGridViewRow());
                 filas[filas.Count - 1].CreateCells(dataGridPorcentajePago, columnas);
             }
