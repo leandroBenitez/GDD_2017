@@ -14,14 +14,15 @@ namespace PagoAgilFrba.AbmSucursal
 {
     public partial class Alta : Form
     {
+        private bool nameok = true;
+        private bool dirok = true;
+        private bool cpok = true;
+        private Form anterior;
 
-       private bool nameok = true;
-       private bool dirok = true;
-       private bool cpok = true;
-
-        public Alta()
+        public Alta(Form una)
         {
             InitializeComponent();
+            anterior = una;
         }
 
         private void Alta_Load(object sender, EventArgs e)
@@ -41,11 +42,11 @@ namespace PagoAgilFrba.AbmSucursal
             {
                 MessageBox.Show("no puede haber campos sin completar", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
-            else if(!nameok)
+            else if (!nameok)
             {
                 MessageBox.Show("Nombre hasta 50 caracteres", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
-            else if(!dirok)
+            else if (!dirok)
             {
                 MessageBox.Show("Direccion hasta 50 caracteres", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
 
@@ -53,7 +54,7 @@ namespace PagoAgilFrba.AbmSucursal
             else if (!cpok)
             {
                 MessageBox.Show("El código postal debe ser distinto de cero", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-           
+
             }
             else
             {
@@ -102,12 +103,20 @@ namespace PagoAgilFrba.AbmSucursal
             dirok = true;
             cpok = true;
 
-            if (nombre.TextLength > 50) { nameok = false;}
-            if (direccion.TextLength > 50 ){ dirok = false;}
-            if (int.Parse(cp.Text) <= 0) { cpok = false; }
+
+            if (nombre.TextLength > 50) { nameok = false; }
+            if (direccion.TextLength > 50) { dirok = false; }
+            if (cp.Text != "") { if (int.Parse(cp.Text) <= 0) { cpok = false; }; }
 
         }
 
-      
+        private void button2_Click(object sender, EventArgs e)
+        {
+            anterior.Show();
+            this.Close();
+
+        }
+
+
     }
 }

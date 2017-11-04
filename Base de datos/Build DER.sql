@@ -11,6 +11,11 @@ DROP PROCEDURE [PAGO_AGIL].agregar_sucursal
 
 GO
 
+IF OBJECT_ID('PAGO_AGIL.modificar_sucursal') IS NOT NULL
+DROP PROCEDURE [PAGO_AGIL].modificar_sucursal
+
+Go
+
 --Borrado de Vistas
 IF OBJECT_ID('PAGO_AGIL.Vw_Rendidos') IS NOT NULL
     DROP VIEW PAGO_AGIL.Vw_Rendidos;
@@ -627,8 +632,43 @@ as
 	if exists(select * from PAGO_AGIL.Dim_Sucursal s where s.Sucursal_Codigo_Postal = @cp )
 		select -1 -- Ya existe una sucursal con ese CP
 	else 
-		insert into PAGO_AGIL.Dim_Sucursal (Sucursal_Nombre,Sucursal_Direccion,Sucursal_Codigo_Postal,Sucursal_Habilitado)
-		values (@nombre,@direccion,@cp,1)
-		select 1
-
+		begin
+			insert into PAGO_AGIL.Dim_Sucursal (Sucursal_Nombre,Sucursal_Direccion,Sucursal_Codigo_Postal,Sucursal_Habilitado)
+			values (@nombre,@direccion,@cp,1)
+			select 1
+		end
 GO
+
+Create procedure [PAGO_AGIL].modificar_sucursal (@nombreant nvarchar(50),@direccionant nvarchar(50),@cpant int,@nombrenuev nvarchar(50),@direccionnuev nvarchar(50),@cpnuev int,@habilitar bit)
+as 	
+	declare @actualizarnombre nvarchar(50);	
+	declare @actualizardire nvarchar(50);
+	declare @actualizarcp int;
+	
+	set @actualizarnombre = @nombrenuev
+	set @actualizardire = @direccionnuev
+	set @actualizarcp = @cpnuev
+	
+	if (@nombrenuev = @nombreant and @direccionnuev = @direccionant and @cpnuev = @cpant)
+		begin
+			update PAGO_AGIL.Dim_Sucursal
+			set Sucursal_Habilitado = @habilitar
+			where Sucursal_Codigo_Postal = @cpant and Sucursal_Direccion = @direccionant and Sucursal_Nombre = @nombreant
+			return 1
+		end
+	else
+		begin
+			if exists(select * from PAGO_AGIL.Dim_Sucursal s where s.Sucursal_Codigo_Postal = @cpnuev) and @cpnuev<>@cpant
+				return -1  -- Ya existe una sucursal con ese CP
+			else
+				begin
+					update PAGO_AGIL.Dim_Sucursal
+					set Sucursal_Nombre = @actualizarnombre,
+					Sucursal_Direccion = @actualizardire,
+					Sucursal_Codigo_Postal = @actualizarcp,
+					Sucursal_Habilitado = @habilitar
+					where Sucursal_Codigo_Postal = @cpant and Sucursal_Direccion = @direccionant and Sucursal_Nombre = @nombreant
+					return 1
+				end
+		end
+Go

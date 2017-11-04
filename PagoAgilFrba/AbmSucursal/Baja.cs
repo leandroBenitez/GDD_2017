@@ -13,10 +13,12 @@ namespace PagoAgilFrba.AbmSucursal
 {
     public partial class Baja : Form
     {
+        private Form anterior;
 
-        public Baja()
+        public Baja(Form una)
         {
             InitializeComponent();
+            anterior = una;
             nombre.Text = "";
             direccion.Text = "";
             cp.Text = "";
@@ -48,7 +50,7 @@ namespace PagoAgilFrba.AbmSucursal
             {
                 cadena = cadena + " and s.Sucursal_Codigo_Postal = " + cp.Text;
             }
-            if (estado.Text != "") 
+            if (estado.Text != "")
             {
                 int valor;
                 if (estado.Text == "Habilitada") valor = 1; else valor = 0;
@@ -106,8 +108,8 @@ namespace PagoAgilFrba.AbmSucursal
         {
             if (e.RowIndex >= 0 && e.ColumnIndex == 4)
             {
-                
-                DialogResult resultado =MessageBox.Show("   ¿Desea dar de baja la sucursal?", "Baja Sucursal", MessageBoxButtons.YesNo, MessageBoxIcon.None);
+
+                DialogResult resultado = MessageBox.Show("   ¿Desea dar de baja la sucursal?", "Baja Sucursal", MessageBoxButtons.YesNo, MessageBoxIcon.None);
                 if (resultado == DialogResult.Yes)
                 {
                     DataGridViewRow row = this.dataGridView1.Rows[e.RowIndex];
@@ -142,12 +144,19 @@ namespace PagoAgilFrba.AbmSucursal
                             MessageBox.Show("Error: " + ex.Message);
                         }
 
-                        
+
                     }
                 }
 
                 dataGridView1.CancelEdit();
             }
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+
+            anterior.Show();
+            this.Close();
         }
 
 

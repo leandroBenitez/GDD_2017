@@ -46,6 +46,7 @@
             this.label5 = new System.Windows.Forms.Label();
             this.label6 = new System.Windows.Forms.Label();
             this.estado = new System.Windows.Forms.ComboBox();
+            this.button1 = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.SuspendLayout();
             // 
@@ -80,7 +81,7 @@
             // 
             this.label4.AutoSize = true;
             this.label4.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label4.Location = new System.Drawing.Point(12, 9);
+            this.label4.Location = new System.Drawing.Point(21, 19);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(52, 16);
             this.label4.TabIndex = 3;
@@ -89,7 +90,7 @@
             // limpiar
             // 
             this.limpiar.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F);
-            this.limpiar.Location = new System.Drawing.Point(524, 56);
+            this.limpiar.Location = new System.Drawing.Point(524, 33);
             this.limpiar.Name = "limpiar";
             this.limpiar.Size = new System.Drawing.Size(79, 33);
             this.limpiar.TabIndex = 4;
@@ -100,7 +101,7 @@
             // buscarsuc
             // 
             this.buscarsuc.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F);
-            this.buscarsuc.Location = new System.Drawing.Point(524, 112);
+            this.buscarsuc.Location = new System.Drawing.Point(524, 89);
             this.buscarsuc.Name = "buscarsuc";
             this.buscarsuc.Size = new System.Drawing.Size(79, 33);
             this.buscarsuc.TabIndex = 5;
@@ -188,7 +189,7 @@
             // 
             this.label5.AutoSize = true;
             this.label5.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label5.Location = new System.Drawing.Point(117, 166);
+            this.label5.Location = new System.Drawing.Point(132, 165);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(355, 15);
             this.label5.TabIndex = 10;
@@ -213,12 +214,25 @@
             this.estado.Location = new System.Drawing.Point(312, 125);
             this.estado.Name = "estado";
             this.estado.Size = new System.Drawing.Size(98, 21);
-            this.estado.TabIndex = 13; // 
+            this.estado.TabIndex = 13;
+            // 
+            // button1
+            // 
+            this.button1.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F);
+            this.button1.Location = new System.Drawing.Point(524, 137);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(79, 33);
+            this.button1.TabIndex = 15;
+            this.button1.Text = "Cancelar";
+            this.button1.UseVisualStyleBackColor = true;
+            this.button1.Click += new System.EventHandler(this.button1_Click);
+            // 
             // Modificar
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(658, 343);
+            this.Controls.Add(this.button1);
             this.Controls.Add(this.label6);
             this.Controls.Add(this.estado);
             this.Controls.Add(this.label5);
@@ -260,5 +274,6 @@
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.Label label6;
         private System.Windows.Forms.ComboBox estado;
+        private System.Windows.Forms.Button button1;
     }
 }

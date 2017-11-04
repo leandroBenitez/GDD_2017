@@ -14,13 +14,16 @@ namespace PagoAgilFrba.AbmSucursal
 {
     public partial class Modificar : Form
     {
+        private Form anterior;
 
-        public Modificar()
+        public Modificar(Form an)
         {
             InitializeComponent();
+            anterior = an;
             nombre.Text = "";
             direccion.Text = "";
             cp.Text = "";
+            this.Text = "Modificar Sucursal";
         }
 
         private void limpiar_Click(object sender, EventArgs e)
@@ -28,6 +31,7 @@ namespace PagoAgilFrba.AbmSucursal
             nombre.Text = "";
             direccion.Text = "";
             cp.Text = "";
+            estado.SelectedIndex = -1;
             dataGridView1.Rows.Clear();
 
         }
@@ -39,10 +43,10 @@ namespace PagoAgilFrba.AbmSucursal
             conexion connection = new conexion();
             SqlCommand command = new SqlCommand();
 
-            if (cp.Text != "") 
+            if (cp.Text != "")
             {
                 cadena = cadena + " and s.Sucursal_Codigo_Postal = " + cp.Text;
-            } 
+            }
             if (estado.Text != "")
             {
                 int valor;
@@ -67,7 +71,7 @@ namespace PagoAgilFrba.AbmSucursal
 
         }
 
-        private void cargar_datos(SqlDataReader reader) 
+        private void cargar_datos(SqlDataReader reader)
         {
 
             dataGridView1.Rows.Clear();
@@ -100,11 +104,22 @@ namespace PagoAgilFrba.AbmSucursal
 
         private void dataGridView1_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
-            if (e.RowIndex >= 0 && e.ColumnIndex == 4 )
-            {   
+            if (e.RowIndex >= 0 && e.ColumnIndex == 4)
+            {
                 this.Hide();
-   
+                DataGridViewRow row = this.dataGridView1.Rows[e.RowIndex];
+                auxiliarModificacion modi = new PagoAgilFrba.AbmSucursal.auxiliarModificacion(this, row);
+                modi.Show();
+                this.limpiar_Click(sender, e);
+
             }
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            anterior.Show();
+            this.Close();
+
         }
 
 
