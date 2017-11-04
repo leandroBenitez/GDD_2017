@@ -50,6 +50,10 @@
             this.rubro = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.monto_rendido = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dataGridPorcentajePago = new System.Windows.Forms.DataGridView();
+            this.DNI_Cliente = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.ApellidoCliente = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.NombreCliente = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.porcentaje_pago = new System.Windows.Forms.DataGridViewTextBoxColumn();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridCantPagos)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridMontoRendido)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridPorcentajePago)).BeginInit();
@@ -254,11 +258,36 @@
             // dataGridPorcentajePago
             // 
             this.dataGridPorcentajePago.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dataGridPorcentajePago.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.DNI_Cliente,
+            this.ApellidoCliente,
+            this.NombreCliente,
+            this.porcentaje_pago});
             this.dataGridPorcentajePago.Location = new System.Drawing.Point(40, 218);
             this.dataGridPorcentajePago.Name = "dataGridPorcentajePago";
             this.dataGridPorcentajePago.Size = new System.Drawing.Size(444, 137);
             this.dataGridPorcentajePago.TabIndex = 14;
             this.dataGridPorcentajePago.Visible = false;
+            // 
+            // DNI_Cliente
+            // 
+            this.DNI_Cliente.HeaderText = "DNI_Cliente";
+            this.DNI_Cliente.Name = "DNI_Cliente";
+            // 
+            // ApellidoCliente
+            // 
+            this.ApellidoCliente.HeaderText = "ApellidoCliente";
+            this.ApellidoCliente.Name = "ApellidoCliente";
+            // 
+            // NombreCliente
+            // 
+            this.NombreCliente.HeaderText = "NombreCliente";
+            this.NombreCliente.Name = "NombreCliente";
+            // 
+            // porcentaje_pago
+            // 
+            this.porcentaje_pago.HeaderText = "porcentaje_pago";
+            this.porcentaje_pago.Name = "porcentaje_pago";
             // 
             // estadisticas
             // 
@@ -314,5 +343,9 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn rubro;
         private System.Windows.Forms.DataGridViewTextBoxColumn monto_rendido;
         private System.Windows.Forms.DataGridView dataGridPorcentajePago;
+        private System.Windows.Forms.DataGridViewTextBoxColumn DNI_Cliente;
+        private System.Windows.Forms.DataGridViewTextBoxColumn ApellidoCliente;
+        private System.Windows.Forms.DataGridViewTextBoxColumn NombreCliente;
+        private System.Windows.Forms.DataGridViewTextBoxColumn porcentaje_pago;
     }
 }
