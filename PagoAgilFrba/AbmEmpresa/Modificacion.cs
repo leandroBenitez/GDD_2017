@@ -60,13 +60,13 @@ namespace PagoAgilFrba.AbmEmpresa
                     hab = "1";
                 else
                     hab = "0";
-                cuit_formateado = textBox_cuit_in + "-" + textBox_cuit_medio + "-" + textBox_cuit_fin;
+                cuit_formateado = textBox_cuit_in.Text + "-" + textBox_cuit_medio.Text + "-" + textBox_cuit_fin.Text;
                 string cadena = "Execute PAGO_AGIL.Modificar_Empresa '" + id_emp.ToString() + "', '";
                 cadena = cadena + textBox_nombre.Text + "', '";
                 cadena = cadena + textBox_direccion.Text + "', '";
                 cadena = cadena + cuit_formateado + "', '";
                 cadena = cadena + comboBox_rubro.Text + "', '";
-                cadena = cadena + hab + "'";
+                cadena = cadena + hab + "' ";
 
                 conexion connection = new conexion();
                 SqlCommand command = new SqlCommand();

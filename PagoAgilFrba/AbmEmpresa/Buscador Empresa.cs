@@ -100,7 +100,7 @@ namespace PagoAgilFrba.AbmEmpresa
                 cuit = row.Cells[2].Value.ToString();
                 direccion = row.Cells[3].Value.ToString();
                 rubro = row.Cells[4].Value.ToString();
-                if (row.Cells[3].Value.ToString().Equals("Habilitado"))
+                if (row.Cells[5].Value.ToString().Equals("Habilitado"))
                     habilitado = true;
                 else
                     habilitado = false;
@@ -110,6 +110,41 @@ namespace PagoAgilFrba.AbmEmpresa
 
             }
             
+        }
+
+        private void button_baja_Click(object sender, EventArgs e)
+        {
+            if (dataGridView.SelectedRows.Count == 0)
+            {
+                MessageBox.Show("Elija una empresa para dar de baja", "Informacion", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+            }
+            else
+            {
+                DataGridViewRow row = this.dataGridView.SelectedRows[0];
+                idEmp = int.Parse(row.Cells[0].Value.ToString());
+
+                string cadena = "Execute PAGO_AGIL.Baja_Empresa '" + idEmp.ToString() + "'";
+
+
+                conexion connection = new conexion();
+                SqlCommand command = new SqlCommand();
+
+                command.CommandText = cadena;
+                command.CommandType = CommandType.Text;
+                command.Connection = connection.abrir_conexion();
+
+                try
+                {
+                    Object reader = command.ExecuteScalar();
+
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show("Error: " + ex.Message);
+                }
+
+                dataGridView.Rows.Clear();
+            }
         }
 
     }

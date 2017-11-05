@@ -745,6 +745,8 @@ begin
 		where emp.Empresa_Id = @id
 end
 
+select @resultado as Resultado
+
 GO
 
 --Dar de Alta Empresa
@@ -756,7 +758,7 @@ Create Procedure PAGO_AGIL.Alta_Empresa  (@nombre varchar(100)
 as
 
 declare @cuit_valido int = 1
-declare @resultado varchar(100)
+declare @resultado varchar(100) = 'OK'
 
 Select @cuit_valido = 0 from PAGO_AGIL.Dim_Empresa as emp
 where emp.Empresa_Cuit like @cuit
@@ -783,6 +785,16 @@ Select @resultado as Resultado
 
 GO
 
+--Baja Empresa
+
+Create Procedure PAGO_AGIL.Baja_Empresa  (@id int)
+as
+	update emp
+		set emp.Empresa_Habilitado = 0
+	    from PAGO_AGIL.Dim_Empresa as emp
+		where emp.Empresa_Id = @id
+
+GO
 
 -- Alta Factura
 

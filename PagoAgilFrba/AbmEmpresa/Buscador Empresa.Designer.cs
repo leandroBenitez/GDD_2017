@@ -180,6 +180,7 @@
             this.button_baja.TabIndex = 9;
             this.button_baja.Text = "Dar de Baja";
             this.button_baja.UseVisualStyleBackColor = true;
+            this.button_baja.Click += new System.EventHandler(this.button_baja_Click);
             // 
             // Buscador_Empresa
             // 

@@ -41,7 +41,47 @@ namespace PagoAgilFrba.AbmEmpresa
                 return;
             }
             else
-            { 
+            {
+                string cuit_formateado = textBox_cuit_in.Text + "-" + textBox_cuit_medio.Text + "-" + textBox_cuit_fin.Text;
+                string cadena = "Execute PAGO_AGIL.Alta_Empresa '" + textBox_nombre.Text + "', '";
+                cadena = cadena + textBox_direccion.Text + "', '";
+                cadena = cadena + cuit_formateado + "', '";
+                cadena = cadena + comboBox_rubro.Text + "'";
+
+                conexion connection = new conexion();
+                SqlCommand command = new SqlCommand();
+
+                command.CommandText = cadena;
+                command.CommandType = CommandType.Text;
+                command.Connection = connection.abrir_conexion();
+
+                try
+                {
+                    Object reader = command.ExecuteScalar();
+                    string resultado = reader.ToString();
+                    tratar_resultado(resultado);
+
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show("Error: " + ex.Message);
+                }
+           
+            }
+        }
+
+        private void tratar_resultado(string resultado)
+        {
+            if (resultado.Equals("OK"))
+            {
+                MessageBox.Show("Empresa dada de alta con éxito", "Alta Empresa", MessageBoxButtons.OK, MessageBoxIcon.None);
+            }
+            else
+            {
+                MessageBox.Show(resultado, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                textBox_cuit_in.Text = "";
+                textBox_cuit_fin.Text = "";
+                textBox_cuit_medio.Text = "";
             }
         }
     }
