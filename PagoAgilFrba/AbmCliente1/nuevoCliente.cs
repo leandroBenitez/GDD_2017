@@ -39,7 +39,7 @@ namespace PagoAgilFrba.AbmCliente1
             { bitHabilitado = "1"; }
             else { bitHabilitado = "0"; }
 
-            consulta = "Execute nuevoCliente " + dni.Text + ", '" + apellido.Text + "', '" +
+            consulta = "Execute PAGO_AGIL.nuevoCliente " + dni.Text + ", '" + apellido.Text + "', '" +
             nombre.Text + "', '" + telefono.Text + "', '" + fechaNac.Text + "', '" + mail.Text + "', '" + direccion.Text + "', '" +
             codPostal.Text + "', " + bitHabilitado;
             conexion connection = new conexion();

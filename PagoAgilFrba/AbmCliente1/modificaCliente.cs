@@ -161,7 +161,7 @@ namespace PagoAgilFrba.AbmCliente1
             if (dni.Text == "")
             { dni_cadena = "null"; }
             else { dni_cadena = dni.Text; };
-            string consulta = "Execute modificaCliente " + dniBuscado.Text + ", " + dni_cadena + ", '" + apellido.Text + "', '" +
+            string consulta = "Execute PAGO_AGIL.modificaCliente " + dniBuscado.Text + ", " + dni_cadena + ", '" + apellido.Text + "', '" +
             nombre.Text + "', '" + telefono.Text + "', '" + fechaNac.Text + "', '" + mail.Text + "', '" + direccion.Text + "', '" +
             codPostal.Text + "', " + bitHabilitado;
             conexion connection = new conexion();
