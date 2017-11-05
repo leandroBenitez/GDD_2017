@@ -67,11 +67,11 @@ DROP PROCEDURE [PAGO_AGIL].modificaCliente
 Go
 
 IF OBJECT_ID('PAGO_AGIL.Alta_Rol') IS NOT NULL
-DROP PROCEDURE [PAGO_AGIL].modificaCliente
+DROP PROCEDURE [PAGO_AGIL].Alta_Rol
 Go
 
 IF OBJECT_ID('PAGO_AGIL.Rol_Funcionalidad') IS NOT NULL
-DROP PROCEDURE [PAGO_AGIL].modificaCliente
+DROP PROCEDURE [PAGO_AGIL].Rol_Funcionalidad
 Go
 
 IF OBJECT_ID('PAGO_AGIL.topPorcentajeFacturasEmpresa') IS NOT NULL
@@ -1180,5 +1180,5 @@ insert into PAGO_AGIL.Ft_Pago(	Pago_Id
 			,(select suc.Sucursal_Id from PAGO_AGIL.Dim_Sucursal as suc
 				where suc.Sucursal_Nombre like @sucursal)
 			,(select us.Usuario_Id from PAGO_AGIL.Lk_Usuario as us
-				where us.Usuario_Name like @user)
-			) 
+				where us.Usuario_Name like @user))
+GO 
