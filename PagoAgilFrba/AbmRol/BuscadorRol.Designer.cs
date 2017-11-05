@@ -53,6 +53,7 @@
             this.button1.TabIndex = 9;
             this.button1.Text = "Buscar";
             this.button1.UseVisualStyleBackColor = true;
+            this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
             // label2
             // 
@@ -136,6 +137,7 @@
             this.button_limpiar.TabIndex = 12;
             this.button_limpiar.Text = "Limpiar";
             this.button_limpiar.UseVisualStyleBackColor = true;
+            this.button_limpiar.Click += new System.EventHandler(this.button_limpiar_Click);
             // 
             // button_modificar
             // 
@@ -145,6 +147,7 @@
             this.button_modificar.TabIndex = 13;
             this.button_modificar.Text = "Modificar";
             this.button_modificar.UseVisualStyleBackColor = true;
+            this.button_modificar.Click += new System.EventHandler(this.button_modificar_Click);
             // 
             // button_baja
             // 
@@ -154,6 +157,7 @@
             this.button_baja.TabIndex = 14;
             this.button_baja.Text = "Dar de Baja";
             this.button_baja.UseVisualStyleBackColor = true;
+            this.button_baja.Click += new System.EventHandler(this.button_baja_Click);
             // 
             // BuscadorRol
             // 

@@ -49,6 +49,30 @@ IF OBJECT_ID('PAGO_AGIL.calcular_fact_total') IS NOT NULL
 DROP PROCEDURE [PAGO_AGIL].calcular_fact_total
 Go
 
+IF OBJECT_ID('PAGO_AGIL.bajaCliente') IS NOT NULL
+DROP PROCEDURE [PAGO_AGIL].bajaCliente
+Go
+
+IF OBJECT_ID('PAGO_AGIL.topMontoRendido') IS NOT NULL
+DROP PROCEDURE [PAGO_AGIL].topMontoRendido
+Go
+
+IF OBJECT_ID('PAGO_AGIL.topPorcentajePago') IS NOT NULL
+DROP PROCEDURE [PAGO_AGIL].topPorcentajePago
+Go
+
+IF OBJECT_ID('PAGO_AGIL.topCantidadPagos') IS NOT NULL
+DROP PROCEDURE [PAGO_AGIL].topCantidadPagos
+Go
+
+IF OBJECT_ID('PAGO_AGIL.nuevoCliente') IS NOT NULL
+DROP PROCEDURE [PAGO_AGIL].nuevoCliente
+Go
+
+IF OBJECT_ID('PAGO_AGIL.modificaCliente') IS NOT NULL
+DROP PROCEDURE [PAGO_AGIL].modificaCliente
+Go
+
 --Borrado de Vistas
 IF OBJECT_ID('PAGO_AGIL.Vw_Rendidos') IS NOT NULL
     DROP VIEW PAGO_AGIL.Vw_Rendidos;
@@ -223,7 +247,8 @@ Create Table PAGO_AGIL.Lk_Factura
 	Factura_Fecha_Vencimiento datetime,
 	Factura_Cliente_Id int FOREIGN KEY REFERENCES PAGO_AGIL.Lk_Cliente(Cliente_Id),
 	Factura_Empresa_Id int FOREIGN KEY REFERENCES PAGO_AGIL.Dim_Empresa(Empresa_Id),
-	Factura_Rendicion_Id int FOREIGN KEY REFERENCES PAGO_AGIL.Ft_Rendicion(Rendicion_Id)
+	Factura_Rendicion_Id int FOREIGN KEY REFERENCES PAGO_AGIL.Ft_Rendicion(Rendicion_Id),
+	Factura_Pagado bit default 0 --1 pagado
 )
 
 Create Table PAGO_AGIL.Lk_Item_Factura
@@ -422,6 +447,12 @@ inner join PAGO_AGIL.Ft_Pago as pag
 inner join PAGO_AGIL.Lk_Factura as fac
 	on main.Nro_Factura = fac.Factura_Nro
 where main.Pago_nro is not null
+
+Update fac
+Set fac.Factura_Pagado = 1
+from PAGO_AGIL.Lk_Factura as fac
+inner join PAGO_AGIL.RL_PagoxFactura as rl
+	on fac.Factura_Id = rl.Id_Factura
 
 --Carga de Usuarios x Sucursal
 Insert into PAGO_AGIL.RL_UsuarioxSucursal (Id_Sucursal, Id_usuario)
@@ -852,7 +883,7 @@ as
 go
 
 --Baja de un cliente
-create procedure bajaCliente(@dni int) as
+create procedure PAGO_AGIL.bajaCliente(@dni int) as
 begin
 	declare @estadoActual int = (select Cliente_Habilitado from PAGO_AGIL.Lk_Cliente where Cliente_Dni = @dni)
 	if(@estadoActual = 1)
@@ -871,7 +902,7 @@ GO
 
 -- Ranking monto rendido
 
-create procedure topMontoRendido (@fechaInicio date, @fechaFin date) as
+create procedure PAGO_AGIL.topMontoRendido (@fechaInicio date, @fechaFin date) as
 	begin
 		select top 5
 		emp.Empresa_Nombre as Empresa_Nombre,
@@ -887,7 +918,7 @@ go
 ;
 
 --Ranking porcentaje de pago
-create procedure topPorcentajePago(@fechaInicio date, @fechaFin date) as 
+create procedure PAGO_AGIL.topPorcentajePago(@fechaInicio date, @fechaFin date) as 
 	begin
 		select top 5
 		clie.Cliente_Dni as Dni_Cliente,
@@ -909,7 +940,7 @@ go
 ;
 
 -- Ranking cantidad de pagos
-create procedure topCantidadPagos(@fechaInicio date, @fechaFin date) as
+create procedure PAGO_AGIL.topCantidadPagos(@fechaInicio date, @fechaFin date) as
 	begin
 		SELECT top 5
 		CLIE.Cliente_Nombre as Cliente_Nombre,
@@ -928,7 +959,7 @@ go
 
 --Creacion de nuevo cliente
 
-create procedure nuevoCliente(@DNI int, @apellido nvarchar(255), @nombre nvarchar(255), 
+create procedure PAGO_AGIL.nuevoCliente(@DNI int, @apellido nvarchar(255), @nombre nvarchar(255), 
 @telefono nvarchar(255), @fechaNac datetime, @mail nvarchar(255), @direccion nvarchar(255), @codigoPostal nvarchar(255), @habilitado int) as
 	begin
 		insert into PAGO_AGIL.Lk_Cliente(Cliente_Dni, Cliente_Apellido, Cliente_Nombre, Cliente_Telefono, Cliente_Fecha_Nac, 
@@ -940,7 +971,7 @@ create procedure nuevoCliente(@DNI int, @apellido nvarchar(255), @nombre nvarcha
 ;
 
 -- Modificacion de cliente
-create procedure modificaCliente(@dni_buscado int, @DNI int, @apellido nvarchar(255), @nombre nvarchar(255), 
+create procedure PAGO_AGIL.modificaCliente(@dni_buscado int, @DNI int, @apellido nvarchar(255), @nombre nvarchar(255), 
 @telefono nvarchar(255), @fechaNac datetime, @mail nvarchar(255), @direccion nvarchar(255), 
 @codigoPostal nvarchar(255), @habilitado int) as
 	begin

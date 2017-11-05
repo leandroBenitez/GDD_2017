@@ -15,6 +15,7 @@ namespace PagoAgilFrba.AbmRol
         public Alta()
         {
             InitializeComponent();
+
         }
     }
 }

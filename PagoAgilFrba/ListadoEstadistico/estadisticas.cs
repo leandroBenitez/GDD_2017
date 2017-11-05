@@ -54,7 +54,7 @@ namespace PagoAgilFrba.ListadoEstadistico
                 default: MessageBox.Show("Debe seleccionar un trimestre");
                     break;
             }
-                        string consulta = "Execute topCantidadPagos '" + label2.Text + "', '" + label3.Text + "'"; 
+            string consulta = "Execute PAGO_AGIL.topCantidadPagos '" + label2.Text + "', '" + label3.Text + "'"; 
             conexion connection = new conexion();
             SqlCommand command = new SqlCommand();
 
@@ -156,7 +156,7 @@ namespace PagoAgilFrba.ListadoEstadistico
                 default: MessageBox.Show("Debe seleccionar un trimestre");
                     break;
             }
-            string consulta = "Execute topMontoRendido '" + label2.Text + "', '" + label3.Text + "'";
+            string consulta = "Execute PAGO_AGIL.topMontoRendido '" + label2.Text + "', '" + label3.Text + "'";
             conexion connection = new conexion();
             SqlCommand command = new SqlCommand();
 
@@ -232,7 +232,7 @@ namespace PagoAgilFrba.ListadoEstadistico
                 default: MessageBox.Show("Debe seleccionar un trimestre");
                     break;
             }
-            string consulta = "Execute topPorcentajePago '" + label2.Text + "', '" + label3.Text + "'";
+            string consulta = "Execute PAGO_AGIL.topPorcentajePago '" + label2.Text + "', '" + label3.Text + "'";
             conexion connection = new conexion();
             SqlCommand command = new SqlCommand();
 

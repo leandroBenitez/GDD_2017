@@ -107,7 +107,7 @@ namespace PagoAgilFrba.AbmCliente1
         {
             if (dni.Text != "")
             {
-                string consulta = "Execute bajaCliente " + dni.Text;
+                string consulta = "Execute PAGO_AGIL.bajaCliente " + dni.Text;
                 conexion connection = new conexion();
                 SqlCommand command = new SqlCommand();
 
