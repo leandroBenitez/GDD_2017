@@ -101,7 +101,29 @@ namespace PagoAgilFrba.AbmRol
 
         private void button_modificar_Click(object sender, EventArgs e)
         {
-
+            if (dataGridView_resultados.SelectedRows.Count == 0)
+            {
+                MessageBox.Show("Elija un rol para modificar", "Informacion", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+            }
+            else
+            {
+                DataGridViewRow row = this.dataGridView_resultados.SelectedRows[0];
+                int idRol = int.Parse(row.Cells[0].Value.ToString());
+                string nombre = row.Cells[1].Value.ToString();
+                DataGridViewCheckBoxCell chk = (DataGridViewCheckBoxCell)row.Cells[2];
+                bool habilitado;
+                if (chk.Value == chk.TrueValue)
+                {
+                    habilitado = true;
+                }
+                else
+                {
+                    habilitado = false;
+                }      
+                PagoAgilFrba.AbmRol.Modificacion modificacion = new PagoAgilFrba.AbmRol.Modificacion(idRol, nombre, habilitado);
+                this.Hide();
+                modificacion.Show();
+            }
         }
 
     }

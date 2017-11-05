@@ -78,6 +78,11 @@ IF OBJECT_ID('PAGO_AGIL.topPorcentajeFacturasEmpresa') IS NOT NULL
 DROP PROCEDURE [PAGO_AGIL].topPorcentajeFacturasEmpresa
 Go
 
+IF OBJECT_ID('PAGO_AGIL.PAGO_AGIL.Rol_Funcionalidad_Modif') IS NOT NULL
+DROP PROCEDURE [PAGO_AGIL].PAGO_AGIL.Rol_Funcionalidad_Modif
+Go
+
+
 --Borrado de Vistas
 IF OBJECT_ID('PAGO_AGIL.Vw_Rendidos') IS NOT NULL
     DROP VIEW PAGO_AGIL.Vw_Rendidos;
@@ -149,6 +154,10 @@ IF OBJECT_ID('PAGO_AGIL.Dim_Funcionalidad', 'U') IS NOT NULL
 
 IF OBJECT_ID('PAGO_AGIL.Dim_Rol', 'U') IS NOT NULL 
 	DROP TABLE PAGO_AGIL.Dim_Rol;
+Go
+
+IF OBJECT_ID('PAGO_AGIL.Baja_Rol', 'U') IS NOT NULL 
+	DROP TABLE PAGO_AGIL.Baja_Rol;
 Go
 
 
@@ -1080,5 +1089,55 @@ from PAGO_AGIL.Rl_RolxFuncionalidad as rf
 	inner join PAGO_AGIL.Dim_Rol as rol
 	on rol.Rol_Desc like @nombre
 where rf.Rol_id is null
+
+GO
+
+--Baja Rol
+
+Create Procedure PAGO_AGIL.Baja_Rol (@id_rol int)
+as
+Update rol
+	set rol.Rol_Habilitado = 0 from PAGO_AGIL.Dim_Rol as rol 
+	where rol.Rol_Id = @id_rol
+
+Delete from PAGO_AGIL.Rl_RolxUsuario 
+where Rol_Id = @id_rol
+
+GO
+
+--Modificacion Rol
+Create Procedure PAGO_AGIL.Rol_Funcionalidad_Modif ( @id_funcionalidad int
+													,@id_rol int
+													,@checkeado int)
+as
+
+declare @relacion_existente int = 0
+
+Select @relacion_existente = 1 from PAGO_AGIL.Rl_RolxFuncionalidad as rf
+where rf.Funcionalidad_Id = @id_funcionalidad 
+	and rf.Rol_Id = @id_rol
+	
+if @relacion_existente = 1
+begin
+	if @checkeado = 0
+	begin
+		delete from  PAGO_AGIL.Rl_RolxFuncionalidad 
+		where Funcionalidad_Id = @id_funcionalidad 
+		and Rol_Id = @id_rol
+	end
+	else
+	begin
+		insert into PAGO_AGIL.Rl_RolxFuncionalidad (Funcionalidad_Id, Rol_Id)
+		values (@id_funcionalidad, @id_rol)
+	end	
+end 
+else
+begin 
+	if @checkeado = 1
+	begin
+		insert into PAGO_AGIL.Rl_RolxFuncionalidad (Funcionalidad_Id, Rol_Id)
+		values (@id_funcionalidad, @id_rol)
+	end
+end
 
 GO
