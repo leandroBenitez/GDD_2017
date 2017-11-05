@@ -36,12 +36,13 @@
             this.Funcionalidad = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Agregada = new System.Windows.Forms.DataGridViewCheckBoxColumn();
             this.checkBox_hab = new System.Windows.Forms.CheckBox();
+            this.button_atras = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView_funcionalidades)).BeginInit();
             this.SuspendLayout();
             // 
             // button_mod
             // 
-            this.button_mod.Location = new System.Drawing.Point(110, 277);
+            this.button_mod.Location = new System.Drawing.Point(188, 277);
             this.button_mod.Name = "button_mod";
             this.button_mod.Size = new System.Drawing.Size(75, 23);
             this.button_mod.TabIndex = 9;
@@ -107,11 +108,22 @@
             this.checkBox_hab.Text = "Habilitado";
             this.checkBox_hab.UseVisualStyleBackColor = true;
             // 
+            // button_atras
+            // 
+            this.button_atras.Location = new System.Drawing.Point(20, 277);
+            this.button_atras.Name = "button_atras";
+            this.button_atras.Size = new System.Drawing.Size(75, 23);
+            this.button_atras.TabIndex = 11;
+            this.button_atras.Text = "Atras";
+            this.button_atras.UseVisualStyleBackColor = true;
+            this.button_atras.Click += new System.EventHandler(this.button_atras_Click);
+            // 
             // Modificacion
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(295, 312);
+            this.Controls.Add(this.button_atras);
             this.Controls.Add(this.checkBox_hab);
             this.Controls.Add(this.button_mod);
             this.Controls.Add(this.label2);
@@ -136,6 +148,7 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn Funcionalidad;
         private System.Windows.Forms.DataGridViewCheckBoxColumn Agregada;
         private System.Windows.Forms.CheckBox checkBox_hab;
+        private System.Windows.Forms.Button button_atras;
 
     }
 }

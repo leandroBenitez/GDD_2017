@@ -119,5 +119,26 @@ namespace PagoAgilFrba.Login
             this.Hide();
             rendicion.Show();
         }
+
+        private void button_abm_empresa_Click(object sender, EventArgs e)
+        {
+            PagoAgilFrba.AbmEmpresa.Menu menu_abm_empre = new PagoAgilFrba.AbmEmpresa.Menu(this);
+            this.Hide();
+            menu_abm_empre.Show();
+        }
+
+        private void button_abm_rol_Click(object sender, EventArgs e)
+        {
+            PagoAgilFrba.AbmRol.Menu menu_abm_rol = new PagoAgilFrba.AbmRol.Menu(this);
+            this.Hide();
+            menu_abm_rol.Show();
+        }
+
+        private void button_pagar_Click(object sender, EventArgs e)
+        {
+            PagoAgilFrba.RegistroPago.RegistroPago menu_reg = new PagoAgilFrba.RegistroPago.RegistroPago(menu_fecha, menu_sucursal, this);
+            this.Hide();
+            menu_reg.Show();
+        }
     }
 }

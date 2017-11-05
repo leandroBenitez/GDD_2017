@@ -43,6 +43,7 @@
             this.textBox_cuit_fin = new System.Windows.Forms.TextBox();
             this.textBox_cuit_in = new System.Windows.Forms.TextBox();
             this.checkBox_habilitada = new System.Windows.Forms.CheckBox();
+            this.button_cancelar = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // textBox_nombre
@@ -114,7 +115,7 @@
             // 
             // button_modificacion
             // 
-            this.button_modificacion.Location = new System.Drawing.Point(145, 272);
+            this.button_modificacion.Location = new System.Drawing.Point(272, 276);
             this.button_modificacion.Name = "button_modificacion";
             this.button_modificacion.Size = new System.Drawing.Size(78, 23);
             this.button_modificacion.TabIndex = 9;
@@ -171,11 +172,22 @@
             this.checkBox_habilitada.Text = "Habilitada";
             this.checkBox_habilitada.UseVisualStyleBackColor = true;
             // 
+            // button_cancelar
+            // 
+            this.button_cancelar.Location = new System.Drawing.Point(58, 276);
+            this.button_cancelar.Name = "button_cancelar";
+            this.button_cancelar.Size = new System.Drawing.Size(78, 23);
+            this.button_cancelar.TabIndex = 22;
+            this.button_cancelar.Text = "Cancelar";
+            this.button_cancelar.UseVisualStyleBackColor = true;
+            this.button_cancelar.Click += new System.EventHandler(this.button_cancelar_Click);
+            // 
             // Modificacion
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(382, 335);
+            this.Controls.Add(this.button_cancelar);
             this.Controls.Add(this.checkBox_habilitada);
             this.Controls.Add(this.label7);
             this.Controls.Add(this.label6);
@@ -216,5 +228,6 @@
         private System.Windows.Forms.TextBox textBox_cuit_fin;
         private System.Windows.Forms.TextBox textBox_cuit_in;
         private System.Windows.Forms.CheckBox checkBox_habilitada;
+        private System.Windows.Forms.Button button_cancelar;
     }
 }
