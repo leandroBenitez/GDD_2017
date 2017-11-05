@@ -73,6 +73,10 @@ IF OBJECT_ID('PAGO_AGIL.modificaCliente') IS NOT NULL
 DROP PROCEDURE [PAGO_AGIL].modificaCliente
 Go
 
+IF OBJECT_ID('PAGO_AGIL.topPorcentajeFacturasEmpresa') IS NOT NULL
+DROP PROCEDURE [PAGO_AGIL].topPorcentajeFacturasEmpresa
+Go
+
 --Borrado de Vistas
 IF OBJECT_ID('PAGO_AGIL.Vw_Rendidos') IS NOT NULL
     DROP VIEW PAGO_AGIL.Vw_Rendidos;
@@ -145,6 +149,8 @@ IF OBJECT_ID('PAGO_AGIL.Dim_Funcionalidad', 'U') IS NOT NULL
 IF OBJECT_ID('PAGO_AGIL.Dim_Rol', 'U') IS NOT NULL 
 	DROP TABLE PAGO_AGIL.Dim_Rol;
 Go
+
+
 
 --Borrado de Schema
 IF EXISTS (SELECT 'exists' FROM sys.schemas WHERE name = 'PAGO_AGIL')
@@ -899,6 +905,28 @@ begin
 
 GO
 ;
+
+-- Ranking porcentaje facturas pagadas por empresa 
+
+create procedure PAGO_AGIL.topPorcentajeFacturasEmpresa(@fechaInicio date, @fechaFin date) as 
+	begin
+		select distinct top 5
+		emp.Empresa_Nombre as Nombre,
+		emp.Empresa_Cuit as Cuit,
+		rub.Rubro_Descripcion as Descripcion,
+		(select
+		(select count(1) from PAGO_AGIL.Lk_Factura as factAux 
+		inner join PAGO_AGIL.RL_PagoxFactura as pagofactAux on factAux.Factura_Id = pagofactAux.Id_Factura
+		inner join PAGO_AGIL.Ft_Pago as pagoAux on pagofactAux.Id_Pago = pagoAux.Pago_Id
+		where factAux.Factura_Empresa_Id = emp.Empresa_Id 
+		AND factAux.Factura_Fecha_Alta BETWEEN @fechaInicio and @fechaFin
+		AND pagoAux.Pago_Fecha between @fechaInicio and @fechaFin) *100 /
+		(select count(1) from PAGO_AGIL.Lk_Factura as factAux2 where factAux2.Factura_Empresa_Id=emp.Empresa_Id)) as porcentaje
+		from PAGO_AGIL.Lk_Factura as fact 
+		inner join PAGO_AGIL.Dim_Empresa as emp on fact.Factura_Empresa_Id=emp.Empresa_Id
+		inner join PAGO_AGIL.Dim_Rubro as rub on emp.Empresa_Rubro_Id = rub.Rubro_Id
+	end
+go
 
 -- Ranking monto rendido
 
