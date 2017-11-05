@@ -78,8 +78,16 @@ IF OBJECT_ID('PAGO_AGIL.topPorcentajeFacturasEmpresa') IS NOT NULL
 DROP PROCEDURE [PAGO_AGIL].topPorcentajeFacturasEmpresa
 Go
 
-IF OBJECT_ID('PAGO_AGIL.PAGO_AGIL.Rol_Funcionalidad_Modif') IS NOT NULL
-DROP PROCEDURE [PAGO_AGIL].PAGO_AGIL.Rol_Funcionalidad_Modif
+IF OBJECT_ID('PAGO_AGIL..Rol_Funcionalidad_Modif') IS NOT NULL
+DROP PROCEDURE [PAGO_AGIL].Rol_Funcionalidad_Modif
+Go
+
+IF OBJECT_ID('PAGO_AGIL..Mod_Rol') IS NOT NULL
+DROP PROCEDURE [PAGO_AGIL].Mod_Rol
+Go
+
+IF OBJECT_ID('PAGO_AGIL.FacturaPaga') IS NOT NULL
+DROP PROCEDURE [PAGO_AGIL].FacturaPaga
 Go
 
 
@@ -641,6 +649,7 @@ declare @factura_existente int = 0
 declare @pago_id int
 declare @f_ven date
 declare @f_pag date
+declare @id_factura int
 
 Select @empresa_activa = 1 from PAGO_AGIL.Dim_Empresa as emp
 where emp.Empresa_Nombre like @empresa
@@ -651,7 +660,7 @@ begin
 	set @resultado = ' Empresa Inactiva'
 end
 
-Select @factura_existente = 1 from PAGO_AGIL.Lk_Factura as fact
+Select @factura_existente = 1, @id_factura = fact.Factura_Id from PAGO_AGIL.Lk_Factura as fact
 inner join PAGO_AGIL.Dim_Empresa as emp
 	on emp.Empresa_Id = fact.Factura_Empresa_Id
 inner join PAGO_AGIL.Lk_Cliente as cli
@@ -681,27 +690,11 @@ end
 
 if(@resultado not like 'Error%')
 begin
-	select @pago_id = count(1) - 1 from PAGO_AGIL.Ft_Pago
-	insert into PAGO_AGIL.Ft_Pago(	 Pago_Id
-									,Pago_Fecha
-									,Pago_Item_nro
-									,Pago_Total
-									,Pago_FormaPago_Id
-									,Pago_Sucursal_Id
-									,Pago_Resp_Id)
-	values  (@pago_id
-			,@f_pag
-			,null
-			,@importe
-			,(select form.FormaPago_Id from PAGO_AGIL.Dim_FormaPago as form
-				where form.FormaPago_Desc like @forma_pago)
-			,(select suc.Sucursal_Id from PAGO_AGIL.Dim_Sucursal as suc
-				where suc.Sucursal_Nombre like @sucursal)
-			,(select us.Usuario_Id from PAGO_AGIL.Lk_Usuario as us
-				where us.Usuario_Name like @user)
-			) 
+	insert into PAGO_AGIL.RL_PagoxFactura(Id_Factura)
+	values(@id_factura)
 end
 
+Select @resultado as Resultado
 Go
 
 -- Alta Sucursal
@@ -1141,3 +1134,51 @@ begin
 end
 
 GO
+
+Create Procedure PAGO_AGIL.Mod_Rol(@id_rol int, @nombre varchar(100), @habilitado bit)
+as
+
+Update rol
+	set rol.Rol_Desc = @nombre,
+		rol.Rol_Habilitado = @habilitado
+	from PAGO_AGIL.Dim_Rol as rol
+	where rol.Rol_Id = @id_rol
+
+GO
+
+--Alta Registro Pago
+Create Procedure PAGO_AGIL.FacturaPaga (@id_factura int)
+as
+	insert into PAGO_AGIL.RL_PagoxFactura(Id_Factura)
+	values(@id_factura)
+GO
+
+Create Procedure PAGO_AGIL.RegistrarPago( @fecha varchar(20)
+										, @total int
+										, @forma_pago varchar(100)
+										, @sucursal varchar(100)
+										, @user varchar(100))
+as
+
+declare @pago_id int
+declare @f_pag date = convert(date, @fecha, 101)
+	
+select @pago_id = count(1) - 1 from PAGO_AGIL.Ft_Pago
+insert into PAGO_AGIL.Ft_Pago(	Pago_Id
+								,Pago_Fecha
+								,Pago_Item_nro
+								,Pago_Total
+								,Pago_FormaPago_Id
+								,Pago_Sucursal_Id
+								,Pago_Resp_Id)
+	values  (@pago_id
+			,@f_pag
+			,null
+			,@total
+			,(select form.FormaPago_Id from PAGO_AGIL.Dim_FormaPago as form
+				where form.FormaPago_Desc like @forma_pago)
+			,(select suc.Sucursal_Id from PAGO_AGIL.Dim_Sucursal as suc
+				where suc.Sucursal_Nombre like @sucursal)
+			,(select us.Usuario_Id from PAGO_AGIL.Lk_Usuario as us
+				where us.Usuario_Name like @user)
+			) 
