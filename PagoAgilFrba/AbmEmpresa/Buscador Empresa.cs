@@ -36,9 +36,10 @@ namespace PagoAgilFrba.AbmEmpresa
             {
                 consulta = consulta + "and Empresa_Nombre LIKE '%" + textBox_nombre.Text + "%' ";
             }
-            if (!string.IsNullOrWhiteSpace(textBox_cuit.Text))
+            if (!string.IsNullOrWhiteSpace(textBox_cuit_fin.Text) && !string.IsNullOrWhiteSpace(textBox_cuit_medio.Text) && !string.IsNullOrWhiteSpace(textBox_cuit_in.Text))
             {
-                consulta = consulta + "and Empresa_Cuit LIKE '%" + textBox_cuit.Text + "%' ";
+                string cuit_formateado = textBox_cuit_in.Text + "-" + textBox_cuit_medio.Text + "-" + textBox_cuit_fin.Text;
+                consulta = consulta + "and Empresa_Cuit LIKE '%" + cuit_formateado + "%' ";
             }
             if (combo_rubro.SelectedIndex != -1)
             {
@@ -145,6 +146,15 @@ namespace PagoAgilFrba.AbmEmpresa
 
                 dataGridView.Rows.Clear();
             }
+        }
+
+        private void button_limpiar_Click(object sender, EventArgs e)
+        {
+            dataGridView.Rows.Clear();
+            textBox_nombre.Text = "";
+            textBox_cuit_in.Text = "";
+            textBox_cuit_fin.Text = "";
+            textBox_cuit_medio.Text = "";
         }
 
     }

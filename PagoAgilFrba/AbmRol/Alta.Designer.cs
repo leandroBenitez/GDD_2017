@@ -94,6 +94,7 @@
             this.button_alta.TabIndex = 4;
             this.button_alta.Text = "Alta";
             this.button_alta.UseVisualStyleBackColor = true;
+            this.button_alta.Click += new System.EventHandler(this.button_alta_Click);
             // 
             // Alta
             // 

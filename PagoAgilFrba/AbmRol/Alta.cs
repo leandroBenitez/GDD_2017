@@ -60,5 +60,42 @@ namespace PagoAgilFrba.AbmRol
             dataGridView_funcionalidades.Rows.AddRange(filas.ToArray());
         }
 
+        private void button_alta_Click(object sender, EventArgs e)
+        {
+            
+            conexion connection = new conexion();
+            SqlCommand command = new SqlCommand();
+            
+            command.CommandType = CommandType.Text;
+            command.Connection = connection.abrir_conexion();
+
+            foreach (DataGridViewRow row in dataGridView_funcionalidades.Rows)
+            {
+                DataGridViewCheckBoxCell chk = (DataGridViewCheckBoxCell)row.Cells[2];
+                if (chk.Value == chk.TrueValue)
+                {
+                    string consulta = "Execute PAGO_AGIL.Rol_Funcionalidad '" + row.Cells[0].ToString() + "'";
+                    try
+                    {
+                        SqlDataReader reader = command.ExecuteReader();
+                    }
+                    catch (Exception ex)
+                    {
+                        MessageBox.Show("Error: " + ex.Message);
+                    }
+                }
+                string consulta2 = "Execute PAGO_AGIL.Alta_Rol '" + textBox_nombre.Text + "'";
+                try
+                {
+                    SqlDataReader reader = command.ExecuteReader();
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show("Error: " + ex.Message);
+                }
+            }
+
+        }
+
     }
 }

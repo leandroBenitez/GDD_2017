@@ -31,7 +31,6 @@
             this.textBox_nombre = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
-            this.textBox_cuit = new System.Windows.Forms.TextBox();
             this.combo_rubro = new System.Windows.Forms.ComboBox();
             this.label3 = new System.Windows.Forms.Label();
             this.button_buscar = new System.Windows.Forms.Button();
@@ -44,6 +43,12 @@
             this.Habilitada = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.button_modificar = new System.Windows.Forms.Button();
             this.button_baja = new System.Windows.Forms.Button();
+            this.button_limpiar = new System.Windows.Forms.Button();
+            this.label7 = new System.Windows.Forms.Label();
+            this.label6 = new System.Windows.Forms.Label();
+            this.textBox_cuit_medio = new System.Windows.Forms.TextBox();
+            this.textBox_cuit_fin = new System.Windows.Forms.TextBox();
+            this.textBox_cuit_in = new System.Windows.Forms.TextBox();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView)).BeginInit();
             this.SuspendLayout();
             // 
@@ -72,13 +77,6 @@
             this.label2.TabIndex = 3;
             this.label2.Text = "CUIT:";
             // 
-            // textBox_cuit
-            // 
-            this.textBox_cuit.Location = new System.Drawing.Point(330, 28);
-            this.textBox_cuit.Name = "textBox_cuit";
-            this.textBox_cuit.Size = new System.Drawing.Size(169, 20);
-            this.textBox_cuit.TabIndex = 2;
-            // 
             // combo_rubro
             // 
             this.combo_rubro.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
@@ -99,9 +97,9 @@
             // 
             // button_buscar
             // 
-            this.button_buscar.Location = new System.Drawing.Point(359, 63);
+            this.button_buscar.Location = new System.Drawing.Point(292, 63);
             this.button_buscar.Name = "button_buscar";
-            this.button_buscar.Size = new System.Drawing.Size(122, 23);
+            this.button_buscar.Size = new System.Drawing.Size(87, 23);
             this.button_buscar.TabIndex = 6;
             this.button_buscar.Text = "Buscar";
             this.button_buscar.UseVisualStyleBackColor = true;
@@ -182,11 +180,66 @@
             this.button_baja.UseVisualStyleBackColor = true;
             this.button_baja.Click += new System.EventHandler(this.button_baja_Click);
             // 
+            // button_limpiar
+            // 
+            this.button_limpiar.Location = new System.Drawing.Point(415, 63);
+            this.button_limpiar.Name = "button_limpiar";
+            this.button_limpiar.Size = new System.Drawing.Size(99, 23);
+            this.button_limpiar.TabIndex = 10;
+            this.button_limpiar.Text = "Limpiar";
+            this.button_limpiar.UseVisualStyleBackColor = true;
+            this.button_limpiar.Click += new System.EventHandler(this.button_limpiar_Click);
+            // 
+            // label7
+            // 
+            this.label7.AutoSize = true;
+            this.label7.Location = new System.Drawing.Point(475, 31);
+            this.label7.Name = "label7";
+            this.label7.Size = new System.Drawing.Size(10, 13);
+            this.label7.TabIndex = 19;
+            this.label7.Text = "-";
+            // 
+            // label6
+            // 
+            this.label6.AutoSize = true;
+            this.label6.Location = new System.Drawing.Point(361, 31);
+            this.label6.Name = "label6";
+            this.label6.Size = new System.Drawing.Size(10, 13);
+            this.label6.TabIndex = 18;
+            this.label6.Text = "-";
+            // 
+            // textBox_cuit_medio
+            // 
+            this.textBox_cuit_medio.Location = new System.Drawing.Point(377, 28);
+            this.textBox_cuit_medio.Name = "textBox_cuit_medio";
+            this.textBox_cuit_medio.Size = new System.Drawing.Size(92, 20);
+            this.textBox_cuit_medio.TabIndex = 17;
+            // 
+            // textBox_cuit_fin
+            // 
+            this.textBox_cuit_fin.Location = new System.Drawing.Point(488, 28);
+            this.textBox_cuit_fin.Name = "textBox_cuit_fin";
+            this.textBox_cuit_fin.Size = new System.Drawing.Size(26, 20);
+            this.textBox_cuit_fin.TabIndex = 16;
+            // 
+            // textBox_cuit_in
+            // 
+            this.textBox_cuit_in.Location = new System.Drawing.Point(329, 28);
+            this.textBox_cuit_in.Name = "textBox_cuit_in";
+            this.textBox_cuit_in.Size = new System.Drawing.Size(26, 20);
+            this.textBox_cuit_in.TabIndex = 15;
+            // 
             // Buscador_Empresa
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(586, 332);
+            this.Controls.Add(this.label7);
+            this.Controls.Add(this.label6);
+            this.Controls.Add(this.textBox_cuit_medio);
+            this.Controls.Add(this.textBox_cuit_fin);
+            this.Controls.Add(this.textBox_cuit_in);
+            this.Controls.Add(this.button_limpiar);
             this.Controls.Add(this.button_baja);
             this.Controls.Add(this.button_modificar);
             this.Controls.Add(this.dataGridView);
@@ -194,7 +247,6 @@
             this.Controls.Add(this.label3);
             this.Controls.Add(this.combo_rubro);
             this.Controls.Add(this.label2);
-            this.Controls.Add(this.textBox_cuit);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.textBox_nombre);
             this.Name = "Buscador_Empresa";
@@ -210,7 +262,6 @@
         private System.Windows.Forms.TextBox textBox_nombre;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label label2;
-        private System.Windows.Forms.TextBox textBox_cuit;
         private System.Windows.Forms.ComboBox combo_rubro;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Button button_buscar;
@@ -223,5 +274,11 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn Habilitada;
         private System.Windows.Forms.Button button_modificar;
         private System.Windows.Forms.Button button_baja;
+        private System.Windows.Forms.Button button_limpiar;
+        private System.Windows.Forms.Label label7;
+        private System.Windows.Forms.Label label6;
+        private System.Windows.Forms.TextBox textBox_cuit_medio;
+        private System.Windows.Forms.TextBox textBox_cuit_fin;
+        private System.Windows.Forms.TextBox textBox_cuit_in;
     }
 }

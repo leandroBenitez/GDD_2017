@@ -28,33 +28,16 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.button1 = new System.Windows.Forms.Button();
             this.label2 = new System.Windows.Forms.Label();
-            this.label1 = new System.Windows.Forms.Label();
-            this.textBox_nombre = new System.Windows.Forms.TextBox();
-            this.dataGridView_funcionalidades = new System.Windows.Forms.DataGridView();
             this.dataGridView_resultados = new System.Windows.Forms.DataGridView();
             this.label = new System.Windows.Forms.Label();
-            this.Nombre = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.button_limpiar = new System.Windows.Forms.Button();
             this.button_modificar = new System.Windows.Forms.Button();
             this.button_baja = new System.Windows.Forms.Button();
-            this.Id_Funcionalidad = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Funcionalidad = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Seleccionar = new System.Windows.Forms.DataGridViewCheckBoxColumn();
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView_funcionalidades)).BeginInit();
+            this.Id_Rol = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Nombre = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Habilitado = new System.Windows.Forms.DataGridViewCheckBoxColumn();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView_resultados)).BeginInit();
             this.SuspendLayout();
-            // 
-            // button1
-            // 
-            this.button1.Location = new System.Drawing.Point(20, 256);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(75, 23);
-            this.button1.TabIndex = 9;
-            this.button1.Text = "Buscar";
-            this.button1.UseVisualStyleBackColor = true;
-            this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
             // label2
             // 
@@ -66,74 +49,30 @@
             this.label2.TabIndex = 8;
             this.label2.Text = "Búsqueda Rol";
             // 
-            // label1
-            // 
-            this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(17, 46);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(47, 13);
-            this.label1.TabIndex = 7;
-            this.label1.Text = "Nombre:";
-            // 
-            // textBox_nombre
-            // 
-            this.textBox_nombre.Location = new System.Drawing.Point(88, 43);
-            this.textBox_nombre.Name = "textBox_nombre";
-            this.textBox_nombre.Size = new System.Drawing.Size(175, 20);
-            this.textBox_nombre.TabIndex = 6;
-            // 
-            // dataGridView_funcionalidades
-            // 
-            this.dataGridView_funcionalidades.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridView_funcionalidades.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
-            this.Id_Funcionalidad,
-            this.Funcionalidad,
-            this.Seleccionar});
-            this.dataGridView_funcionalidades.Location = new System.Drawing.Point(20, 81);
-            this.dataGridView_funcionalidades.Name = "dataGridView_funcionalidades";
-            this.dataGridView_funcionalidades.Size = new System.Drawing.Size(243, 150);
-            this.dataGridView_funcionalidades.TabIndex = 5;
-            this.dataGridView_funcionalidades.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView_funcionalidades_CellContentClick);
-            // 
             // dataGridView_resultados
             // 
             this.dataGridView_resultados.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dataGridView_resultados.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
-            this.Nombre});
-            this.dataGridView_resultados.Location = new System.Drawing.Point(338, 46);
+            this.Id_Rol,
+            this.Nombre,
+            this.Habilitado});
+            this.dataGridView_resultados.Location = new System.Drawing.Point(24, 53);
             this.dataGridView_resultados.Name = "dataGridView_resultados";
-            this.dataGridView_resultados.Size = new System.Drawing.Size(144, 185);
+            this.dataGridView_resultados.Size = new System.Drawing.Size(243, 185);
             this.dataGridView_resultados.TabIndex = 10;
             // 
             // label
             // 
             this.label.AutoSize = true;
-            this.label.Location = new System.Drawing.Point(335, 30);
+            this.label.Location = new System.Drawing.Point(21, 37);
             this.label.Name = "label";
-            this.label.Size = new System.Drawing.Size(63, 13);
+            this.label.Size = new System.Drawing.Size(37, 13);
             this.label.TabIndex = 11;
-            this.label.Text = "Resultados:";
-            // 
-            // Nombre
-            // 
-            this.Nombre.HeaderText = "Nombre";
-            this.Nombre.MinimumWidth = 10;
-            this.Nombre.Name = "Nombre";
-            this.Nombre.ReadOnly = true;
-            // 
-            // button_limpiar
-            // 
-            this.button_limpiar.Location = new System.Drawing.Point(188, 256);
-            this.button_limpiar.Name = "button_limpiar";
-            this.button_limpiar.Size = new System.Drawing.Size(75, 23);
-            this.button_limpiar.TabIndex = 12;
-            this.button_limpiar.Text = "Limpiar";
-            this.button_limpiar.UseVisualStyleBackColor = true;
-            this.button_limpiar.Click += new System.EventHandler(this.button_limpiar_Click);
+            this.label.Text = "Roles:";
             // 
             // button_modificar
             // 
-            this.button_modificar.Location = new System.Drawing.Point(338, 266);
+            this.button_modificar.Location = new System.Drawing.Point(192, 256);
             this.button_modificar.Name = "button_modificar";
             this.button_modificar.Size = new System.Drawing.Size(75, 23);
             this.button_modificar.TabIndex = 13;
@@ -143,7 +82,7 @@
             // 
             // button_baja
             // 
-            this.button_baja.Location = new System.Drawing.Point(338, 237);
+            this.button_baja.Location = new System.Drawing.Point(24, 256);
             this.button_baja.Name = "button_baja";
             this.button_baja.Size = new System.Drawing.Size(75, 23);
             this.button_baja.TabIndex = 14;
@@ -151,41 +90,37 @@
             this.button_baja.UseVisualStyleBackColor = true;
             this.button_baja.Click += new System.EventHandler(this.button_baja_Click);
             // 
-            // Id_Funcionalidad
+            // Id_Rol
             // 
-            this.Id_Funcionalidad.HeaderText = "Id_Funcionalidad";
-            this.Id_Funcionalidad.Name = "Id_Funcionalidad";
-            this.Id_Funcionalidad.Visible = false;
+            this.Id_Rol.HeaderText = "Id_Rol";
+            this.Id_Rol.Name = "Id_Rol";
+            this.Id_Rol.Visible = false;
             // 
-            // Funcionalidad
+            // Nombre
             // 
-            this.Funcionalidad.HeaderText = "Funcionalidad";
-            this.Funcionalidad.Name = "Funcionalidad";
-            this.Funcionalidad.ReadOnly = true;
+            this.Nombre.HeaderText = "Nombre";
+            this.Nombre.MinimumWidth = 10;
+            this.Nombre.Name = "Nombre";
+            this.Nombre.ReadOnly = true;
             // 
-            // Seleccionar
+            // Habilitado
             // 
-            this.Seleccionar.HeaderText = "Seleccionar";
-            this.Seleccionar.Name = "Seleccionar";
+            this.Habilitado.HeaderText = "Habilitado";
+            this.Habilitado.Name = "Habilitado";
+            this.Habilitado.ReadOnly = true;
             // 
             // BuscadorRol
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(527, 291);
+            this.ClientSize = new System.Drawing.Size(295, 291);
             this.Controls.Add(this.button_baja);
             this.Controls.Add(this.button_modificar);
-            this.Controls.Add(this.button_limpiar);
             this.Controls.Add(this.label);
             this.Controls.Add(this.dataGridView_resultados);
-            this.Controls.Add(this.button1);
             this.Controls.Add(this.label2);
-            this.Controls.Add(this.label1);
-            this.Controls.Add(this.textBox_nombre);
-            this.Controls.Add(this.dataGridView_funcionalidades);
             this.Name = "BuscadorRol";
             this.Text = "Pago Agil";
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView_funcionalidades)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView_resultados)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
@@ -194,19 +129,13 @@
 
         #endregion
 
-        private System.Windows.Forms.Button button1;
         private System.Windows.Forms.Label label2;
-        private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.TextBox textBox_nombre;
-        private System.Windows.Forms.DataGridView dataGridView_funcionalidades;
         private System.Windows.Forms.DataGridView dataGridView_resultados;
         private System.Windows.Forms.Label label;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Nombre;
-        private System.Windows.Forms.Button button_limpiar;
         private System.Windows.Forms.Button button_modificar;
         private System.Windows.Forms.Button button_baja;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Id_Funcionalidad;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Funcionalidad;
-        private System.Windows.Forms.DataGridViewCheckBoxColumn Seleccionar;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Id_Rol;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Nombre;
+        private System.Windows.Forms.DataGridViewCheckBoxColumn Habilitado;
     }
 }
