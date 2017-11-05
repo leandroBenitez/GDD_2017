@@ -275,7 +275,80 @@ namespace PagoAgilFrba.ListadoEstadistico
 
         private void botonTopFacturasEmpresa_Click(object sender, EventArgs e)
         {
+            string fechaInicio;
+            string fechaFin;
+            dataGridMontoRendido.Visible = false;
+            dataGridPorcentajePago.Visible = false;
+            dataGridPagosEmpresas.Visible = true;
+            switch (label1.Text)
+            {
+                case "1":
+                    fechaInicio = comboBox1.Text + "-01-01";
+                    fechaFin = comboBox1.Text + "-03-31";
+                    label2.Text = fechaInicio;
+                    label3.Text = fechaFin;
+                    break;
+                case "2":
+                    fechaInicio = comboBox1.Text + "-04-01";
+                    fechaFin = comboBox1.Text + "-06-30";
+                    label2.Text = fechaInicio;
+                    label3.Text = fechaFin;
+                    break;
+                case "3":
+                    fechaInicio = comboBox1.Text + "-07-01";
+                    fechaFin = comboBox1.Text + "-09-30";
+                    label2.Text = fechaInicio;
+                    label3.Text = fechaFin;
+                    break;
+                case "4":
+                    fechaInicio = comboBox1.Text + "-10-01";
+                    fechaFin = comboBox1.Text + "-12-31";
+                    label2.Text = fechaInicio;
+                    label3.Text = fechaFin;
+                    break;
+                default: MessageBox.Show("Debe seleccionar un trimestre");
+                    break;
+            }
+            string consulta = "Execute PAGO_AGIL.topPorcentajeFacturasEmpresa '" + label2.Text + "', '" + label3.Text + "'";
+            conexion connection = new conexion();
+            SqlCommand command = new SqlCommand();
 
+            command.CommandText = consulta;
+            command.CommandType = CommandType.Text;
+            command.Connection = connection.abrir_conexion();
+            textBox1.Text = consulta;
+            try
+            {
+                SqlDataReader reader = command.ExecuteReader();
+                cargar_datos4(reader);
+                connection.cerrar_conexion(command.Connection);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Error: " + ex.Message);
+            }
         }
+
+        private void cargar_datos4(SqlDataReader datos)
+        {
+            dataGridPagosEmpresas.Rows.Clear();
+
+            List<DataGridViewRow> filas = new List<DataGridViewRow>();
+            Object[] columnas = new Object[4];
+
+            while (datos.Read())
+            {
+                columnas[0] = datos["Nombre"].ToString();
+                columnas[1] = datos["Cuit"].ToString();
+                columnas[2] = datos["Rubro_Emp"].ToString();
+                columnas[3] = datos["porcentaje"].ToString();
+                filas.Add(new DataGridViewRow());
+                filas[filas.Count - 1].CreateCells(dataGridPagosEmpresas, columnas);
+            }
+
+            dataGridPagosEmpresas.Rows.AddRange(filas.ToArray());
+        }
+
+
     }
 }
