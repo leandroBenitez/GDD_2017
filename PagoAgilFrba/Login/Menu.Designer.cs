@@ -79,6 +79,7 @@
             this.button_abm_cliente.TabIndex = 3;
             this.button_abm_cliente.Text = "ABM Cliente";
             this.button_abm_cliente.UseVisualStyleBackColor = true;
+            this.button_abm_cliente.Click += new System.EventHandler(this.button_abm_cliente_Click);
             // 
             // button_abm_empresa
             // 
@@ -100,6 +101,7 @@
             this.button_abm_sucursal.TabIndex = 5;
             this.button_abm_sucursal.Text = "ABM Sucursal";
             this.button_abm_sucursal.UseVisualStyleBackColor = true;
+            this.button_abm_sucursal.Click += new System.EventHandler(this.button_abm_sucursal_Click);
             // 
             // button_abm_facturas
             // 
@@ -110,6 +112,7 @@
             this.button_abm_facturas.TabIndex = 6;
             this.button_abm_facturas.Text = "ABM Facturas";
             this.button_abm_facturas.UseVisualStyleBackColor = true;
+            this.button_abm_facturas.Click += new System.EventHandler(this.button_abm_facturas_Click);
             // 
             // button_estadisticas
             // 
@@ -120,6 +123,7 @@
             this.button_estadisticas.TabIndex = 7;
             this.button_estadisticas.Text = "Estadisticas";
             this.button_estadisticas.UseVisualStyleBackColor = true;
+            this.button_estadisticas.Click += new System.EventHandler(this.button_estadisticas_Click);
             // 
             // button_pagar
             // 

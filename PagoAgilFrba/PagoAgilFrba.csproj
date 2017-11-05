@@ -173,11 +173,6 @@
     </Compile>
     <Compile Include="Entidades\conexion.cs" />
     <Compile Include="Entidades\Funciones.cs" />
-    <Compile Include="GD2C2017DataSet.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>GD2C2017DataSet.xsd</DependentUpon>
-    </Compile>
     <Compile Include="ListadoEstadistico\estadisticas.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -315,17 +310,6 @@
     <EmbeddedResource Include="Rendicion\Rendicion.resx">
       <DependentUpon>Rendicion.cs</DependentUpon>
     </EmbeddedResource>
-    <None Include="GD2C2017DataSet.xsc">
-      <DependentUpon>GD2C2017DataSet.xsd</DependentUpon>
-    </None>
-    <None Include="GD2C2017DataSet.xsd">
-      <Generator>MSDataSetGenerator</Generator>
-      <LastGenOutput>GD2C2017DataSet.Designer.cs</LastGenOutput>
-      <SubType>Designer</SubType>
-    </None>
-    <None Include="GD2C2017DataSet.xss">
-      <DependentUpon>GD2C2017DataSet.xsd</DependentUpon>
-    </None>
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
