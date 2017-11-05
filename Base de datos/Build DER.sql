@@ -223,7 +223,8 @@ Create Table PAGO_AGIL.Lk_Factura
 	Factura_Fecha_Vencimiento datetime,
 	Factura_Cliente_Id int FOREIGN KEY REFERENCES PAGO_AGIL.Lk_Cliente(Cliente_Id),
 	Factura_Empresa_Id int FOREIGN KEY REFERENCES PAGO_AGIL.Dim_Empresa(Empresa_Id),
-	Factura_Rendicion_Id int FOREIGN KEY REFERENCES PAGO_AGIL.Ft_Rendicion(Rendicion_Id)
+	Factura_Rendicion_Id int FOREIGN KEY REFERENCES PAGO_AGIL.Ft_Rendicion(Rendicion_Id),
+	Factura_Pagado bit default 0 --1 pagado
 )
 
 Create Table PAGO_AGIL.Lk_Item_Factura
@@ -422,6 +423,12 @@ inner join PAGO_AGIL.Ft_Pago as pag
 inner join PAGO_AGIL.Lk_Factura as fac
 	on main.Nro_Factura = fac.Factura_Nro
 where main.Pago_nro is not null
+
+Update fac
+Set fac.Factura_Pagado = 1
+from PAGO_AGIL.Lk_Factura as fac
+inner join PAGO_AGIL.RL_PagoxFactura as rl
+	on fac.Factura_Id = rl.Id_Factura
 
 --Carga de Usuarios x Sucursal
 Insert into PAGO_AGIL.RL_UsuarioxSucursal (Id_Sucursal, Id_usuario)
