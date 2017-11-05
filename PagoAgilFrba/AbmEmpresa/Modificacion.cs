@@ -17,10 +17,12 @@ namespace PagoAgilFrba.AbmEmpresa
         private string[] tokens;
         private int id_emp;
         private string cuit_formateado;
+        Form main_menu;
 
-        public Modificacion(int idEmp, string nombre, string cuit, string direccion, string rubro, bool habilitado)
+        public Modificacion(int idEmp, string nombre, string cuit, string direccion, string rubro, bool habilitado, Form menu)
         {
             InitializeComponent();
+            main_menu = menu;
             textBox_nombre.Text = nombre;
             textBox_direccion.Text = direccion;
             tokens = cuit.Split('-');
@@ -103,6 +105,12 @@ namespace PagoAgilFrba.AbmEmpresa
                 textBox_cuit_fin.Text = "";
                 textBox_cuit_medio.Text = "";
             }
+        }
+
+        private void button_cancelar_Click(object sender, EventArgs e)
+        {
+            main_menu.Show();
+            this.Close();
         }
     }
 }

@@ -17,15 +17,17 @@ namespace PagoAgilFrba.Login
         string menu_user;
         string menu_rol;
         string menu_fecha;
+        string menu_sucursal;
 
-        public Menu(string usuario, string rol, string fecha)
+        public Menu(string usuario, string rol, string fecha, string sucursal)
         {
             InitializeComponent();
             menu_user = usuario;
             menu_rol = rol;
             menu_fecha = fecha;
+            menu_sucursal = sucursal;
             label_usuario.Text = "Rol: " + rol + "      Usuario: " + usuario;
-            label_fecha.Text = "Fecha de sistema: " + fecha;
+            label_fecha.Text = sucursal + "      Fecha de sistema: " + fecha;
             habilitar_botones();
         }
 
@@ -116,6 +118,27 @@ namespace PagoAgilFrba.Login
             PagoAgilFrba.Rendicion.Rendicion rendicion = new PagoAgilFrba.Rendicion.Rendicion(menu_user, menu_fecha, this);
             this.Hide();
             rendicion.Show();
+        }
+
+        private void button_abm_empresa_Click(object sender, EventArgs e)
+        {
+            PagoAgilFrba.AbmEmpresa.Menu menu_abm_empre = new PagoAgilFrba.AbmEmpresa.Menu(this);
+            this.Hide();
+            menu_abm_empre.Show();
+        }
+
+        private void button_abm_rol_Click(object sender, EventArgs e)
+        {
+            PagoAgilFrba.AbmRol.Menu menu_abm_rol = new PagoAgilFrba.AbmRol.Menu(this);
+            this.Hide();
+            menu_abm_rol.Show();
+        }
+
+        private void button_pagar_Click(object sender, EventArgs e)
+        {
+            PagoAgilFrba.RegistroPago.RegistroPago menu_reg = new PagoAgilFrba.RegistroPago.RegistroPago(menu_fecha, menu_sucursal, this);
+            this.Hide();
+            menu_reg.Show();
         }
     }
 }

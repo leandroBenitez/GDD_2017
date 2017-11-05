@@ -14,9 +14,12 @@ namespace PagoAgilFrba.AbmEmpresa
 {
     public partial class Alta : Form
     {
-        public Alta()
+        Form main_menu;
+
+        public Alta(Form menu)
         {
             InitializeComponent();
+            main_menu = menu;
             string consulta = "Select Rubro_Descripcion from PAGO_AGIL.Dim_Rubro";
             Entidades.Herramientas.llenarComboBox(comboBox_rubro, consulta);
         }
@@ -83,6 +86,12 @@ namespace PagoAgilFrba.AbmEmpresa
                 textBox_cuit_fin.Text = "";
                 textBox_cuit_medio.Text = "";
             }
+        }
+
+        private void button_cancelar_Click(object sender, EventArgs e)
+        {
+            main_menu.Show();
+            this.Close();
         }
     }
 }

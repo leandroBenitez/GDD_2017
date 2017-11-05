@@ -14,9 +14,12 @@ namespace PagoAgilFrba.AbmRol
 {
     public partial class BuscadorRol : Form
     {
-        public BuscadorRol()
+        Form main_menu;
+
+        public BuscadorRol(Form menu)
         {
             InitializeComponent();
+            main_menu = menu;
             llenar_dataViewGrid();
         }
 
@@ -120,11 +123,16 @@ namespace PagoAgilFrba.AbmRol
                 {
                     habilitado = false;
                 }      
-                PagoAgilFrba.AbmRol.Modificacion modificacion = new PagoAgilFrba.AbmRol.Modificacion(idRol, nombre, habilitado);
+                PagoAgilFrba.AbmRol.Modificacion modificacion = new PagoAgilFrba.AbmRol.Modificacion(idRol, nombre, habilitado, this);
                 this.Hide();
                 modificacion.Show();
             }
         }
 
+        private void button_atras_Click(object sender, EventArgs e)
+        {
+            main_menu.Show();
+            this.Close();
+        }
     }
 }

@@ -49,6 +49,7 @@
             this.textBox_cuit_medio = new System.Windows.Forms.TextBox();
             this.textBox_cuit_fin = new System.Windows.Forms.TextBox();
             this.textBox_cuit_in = new System.Windows.Forms.TextBox();
+            this.button_atras = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView)).BeginInit();
             this.SuspendLayout();
             // 
@@ -162,7 +163,7 @@
             // 
             // button_modificar
             // 
-            this.button_modificar.Location = new System.Drawing.Point(142, 283);
+            this.button_modificar.Location = new System.Drawing.Point(249, 283);
             this.button_modificar.Name = "button_modificar";
             this.button_modificar.Size = new System.Drawing.Size(75, 37);
             this.button_modificar.TabIndex = 8;
@@ -172,7 +173,7 @@
             // 
             // button_baja
             // 
-            this.button_baja.Location = new System.Drawing.Point(359, 282);
+            this.button_baja.Location = new System.Drawing.Point(476, 283);
             this.button_baja.Name = "button_baja";
             this.button_baja.Size = new System.Drawing.Size(75, 37);
             this.button_baja.TabIndex = 9;
@@ -229,11 +230,22 @@
             this.textBox_cuit_in.Size = new System.Drawing.Size(26, 20);
             this.textBox_cuit_in.TabIndex = 15;
             // 
+            // button_atras
+            // 
+            this.button_atras.Location = new System.Drawing.Point(12, 283);
+            this.button_atras.Name = "button_atras";
+            this.button_atras.Size = new System.Drawing.Size(75, 37);
+            this.button_atras.TabIndex = 20;
+            this.button_atras.Text = "Atras";
+            this.button_atras.UseVisualStyleBackColor = true;
+            this.button_atras.Click += new System.EventHandler(this.button_atras_Click);
+            // 
             // Buscador_Empresa
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(586, 332);
+            this.Controls.Add(this.button_atras);
             this.Controls.Add(this.label7);
             this.Controls.Add(this.label6);
             this.Controls.Add(this.textBox_cuit_medio);
@@ -280,5 +292,6 @@
         private System.Windows.Forms.TextBox textBox_cuit_medio;
         private System.Windows.Forms.TextBox textBox_cuit_fin;
         private System.Windows.Forms.TextBox textBox_cuit_in;
+        private System.Windows.Forms.Button button_atras;
     }
 }

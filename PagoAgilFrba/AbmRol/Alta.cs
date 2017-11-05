@@ -14,9 +14,12 @@ namespace PagoAgilFrba.AbmRol
 {
     public partial class Alta : Form
     {
-        public Alta()
+        Form main_menuRol;
+
+        public Alta(Form menuRol)
         {
             InitializeComponent();
+            main_menuRol = menuRol;
             llenar_dataViewGrid();
         }
 
@@ -97,5 +100,10 @@ namespace PagoAgilFrba.AbmRol
 
         }
 
+        private void button_atras_Click(object sender, EventArgs e)
+        {
+            main_menuRol.Show();
+            this.Close();
+        }
     }
 }

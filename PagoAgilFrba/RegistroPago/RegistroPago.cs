@@ -16,8 +16,9 @@ namespace PagoAgilFrba.RegistroPago
     {
         private int cantidad_fact;
         private float monto_total;
+        Form main_menu;
 
-        public RegistroPago(string fecha_sistema, string sucursal)
+        public RegistroPago(string fecha_sistema, string sucursal, Form menu)
         {
             InitializeComponent();
             textBox_fecha_sistema.Text = fecha_sistema;
@@ -26,6 +27,7 @@ namespace PagoAgilFrba.RegistroPago
             label_total.Text = "0";
             cantidad_fact = 0;
             monto_total = 0;
+            main_menu = menu;
             string consulta_empresas = "Select distinct emp.Empresa_Nombre from PAGO_AGIL.Dim_Empresa as emp";
             Entidades.Herramientas.llenarComboBox(comboBox_empresa, consulta_empresas);
             string consulta_clientes = "Select (cli.Cliente_Nombre + ' ' + cli.Cliente_Apellido) from PAGO_AGIL.Lk_Cliente as cli";
@@ -88,6 +90,12 @@ namespace PagoAgilFrba.RegistroPago
             textBox_importe.Text = "";
 
 
+        }
+
+        private void button_cancelar_Click(object sender, EventArgs e)
+        {
+            main_menu.Show();
+            this.Close();
         }
     }
 }

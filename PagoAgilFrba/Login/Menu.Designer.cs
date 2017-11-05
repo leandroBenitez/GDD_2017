@@ -68,6 +68,7 @@
             this.button_abm_rol.TabIndex = 2;
             this.button_abm_rol.Text = "ABM Rol";
             this.button_abm_rol.UseVisualStyleBackColor = true;
+            this.button_abm_rol.Click += new System.EventHandler(this.button_abm_rol_Click);
             // 
             // button_abm_cliente
             // 
@@ -88,6 +89,7 @@
             this.button_abm_empresa.TabIndex = 4;
             this.button_abm_empresa.Text = "ABM Empresa";
             this.button_abm_empresa.UseVisualStyleBackColor = true;
+            this.button_abm_empresa.Click += new System.EventHandler(this.button_abm_empresa_Click);
             // 
             // button_abm_sucursal
             // 
@@ -128,6 +130,7 @@
             this.button_pagar.TabIndex = 8;
             this.button_pagar.Text = "Registrar Pago";
             this.button_pagar.UseVisualStyleBackColor = true;
+            this.button_pagar.Click += new System.EventHandler(this.button_pagar_Click);
             // 
             // button_rendir
             // 

@@ -20,10 +20,12 @@ namespace PagoAgilFrba.AbmEmpresa
         private string direccion;
         private string rubro;
         private bool habilitado;
+        Form main_menu;
 
-        public Buscador_Empresa()
+        public Buscador_Empresa(Form menu)
         {
             InitializeComponent();
+            main_menu = menu;
             string consulta = "Select Rubro_Descripcion from PAGO_AGIL.Dim_Rubro";
             Entidades.Herramientas.llenarComboBox(combo_rubro, consulta);
         }
@@ -105,7 +107,7 @@ namespace PagoAgilFrba.AbmEmpresa
                     habilitado = true;
                 else
                     habilitado = false;
-                PagoAgilFrba.AbmEmpresa.Modificacion modificacion = new PagoAgilFrba.AbmEmpresa.Modificacion(idEmp, nombre, cuit, direccion, rubro, habilitado);
+                PagoAgilFrba.AbmEmpresa.Modificacion modificacion = new PagoAgilFrba.AbmEmpresa.Modificacion(idEmp, nombre, cuit, direccion, rubro, habilitado, this);
                 this.Hide();
                 modificacion.Show();
 
@@ -157,5 +159,10 @@ namespace PagoAgilFrba.AbmEmpresa
             textBox_cuit_medio.Text = "";
         }
 
+        private void button_atras_Click(object sender, EventArgs e)
+        {
+            main_menu.Show();
+            this.Close();
+        }
     }
 }

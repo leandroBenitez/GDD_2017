@@ -14,9 +14,12 @@ namespace PagoAgilFrba.AbmRol
 {
     public partial class Modificacion : Form
     {
-        public Modificacion(int id_rol, string nombre_rol, bool habilitado)
+        Form main_menu;
+
+        public Modificacion(int id_rol, string nombre_rol, bool habilitado, Form menu)
         {
             InitializeComponent();
+            main_menu = menu;
             textBox_nombre.Text = nombre_rol;
             checkBox_hab.Checked = habilitado;
             llenar_dataViewGrid(id_rol);
@@ -75,6 +78,12 @@ namespace PagoAgilFrba.AbmRol
         private void button_mod_Click(object sender, EventArgs e)
         {
 
+        }
+
+        private void button_atras_Click(object sender, EventArgs e)
+        {
+            main_menu.Show();
+            this.Close();
         }
     }
 }

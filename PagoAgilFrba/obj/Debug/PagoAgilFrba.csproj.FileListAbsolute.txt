@@ -138,3 +138,5 @@ C:\Users\Fabrizio\Documents\GitHub\GDD_2017\PagoAgilFrba\obj\Debug\PagoAgilFrba.
 C:\Users\Fabrizio\Documents\GitHub\GDD_2017\PagoAgilFrba\obj\Debug\PagoAgilFrba.AbmRol.BuscadorRol.resources
 C:\Users\Fabrizio\Documents\GitHub\GDD_2017\PagoAgilFrba\obj\Debug\PagoAgilFrba.AbmRol.Menu.resources
 C:\Users\Fabrizio\Documents\GitHub\GDD_2017\PagoAgilFrba\obj\Debug\PagoAgilFrba.AbmRol.Modificacion.resources
+C:\Users\CoreBI\Desktop\Tp GDD\GDD_2017\PagoAgilFrba\obj\Debug\PagoAgilFrba.Login.Sucursales.resources
+C:\Users\CoreBI\Desktop\Tp GDD\GDD_2017\PagoAgilFrba\obj\Debug\PagoAgilFrba.AbmEmpresa.Menu.resources

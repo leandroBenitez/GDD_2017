@@ -30,11 +30,12 @@
         {
             this.button_alta = new System.Windows.Forms.Button();
             this.button_busqueda = new System.Windows.Forms.Button();
+            this.button_cancelar = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // button_alta
             // 
-            this.button_alta.Location = new System.Drawing.Point(38, 45);
+            this.button_alta.Location = new System.Drawing.Point(32, 22);
             this.button_alta.Name = "button_alta";
             this.button_alta.Size = new System.Drawing.Size(97, 38);
             this.button_alta.TabIndex = 0;
@@ -44,7 +45,7 @@
             // 
             // button_busqueda
             // 
-            this.button_busqueda.Location = new System.Drawing.Point(153, 45);
+            this.button_busqueda.Location = new System.Drawing.Point(147, 22);
             this.button_busqueda.Name = "button_busqueda";
             this.button_busqueda.Size = new System.Drawing.Size(107, 38);
             this.button_busqueda.TabIndex = 1;
@@ -52,11 +53,22 @@
             this.button_busqueda.UseVisualStyleBackColor = true;
             this.button_busqueda.Click += new System.EventHandler(this.button_busqueda_Click);
             // 
+            // button_cancelar
+            // 
+            this.button_cancelar.Location = new System.Drawing.Point(32, 86);
+            this.button_cancelar.Name = "button_cancelar";
+            this.button_cancelar.Size = new System.Drawing.Size(97, 28);
+            this.button_cancelar.TabIndex = 2;
+            this.button_cancelar.Text = "Cancelar";
+            this.button_cancelar.UseVisualStyleBackColor = true;
+            this.button_cancelar.Click += new System.EventHandler(this.button_cancelar_Click);
+            // 
             // Menu
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(284, 126);
+            this.Controls.Add(this.button_cancelar);
             this.Controls.Add(this.button_busqueda);
             this.Controls.Add(this.button_alta);
             this.Name = "Menu";
@@ -69,5 +81,6 @@
 
         private System.Windows.Forms.Button button_alta;
         private System.Windows.Forms.Button button_busqueda;
+        private System.Windows.Forms.Button button_cancelar;
     }
 }

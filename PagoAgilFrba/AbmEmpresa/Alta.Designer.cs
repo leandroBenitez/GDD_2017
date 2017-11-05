@@ -42,6 +42,7 @@
             this.textBox_cuit_medio = new System.Windows.Forms.TextBox();
             this.label6 = new System.Windows.Forms.Label();
             this.label7 = new System.Windows.Forms.Label();
+            this.button_cancelar = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // textBox_nombre
@@ -121,7 +122,7 @@
             // 
             // button_alta
             // 
-            this.button_alta.Location = new System.Drawing.Point(150, 268);
+            this.button_alta.Location = new System.Drawing.Point(273, 268);
             this.button_alta.Name = "button_alta";
             this.button_alta.Size = new System.Drawing.Size(78, 23);
             this.button_alta.TabIndex = 10;
@@ -161,11 +162,22 @@
             this.label7.TabIndex = 14;
             this.label7.Text = "-";
             // 
+            // button_cancelar
+            // 
+            this.button_cancelar.Location = new System.Drawing.Point(58, 268);
+            this.button_cancelar.Name = "button_cancelar";
+            this.button_cancelar.Size = new System.Drawing.Size(78, 23);
+            this.button_cancelar.TabIndex = 15;
+            this.button_cancelar.Text = "Cancelar";
+            this.button_cancelar.UseVisualStyleBackColor = true;
+            this.button_cancelar.Click += new System.EventHandler(this.button_cancelar_Click);
+            // 
             // Alta
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(379, 335);
+            this.Controls.Add(this.button_cancelar);
             this.Controls.Add(this.label7);
             this.Controls.Add(this.label6);
             this.Controls.Add(this.textBox_cuit_medio);
@@ -204,5 +216,6 @@
         private System.Windows.Forms.TextBox textBox_cuit_medio;
         private System.Windows.Forms.Label label6;
         private System.Windows.Forms.Label label7;
+        private System.Windows.Forms.Button button_cancelar;
     }
 }

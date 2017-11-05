@@ -51,18 +51,19 @@
             this.comboBox_forma = new System.Windows.Forms.ComboBox();
             this.label11 = new System.Windows.Forms.Label();
             this.comboBox_cliente = new System.Windows.Forms.ComboBox();
+            this.button_cancelar = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // textBox_nro_fact
             // 
-            this.textBox_nro_fact.Location = new System.Drawing.Point(144, 62);
+            this.textBox_nro_fact.Location = new System.Drawing.Point(172, 62);
             this.textBox_nro_fact.Name = "textBox_nro_fact";
             this.textBox_nro_fact.Size = new System.Drawing.Size(147, 20);
             this.textBox_nro_fact.TabIndex = 0;
             // 
             // textBox_fecha_sistema
             // 
-            this.textBox_fecha_sistema.Location = new System.Drawing.Point(144, 98);
+            this.textBox_fecha_sistema.Location = new System.Drawing.Point(172, 98);
             this.textBox_fecha_sistema.Name = "textBox_fecha_sistema";
             this.textBox_fecha_sistema.ReadOnly = true;
             this.textBox_fecha_sistema.Size = new System.Drawing.Size(147, 20);
@@ -72,28 +73,28 @@
             // 
             this.comboBox_empresa.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.comboBox_empresa.FormattingEnabled = true;
-            this.comboBox_empresa.Location = new System.Drawing.Point(144, 135);
+            this.comboBox_empresa.Location = new System.Drawing.Point(172, 135);
             this.comboBox_empresa.Name = "comboBox_empresa";
             this.comboBox_empresa.Size = new System.Drawing.Size(147, 21);
             this.comboBox_empresa.TabIndex = 2;
             // 
             // textBox_fecha_venc
             // 
-            this.textBox_fecha_venc.Location = new System.Drawing.Point(144, 175);
+            this.textBox_fecha_venc.Location = new System.Drawing.Point(172, 175);
             this.textBox_fecha_venc.Name = "textBox_fecha_venc";
             this.textBox_fecha_venc.Size = new System.Drawing.Size(147, 20);
             this.textBox_fecha_venc.TabIndex = 4;
             // 
             // textBox_importe
             // 
-            this.textBox_importe.Location = new System.Drawing.Point(144, 211);
+            this.textBox_importe.Location = new System.Drawing.Point(172, 211);
             this.textBox_importe.Name = "textBox_importe";
             this.textBox_importe.Size = new System.Drawing.Size(147, 20);
             this.textBox_importe.TabIndex = 5;
             // 
             // textBox_sucursal
             // 
-            this.textBox_sucursal.Location = new System.Drawing.Point(144, 321);
+            this.textBox_sucursal.Location = new System.Drawing.Point(172, 321);
             this.textBox_sucursal.Name = "textBox_sucursal";
             this.textBox_sucursal.ReadOnly = true;
             this.textBox_sucursal.Size = new System.Drawing.Size(147, 20);
@@ -155,7 +156,7 @@
             // 
             // button_confirmar
             // 
-            this.button_confirmar.Location = new System.Drawing.Point(196, 417);
+            this.button_confirmar.Location = new System.Drawing.Point(230, 417);
             this.button_confirmar.Name = "button_confirmar";
             this.button_confirmar.Size = new System.Drawing.Size(102, 35);
             this.button_confirmar.TabIndex = 14;
@@ -166,7 +167,7 @@
             // label8
             // 
             this.label8.AutoSize = true;
-            this.label8.Location = new System.Drawing.Point(105, 20);
+            this.label8.Location = new System.Drawing.Point(123, 19);
             this.label8.Name = "label8";
             this.label8.Size = new System.Drawing.Size(89, 13);
             this.label8.TabIndex = 15;
@@ -175,7 +176,7 @@
             // 
             // button_agregar
             // 
-            this.button_agregar.Location = new System.Drawing.Point(19, 417);
+            this.button_agregar.Location = new System.Drawing.Point(122, 417);
             this.button_agregar.Name = "button_agregar";
             this.button_agregar.Size = new System.Drawing.Size(102, 35);
             this.button_agregar.TabIndex = 16;
@@ -232,7 +233,7 @@
             // 
             this.comboBox_forma.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.comboBox_forma.FormattingEnabled = true;
-            this.comboBox_forma.Location = new System.Drawing.Point(144, 287);
+            this.comboBox_forma.Location = new System.Drawing.Point(172, 287);
             this.comboBox_forma.Name = "comboBox_forma";
             this.comboBox_forma.Size = new System.Drawing.Size(147, 21);
             this.comboBox_forma.TabIndex = 23;
@@ -250,16 +251,27 @@
             // 
             this.comboBox_cliente.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.comboBox_cliente.FormattingEnabled = true;
-            this.comboBox_cliente.Location = new System.Drawing.Point(144, 246);
+            this.comboBox_cliente.Location = new System.Drawing.Point(172, 246);
             this.comboBox_cliente.Name = "comboBox_cliente";
             this.comboBox_cliente.Size = new System.Drawing.Size(147, 21);
             this.comboBox_cliente.TabIndex = 21;
+            // 
+            // button_cancelar
+            // 
+            this.button_cancelar.Location = new System.Drawing.Point(14, 417);
+            this.button_cancelar.Name = "button_cancelar";
+            this.button_cancelar.Size = new System.Drawing.Size(102, 35);
+            this.button_cancelar.TabIndex = 25;
+            this.button_cancelar.Text = "Cancelar";
+            this.button_cancelar.UseVisualStyleBackColor = true;
+            this.button_cancelar.Click += new System.EventHandler(this.button_cancelar_Click);
             // 
             // RegistroPago
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(314, 464);
+            this.ClientSize = new System.Drawing.Size(344, 464);
+            this.Controls.Add(this.button_cancelar);
             this.Controls.Add(this.label10);
             this.Controls.Add(this.comboBox_forma);
             this.Controls.Add(this.label11);
@@ -315,5 +327,6 @@
         private System.Windows.Forms.ComboBox comboBox_forma;
         private System.Windows.Forms.Label label11;
         private System.Windows.Forms.ComboBox comboBox_cliente;
+        private System.Windows.Forms.Button button_cancelar;
     }
 }
