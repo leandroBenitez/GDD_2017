@@ -22,7 +22,6 @@ C:\Users\CoreBI\Desktop\Tp GDD\GDD_2017\PagoAgilFrba\obj\Debug\PagoAgilFrba.cspr
 C:\Users\CoreBI\Desktop\Tp GDD\GDD_2017\PagoAgilFrba\bin\Debug\PagoAgilFrba.exe.config
 C:\Users\CoreBI\Desktop\Tp GDD\GDD_2017\PagoAgilFrba\bin\Debug\PagoAgilFrba.exe
 C:\Users\CoreBI\Desktop\Tp GDD\GDD_2017\PagoAgilFrba\bin\Debug\PagoAgilFrba.pdb
-C:\Users\CoreBI\Desktop\Tp GDD\GDD_2017\PagoAgilFrba\obj\Debug\PagoAgilFrba.csprojResolveAssemblyReference.cache
 C:\Users\CoreBI\Desktop\Tp GDD\GDD_2017\PagoAgilFrba\obj\Debug\PagoAgilFrba.exe
 C:\Users\CoreBI\Desktop\Tp GDD\GDD_2017\PagoAgilFrba\obj\Debug\PagoAgilFrba.pdb
 C:\Users\Fabrizio\Documents\GitHub\GDD_2017\PagoAgilFrba\bin\Debug\PagoAgilFrba.exe.config
@@ -140,3 +139,4 @@ C:\Users\Fabrizio\Documents\GitHub\GDD_2017\PagoAgilFrba\obj\Debug\PagoAgilFrba.
 C:\Users\Fabrizio\Documents\GitHub\GDD_2017\PagoAgilFrba\obj\Debug\PagoAgilFrba.AbmRol.Modificacion.resources
 C:\Users\CoreBI\Desktop\Tp GDD\GDD_2017\PagoAgilFrba\obj\Debug\PagoAgilFrba.Login.Sucursales.resources
 C:\Users\CoreBI\Desktop\Tp GDD\GDD_2017\PagoAgilFrba\obj\Debug\PagoAgilFrba.AbmEmpresa.Menu.resources
+C:\Users\CoreBI\Desktop\Tp GDD\GDD_2017\PagoAgilFrba\obj\Debug\PagoAgilFrba.csprojResolveAssemblyReference.cache

@@ -29,37 +29,30 @@
         private void InitializeComponent()
         {
             this.dataGridView_funcionalidades = new System.Windows.Forms.DataGridView();
-            this.Funcionalidad = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Agregada = new System.Windows.Forms.DataGridViewCheckBoxColumn();
             this.textBox_nombre = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.button_alta = new System.Windows.Forms.Button();
             this.button_atras = new System.Windows.Forms.Button();
+            this.funcionalidad_id = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Funcionalidad = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Agregada = new System.Windows.Forms.DataGridViewCheckBoxColumn();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView_funcionalidades)).BeginInit();
             this.SuspendLayout();
             // 
             // dataGridView_funcionalidades
             // 
+            this.dataGridView_funcionalidades.AllowUserToAddRows = false;
+            this.dataGridView_funcionalidades.AllowUserToDeleteRows = false;
             this.dataGridView_funcionalidades.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dataGridView_funcionalidades.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.funcionalidad_id,
             this.Funcionalidad,
             this.Agregada});
             this.dataGridView_funcionalidades.Location = new System.Drawing.Point(27, 95);
             this.dataGridView_funcionalidades.Name = "dataGridView_funcionalidades";
             this.dataGridView_funcionalidades.Size = new System.Drawing.Size(243, 150);
             this.dataGridView_funcionalidades.TabIndex = 0;
-            // 
-            // Funcionalidad
-            // 
-            this.Funcionalidad.HeaderText = "Funcionalidad";
-            this.Funcionalidad.Name = "Funcionalidad";
-            this.Funcionalidad.ReadOnly = true;
-            // 
-            // Agregada
-            // 
-            this.Agregada.HeaderText = "Agregada";
-            this.Agregada.Name = "Agregada";
             // 
             // textBox_nombre
             // 
@@ -107,6 +100,22 @@
             this.button_atras.UseVisualStyleBackColor = true;
             this.button_atras.Click += new System.EventHandler(this.button_atras_Click);
             // 
+            // funcionalidad_id
+            // 
+            this.funcionalidad_id.HeaderText = "funcionalidad_id";
+            this.funcionalidad_id.Name = "funcionalidad_id";
+            this.funcionalidad_id.Visible = false;
+            // 
+            // Funcionalidad
+            // 
+            this.Funcionalidad.HeaderText = "Funcionalidad";
+            this.Funcionalidad.Name = "Funcionalidad";
+            // 
+            // Agregada
+            // 
+            this.Agregada.HeaderText = "Agregada";
+            this.Agregada.Name = "Agregada";
+            // 
             // Alta
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -129,12 +138,13 @@
         #endregion
 
         private System.Windows.Forms.DataGridView dataGridView_funcionalidades;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Funcionalidad;
-        private System.Windows.Forms.DataGridViewCheckBoxColumn Agregada;
         private System.Windows.Forms.TextBox textBox_nombre;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Button button_alta;
         private System.Windows.Forms.Button button_atras;
+        private System.Windows.Forms.DataGridViewTextBoxColumn funcionalidad_id;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Funcionalidad;
+        private System.Windows.Forms.DataGridViewCheckBoxColumn Agregada;
     }
 }

@@ -56,10 +56,13 @@ namespace PagoAgilFrba.AbmRol
                 columnas[0] = datos[0].ToString();
                 columnas[1] = datos[1].ToString();
                 DataGridViewCheckBoxColumn col = new DataGridViewCheckBoxColumn();
-                if (datos[2].ToString().Equals("1"))
+                string aux = datos[2].ToString();
+
+                if (aux == "True")
                     columnas[2] = col.TrueValue;
                 else
                     columnas[2] = col.FalseValue;
+
                 filas.Add(new DataGridViewRow());
                 filas[filas.Count - 1].CreateCells(dataGridView_resultados, columnas);
             }

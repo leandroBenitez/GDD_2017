@@ -2,6 +2,22 @@ USE GD2C2017
 Go
 
 --Borrado de Stored Procedures
+IF OBJECT_ID('PAGO_AGIL.Baja_Rol') IS NOT NULL
+	DROP PROCEDURE PAGO_AGIL.Baja_Rol;
+Go
+
+IF OBJECT_ID('PAGO_AGIL.RegistrarPago') IS NOT NULL
+	DROP PROCEDURE PAGO_AGIL.RegistrarPago;
+Go
+
+IF OBJECT_ID('PAGO_AGIL.Rol_Funcionalidad_Modif') IS NOT NULL
+	DROP PROCEDURE PAGO_AGIL.Rol_Funcionalidad_Modif;
+Go
+
+IF OBJECT_ID('PAGO_AGIL.Mod_Rol') IS NOT NULL
+	DROP PROCEDURE PAGO_AGIL.Mod_Rol;
+Go
+
 IF OBJECT_ID('PAGO_AGIL.Login') IS NOT NULL
 	DROP PROCEDURE PAGO_AGIL.Login;
 Go
@@ -535,6 +551,7 @@ as
 Select	 rol.Rol_Desc Rol
 		,fun.Funcionalidad_Desc Funcionalidad
 		,usu.Usuario_Name Usuario
+		,suc.Sucursal_Nombre Sucursal
 from PAGO_AGIL.Dim_Rol rol
 inner join PAGO_AGIL.Rl_RolxFuncionalidad rl_fun
 	on rol.Rol_Id = rl_fun.Rol_Id
@@ -544,8 +561,13 @@ inner join PAGO_AGIL.Rl_RolxUsuario rl_us
 	on rol.Rol_Id = rl_us.Rol_Id
 	inner join PAGO_AGIL.Lk_Usuario usu
 		on rl_us.Usuario_Id = usu.Usuario_Id
+		inner join PAGO_AGIL.RL_UsuarioxSucursal as rl_suc
+			on usu.Usuario_Id = rl_suc.Id_usuario
+			inner join PAGO_AGIL.Dim_Sucursal as suc
+				on rl_suc.Id_Sucursal = suc.Sucursal_Id
 where	rol.Rol_Habilitado = 1
 	and usu.Usuario_Habilitado = 1
+	and suc.Sucursal_Habilitado = 1
 Go
 
 --Vista con informacion de Empresas
@@ -569,23 +591,25 @@ as
 Select	 emp.Empresa_Id
 		,emp.Empresa_Nombre
 		,emp.Empresa_Cuit
-		,Convert(char(7), fac.Factura_Fecha_Vencimiento, 126) as Periodo
+		,Convert(char(7), pag.Pago_Fecha, 126) as Periodo
 		,Count(Distinct fac.Factura_Nro) as Cant_Facturas
 		,'$' + Cast(Sum(Factura_Total) as varchar) as Total
 		,case when fac.Factura_Rendicion_Id is not null then 'Rendida' else 'Sin rendir' end as Rendida
 from PAGO_AGIL.Dim_Empresa as emp
 inner join PAGO_AGIL.Lk_Factura as fac
 	on emp.Empresa_Id = fac.Factura_Empresa_Id
+	inner join PAGO_AGIL.RL_PagoxFactura as rlp
+		on fac.Factura_Id = rlp.Id_Factura
+	inner join PAGO_AGIL.Ft_Pago as pag
+		on pag.Pago_Id = rlp.Id_Pago
 where fac.Factura_Pagado = 1
 group by emp.Empresa_Id
 		,emp.Empresa_Nombre
 		,emp.Empresa_Cuit
-		,Convert(char(7), fac.Factura_Fecha_Vencimiento, 126)
+		,Convert(char(7), pag.Pago_Fecha, 126)
 		,case when fac.Factura_Rendicion_Id is not null then 'Rendida' else 'Sin rendir' end
---order by emp.Empresa_Id
---		,Periodo
-
-GO
+--order by emp.Empresa_Id, Periodo, RendidaGO
+Go
 
 --Creacion de Stored Procedures
 --Procedimiento para verificar entrada a sistema

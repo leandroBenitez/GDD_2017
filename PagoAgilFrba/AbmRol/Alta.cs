@@ -65,21 +65,20 @@ namespace PagoAgilFrba.AbmRol
 
         private void button_alta_Click(object sender, EventArgs e)
         {
-            
-            conexion connection = new conexion();
-            SqlCommand command = new SqlCommand();
-            
-            command.CommandType = CommandType.Text;
-            command.Connection = connection.abrir_conexion();
-
             foreach (DataGridViewRow row in dataGridView_funcionalidades.Rows)
             {
                 DataGridViewCheckBoxCell chk = (DataGridViewCheckBoxCell)row.Cells[2];
                 if (chk.Value == chk.TrueValue)
                 {
-                    string consulta = "Execute PAGO_AGIL.Rol_Funcionalidad '" + row.Cells[0].ToString() + "'";
+                    string consulta = "Execute PAGO_AGIL.Rol_Funcionalidad '" + row.Cells[0].Value.ToString() + "'";
                     try
                     {
+                        conexion connection = new conexion();
+                        SqlCommand command = new SqlCommand();
+
+                        command.CommandType = CommandType.Text;
+                        command.Connection = connection.abrir_conexion();
+                        command.CommandText = consulta;
                         SqlDataReader reader = command.ExecuteReader();
                     }
                     catch (Exception ex)
@@ -87,17 +86,23 @@ namespace PagoAgilFrba.AbmRol
                         MessageBox.Show("Error: " + ex.Message);
                     }
                 }
-                string consulta2 = "Execute PAGO_AGIL.Alta_Rol '" + textBox_nombre.Text + "'";
-                try
-                {
-                    SqlDataReader reader = command.ExecuteReader();
-                }
-                catch (Exception ex)
-                {
-                    MessageBox.Show("Error: " + ex.Message);
-                }
             }
 
+            string consulta2 = "Execute PAGO_AGIL.Alta_Rol '" + textBox_nombre.Text + "'";
+            try
+            {
+                conexion connection = new conexion();
+                SqlCommand command = new SqlCommand();
+
+                command.CommandType = CommandType.Text;
+                command.Connection = connection.abrir_conexion();
+                command.CommandText = consulta2;
+                SqlDataReader reader = command.ExecuteReader();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Error: " + ex.Message);
+            }
         }
 
         private void button_atras_Click(object sender, EventArgs e)

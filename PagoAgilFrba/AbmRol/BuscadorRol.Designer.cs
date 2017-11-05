@@ -52,6 +52,8 @@
             // 
             // dataGridView_resultados
             // 
+            this.dataGridView_resultados.AllowUserToAddRows = false;
+            this.dataGridView_resultados.AllowUserToDeleteRows = false;
             this.dataGridView_resultados.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dataGridView_resultados.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.Id_Rol,
@@ -59,6 +61,7 @@
             this.Habilitado});
             this.dataGridView_resultados.Location = new System.Drawing.Point(24, 53);
             this.dataGridView_resultados.Name = "dataGridView_resultados";
+            this.dataGridView_resultados.ReadOnly = true;
             this.dataGridView_resultados.Size = new System.Drawing.Size(243, 185);
             this.dataGridView_resultados.TabIndex = 10;
             // 
@@ -66,6 +69,7 @@
             // 
             this.Id_Rol.HeaderText = "Id_Rol";
             this.Id_Rol.Name = "Id_Rol";
+            this.Id_Rol.ReadOnly = true;
             this.Id_Rol.Visible = false;
             // 
             // Nombre
