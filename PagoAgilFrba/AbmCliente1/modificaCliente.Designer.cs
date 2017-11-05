@@ -71,6 +71,7 @@
             // 
             this.fechaNac.Location = new System.Drawing.Point(59, 223);
             this.fechaNac.Name = "fechaNac";
+            this.fechaNac.ReadOnly = true;
             this.fechaNac.Size = new System.Drawing.Size(114, 20);
             this.fechaNac.TabIndex = 69;
             // 
@@ -388,7 +389,7 @@
             this.Controls.Add(this.botLimpiar);
             this.Controls.Add(this.dataGridView1);
             this.Name = "modificaCliente";
-            this.Text = "Form1";
+            this.Text = "Modificar un Cliente";
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();

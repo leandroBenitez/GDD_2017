@@ -357,7 +357,7 @@
             this.Controls.Add(this.botLimpiar);
             this.Controls.Add(this.dataGridView1);
             this.Name = "busqueda";
-            this.Text = "Form1";
+            this.Text = "Busqueda de Clientes";
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();

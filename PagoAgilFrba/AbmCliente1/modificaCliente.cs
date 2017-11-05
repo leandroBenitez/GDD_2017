@@ -83,6 +83,10 @@ namespace PagoAgilFrba.AbmCliente1
                 consulta = consulta + "and Cliente_Codigo_Postal LIKE '%" + codPostal.Text + "%' ";
             }
 
+            if (!string.IsNullOrWhiteSpace(fechaNac.Text))
+            {
+                consulta = consulta + "and Cliente_Fecha_Nac LIKE '%" + fechaNac.Text + "%' ";
+            }
 
             if (comboHabilitado.SelectedIndex != -1)
             {
@@ -146,6 +150,7 @@ namespace PagoAgilFrba.AbmCliente1
             mail.Text = "";
             direccion.Text = "";
             codPostal.Text = "";
+            fechaNac.Text = "";
         }
 
         private void botonModificar_Click_1(object sender, EventArgs e)
