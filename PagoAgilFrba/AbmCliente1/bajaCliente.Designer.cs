@@ -48,12 +48,14 @@
             this.Cliente_Direccion = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Cliente_Codigo_Postal = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Cliente_Habilitado = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.label5 = new System.Windows.Forms.Label();
+            this.button1 = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.SuspendLayout();
             // 
             // direccion
             // 
-            this.direccion.Location = new System.Drawing.Point(65, 221);
+            this.direccion.Location = new System.Drawing.Point(132, 222);
             this.direccion.Name = "direccion";
             this.direccion.Size = new System.Drawing.Size(135, 20);
             this.direccion.TabIndex = 22;
@@ -61,7 +63,7 @@
             // label4
             // 
             this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(62, 205);
+            this.label4.Location = new System.Drawing.Point(129, 206);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(52, 13);
             this.label4.TabIndex = 21;
@@ -69,7 +71,7 @@
             // 
             // botonDeshabilitar
             // 
-            this.botonDeshabilitar.Location = new System.Drawing.Point(314, 156);
+            this.botonDeshabilitar.Location = new System.Drawing.Point(380, 140);
             this.botonDeshabilitar.Name = "botonDeshabilitar";
             this.botonDeshabilitar.Size = new System.Drawing.Size(143, 31);
             this.botonDeshabilitar.TabIndex = 20;
@@ -79,7 +81,7 @@
             // 
             // botonBuscar
             // 
-            this.botonBuscar.Location = new System.Drawing.Point(314, 93);
+            this.botonBuscar.Location = new System.Drawing.Point(380, 77);
             this.botonBuscar.Name = "botonBuscar";
             this.botonBuscar.Size = new System.Drawing.Size(143, 31);
             this.botonBuscar.TabIndex = 19;
@@ -89,7 +91,7 @@
             // 
             // nombre
             // 
-            this.nombre.Location = new System.Drawing.Point(65, 172);
+            this.nombre.Location = new System.Drawing.Point(132, 173);
             this.nombre.Name = "nombre";
             this.nombre.Size = new System.Drawing.Size(135, 20);
             this.nombre.TabIndex = 18;
@@ -97,7 +99,7 @@
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(62, 156);
+            this.label3.Location = new System.Drawing.Point(129, 157);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(44, 13);
             this.label3.TabIndex = 17;
@@ -105,14 +107,14 @@
             // 
             // apellido
             // 
-            this.apellido.Location = new System.Drawing.Point(65, 124);
+            this.apellido.Location = new System.Drawing.Point(132, 125);
             this.apellido.Name = "apellido";
             this.apellido.Size = new System.Drawing.Size(135, 20);
             this.apellido.TabIndex = 16;
             // 
             // dni
             // 
-            this.dni.Location = new System.Drawing.Point(65, 76);
+            this.dni.Location = new System.Drawing.Point(132, 77);
             this.dni.Name = "dni";
             this.dni.Size = new System.Drawing.Size(135, 20);
             this.dni.TabIndex = 15;
@@ -120,7 +122,7 @@
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(62, 108);
+            this.label2.Location = new System.Drawing.Point(129, 109);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(44, 13);
             this.label2.TabIndex = 14;
@@ -129,7 +131,7 @@
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(62, 60);
+            this.label1.Location = new System.Drawing.Point(129, 61);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(26, 13);
             this.label1.TabIndex = 13;
@@ -199,11 +201,33 @@
             this.Cliente_Habilitado.HeaderText = "Cliente_Habilitado";
             this.Cliente_Habilitado.Name = "Cliente_Habilitado";
             // 
+            // label5
+            // 
+            this.label5.AutoSize = true;
+            this.label5.Font = new System.Drawing.Font("Microsoft Sans Serif", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label5.Location = new System.Drawing.Point(266, 9);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(130, 26);
+            this.label5.TabIndex = 23;
+            this.label5.Text = "Baja Cliente";
+            // 
+            // button1
+            // 
+            this.button1.Location = new System.Drawing.Point(380, 197);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(143, 31);
+            this.button1.TabIndex = 24;
+            this.button1.Text = "Limpiar";
+            this.button1.UseVisualStyleBackColor = true;
+            this.button1.Click += new System.EventHandler(this.button1_Click);
+            // 
             // bajaCliente
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(667, 451);
+            this.Controls.Add(this.button1);
+            this.Controls.Add(this.label5);
             this.Controls.Add(this.direccion);
             this.Controls.Add(this.label4);
             this.Controls.Add(this.botonDeshabilitar);
@@ -245,5 +269,7 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn Cliente_Direccion;
         private System.Windows.Forms.DataGridViewTextBoxColumn Cliente_Codigo_Postal;
         private System.Windows.Forms.DataGridViewTextBoxColumn Cliente_Habilitado;
+        private System.Windows.Forms.Label label5;
+        private System.Windows.Forms.Button button1;
     }
 }

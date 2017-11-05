@@ -131,6 +131,14 @@ namespace PagoAgilFrba.AbmCliente1
             else { MessageBox.Show("El campo DNI no puede estar vacio"); }
         }
 
+        private void button1_Click(object sender, EventArgs e)
+        {
+            dni.Text = "";
+            apellido.Text = "";
+            nombre.Text = "";
+            direccion.Text = "";
+        }
+
 
     }
 }
