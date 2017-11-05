@@ -946,7 +946,8 @@ create procedure PAGO_AGIL.topCantidadPagos(@fechaInicio date, @fechaFin date) a
 		CLIE.Cliente_Nombre as Cliente_Nombre,
 		CLIE.Cliente_Apellido as Cliente_Apellido,
 		CLIE.Cliente_Dni as Cliente_Dni,
-		(select count(1) from PAGO_AGIL.Lk_Factura as aux_fact WHERE aux_fact.Factura_Cliente_Id=CLIE.Cliente_Id) as cantidad_pagos
+		(select count(1) from PAGO_AGIL.Lk_Factura as aux_fact WHERE aux_fact.Factura_Cliente_Id=CLIE.Cliente_Id
+		AND aux_fact.Factura_Pagado=1) as cantidad_pagos
 		from PAGO_AGIL.Lk_Factura FACT
 		inner join PAGO_AGIL.RL_PagoxFactura as PAGOF on (PAGOF.id_factura = FACT.Factura_Id AND PAGOF.Id_Pago is not null)
 		inner join PAGO_AGIL.Lk_Cliente as CLIE on FACT.Factura_Cliente_Id = CLIE.Cliente_Id
@@ -955,7 +956,6 @@ create procedure PAGO_AGIL.topCantidadPagos(@fechaInicio date, @fechaFin date) a
 		order by cantidad_pagos desc
 	end
 go
-;
 
 --Creacion de nuevo cliente
 
