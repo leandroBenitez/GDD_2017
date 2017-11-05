@@ -920,21 +920,22 @@ go
 --Ranking porcentaje de pago
 create procedure PAGO_AGIL.topPorcentajePago(@fechaInicio date, @fechaFin date) as 
 	begin
-		select top 5
+	select distinct top 5
 		clie.Cliente_Dni as Dni_Cliente,
 		clie.Cliente_Apellido as ApellidoCliente,
 		clie.Cliente_Nombre as NombreCliente,
-		(select count(1)
-			from PAGO_AGIL.Ft_Pago as pagoAux 
-			inner join PAGO_AGIL.Lk_Factura as factAux on factAux.Factura_Cliente_Id = pagofact.Id_Factura
-			inner join PAGO_AGIL.Lk_Cliente as clieAux on clieAux.Cliente_Id = factAux.Factura_Cliente_Id
-			where pagoAux.Pago_Id = pagofact.Id_Pago 
-			) / (select count(1) from PAGO_AGIL.Lk_Factura where Factura_Cliente_Id=clie.Cliente_Id) * 100 as porcentaje_pago
+		(select count(1) from PAGO_AGIL.Lk_Factura as factAux 
+			inner join PAGO_AGIL.RL_PagoxFactura as pagofactAux on factAux.Factura_Id=pagofactAux.Id_Factura
+			inner join PAGO_AGIL.Ft_Pago as pagoAux on pagofactAux.Id_Pago = pagoAux.Pago_Id
+			where factAux.Factura_Cliente_Id = clie.Cliente_Id 	AND factAux.Factura_Pagado=1 AND 
+			factAux.Factura_Fecha_Alta between @fechaInicio and @fechaFin 
+			and pagoAux.Pago_Fecha between @fechaInicio and @fechaFin) *100 /
+		(select count(1) from PAGO_AGIL.Lk_Factura as factAux2 
+			where factAux2.Factura_Cliente_Id = clie.Cliente_Id ) as porcentaje
 		from PAGO_AGIL.Lk_Factura as fact
-		inner join PAGO_AGIL.Lk_Cliente as clie on clie.Cliente_Id = fact.Factura_Cliente_Id
-		inner join PAGO_AGIL.RL_PagoxFactura as pagofact on (fact.Factura_Id = pagofact.Id_Factura AND pagofact.Id_Pago is not null)
-		where convert(date,fact.Factura_Fecha_Alta) between @fechaInicio and @fechaFin
-			order by porcentaje_pago desc
+		inner join PAGO_AGIL.Lk_Cliente as clie on fact.Factura_Cliente_Id = clie.Cliente_Id
+		order by porcentaje desc
+	;
 	end
 go
 ;
