@@ -23,8 +23,10 @@ namespace PagoAgilFrba.ListadoEstadistico
         {
             string fechaInicio;
             string fechaFin;
-            dataGridMontoRendido.Visible=false;
             dataGridCantPagos.Visible = true;
+            dataGridMontoRendido.Visible = false;
+            dataGridPorcentajePago.Visible = false;
+            dataGridPagosEmpresas.Visible = false;
             switch (label1.Text)
             {
                 case "1" : 
@@ -127,6 +129,9 @@ namespace PagoAgilFrba.ListadoEstadistico
             string fechaInicio;
             string fechaFin;
             dataGridMontoRendido.Visible = true;
+            dataGridPorcentajePago.Visible = false;
+            dataGridPagosEmpresas.Visible = false;
+            dataGridCantPagos.Visible = false;
             switch (label1.Text)
             {
                 case "1":
@@ -201,6 +206,8 @@ namespace PagoAgilFrba.ListadoEstadistico
         {
             string fechaInicio;
             string fechaFin;
+            dataGridPagosEmpresas.Visible = false;
+            dataGridCantPagos.Visible = false;
             dataGridMontoRendido.Visible = false;
             dataGridPorcentajePago.Visible = true;
             switch (label1.Text)
@@ -277,6 +284,7 @@ namespace PagoAgilFrba.ListadoEstadistico
         {
             string fechaInicio;
             string fechaFin;
+            dataGridCantPagos.Visible = false;
             dataGridMontoRendido.Visible = false;
             dataGridPorcentajePago.Visible = false;
             dataGridPagosEmpresas.Visible = true;

@@ -134,3 +134,7 @@ C:\Users\CoreBI\Desktop\Tp GDD\GDD_2017\PagoAgilFrba\obj\Debug\PagoAgilFrba.AbmR
 C:\Users\CoreBI\Desktop\Tp GDD\GDD_2017\PagoAgilFrba\obj\Debug\PagoAgilFrba.AbmRol.Modificacion.resources
 C:\Users\CoreBI\Desktop\Tp GDD\GDD_2017\PagoAgilFrba\obj\Debug\PagoAgilFrba.AbmSucursal.auxiliarModificacion.resources
 C:\Users\CoreBI\Desktop\Tp GDD\GDD_2017\PagoAgilFrba\obj\Debug\PagoAgilFrba.ListadoEstadistico.estadisticas.resources
+C:\Users\Fabrizio\Documents\GitHub\GDD_2017\PagoAgilFrba\obj\Debug\PagoAgilFrba.AbmRol.Alta.resources
+C:\Users\Fabrizio\Documents\GitHub\GDD_2017\PagoAgilFrba\obj\Debug\PagoAgilFrba.AbmRol.BuscadorRol.resources
+C:\Users\Fabrizio\Documents\GitHub\GDD_2017\PagoAgilFrba\obj\Debug\PagoAgilFrba.AbmRol.Menu.resources
+C:\Users\Fabrizio\Documents\GitHub\GDD_2017\PagoAgilFrba\obj\Debug\PagoAgilFrba.AbmRol.Modificacion.resources
