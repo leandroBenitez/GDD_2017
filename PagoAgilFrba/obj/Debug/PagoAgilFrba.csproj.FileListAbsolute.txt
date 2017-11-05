@@ -7,7 +7,6 @@ C:\Users\CoreBI\Desktop\Tp GDD\TP Pago Facil Frba 1.0 - 2C 2017\Aplicacion Deskt
 C:\Users\CoreBI\Desktop\Tp GDD\TP Pago Facil Frba 1.0 - 2C 2017\Aplicacion Desktop\PagoAgilFrba\obj\Debug\PagoAgilFrba.exe
 C:\Users\CoreBI\Desktop\Tp GDD\TP Pago Facil Frba 1.0 - 2C 2017\Aplicacion Desktop\PagoAgilFrba\obj\Debug\PagoAgilFrba.pdb
 C:\Users\CoreBI\Desktop\Tp GDD\TP Pago Facil Frba 1.0 - 2C 2017\Aplicacion Desktop\PagoAgilFrba\obj\Debug\PagoAgilFrba.Login.Login.resources
-C:\Users\CoreBI\Desktop\Tp GDD\GDD_2017\PagoAgilFrba\obj\Debug\PagoAgilFrba.AbmEmpresa.Alta_Modificacion.resources
 C:\Users\CoreBI\Desktop\Tp GDD\GDD_2017\PagoAgilFrba\obj\Debug\PagoAgilFrba.AbmEmpresa.Buscador_Empresa.resources
 C:\Users\CoreBI\Desktop\Tp GDD\GDD_2017\PagoAgilFrba\obj\Debug\PagoAgilFrba.AbmSucursal.Alta.resources
 C:\Users\CoreBI\Desktop\Tp GDD\GDD_2017\PagoAgilFrba\obj\Debug\PagoAgilFrba.AbmSucursal.Baja.resources
@@ -119,3 +118,19 @@ C:\Users\susana\Documents\GitHub\GDD_2017\PagoAgilFrba\obj\Debug\PagoAgilFrba.Ab
 C:\Users\susana\Documents\GitHub\GDD_2017\PagoAgilFrba\obj\Debug\PagoAgilFrba.AbmRol.BuscadorRol.resources
 C:\Users\susana\Documents\GitHub\GDD_2017\PagoAgilFrba\obj\Debug\PagoAgilFrba.AbmRol.Menu.resources
 C:\Users\susana\Documents\GitHub\GDD_2017\PagoAgilFrba\obj\Debug\PagoAgilFrba.AbmRol.Modificacion.resources
+C:\Users\CoreBI\Desktop\Tp GDD\GDD_2017\PagoAgilFrba\obj\Debug\PagoAgilFrba.AbmCliente1.bajaCliente.resources
+C:\Users\CoreBI\Desktop\Tp GDD\GDD_2017\PagoAgilFrba\obj\Debug\PagoAgilFrba.AbmCliente1.busqueda.resources
+C:\Users\CoreBI\Desktop\Tp GDD\GDD_2017\PagoAgilFrba\obj\Debug\PagoAgilFrba.AbmCliente1.modificaCliente.resources
+C:\Users\CoreBI\Desktop\Tp GDD\GDD_2017\PagoAgilFrba\obj\Debug\PagoAgilFrba.AbmCliente1.nuevoCliente.resources
+C:\Users\CoreBI\Desktop\Tp GDD\GDD_2017\PagoAgilFrba\obj\Debug\PagoAgilFrba.AbmCliente1.mainABMClie.resources
+C:\Users\CoreBI\Desktop\Tp GDD\GDD_2017\PagoAgilFrba\obj\Debug\PagoAgilFrba.AbmEmpresa.Alta.resources
+C:\Users\CoreBI\Desktop\Tp GDD\GDD_2017\PagoAgilFrba\obj\Debug\PagoAgilFrba.AbmEmpresa.Modificacion.resources
+C:\Users\CoreBI\Desktop\Tp GDD\GDD_2017\PagoAgilFrba\obj\Debug\PagoAgilFrba.AbmFactura.Alta.resources
+C:\Users\CoreBI\Desktop\Tp GDD\GDD_2017\PagoAgilFrba\obj\Debug\PagoAgilFrba.AbmFactura.item.resources
+C:\Users\CoreBI\Desktop\Tp GDD\GDD_2017\PagoAgilFrba\obj\Debug\PagoAgilFrba.AbmFactura.Modificar.resources
+C:\Users\CoreBI\Desktop\Tp GDD\GDD_2017\PagoAgilFrba\obj\Debug\PagoAgilFrba.AbmRol.Alta.resources
+C:\Users\CoreBI\Desktop\Tp GDD\GDD_2017\PagoAgilFrba\obj\Debug\PagoAgilFrba.AbmRol.BuscadorRol.resources
+C:\Users\CoreBI\Desktop\Tp GDD\GDD_2017\PagoAgilFrba\obj\Debug\PagoAgilFrba.AbmRol.Menu.resources
+C:\Users\CoreBI\Desktop\Tp GDD\GDD_2017\PagoAgilFrba\obj\Debug\PagoAgilFrba.AbmRol.Modificacion.resources
+C:\Users\CoreBI\Desktop\Tp GDD\GDD_2017\PagoAgilFrba\obj\Debug\PagoAgilFrba.AbmSucursal.auxiliarModificacion.resources
+C:\Users\CoreBI\Desktop\Tp GDD\GDD_2017\PagoAgilFrba\obj\Debug\PagoAgilFrba.ListadoEstadistico.estadisticas.resources

@@ -111,7 +111,6 @@
     <Compile Include="AbmFactura\Modificar.Designer.cs">
       <DependentUpon>Modificar.cs</DependentUpon>
     </Compile>
-<<<<<<< HEAD
     <Compile Include="AbmRol\Alta.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -136,8 +135,6 @@
     <Compile Include="AbmRol\Modificacion.Designer.cs">
       <DependentUpon>Modificacion.cs</DependentUpon>
     </Compile>
-=======
->>>>>>> b3da084c797a9d39fcec007b1e88556a51d88643
     <Compile Include="AbmSucursal\Alta.cs">
       <SubType>Form</SubType>
     </Compile>
