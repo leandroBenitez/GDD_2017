@@ -111,6 +111,33 @@
     <Compile Include="AbmFactura\Modificar.Designer.cs">
       <DependentUpon>Modificar.cs</DependentUpon>
     </Compile>
+<<<<<<< HEAD
+    <Compile Include="AbmRol\Alta.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="AbmRol\Alta.Designer.cs">
+      <DependentUpon>Alta.cs</DependentUpon>
+    </Compile>
+    <Compile Include="AbmRol\BuscadorRol.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="AbmRol\BuscadorRol.Designer.cs">
+      <DependentUpon>BuscadorRol.cs</DependentUpon>
+    </Compile>
+    <Compile Include="AbmRol\Menu.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="AbmRol\Menu.Designer.cs">
+      <DependentUpon>Menu.cs</DependentUpon>
+    </Compile>
+    <Compile Include="AbmRol\Modificacion.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="AbmRol\Modificacion.Designer.cs">
+      <DependentUpon>Modificacion.cs</DependentUpon>
+    </Compile>
+=======
+>>>>>>> b3da084c797a9d39fcec007b1e88556a51d88643
     <Compile Include="AbmSucursal\Alta.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -218,6 +245,18 @@
     </EmbeddedResource>
     <EmbeddedResource Include="AbmFactura\Modificar.resx">
       <DependentUpon>Modificar.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="AbmRol\Alta.resx">
+      <DependentUpon>Alta.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="AbmRol\BuscadorRol.resx">
+      <DependentUpon>BuscadorRol.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="AbmRol\Menu.resx">
+      <DependentUpon>Menu.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="AbmRol\Modificacion.resx">
+      <DependentUpon>Modificacion.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="AbmSucursal\Alta.resx">
       <DependentUpon>Alta.cs</DependentUpon>

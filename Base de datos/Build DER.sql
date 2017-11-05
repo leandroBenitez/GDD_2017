@@ -73,8 +73,17 @@ IF OBJECT_ID('PAGO_AGIL.modificaCliente') IS NOT NULL
 DROP PROCEDURE [PAGO_AGIL].modificaCliente
 Go
 
+<<<<<<< HEAD
+IF OBJECT_ID('PAGO_AGIL.Alta_Rol') IS NOT NULL
+DROP PROCEDURE [PAGO_AGIL].modificaCliente
+Go
+
+IF OBJECT_ID('PAGO_AGIL.Rol_Funcionalidad') IS NOT NULL
+DROP PROCEDURE [PAGO_AGIL].modificaCliente
+=======
 IF OBJECT_ID('PAGO_AGIL.topPorcentajeFacturasEmpresa') IS NOT NULL
 DROP PROCEDURE [PAGO_AGIL].topPorcentajeFacturasEmpresa
+>>>>>>> b3da084c797a9d39fcec007b1e88556a51d88643
 Go
 
 --Borrado de Vistas
@@ -1060,3 +1069,27 @@ create procedure PAGO_AGIL.modificaCliente(@dni_buscado int, @DNI int, @apellido
 	end
 go
 ;
+
+--Alta Rol 
+Create Procedure PAGO_AGIL.Rol_Funcionalidad(@id_funcionalidad int)
+as
+
+Insert into PAGO_AGIL.Rl_RolxFuncionalidad(Funcionalidad_Id)
+values (@id_funcionalidad)
+
+GO
+
+Create Procedure PAGO_AGIL.Alta_Rol(@nombre varchar(100))
+as
+
+Insert into PAGO_AGIL.Dim_Rol(Rol_Desc)
+values (@nombre)
+
+update rf
+	set rf.Rol_Id = rol.Rol_Id
+from PAGO_AGIL.Rl_RolxFuncionalidad as rf
+	inner join PAGO_AGIL.Dim_Rol as rol
+	on rol.Rol_Desc like @nombre
+where rf.Rol_id is null
+
+GO
