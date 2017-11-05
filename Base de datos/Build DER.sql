@@ -8,37 +8,30 @@ Go
 
 IF OBJECT_ID('PAGO_AGIL.agregar_sucursal') IS NOT NULL
 DROP PROCEDURE [PAGO_AGIL].agregar_sucursal
-
 GO
 
 IF OBJECT_ID('PAGO_AGIL.modificar_sucursal') IS NOT NULL
 DROP PROCEDURE [PAGO_AGIL].modificar_sucursal
-
 Go
 
 IF OBJECT_ID('PAGO_AGIL.Modificar_Empresa') IS NOT NULL
 DROP PROCEDURE [PAGO_AGIL].Modificar_Empresa
-
 Go
 
 IF OBJECT_ID('PAGO_AGIL.Alta_Empresa') IS NOT NULL
 DROP PROCEDURE [PAGO_AGIL].Alta_Empresa
-
 Go
 
 IF OBJECT_ID('PAGO_AGIL.Baja_Empresa') IS NOT NULL
 DROP PROCEDURE [PAGO_AGIL].Baja_Empresa
-
 Go
 
 IF OBJECT_ID('PAGO_AGIL.Pago') IS NOT NULL
 DROP PROCEDURE [PAGO_AGIL].Pago
-
 Go
 
 IF OBJECT_ID('PAGO_AGIL.alta_factura') IS NOT NULL
 DROP PROCEDURE [PAGO_AGIL].alta_factura
-
 GO
 
 IF OBJECT_ID('PAGO_AGIL.alta_item_fact') IS NOT NULL
@@ -73,17 +66,16 @@ IF OBJECT_ID('PAGO_AGIL.modificaCliente') IS NOT NULL
 DROP PROCEDURE [PAGO_AGIL].modificaCliente
 Go
 
-<<<<<<< HEAD
 IF OBJECT_ID('PAGO_AGIL.Alta_Rol') IS NOT NULL
 DROP PROCEDURE [PAGO_AGIL].modificaCliente
 Go
 
 IF OBJECT_ID('PAGO_AGIL.Rol_Funcionalidad') IS NOT NULL
 DROP PROCEDURE [PAGO_AGIL].modificaCliente
-=======
+Go
+
 IF OBJECT_ID('PAGO_AGIL.topPorcentajeFacturasEmpresa') IS NOT NULL
 DROP PROCEDURE [PAGO_AGIL].topPorcentajeFacturasEmpresa
->>>>>>> b3da084c797a9d39fcec007b1e88556a51d88643
 Go
 
 --Borrado de Vistas
@@ -555,7 +547,7 @@ inner join PAGO_AGIL.Dim_Rubro as rub
 Go
 
 --Vista con informacion de rendiciones
-Create view PAGO_AGIL.Vw_Rendidos
+Create view [PAGO_AGIL].[Vw_Rendidos]
 as
 Select	 emp.Empresa_Id
 		,emp.Empresa_Nombre
@@ -563,23 +555,20 @@ Select	 emp.Empresa_Id
 		,Convert(char(7), fac.Factura_Fecha_Vencimiento, 126) as Periodo
 		,Count(Distinct fac.Factura_Nro) as Cant_Facturas
 		,'$' + Cast(Sum(Factura_Total) as varchar) as Total
-		,(Select TOP 1 Case aux_ren.Rendicion_Id when null then 'Sin rendir' else 'Rendida' END
-			from PAGO_AGIL.Ft_Rendicion as aux_ren
-			inner join PAGO_AGIL.Lk_Factura as aux_fac
-				on aux_ren.Rendicion_Id = aux_fac.Factura_Rendicion_Id	
-			where Convert(char(7), fac.Factura_Fecha_Vencimiento, 126) = Convert(char(7), fac.Factura_Fecha_Vencimiento, 126)	) as Rendida
+		,case when fac.Factura_Rendicion_Id is not null then 'Rendida' else 'Sin rendir' end as Rendida
 from PAGO_AGIL.Dim_Empresa as emp
 inner join PAGO_AGIL.Lk_Factura as fac
 	on emp.Empresa_Id = fac.Factura_Empresa_Id
-	inner join PAGO_AGIL.RL_PagoxFactura as pag
-		on fac.Factura_Id = pag.Id_Factura
+where fac.Factura_Pagado = 1
 group by emp.Empresa_Id
 		,emp.Empresa_Nombre
 		,emp.Empresa_Cuit
 		,Convert(char(7), fac.Factura_Fecha_Vencimiento, 126)
+		,case when fac.Factura_Rendicion_Id is not null then 'Rendida' else 'Sin rendir' end
 --order by emp.Empresa_Id
 --		,Periodo
-Go
+
+GO
 
 --Creacion de Stored Procedures
 --Procedimiento para verificar entrada a sistema
