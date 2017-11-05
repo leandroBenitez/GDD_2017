@@ -33,14 +33,15 @@
             this.label1 = new System.Windows.Forms.Label();
             this.textBox_nombre = new System.Windows.Forms.TextBox();
             this.dataGridView_funcionalidades = new System.Windows.Forms.DataGridView();
-            this.Funcionalidad = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Seleccionar = new System.Windows.Forms.DataGridViewCheckBoxColumn();
             this.dataGridView_resultados = new System.Windows.Forms.DataGridView();
             this.label = new System.Windows.Forms.Label();
             this.Nombre = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.button_limpiar = new System.Windows.Forms.Button();
             this.button_modificar = new System.Windows.Forms.Button();
             this.button_baja = new System.Windows.Forms.Button();
+            this.Id_Funcionalidad = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Funcionalidad = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Seleccionar = new System.Windows.Forms.DataGridViewCheckBoxColumn();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView_funcionalidades)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView_resultados)).BeginInit();
             this.SuspendLayout();
@@ -85,23 +86,14 @@
             // 
             this.dataGridView_funcionalidades.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dataGridView_funcionalidades.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.Id_Funcionalidad,
             this.Funcionalidad,
             this.Seleccionar});
             this.dataGridView_funcionalidades.Location = new System.Drawing.Point(20, 81);
             this.dataGridView_funcionalidades.Name = "dataGridView_funcionalidades";
             this.dataGridView_funcionalidades.Size = new System.Drawing.Size(243, 150);
             this.dataGridView_funcionalidades.TabIndex = 5;
-            // 
-            // Funcionalidad
-            // 
-            this.Funcionalidad.HeaderText = "Funcionalidad";
-            this.Funcionalidad.Name = "Funcionalidad";
-            this.Funcionalidad.ReadOnly = true;
-            // 
-            // Seleccionar
-            // 
-            this.Seleccionar.HeaderText = "Seleccionar";
-            this.Seleccionar.Name = "Seleccionar";
+            this.dataGridView_funcionalidades.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView_funcionalidades_CellContentClick);
             // 
             // dataGridView_resultados
             // 
@@ -159,6 +151,23 @@
             this.button_baja.UseVisualStyleBackColor = true;
             this.button_baja.Click += new System.EventHandler(this.button_baja_Click);
             // 
+            // Id_Funcionalidad
+            // 
+            this.Id_Funcionalidad.HeaderText = "Id_Funcionalidad";
+            this.Id_Funcionalidad.Name = "Id_Funcionalidad";
+            this.Id_Funcionalidad.Visible = false;
+            // 
+            // Funcionalidad
+            // 
+            this.Funcionalidad.HeaderText = "Funcionalidad";
+            this.Funcionalidad.Name = "Funcionalidad";
+            this.Funcionalidad.ReadOnly = true;
+            // 
+            // Seleccionar
+            // 
+            this.Seleccionar.HeaderText = "Seleccionar";
+            this.Seleccionar.Name = "Seleccionar";
+            // 
             // BuscadorRol
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -190,13 +199,14 @@
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.TextBox textBox_nombre;
         private System.Windows.Forms.DataGridView dataGridView_funcionalidades;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Funcionalidad;
-        private System.Windows.Forms.DataGridViewCheckBoxColumn Seleccionar;
         private System.Windows.Forms.DataGridView dataGridView_resultados;
         private System.Windows.Forms.Label label;
         private System.Windows.Forms.DataGridViewTextBoxColumn Nombre;
         private System.Windows.Forms.Button button_limpiar;
         private System.Windows.Forms.Button button_modificar;
         private System.Windows.Forms.Button button_baja;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Id_Funcionalidad;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Funcionalidad;
+        private System.Windows.Forms.DataGridViewCheckBoxColumn Seleccionar;
     }
 }

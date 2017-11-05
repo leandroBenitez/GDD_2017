@@ -28,26 +28,26 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.dataGridView1 = new System.Windows.Forms.DataGridView();
+            this.dataGridView_funcionalidades = new System.Windows.Forms.DataGridView();
             this.Funcionalidad = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Agregada = new System.Windows.Forms.DataGridViewCheckBoxColumn();
             this.textBox_nombre = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
-            this.button1 = new System.Windows.Forms.Button();
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
+            this.button_alta = new System.Windows.Forms.Button();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridView_funcionalidades)).BeginInit();
             this.SuspendLayout();
             // 
-            // dataGridView1
+            // dataGridView_funcionalidades
             // 
-            this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridView1.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.dataGridView_funcionalidades.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dataGridView_funcionalidades.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.Funcionalidad,
             this.Agregada});
-            this.dataGridView1.Location = new System.Drawing.Point(27, 95);
-            this.dataGridView1.Name = "dataGridView1";
-            this.dataGridView1.Size = new System.Drawing.Size(243, 150);
-            this.dataGridView1.TabIndex = 0;
+            this.dataGridView_funcionalidades.Location = new System.Drawing.Point(27, 95);
+            this.dataGridView_funcionalidades.Name = "dataGridView_funcionalidades";
+            this.dataGridView_funcionalidades.Size = new System.Drawing.Size(243, 150);
+            this.dataGridView_funcionalidades.TabIndex = 0;
             // 
             // Funcionalidad
             // 
@@ -86,28 +86,28 @@
             this.label2.TabIndex = 3;
             this.label2.Text = "Alta Rol";
             // 
-            // button1
+            // button_alta
             // 
-            this.button1.Location = new System.Drawing.Point(111, 268);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(75, 23);
-            this.button1.TabIndex = 4;
-            this.button1.Text = "Alta";
-            this.button1.UseVisualStyleBackColor = true;
+            this.button_alta.Location = new System.Drawing.Point(111, 268);
+            this.button_alta.Name = "button_alta";
+            this.button_alta.Size = new System.Drawing.Size(75, 23);
+            this.button_alta.TabIndex = 4;
+            this.button_alta.Text = "Alta";
+            this.button_alta.UseVisualStyleBackColor = true;
             // 
             // Alta
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(309, 315);
-            this.Controls.Add(this.button1);
+            this.Controls.Add(this.button_alta);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.textBox_nombre);
-            this.Controls.Add(this.dataGridView1);
+            this.Controls.Add(this.dataGridView_funcionalidades);
             this.Name = "Alta";
             this.Text = "Pago Agil";
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridView_funcionalidades)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -115,12 +115,12 @@
 
         #endregion
 
-        private System.Windows.Forms.DataGridView dataGridView1;
+        private System.Windows.Forms.DataGridView dataGridView_funcionalidades;
         private System.Windows.Forms.DataGridViewTextBoxColumn Funcionalidad;
         private System.Windows.Forms.DataGridViewCheckBoxColumn Agregada;
         private System.Windows.Forms.TextBox textBox_nombre;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label label2;
-        private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.Button button_alta;
     }
 }
