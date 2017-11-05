@@ -178,6 +178,12 @@
     <Compile Include="ListadoEstadistico\estadisticas.Designer.cs">
       <DependentUpon>estadisticas.cs</DependentUpon>
     </Compile>
+    <Compile Include="Login\Sucursales.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Login\Sucursales.Designer.cs">
+      <DependentUpon>Sucursales.cs</DependentUpon>
+    </Compile>
     <Compile Include="Login\Login.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -273,6 +279,9 @@
     <EmbeddedResource Include="ListadoEstadistico\estadisticas.resx">
       <DependentUpon>estadisticas.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Login\Sucursales.resx">
+      <DependentUpon>Sucursales.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Login\Login.resx">
       <DependentUpon>Login.cs</DependentUpon>
     </EmbeddedResource>
@@ -323,9 +332,7 @@
       <SubType>Designer</SubType>
     </None>
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="AbmRol\" />
-  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

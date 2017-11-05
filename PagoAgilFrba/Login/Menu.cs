@@ -17,15 +17,17 @@ namespace PagoAgilFrba.Login
         string menu_user;
         string menu_rol;
         string menu_fecha;
+        string menu_sucursal;
 
-        public Menu(string usuario, string rol, string fecha)
+        public Menu(string usuario, string rol, string fecha, string sucursal)
         {
             InitializeComponent();
             menu_user = usuario;
             menu_rol = rol;
             menu_fecha = fecha;
+            menu_sucursal = sucursal;
             label_usuario.Text = "Rol: " + rol + "      Usuario: " + usuario;
-            label_fecha.Text = "Fecha de sistema: " + fecha;
+            label_fecha.Text = sucursal + "      Fecha de sistema: " + fecha;
             habilitar_botones();
         }
 
