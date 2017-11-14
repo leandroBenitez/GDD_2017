@@ -65,7 +65,7 @@
             this.button_abm_rol.Location = new System.Drawing.Point(186, 125);
             this.button_abm_rol.Name = "button_abm_rol";
             this.button_abm_rol.Size = new System.Drawing.Size(140, 27);
-            this.button_abm_rol.TabIndex = 2;
+            this.button_abm_rol.TabIndex = 4;
             this.button_abm_rol.Text = "ABM Rol";
             this.button_abm_rol.UseVisualStyleBackColor = true;
             this.button_abm_rol.Click += new System.EventHandler(this.button_abm_rol_Click);
@@ -76,7 +76,7 @@
             this.button_abm_cliente.Location = new System.Drawing.Point(25, 172);
             this.button_abm_cliente.Name = "button_abm_cliente";
             this.button_abm_cliente.Size = new System.Drawing.Size(140, 27);
-            this.button_abm_cliente.TabIndex = 3;
+            this.button_abm_cliente.TabIndex = 5;
             this.button_abm_cliente.Text = "ABM Cliente";
             this.button_abm_cliente.UseVisualStyleBackColor = true;
             this.button_abm_cliente.Click += new System.EventHandler(this.button_abm_cliente_Click);
@@ -87,7 +87,7 @@
             this.button_abm_empresa.Location = new System.Drawing.Point(186, 172);
             this.button_abm_empresa.Name = "button_abm_empresa";
             this.button_abm_empresa.Size = new System.Drawing.Size(140, 27);
-            this.button_abm_empresa.TabIndex = 4;
+            this.button_abm_empresa.TabIndex = 6;
             this.button_abm_empresa.Text = "ABM Empresa";
             this.button_abm_empresa.UseVisualStyleBackColor = true;
             this.button_abm_empresa.Click += new System.EventHandler(this.button_abm_empresa_Click);
@@ -98,7 +98,7 @@
             this.button_abm_sucursal.Location = new System.Drawing.Point(25, 219);
             this.button_abm_sucursal.Name = "button_abm_sucursal";
             this.button_abm_sucursal.Size = new System.Drawing.Size(140, 27);
-            this.button_abm_sucursal.TabIndex = 5;
+            this.button_abm_sucursal.TabIndex = 7;
             this.button_abm_sucursal.Text = "ABM Sucursal";
             this.button_abm_sucursal.UseVisualStyleBackColor = true;
             this.button_abm_sucursal.Click += new System.EventHandler(this.button_abm_sucursal_Click);
@@ -109,7 +109,7 @@
             this.button_abm_facturas.Location = new System.Drawing.Point(186, 219);
             this.button_abm_facturas.Name = "button_abm_facturas";
             this.button_abm_facturas.Size = new System.Drawing.Size(140, 27);
-            this.button_abm_facturas.TabIndex = 6;
+            this.button_abm_facturas.TabIndex = 8;
             this.button_abm_facturas.Text = "ABM Facturas";
             this.button_abm_facturas.UseVisualStyleBackColor = true;
             this.button_abm_facturas.Click += new System.EventHandler(this.button_abm_facturas_Click);
@@ -120,7 +120,7 @@
             this.button_estadisticas.Location = new System.Drawing.Point(25, 125);
             this.button_estadisticas.Name = "button_estadisticas";
             this.button_estadisticas.Size = new System.Drawing.Size(140, 27);
-            this.button_estadisticas.TabIndex = 7;
+            this.button_estadisticas.TabIndex = 3;
             this.button_estadisticas.Text = "Estadisticas";
             this.button_estadisticas.UseVisualStyleBackColor = true;
             this.button_estadisticas.Click += new System.EventHandler(this.button_estadisticas_Click);
@@ -131,7 +131,7 @@
             this.button_pagar.Location = new System.Drawing.Point(25, 79);
             this.button_pagar.Name = "button_pagar";
             this.button_pagar.Size = new System.Drawing.Size(140, 27);
-            this.button_pagar.TabIndex = 8;
+            this.button_pagar.TabIndex = 1;
             this.button_pagar.Text = "Registrar Pago";
             this.button_pagar.UseVisualStyleBackColor = true;
             this.button_pagar.Click += new System.EventHandler(this.button_pagar_Click);
@@ -142,7 +142,7 @@
             this.button_rendir.Location = new System.Drawing.Point(186, 79);
             this.button_rendir.Name = "button_rendir";
             this.button_rendir.Size = new System.Drawing.Size(140, 27);
-            this.button_rendir.TabIndex = 9;
+            this.button_rendir.TabIndex = 2;
             this.button_rendir.Text = "Rendir Facturas";
             this.button_rendir.UseVisualStyleBackColor = true;
             this.button_rendir.Click += new System.EventHandler(this.button_rendir_Click);
@@ -154,7 +154,7 @@
             this.button_salir.Location = new System.Drawing.Point(186, 267);
             this.button_salir.Name = "button_salir";
             this.button_salir.Size = new System.Drawing.Size(140, 27);
-            this.button_salir.TabIndex = 10;
+            this.button_salir.TabIndex = 9;
             this.button_salir.Text = "Salir";
             this.button_salir.UseVisualStyleBackColor = true;
             this.button_salir.Click += new System.EventHandler(this.button_salir_Click);

@@ -32,15 +32,15 @@
             this.label3 = new System.Windows.Forms.Label();
             this.combo_rendido = new System.Windows.Forms.ComboBox();
             this.label2 = new System.Windows.Forms.Label();
-            this.textBox_cuit = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
             this.textBox_nombre = new System.Windows.Forms.TextBox();
             this.dataGridView = new System.Windows.Forms.DataGridView();
             this.Id_empresa = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Empresa = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.CUIT = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dia_rendic = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Periodo = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Facturas = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Comisiones = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.MontoTotal = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Rendida = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.button_rendir = new System.Windows.Forms.Button();
@@ -48,6 +48,7 @@
             this.label4 = new System.Windows.Forms.Label();
             this.comboBox_comision = new System.Windows.Forms.ComboBox();
             this.button_limpiar = new System.Windows.Forms.Button();
+            this.comboBox_periodo = new System.Windows.Forms.ComboBox();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView)).BeginInit();
             this.SuspendLayout();
             // 
@@ -84,16 +85,9 @@
             this.label2.AutoSize = true;
             this.label2.Location = new System.Drawing.Point(299, 19);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(35, 13);
+            this.label2.Size = new System.Drawing.Size(46, 13);
             this.label2.TabIndex = 10;
-            this.label2.Text = "CUIT:";
-            // 
-            // textBox_cuit
-            // 
-            this.textBox_cuit.Location = new System.Drawing.Point(340, 16);
-            this.textBox_cuit.Name = "textBox_cuit";
-            this.textBox_cuit.Size = new System.Drawing.Size(169, 20);
-            this.textBox_cuit.TabIndex = 9;
+            this.label2.Text = "Periodo:";
             // 
             // label1
             // 
@@ -119,9 +113,10 @@
             this.dataGridView.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.Id_empresa,
             this.Empresa,
-            this.CUIT,
+            this.dia_rendic,
             this.Periodo,
             this.Facturas,
+            this.Comisiones,
             this.MontoTotal,
             this.Rendida});
             this.dataGridView.Location = new System.Drawing.Point(23, 93);
@@ -143,11 +138,11 @@
             this.Empresa.Name = "Empresa";
             this.Empresa.ReadOnly = true;
             // 
-            // CUIT
+            // dia_rendic
             // 
-            this.CUIT.HeaderText = "CUIT";
-            this.CUIT.Name = "CUIT";
-            this.CUIT.ReadOnly = true;
+            this.dia_rendic.HeaderText = "Dia Rendicion";
+            this.dia_rendic.Name = "dia_rendic";
+            this.dia_rendic.ReadOnly = true;
             // 
             // Periodo
             // 
@@ -160,6 +155,12 @@
             this.Facturas.HeaderText = "Facturas";
             this.Facturas.Name = "Facturas";
             this.Facturas.ReadOnly = true;
+            // 
+            // Comisiones
+            // 
+            this.Comisiones.HeaderText = "Comision";
+            this.Comisiones.Name = "Comisiones";
+            this.Comisiones.ReadOnly = true;
             // 
             // MontoTotal
             // 
@@ -222,11 +223,21 @@
             this.button_limpiar.UseVisualStyleBackColor = true;
             this.button_limpiar.Click += new System.EventHandler(this.button_limpiar_Click);
             // 
+            // comboBox_periodo
+            // 
+            this.comboBox_periodo.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.comboBox_periodo.FormattingEnabled = true;
+            this.comboBox_periodo.Location = new System.Drawing.Point(351, 16);
+            this.comboBox_periodo.Name = "comboBox_periodo";
+            this.comboBox_periodo.Size = new System.Drawing.Size(169, 21);
+            this.comboBox_periodo.TabIndex = 20;
+            // 
             // Rendicion
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(671, 327);
+            this.Controls.Add(this.comboBox_periodo);
             this.Controls.Add(this.button_limpiar);
             this.Controls.Add(this.comboBox_comision);
             this.Controls.Add(this.label4);
@@ -237,7 +248,6 @@
             this.Controls.Add(this.label3);
             this.Controls.Add(this.combo_rendido);
             this.Controls.Add(this.label2);
-            this.Controls.Add(this.textBox_cuit);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.textBox_nombre);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
@@ -255,21 +265,22 @@
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.ComboBox combo_rendido;
         private System.Windows.Forms.Label label2;
-        private System.Windows.Forms.TextBox textBox_cuit;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.TextBox textBox_nombre;
         private System.Windows.Forms.DataGridView dataGridView;
         private System.Windows.Forms.Button button_rendir;
         private System.Windows.Forms.Button button_cancelar;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Id_empresa;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Empresa;
-        private System.Windows.Forms.DataGridViewTextBoxColumn CUIT;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Periodo;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Facturas;
-        private System.Windows.Forms.DataGridViewTextBoxColumn MontoTotal;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Rendida;
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.ComboBox comboBox_comision;
         private System.Windows.Forms.Button button_limpiar;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Id_empresa;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Empresa;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dia_rendic;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Periodo;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Facturas;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Comisiones;
+        private System.Windows.Forms.DataGridViewTextBoxColumn MontoTotal;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Rendida;
+        private System.Windows.Forms.ComboBox comboBox_periodo;
     }
 }
