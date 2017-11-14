@@ -28,9 +28,16 @@ namespace PagoAgilFrba.Rendicion
             combo_rendido.Items.Add("Rendidas");
             combo_rendido.Items.Add("Sin Rendir");
             for (int i = 0; i < 100; i++) { comboBox_comision.Items.Add(i + 1); }
+            string consulta = "Select Distinct Periodo from PAGO_AGIL.Vw_Rendidos";
+            Entidades.Herramientas.llenarComboBox(comboBox_periodo, consulta);
         }
 
         private void button_buscar_Click(object sender, EventArgs e)
+        {
+            click();
+        }
+
+        private void click()
         {
             string consulta = "Select * from PAGO_AGIL.Vw_Rendidos where 1 = 1 ";
 
@@ -38,9 +45,9 @@ namespace PagoAgilFrba.Rendicion
             {
                 consulta = consulta + "and Empresa_Nombre LIKE '%" + textBox_nombre.Text + "%' ";
             }
-            if (!string.IsNullOrWhiteSpace(textBox_cuit.Text))
+            if (comboBox_periodo.SelectedIndex != -1)
             {
-                consulta = consulta + "and Empresa_Cuit LIKE '%" + textBox_cuit.Text + "%' ";
+                consulta = consulta + "and Periodo = '%" + comboBox_periodo.Text + "%' ";
             }
             if (combo_rendido.SelectedIndex == 0)
             {
@@ -76,17 +83,18 @@ namespace PagoAgilFrba.Rendicion
             dataGridView.Rows.Clear();
 
             List<DataGridViewRow> filas = new List<DataGridViewRow>();
-            Object[] columnas = new Object[7];
+            Object[] columnas = new Object[8];
 
             while (datos.Read())
             {
                 columnas[0] = datos["Empresa_Id"].ToString();
                 columnas[1] = datos["Empresa_Nombre"].ToString();
-                columnas[2] = datos["Empresa_Cuit"].ToString();
+                columnas[2] = datos["Empresa_Dia_Rendicion"].ToString();
                 columnas[3] = datos["Periodo"].ToString();
                 columnas[4] = datos["Cant_Facturas"].ToString();
-                columnas[5] = datos["Total"].ToString();
-                columnas[6] = datos["Rendida"].ToString();
+                columnas[5] = datos["Comision"].ToString();
+                columnas[6] = datos["Total"].ToString();
+                columnas[7] = datos["Rendida"].ToString();
 
                 filas.Add(new DataGridViewRow());
                 filas[filas.Count - 1].CreateCells(dataGridView, columnas);
@@ -112,6 +120,7 @@ namespace PagoAgilFrba.Rendicion
                 string id_empresa = fila.Cells["Id_empresa"].Value.ToString();
                 string periodo = fila.Cells["Periodo"].Value.ToString();
                 string rendido = fila.Cells["Rendida"].Value.ToString();
+                string dia_rendicion = fila.Cells["dia_rendic"].Value.ToString();
 
                 if(rendido == "Rendida")
                 {
@@ -121,9 +130,13 @@ namespace PagoAgilFrba.Rendicion
                 {
                     MessageBox.Show("Seleccione un porcentaje de comision");
                 }
+                else if (dia_rendicion != main_fecha.Substring(0,2))
+                {
+                    MessageBox.Show("Esta empresa solo rinde los dias " + dia_rendicion + " de cada mes");
+                }
                 else
                 {
-                    realizar_rendicion();
+                    realizar_rendicion(id_empresa, periodo);
                 }
             }
             catch
@@ -132,15 +145,32 @@ namespace PagoAgilFrba.Rendicion
             }
         }
 
-        private void realizar_rendicion()
+        private void realizar_rendicion(string id_empresa, string periodo)
         {
-            
+            string consulta = "Execute PAGO_AGIL.Rendir '" + main_fecha + "', '" + main_usuario + "', " + id_empresa + ", '" + periodo + "', " + comboBox_comision.Text;
+
+            conexion connection = new conexion();
+            SqlCommand command = new SqlCommand();
+
+            command.CommandText = consulta;
+            command.CommandType = CommandType.Text;
+            command.Connection = connection.abrir_conexion();
+
+            try
+            {
+                Object reader = command.ExecuteNonQuery();
+                click();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Error: " + ex.Message);
+            }
         }
 
         private void button_limpiar_Click(object sender, EventArgs e)
         {
             textBox_nombre.Text = "";
-            textBox_cuit.Text = "";
+            comboBox_periodo.SelectedIndex = -1;
             combo_rendido.SelectedIndex = -1;
             comboBox_comision.SelectedIndex = -1;
             dataGridView.Rows.Clear();
