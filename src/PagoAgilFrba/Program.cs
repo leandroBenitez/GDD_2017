@@ -17,8 +17,7 @@ namespace PagoAgilFrba
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-           // Application.Run(new PagoAgilFrba.Login.Login());
-            Application.Run(new PagoAgilFrba.AbmFactura.Menu(new PagoAgilFrba.Login.Login()));
+            Application.Run(new PagoAgilFrba.Login.Login());
         }
     }
 }
