@@ -137,6 +137,12 @@ namespace PagoAgilFrba.AbmSucursal
                             command.ExecuteNonQuery();
                             MessageBox.Show("  Hecho ", "Baja Sucursal", MessageBoxButtons.OK, MessageBoxIcon.None);
                             connection.cerrar_conexion(command.Connection);
+                            nombre.Text = "";
+                            direccion.Text = "";
+                            cp.Text = "";
+                            estado.Text = "";
+                            estado.SelectedIndex = -1;
+                            dataGridView1.Rows.Clear();
 
                         }
                         catch (Exception ex)

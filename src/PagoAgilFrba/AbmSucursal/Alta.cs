@@ -23,6 +23,7 @@ namespace PagoAgilFrba.AbmSucursal
         {
             InitializeComponent();
             anterior = una;
+            this.Text = "Alta Sucursal";
         }
 
         private void Alta_Load(object sender, EventArgs e)

@@ -128,6 +128,7 @@ namespace PagoAgilFrba.AbmSucursal
         private void habilitar_Click(object sender, EventArgs e)
         {
             reh = 1;
+            habilitar.Enabled= false;
 
         }
 
@@ -152,6 +153,13 @@ namespace PagoAgilFrba.AbmSucursal
         private void cp_Click(object sender, MouseEventArgs e)
         {
             cp.ReadOnly = false;
+        }
+
+        private void cancel_Click(object sender, EventArgs e)
+        {
+            anterior.Show();
+            this.Close();
+
         }
 
     }

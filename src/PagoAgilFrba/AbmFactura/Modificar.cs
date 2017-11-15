@@ -27,6 +27,9 @@ namespace PagoAgilFrba.AbmFactura
             Entidades.Herramientas.llenarComboBox(empresas, empresasc);
             string consultaclientes = "Select (cli.Cliente_Nombre + ',' + cli.Cliente_Apellido) from PAGO_AGIL.Lk_Cliente as cli order by cli.Cliente_Nombre";
             Entidades.Herramientas.llenarComboBox(clientes, consultaclientes);
+
+            pickalta.CustomFormat = pickvenc.CustomFormat = " ";
+            pickalta.Format = pickvenc.Format = DateTimePickerFormat.Custom;
             anterior = an;
             empresas.Text = "";
             clientes.Text = "";
@@ -43,6 +46,9 @@ namespace PagoAgilFrba.AbmFactura
             empresas.Text = "";
             clientes.Text = "";
             facnum.Text = "";
+            pickalta.Value = pickvenc.Value = pickvenc.MinDate;
+            pickalta.CustomFormat = pickvenc.CustomFormat = " ";
+            pickalta.Format = pickvenc.Format = DateTimePickerFormat.Custom;
             empresas.SelectedIndex = -1;
             clientes.SelectedIndex = -1;
             dataGridView1.Rows.Clear();
@@ -125,9 +131,9 @@ namespace PagoAgilFrba.AbmFactura
 
         private void dataGridView1_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
-            if (e.RowIndex >= 0 && e.ColumnIndex == 4)
+            if (e.RowIndex >= 0 && e.ColumnIndex == 6)
             {
-                this.Hide();
+                
                 DataGridViewRow row = this.dataGridView1.Rows[e.RowIndex];
                 PagoAgilFrba.AbmFactura.auxMod n= new PagoAgilFrba.AbmFactura.auxMod(this,row);
                 n.Show();
@@ -148,6 +154,17 @@ namespace PagoAgilFrba.AbmFactura
         {
 
         }
+
+        private void pickalta_ValueChanged(object sender, EventArgs e)
+        {
+            pickalta.Format = DateTimePickerFormat.Short;
+        }
+
+        private void pickvenc_ValueChanged(object sender, EventArgs e)
+        {
+            pickvenc.Format = DateTimePickerFormat.Short;
+        }
+
 
 
     }

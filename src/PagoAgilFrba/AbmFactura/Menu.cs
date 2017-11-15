@@ -21,14 +21,14 @@ namespace PagoAgilFrba.AbmFactura
 
         private void button2_Click(object sender, EventArgs e)
         {
-            PagoAgilFrba.AbmFactura.Alta a = new PagoAgilFrba.AbmFactura.Alta(this);
+            PagoAgilFrba.AbmFactura.Modificar a = new PagoAgilFrba.AbmFactura.Modificar(this);
             a.Show();
             this.Hide();
         }
 
         private void button1_Click(object sender, EventArgs e)
         {
-            PagoAgilFrba.AbmFactura.Modificar a = new PagoAgilFrba.AbmFactura.Modificar(this);
+            PagoAgilFrba.AbmFactura.Alta a = new PagoAgilFrba.AbmFactura.Alta(this);
             a.Show();
             this.Hide();
         }

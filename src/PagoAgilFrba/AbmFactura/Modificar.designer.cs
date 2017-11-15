@@ -32,10 +32,6 @@
             this.limpiar = new System.Windows.Forms.Button();
             this.buscar = new System.Windows.Forms.Button();
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
-            this.label5 = new System.Windows.Forms.Label();
-            this.cancelar = new System.Windows.Forms.Button();
-            this.label8 = new System.Windows.Forms.Label();
-            this.label11 = new System.Windows.Forms.Label();
             this.Numero = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Alta = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Vencimiento = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -43,6 +39,10 @@
             this.Cliente = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Empresa = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Seleccionar = new System.Windows.Forms.DataGridViewCheckBoxColumn();
+            this.label5 = new System.Windows.Forms.Label();
+            this.cancelar = new System.Windows.Forms.Button();
+            this.label8 = new System.Windows.Forms.Label();
+            this.label11 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
@@ -108,47 +108,6 @@
             this.dataGridView1.TabIndex = 6;
             this.dataGridView1.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView1_CellContentClick);
             // 
-            // label5
-            // 
-            this.label5.AutoSize = true;
-            this.label5.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label5.Location = new System.Drawing.Point(275, 20);
-            this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(355, 15);
-            this.label5.TabIndex = 10;
-            this.label5.Text = "Seleccione uno de los elementos que desea modificar";
-            // 
-            // cancelar
-            // 
-            this.cancelar.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F);
-            this.cancelar.Location = new System.Drawing.Point(24, 298);
-            this.cancelar.Name = "cancelar";
-            this.cancelar.Size = new System.Drawing.Size(79, 33);
-            this.cancelar.TabIndex = 15;
-            this.cancelar.Text = "Cancelar";
-            this.cancelar.UseVisualStyleBackColor = true;
-            this.cancelar.Click += new System.EventHandler(this.button1_Click);
-            // 
-            // label8
-            // 
-            this.label8.AutoSize = true;
-            this.label8.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label8.Location = new System.Drawing.Point(-224, -1);
-            this.label8.Name = "label8";
-            this.label8.Size = new System.Drawing.Size(51, 16);
-            this.label8.TabIndex = 3;
-            this.label8.Text = "Filtros";
-            // 
-            // label11
-            // 
-            this.label11.AutoSize = true;
-            this.label11.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label11.Location = new System.Drawing.Point(-226, -24);
-            this.label11.Name = "label11";
-            this.label11.Size = new System.Drawing.Size(51, 16);
-            this.label11.TabIndex = 3;
-            this.label11.Text = "Filtros";
-            // 
             // Numero
             // 
             this.Numero.HeaderText = "Numero";
@@ -195,6 +154,47 @@
             this.Seleccionar.HeaderText = "Seleccionar";
             this.Seleccionar.Name = "Seleccionar";
             this.Seleccionar.Width = 69;
+            // 
+            // label5
+            // 
+            this.label5.AutoSize = true;
+            this.label5.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label5.Location = new System.Drawing.Point(275, 20);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(355, 15);
+            this.label5.TabIndex = 10;
+            this.label5.Text = "Seleccione uno de los elementos que desea modificar";
+            // 
+            // cancelar
+            // 
+            this.cancelar.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F);
+            this.cancelar.Location = new System.Drawing.Point(24, 298);
+            this.cancelar.Name = "cancelar";
+            this.cancelar.Size = new System.Drawing.Size(79, 33);
+            this.cancelar.TabIndex = 15;
+            this.cancelar.Text = "Cancelar";
+            this.cancelar.UseVisualStyleBackColor = true;
+            this.cancelar.Click += new System.EventHandler(this.button1_Click);
+            // 
+            // label8
+            // 
+            this.label8.AutoSize = true;
+            this.label8.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label8.Location = new System.Drawing.Point(-224, -1);
+            this.label8.Name = "label8";
+            this.label8.Size = new System.Drawing.Size(51, 16);
+            this.label8.TabIndex = 3;
+            this.label8.Text = "Filtros";
+            // 
+            // label11
+            // 
+            this.label11.AutoSize = true;
+            this.label11.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label11.Location = new System.Drawing.Point(-226, -24);
+            this.label11.Name = "label11";
+            this.label11.Size = new System.Drawing.Size(51, 16);
+            this.label11.TabIndex = 3;
+            this.label11.Text = "Filtros";
             // 
             // label1
             // 
@@ -257,6 +257,7 @@
             this.pickalta.Name = "pickalta";
             this.pickalta.Size = new System.Drawing.Size(95, 20);
             this.pickalta.TabIndex = 22;
+            this.pickalta.ValueChanged += new System.EventHandler(this.pickalta_ValueChanged);
             // 
             // pickvenc
             // 
@@ -265,6 +266,7 @@
             this.pickvenc.Name = "pickvenc";
             this.pickvenc.Size = new System.Drawing.Size(95, 20);
             this.pickvenc.TabIndex = 23;
+            this.pickvenc.ValueChanged += new System.EventHandler(this.pickvenc_ValueChanged);
             // 
             // empresas
             // 

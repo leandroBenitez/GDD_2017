@@ -37,11 +37,12 @@
             this.nombre = new System.Windows.Forms.TextBox();
             this.habilitar = new System.Windows.Forms.Button();
             this.label4 = new System.Windows.Forms.Label();
+            this.cancel = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // modificar
             // 
-            this.modificar.Location = new System.Drawing.Point(111, 221);
+            this.modificar.Location = new System.Drawing.Point(148, 221);
             this.modificar.Name = "modificar";
             this.modificar.Size = new System.Drawing.Size(100, 30);
             this.modificar.TabIndex = 15;
@@ -64,8 +65,8 @@
             this.cp.Name = "cp";
             this.cp.Size = new System.Drawing.Size(100, 20);
             this.cp.TabIndex = 13;
-            this.cp.MouseDoubleClick += new System.Windows.Forms.MouseEventHandler(this.cp_Click);
             this.cp.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.cp_KeyPress);
+            this.cp.MouseDoubleClick += new System.Windows.Forms.MouseEventHandler(this.cp_Click);
             // 
             // label2
             // 
@@ -100,7 +101,6 @@
             this.nombre.Size = new System.Drawing.Size(197, 20);
             this.nombre.TabIndex = 9;
             this.nombre.MouseDoubleClick += new System.Windows.Forms.MouseEventHandler(this.nombre_Click);
-       
             // 
             // habilitar
             // 
@@ -121,11 +121,22 @@
             this.label4.TabIndex = 17;
             this.label4.Text = "Estado";
             // 
+            // cancel
+            // 
+            this.cancel.Location = new System.Drawing.Point(42, 221);
+            this.cancel.Name = "cancel";
+            this.cancel.Size = new System.Drawing.Size(100, 30);
+            this.cancel.TabIndex = 18;
+            this.cancel.Text = "Cancelar";
+            this.cancel.UseVisualStyleBackColor = true;
+            this.cancel.Click += new System.EventHandler(this.cancel_Click);
+            // 
             // auxiliarModificacion
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(304, 274);
+            this.Controls.Add(this.cancel);
             this.Controls.Add(this.label4);
             this.Controls.Add(this.habilitar);
             this.Controls.Add(this.modificar);
@@ -153,5 +164,6 @@
         private System.Windows.Forms.TextBox nombre;
         private System.Windows.Forms.Button habilitar;
         private System.Windows.Forms.Label label4;
+        private System.Windows.Forms.Button cancel;
     }
 }

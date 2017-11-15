@@ -16,26 +16,33 @@ namespace PagoAgilFrba.AbmFactura
     {
         private Form anterior;
         private DataGridViewRow row;
+        private int num;
+        private DateTime fecha_antes;
+
+
         public auxMod(Form a,DataGridViewRow r)
         {
             InitializeComponent();
             row = r;
+            num = int.Parse(row.Cells["Numero"].Value.ToString());
+            string f = row.Cells["Vencimiento"].Value.ToString();
+            fecha_antes = System.DateTime.Parse(f);
+
             anterior = a;
         }
 
         private void button1_Click(object sender, EventArgs e)
         {
-            int num = int.Parse(row.Cells["Numero"].ToString());
-            DateTime fecha_antes = System.DateTime.ParseExact(row.Cells["Vencimiento"].ToString(), "dd/MM/yyyy HH:mm:ss", null);
-
-            if (fecha_antes.CompareTo(dateTimePicker1.Value) == -1)
+            
+         
+            if (fecha_antes.CompareTo(dateTimePicker1.Value) >= 0)
             {
-                MessageBox.Show("El nuevo vencimiento tiene que ser mayor al anterior", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show("El nuevo vencimiento tiene que ser mayor al anterior y diferente", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
 
             }
             else
             {
-                string conns = "update PAGO_AGIL.Lk_Factura set Factura_Fecha_Vencimiento = CONVERT(datetime," + dateTimePicker1.Value.ToString() + ",103) where Factura_Nro=" + num;
+                string conns = "update PAGO_AGIL.Lk_Factura set Factura_Fecha_Vencimiento = CONVERT(datetime,'" + dateTimePicker1.Value.ToString() + "',103) where Factura_Nro=" + num;
 
 
                 conexion connection = new conexion();
@@ -51,6 +58,12 @@ namespace PagoAgilFrba.AbmFactura
 
             }
             
+        }
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+            anterior.Show();
+            this.Close();
         }
     }
 }

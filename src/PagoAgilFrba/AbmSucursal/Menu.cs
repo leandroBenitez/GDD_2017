@@ -22,7 +22,7 @@ namespace PagoAgilFrba.AbmSucursal
         // Accedo a dar de alta a una sucursal
         private void button1_Click(object sender, EventArgs e)
         {
-            PagoAgilFrba.AbmFactura.Alta nuevaAlta = new PagoAgilFrba.AbmFactura.Alta(this);
+            PagoAgilFrba.AbmSucursal.Alta nuevaAlta = new PagoAgilFrba.AbmSucursal.Alta(this);
             this.Hide();
             nuevaAlta.Show();
         }
@@ -42,7 +42,7 @@ namespace PagoAgilFrba.AbmSucursal
 
         private void button3_Click(object sender, EventArgs e)
         {
-            PagoAgilFrba.AbmFactura.Modificar nuevaAlta = new PagoAgilFrba.AbmFactura.Modificar(this);
+            PagoAgilFrba.AbmSucursal.Modificar nuevaAlta = new PagoAgilFrba.AbmSucursal.Modificar(this);
             this.Hide();
             nuevaAlta.Show();
 
