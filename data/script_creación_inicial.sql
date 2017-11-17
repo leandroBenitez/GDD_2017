@@ -72,18 +72,6 @@ IF OBJECT_ID('PAGO_AGIL.bajaCliente') IS NOT NULL
 DROP PROCEDURE [PAGO_AGIL].bajaCliente
 Go
 
-IF OBJECT_ID('PAGO_AGIL.topMontoRendido') IS NOT NULL
-DROP PROCEDURE [PAGO_AGIL].topMontoRendido
-Go
-
-IF OBJECT_ID('PAGO_AGIL.topPorcentajePago') IS NOT NULL
-DROP PROCEDURE [PAGO_AGIL].topPorcentajePago
-Go
-
-IF OBJECT_ID('PAGO_AGIL.topCantidadPagos') IS NOT NULL
-DROP PROCEDURE [PAGO_AGIL].topCantidadPagos
-Go
-
 IF OBJECT_ID('PAGO_AGIL.nuevoCliente') IS NOT NULL
 DROP PROCEDURE [PAGO_AGIL].nuevoCliente
 Go
@@ -98,10 +86,6 @@ Go
 
 IF OBJECT_ID('PAGO_AGIL.Rol_Funcionalidad') IS NOT NULL
 DROP PROCEDURE [PAGO_AGIL].Rol_Funcionalidad
-Go
-
-IF OBJECT_ID('PAGO_AGIL.topPorcentajeFacturasEmpresa') IS NOT NULL
-DROP PROCEDURE [PAGO_AGIL].topPorcentajeFacturasEmpresa
 Go
 
 IF OBJECT_ID('PAGO_AGIL..Rol_Funcionalidad_Modif') IS NOT NULL
@@ -125,6 +109,22 @@ IF OBJECT_ID('PAGO_AGIL.Vw_User_Info') IS NOT NULL
 
 IF OBJECT_ID('PAGO_AGIL.Vw_Empresa') IS NOT NULL
     DROP VIEW PAGO_AGIL.Vw_Empresa;
+Go
+
+IF OBJECT_ID('PAGO_AGIL.Vw_FactPagadas') IS NOT NULL
+    DROP VIEW PAGO_AGIL.Vw_FactPagadas;
+Go
+
+IF OBJECT_ID('PAGO_AGIL.Vw_MayoresRendidos') IS NOT NULL
+    DROP VIEW PAGO_AGIL.Vw_MayoresRendidos;
+Go
+
+IF OBJECT_ID('PAGO_AGIL.Vw_MayoresPagados') IS NOT NULL
+    DROP VIEW PAGO_AGIL.Vw_MayoresPagados;
+Go
+
+IF OBJECT_ID('PAGO_AGIL.Vw_MayoresPagadosPorcen') IS NOT NULL
+    DROP VIEW PAGO_AGIL.Vw_MayoresPagadosPorcen;
 Go
 
 --Drop de tablas
@@ -431,6 +431,7 @@ group by Rendicion_Nro
 		,ItemRendicion_Importe
 
 SET IDENTITY_INSERT PAGO_AGIL.Ft_Rendicion off
+
 --Carga de Forma de Pago
 Insert into PAGO_AGIL.Dim_FormaPago (FormaPago_Desc)
 select distinct FormaPagoDescripcion 
@@ -582,6 +583,96 @@ group by emp.Empresa_Id
 --order by emp.Empresa_Id, Periodo, RendidaGO
 Go
 
+--Vista 1: Porcentaje de facturas pagadas por empresa
+Create view [PAGO_AGIL].[Vw_FactPagadas]
+as
+	Select	 Top 5
+			 emp.Empresa_Nombre as Empresa
+			,rub.Rubro_Descripcion as Rubro
+			,emp.Empresa_Cuit Cuit
+			,(SUM(Case when fac.Factura_Pagado = 1 then 1 else 0 end) * 100) / Count(1) as Porcentaje
+			,YEAR(fac.Factura_Fecha_Vencimiento) as Anio
+			,DATEPART(QUARTER, fac.Factura_Fecha_Vencimiento) as Trimestre
+	from PAGO_AGIL.Lk_Factura as fac
+	inner join PAGO_AGIL.Dim_Empresa as emp
+		on fac.Factura_Empresa_Id = emp.Empresa_Id
+		inner join PAGO_AGIL.Dim_Rubro as rub
+			on emp.Empresa_Rubro_Id = rub.Rubro_Id
+	group by YEAR(fac.Factura_Fecha_Vencimiento)
+			,DATEPART(QUARTER, fac.Factura_Fecha_Vencimiento)
+			,emp.Empresa_Nombre
+			,rub.Rubro_Descripcion
+			,emp.Empresa_Cuit
+	--order by Porcentaje desc
+Go
+
+--Vista 2: Mayores montos rendidos por empresa
+Create view [PAGO_AGIL].[Vw_MayoresRendidos]
+as
+	Select	 Top 5
+			 emp.Empresa_Nombre as Empresa
+			,rub.Rubro_Descripcion as Rubro
+			,emp.Empresa_Cuit Cuit
+			,SUM(FAC.Factura_Total) Rendidos
+			,YEAR(fac.Factura_Fecha_Vencimiento) as Anio
+			,DATEPART(QUARTER, fac.Factura_Fecha_Vencimiento) as Trimestre
+	from PAGO_AGIL.Lk_Factura as fac
+	inner join PAGO_AGIL.Dim_Empresa as emp
+		on fac.Factura_Empresa_Id = emp.Empresa_Id
+		inner join PAGO_AGIL.Dim_Rubro as rub
+			on emp.Empresa_Rubro_Id = rub.Rubro_Id
+	where fac.Factura_Rendicion_Id is not null
+	group by YEAR(fac.Factura_Fecha_Vencimiento)
+			,DATEPART(QUARTER, fac.Factura_Fecha_Vencimiento)
+			,emp.Empresa_Nombre
+			,rub.Rubro_Descripcion
+			,emp.Empresa_Cuit
+	--order by Rendido desc
+Go
+
+--Vista 3: Ranking cantidad de pagos por clientes
+Create view [PAGO_AGIL].[Vw_MayoresPagados]
+as
+	Select	 Top 5
+			 Concat(cli.Cliente_Nombre,' ',cli.Cliente_Apellido) Cliente
+			,cli.Cliente_Dni DNI
+			,cli.Cliente_Fecha_Nac Fec_Nac
+			,Count(fac.Factura_Id) Pagos
+			,YEAR(fac.Factura_Fecha_Vencimiento) as Anio
+			,DATEPART(QUARTER, fac.Factura_Fecha_Vencimiento) as Trimestre
+	from PAGO_AGIL.Lk_Factura as fac
+	inner join PAGO_AGIL.Lk_Cliente as cli
+		on fac.Factura_Cliente_Id = cli.Cliente_Id
+	where fac.Factura_Pagado = 1
+	group by Concat(cli.Cliente_Nombre,' ',cli.Cliente_Apellido)
+			,YEAR(fac.Factura_Fecha_Vencimiento)
+			,DATEPART(QUARTER, fac.Factura_Fecha_Vencimiento)
+			,cli.Cliente_Dni
+			,cli.Cliente_Fecha_Nac
+	--order by Pagos desc
+Go
+
+--Vista 4: Porcentaje de facturas pagadas por cliente
+Create view [PAGO_AGIL].[Vw_MayoresPagadosPorcen]
+as
+	Select	 Top 5
+			 Concat(cli.Cliente_Nombre,' ',cli.Cliente_Apellido) Cliente
+			,cli.Cliente_Dni DNI
+			,cli.Cliente_Fecha_Nac Fec_Nac
+			,(SUM(Case when fac.Factura_Pagado = 1 then 1 else 0 end) * 100) / Count(1) as Porcentaje
+			,YEAR(fac.Factura_Fecha_Vencimiento) as Anio
+			,DATEPART(QUARTER, fac.Factura_Fecha_Vencimiento) as Trimestre
+	from PAGO_AGIL.Lk_Factura as fac
+	inner join PAGO_AGIL.Lk_Cliente as cli
+		on fac.Factura_Cliente_Id = cli.Cliente_Id
+	group by Concat(cli.Cliente_Nombre,' ',cli.Cliente_Apellido)
+			,YEAR(fac.Factura_Fecha_Vencimiento)
+			,DATEPART(QUARTER, fac.Factura_Fecha_Vencimiento)
+			,cli.Cliente_Dni
+			,cli.Cliente_Fecha_Nac
+	--order by Porcentaje desc
+Go
+
 --Creacion de Stored Procedures
 --Procedimiento para verificar entrada a sistema
 Create Procedure [PAGO_AGIL].[Login] (@user varchar(100), @pass varchar(100))
@@ -693,7 +784,6 @@ Select @resultado as Resultado
 Go
 
 -- Alta Sucursal
-
 Create procedure [PAGO_AGIL].agregar_sucursal (@nombre nvarchar(50),@direccion nvarchar(50),@cp int)
 as 
 
@@ -708,7 +798,6 @@ as
 GO
 
 -- Modificar Sucursal
-
 Create procedure [PAGO_AGIL].modificar_sucursal (@nombreant nvarchar(50),@direccionant nvarchar(50),@cpant int,@nombrenuev nvarchar(50),@direccionnuev nvarchar(50),@cpnuev int,@habilitar bit)
 as 	
 	declare @actualizarnombre nvarchar(50);	
@@ -897,88 +986,8 @@ begin
 	end
 
 GO
-;
-
--- Ranking porcentaje facturas pagadas por empresa 
-
-create procedure PAGO_AGIL.topPorcentajeFacturasEmpresa(@fechaInicio date, @fechaFin date) as 
-	begin
-		select distinct top 5
-		emp.Empresa_Nombre as Nombre,
-		emp.Empresa_Cuit as Cuit,
-		rub.Rubro_Descripcion as Descripcion,
-		(select
-		(select count(1) from PAGO_AGIL.Lk_Factura as factAux 
-		inner join PAGO_AGIL.RL_PagoxFactura as pagofactAux on factAux.Factura_Id = pagofactAux.Id_Factura
-		inner join PAGO_AGIL.Ft_Pago as pagoAux on pagofactAux.Id_Pago = pagoAux.Pago_Id
-		where factAux.Factura_Empresa_Id = emp.Empresa_Id 
-		AND factAux.Factura_Fecha_Alta BETWEEN @fechaInicio and @fechaFin
-		AND pagoAux.Pago_Fecha between @fechaInicio and @fechaFin) *100 /
-		(select count(1) from PAGO_AGIL.Lk_Factura as factAux2 where factAux2.Factura_Empresa_Id=emp.Empresa_Id)) as porcentaje
-		from PAGO_AGIL.Lk_Factura as fact 
-		inner join PAGO_AGIL.Dim_Empresa as emp on fact.Factura_Empresa_Id=emp.Empresa_Id
-		inner join PAGO_AGIL.Dim_Rubro as rub on emp.Empresa_Rubro_Id = rub.Rubro_Id
-	end
-go
-
--- Ranking monto rendido
-
-create procedure PAGO_AGIL.topMontoRendido (@fechaInicio date, @fechaFin date) as
-	begin
-		select top 5
-		emp.Empresa_Nombre as Empresa_Nombre,
-		rubro.Rubro_Descripcion as rubro,
-		sum(factura_total) as monto_rendido
-		from PAGO_AGIL.Lk_Factura as fact
-		inner join PAGO_AGIL.Dim_Empresa as emp on fact.Factura_Empresa_Id = emp.Empresa_Id
-		inner join PAGO_AGIL.Dim_Rubro as rubro on rubro.Rubro_Id = emp.Empresa_Rubro_Id
-		where convert(date, fact.Factura_Fecha_Alta) between @fechaInicio and @fechaFin
-		group by emp.Empresa_Nombre, Factura_Empresa_Id, rubro.Rubro_Descripcion
-	end
-go
-;
-
---Ranking porcentaje de pago
-create procedure PAGO_AGIL.topPorcentajePago(@fechaInicio date, @fechaFin date) as 
-	begin
-		select distinct top 5
-		clie.Cliente_Dni as Dni_Cliente,
-		clie.Cliente_Apellido as ApellidoCliente,
-		clie.Cliente_Nombre as NombreCliente,
-		(select count(1) from PAGO_AGIL.Lk_Factura as factAux 
-			inner join PAGO_AGIL.RL_PagoxFactura as pagofactAux on factAux.Factura_Id=pagofactAux.Id_Factura
-			inner join PAGO_AGIL.Ft_Pago as pagoAux on pagofactAux.Id_Pago = pagoAux.Pago_Id
-		where factAux.Factura_Cliente_Id = clie.Cliente_Id 	AND factAux.Factura_Pagado=1 AND 
-		factAux.Factura_Fecha_Alta between @fechaInicio and @fechaFin and pagoAux.Pago_Fecha between @fechaInicio and @fechaFin) *100 /
-		(select count(1) from PAGO_AGIL.Lk_Factura as factAux2 where factAux2.Factura_Cliente_Id = clie.Cliente_Id ) as porcentaje
-		from PAGO_AGIL.Lk_Factura as fact
-		inner join PAGO_AGIL.Lk_Cliente as clie on fact.Factura_Cliente_Id = clie.Cliente_Id
-		order by porcentaje desc
-	;
-	end
-go
-;
-
--- Ranking cantidad de pagos
-create procedure PAGO_AGIL.topCantidadPagos(@fechaInicio date, @fechaFin date) as
-	begin
-		SELECT top 5
-		CLIE.Cliente_Nombre as Cliente_Nombre,
-		CLIE.Cliente_Apellido as Cliente_Apellido,
-		CLIE.Cliente_Dni as Cliente_Dni,
-		(select count(1) from PAGO_AGIL.Lk_Factura as aux_fact WHERE aux_fact.Factura_Cliente_Id=CLIE.Cliente_Id
-		AND aux_fact.Factura_Pagado=1) as cantidad_pagos
-		from PAGO_AGIL.Lk_Factura FACT
-		inner join PAGO_AGIL.RL_PagoxFactura as PAGOF on (PAGOF.id_factura = FACT.Factura_Id AND PAGOF.Id_Pago is not null)
-		inner join PAGO_AGIL.Lk_Cliente as CLIE on FACT.Factura_Cliente_Id = CLIE.Cliente_Id
-		inner join PAGO_AGIL.Ft_Pago as PAGO on PAGOF.Id_Pago = PAGO.Pago_Id
-		where convert(date,PAGO.Pago_Fecha) between @fechaInicio and @fechaFin
-		order by cantidad_pagos desc
-	end
-go
 
 --Creacion de nuevo cliente
-
 create procedure PAGO_AGIL.nuevoCliente(@DNI int, @apellido nvarchar(255), @nombre nvarchar(255), 
 @telefono nvarchar(255), @fechaNac datetime, @mail nvarchar(255), @direccion nvarchar(255), @codigoPostal nvarchar(255), @habilitado int) as
 	begin

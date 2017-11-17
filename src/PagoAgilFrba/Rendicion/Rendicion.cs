@@ -17,7 +17,6 @@ namespace PagoAgilFrba.Rendicion
         string main_usuario;
         string main_fecha;
         Form main_menu;
-        string comision;
 
         public Rendicion(string usuario, string fecha, Form menu)
         {

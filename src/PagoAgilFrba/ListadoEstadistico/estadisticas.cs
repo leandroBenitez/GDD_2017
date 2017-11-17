@@ -14,349 +14,116 @@ namespace PagoAgilFrba.ListadoEstadistico
 {
     public partial class estadisticas : Form
     {
-        public estadisticas()
+        Form main_menu;
+
+        public estadisticas(Form menu)
         {
             InitializeComponent();
+            main_menu = menu;
+            combo_trime.Items.Add("Primer trimestre");
+            combo_trime.Items.Add("Segundo trimestre");
+            combo_trime.Items.Add("Tercer trimestre");
+            combo_trime.Items.Add("Cuarto trimestre");
+           
+            combo_listado.Items.Add("Facturas pagadas por empresa");
+            combo_listado.Items.Add("Monto rendido por empresa");
+            combo_listado.Items.Add("Clientes con mas pagos");
+            combo_listado.Items.Add("Facturas pagadas por cliente");
+
+            string consulta = "Select Distinct YEAR(Factura_Fecha_Vencimiento) anio from PAGO_AGIL.Lk_Factura order by anio";
+            Entidades.Herramientas.llenarComboBox(combo_anio, consulta);
         }
 
-        private void botonTopPagos_Click(object sender, EventArgs e)
+        private void button_mostrar_Click(object sender, EventArgs e)
         {
-            string fechaInicio;
-            string fechaFin;
-            dataGridCantPagos.Visible = true;
-            dataGridMontoRendido.Visible = false;
-            dataGridPorcentajePago.Visible = false;
-            dataGridPagosEmpresas.Visible = false;
-            switch (label1.Text)
+            if ((combo_anio.SelectedIndex == -1) || (combo_trime.SelectedIndex == -1) || (combo_listado.SelectedIndex == -1))
             {
-                case "1" : 
-                    fechaInicio = comboBox1.Text + "-01-01" ;
-                    fechaFin = comboBox1.Text + "-03-31";
-                    label2.Text = fechaInicio;
-                    label3.Text = fechaFin;
-                    break;
-                case "2":
-                    fechaInicio = comboBox1.Text + "-04-01" ;
-                    fechaFin = comboBox1.Text + "-06-30";
-                    label2.Text = fechaInicio;
-                    label3.Text = fechaFin;
-                    break;
-                case "3":
-                    fechaInicio = comboBox1.Text + "-07-01";
-                    fechaFin = comboBox1.Text + "-09-30";
-                    label2.Text = fechaInicio;
-                    label3.Text = fechaFin;
-                    break;
-                case "4":
-                    fechaInicio = comboBox1.Text + "-10-01";
-                    fechaFin = comboBox1.Text + "-12-31";
-                    label2.Text = fechaInicio;
-                    label3.Text = fechaFin;
-                    break;
-                default: MessageBox.Show("Debe seleccionar un trimestre");
-                    break;
+                MessageBox.Show("Seleccione todos los campos", "Informacion", MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
-            string consulta = "Execute PAGO_AGIL.topCantidadPagos '" + label2.Text + "', '" + label3.Text + "'"; 
-            conexion connection = new conexion();
-            SqlCommand command = new SqlCommand();
-
-            command.CommandText = consulta;
-            command.CommandType = CommandType.Text;
-            command.Connection = connection.abrir_conexion();
-
-            try
+            else 
             {
-                SqlDataReader reader = command.ExecuteReader();
-                cargar_datos(reader);
-                connection.cerrar_conexion(command.Connection);
+                string consulta;
+
+                if (combo_listado.SelectedIndex == 0)
+                {
+                    consulta = "Select * from PAGO_AGIL.Vw_FactPagadas";
+                    dataGridView.Columns[0].HeaderText = "Empresa";
+                    dataGridView.Columns[1].HeaderText = "Rubro";
+                    dataGridView.Columns[2].HeaderText = "CUIT";
+                    dataGridView.Columns[3].HeaderText = "Porcentage";
+                }
+                else if (combo_listado.SelectedIndex == 1)
+                {
+                    consulta = "Select * from PAGO_AGIL.Vw_MayoresRendidos";
+                    dataGridView.Columns[0].HeaderText = "Empresa";
+                    dataGridView.Columns[1].HeaderText = "Rubro";
+                    dataGridView.Columns[2].HeaderText = "CUIT";
+                    dataGridView.Columns[3].HeaderText = "Monto rendido";
+                }
+                else if (combo_listado.SelectedIndex == 2)
+                {
+                    consulta = "Select * from PAGO_AGIL.Vw_MayoresPagados";
+                    dataGridView.Columns[0].HeaderText = "Cliente";
+                    dataGridView.Columns[1].HeaderText = "DNI";
+                    dataGridView.Columns[2].HeaderText = "Fec Nac";
+                    dataGridView.Columns[3].HeaderText = "Pagos";
+                }
+                else
+                {
+                    consulta = "Select * from PAGO_AGIL.Vw_MayoresPagadosPorcen";
+                    dataGridView.Columns[0].HeaderText = "Cliente";
+                    dataGridView.Columns[1].HeaderText = "DNI";
+                    dataGridView.Columns[2].HeaderText = "Fec Nac";
+                    dataGridView.Columns[3].HeaderText = "Porcentage";
+                }
+
+                consulta = consulta + " where anio = " + combo_anio.Text + " and Trimestre = " + combo_trime.SelectedIndex + " + 1";
+                consulta = consulta + " order by 4 desc";
+
+                conexion connection = new conexion();
+                SqlCommand command = new SqlCommand();
+
+                command.CommandText = consulta;
+                command.CommandType = CommandType.Text;
+                command.Connection = connection.abrir_conexion();
+
+                try
+                {
+                    SqlDataReader reader = command.ExecuteReader();
+                    cargar_datos(reader);
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show("Error: " + ex.Message);
+                }            
             }
-            catch (Exception ex)
-            {
-                MessageBox.Show("Error: " + ex.Message);
-            }
-        
-
-
         }
 
-        private void radioButton1_CheckedChanged(object sender, EventArgs e)
+        private void cargar_datos(SqlDataReader reader)
         {
-            if (radioButton1.Checked == true)
-            { label1.Text = "1"; }
-        }
-
-        private void radioButton2_CheckedChanged(object sender, EventArgs e)
-        {
-            if (radioButton2.Checked == true)
-            { label1.Text = "2"; }
-        }
-
-        private void radioButton3_CheckedChanged(object sender, EventArgs e)
-        {
-            if (radioButton3.Checked == true)
-            { label1.Text = "3"; }
-        }
-
-        private void radioButton4_CheckedChanged(object sender, EventArgs e)
-        {
-            if (radioButton4.Checked == true)
-            { label1.Text = "4"; }
-        }
-
-        private void cargar_datos(SqlDataReader datos)
-        {
-            dataGridCantPagos.Rows.Clear();
+            dataGridView.Rows.Clear();
 
             List<DataGridViewRow> filas = new List<DataGridViewRow>();
             Object[] columnas = new Object[4];
 
-            while (datos.Read())
+            while (reader.Read())
             {
-                columnas[0] = datos["Cliente_Nombre"].ToString();
-                columnas[1] = datos["Cliente_Apellido"].ToString();
-                columnas[2] = datos["Cliente_Dni"].ToString();
-                columnas[3] = datos["cantidad_pagos"].ToString();
+                columnas[0] = reader[0].ToString();
+                columnas[1] = reader[1].ToString();
+                columnas[2] = reader[2].ToString();
+                columnas[3] = reader[3].ToString();
 
                 filas.Add(new DataGridViewRow());
-                filas[filas.Count - 1].CreateCells(dataGridCantPagos, columnas);
+                filas[filas.Count - 1].CreateCells(dataGridView, columnas);
             }
 
-            dataGridCantPagos.Rows.AddRange(filas.ToArray());
+            dataGridView.Rows.AddRange(filas.ToArray());
         }
 
-        private void button2_Click(object sender, EventArgs e)
+        private void button_cancelar_Click(object sender, EventArgs e)
         {
-            string fechaInicio;
-            string fechaFin;
-            dataGridMontoRendido.Visible = true;
-            dataGridPorcentajePago.Visible = false;
-            dataGridPagosEmpresas.Visible = false;
-            dataGridCantPagos.Visible = false;
-            switch (label1.Text)
-            {
-                case "1":
-                    fechaInicio = comboBox1.Text + "-01-01";
-                    fechaFin = comboBox1.Text + "-03-31";
-                    label2.Text = fechaInicio;
-                    label3.Text = fechaFin;
-                    break;
-                case "2":
-                    fechaInicio = comboBox1.Text + "-04-01";
-                    fechaFin = comboBox1.Text + "-06-30";
-                    label2.Text = fechaInicio;
-                    label3.Text = fechaFin;
-                    break;
-                case "3":
-                    fechaInicio = comboBox1.Text + "-07-01";
-                    fechaFin = comboBox1.Text + "-09-30";
-                    label2.Text = fechaInicio;
-                    label3.Text = fechaFin;
-                    break;
-                case "4":
-                    fechaInicio = comboBox1.Text + "-10-01";
-                    fechaFin = comboBox1.Text + "-12-31";
-                    label2.Text = fechaInicio;
-                    label3.Text = fechaFin;
-                    break;
-                default: MessageBox.Show("Debe seleccionar un trimestre");
-                    break;
-            }
-            string consulta = "Execute PAGO_AGIL.topMontoRendido '" + label2.Text + "', '" + label3.Text + "'";
-            conexion connection = new conexion();
-            SqlCommand command = new SqlCommand();
-
-            command.CommandText = consulta;
-            command.CommandType = CommandType.Text;
-            command.Connection = connection.abrir_conexion();
-
-            try
-            {
-                SqlDataReader reader = command.ExecuteReader();
-                cargar_datos2(reader);
-                connection.cerrar_conexion(command.Connection);
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show("Error: " + ex.Message);
-            }
-
+            main_menu.Show();
+            this.Hide();
         }
-
-        private void cargar_datos2(SqlDataReader datos)
-        {
-            dataGridMontoRendido.Rows.Clear();
-
-            List<DataGridViewRow> filas = new List<DataGridViewRow>();
-            Object[] columnas = new Object[3];
-
-            while (datos.Read())
-            {
-                columnas[0] = datos["Empresa_Nombre"].ToString();
-                columnas[1] = datos["rubro"].ToString();
-                columnas[2] = datos["monto_rendido"].ToString();
-
-                filas.Add(new DataGridViewRow());
-                filas[filas.Count - 1].CreateCells(dataGridMontoRendido, columnas);
-            }
-
-            dataGridMontoRendido.Rows.AddRange(filas.ToArray());
-        }
-
-        private void button3_Click(object sender, EventArgs e)
-        {
-            string fechaInicio;
-            string fechaFin;
-            dataGridPagosEmpresas.Visible = false;
-            dataGridCantPagos.Visible = false;
-            dataGridMontoRendido.Visible = false;
-            dataGridPorcentajePago.Visible = true;
-            switch (label1.Text)
-            {
-                case "1":
-                    fechaInicio = comboBox1.Text + "-01-01";
-                    fechaFin = comboBox1.Text + "-03-31";
-                    label2.Text = fechaInicio;
-                    label3.Text = fechaFin;
-                    break;
-                case "2":
-                    fechaInicio = comboBox1.Text + "-04-01";
-                    fechaFin = comboBox1.Text + "-06-30";
-                    label2.Text = fechaInicio;
-                    label3.Text = fechaFin;
-                    break;
-                case "3":
-                    fechaInicio = comboBox1.Text + "-07-01";
-                    fechaFin = comboBox1.Text + "-09-30";
-                    label2.Text = fechaInicio;
-                    label3.Text = fechaFin;
-                    break;
-                case "4":
-                    fechaInicio = comboBox1.Text + "-10-01";
-                    fechaFin = comboBox1.Text + "-12-31";
-                    label2.Text = fechaInicio;
-                    label3.Text = fechaFin;
-                    break;
-                default: MessageBox.Show("Debe seleccionar un trimestre");
-                    break;
-            }
-            string consulta = "Execute PAGO_AGIL.topPorcentajePago '" + label2.Text + "', '" + label3.Text + "'";
-            conexion connection = new conexion();
-            SqlCommand command = new SqlCommand();
-
-            command.CommandText = consulta;
-            command.CommandType = CommandType.Text;
-            command.Connection = connection.abrir_conexion();
-            textBox1.Text = consulta;
-            try
-            {
-                SqlDataReader reader = command.ExecuteReader();
-                cargar_datos3(reader);
-                connection.cerrar_conexion(command.Connection);
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show("Error: " + ex.Message);
-            }
-
-        }
-
-        private void cargar_datos3(SqlDataReader datos)
-        {
-            dataGridPorcentajePago.Rows.Clear();
-
-            List<DataGridViewRow> filas = new List<DataGridViewRow>();
-            Object[] columnas = new Object[4];
-
-            while (datos.Read())
-            {
-                columnas[0] = datos["Dni_Cliente"].ToString();
-                columnas[1] = datos["ApellidoCliente"].ToString();
-                columnas[2] = datos["NombreCliente"].ToString();
-                columnas[3] = datos["porcentaje"].ToString();
-                filas.Add(new DataGridViewRow());
-                filas[filas.Count - 1].CreateCells(dataGridPorcentajePago, columnas);
-            }
-
-            dataGridPorcentajePago.Rows.AddRange(filas.ToArray());
-        }
-
-        private void botonTopFacturasEmpresa_Click(object sender, EventArgs e)
-        {
-            string fechaInicio;
-            string fechaFin;
-            dataGridCantPagos.Visible = false;
-            dataGridMontoRendido.Visible = false;
-            dataGridPorcentajePago.Visible = false;
-            dataGridPagosEmpresas.Visible = true;
-            switch (label1.Text)
-            {
-                case "1":
-                    fechaInicio = comboBox1.Text + "-01-01";
-                    fechaFin = comboBox1.Text + "-03-31";
-                    label2.Text = fechaInicio;
-                    label3.Text = fechaFin;
-                    break;
-                case "2":
-                    fechaInicio = comboBox1.Text + "-04-01";
-                    fechaFin = comboBox1.Text + "-06-30";
-                    label2.Text = fechaInicio;
-                    label3.Text = fechaFin;
-                    break;
-                case "3":
-                    fechaInicio = comboBox1.Text + "-07-01";
-                    fechaFin = comboBox1.Text + "-09-30";
-                    label2.Text = fechaInicio;
-                    label3.Text = fechaFin;
-                    break;
-                case "4":
-                    fechaInicio = comboBox1.Text + "-10-01";
-                    fechaFin = comboBox1.Text + "-12-31";
-                    label2.Text = fechaInicio;
-                    label3.Text = fechaFin;
-                    break;
-                default: MessageBox.Show("Debe seleccionar un trimestre");
-                    break;
-            }
-            string consulta = "Execute PAGO_AGIL.topPorcentajeFacturasEmpresa '" + label2.Text + "', '" + label3.Text + "'";
-            conexion connection = new conexion();
-            SqlCommand command = new SqlCommand();
-
-            command.CommandText = consulta;
-            command.CommandType = CommandType.Text;
-            command.Connection = connection.abrir_conexion();
-            textBox1.Text = consulta;
-            try
-            {
-                SqlDataReader reader = command.ExecuteReader();
-                cargar_datos4(reader);
-                connection.cerrar_conexion(command.Connection);
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show("Error: " + ex.Message);
-            }
-        }
-
-        private void cargar_datos4(SqlDataReader datos)
-        {
-            dataGridPagosEmpresas.Rows.Clear();
-
-            List<DataGridViewRow> filas = new List<DataGridViewRow>();
-            Object[] columnas = new Object[4];
-
-            while (datos.Read())
-            {
-                columnas[0] = datos["Nombre"].ToString();
-                columnas[1] = datos["Cuit"].ToString();
-                columnas[2] = datos["Rubro_Emp"].ToString();
-                columnas[3] = datos["porcentaje"].ToString();
-                filas.Add(new DataGridViewRow());
-                filas[filas.Count - 1].CreateCells(dataGridPagosEmpresas, columnas);
-            }
-
-            dataGridPagosEmpresas.Rows.AddRange(filas.ToArray());
-        }
-
-
     }
 }

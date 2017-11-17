@@ -143,7 +143,7 @@ namespace PagoAgilFrba.Login
 
         private void button_estadisticas_Click(object sender, EventArgs e)
         {
-            PagoAgilFrba.ListadoEstadistico.estadisticas estad = new PagoAgilFrba.ListadoEstadistico.estadisticas();
+            PagoAgilFrba.ListadoEstadistico.estadisticas estad = new PagoAgilFrba.ListadoEstadistico.estadisticas(this);
             this.Hide();
             estad.Show();
         }
