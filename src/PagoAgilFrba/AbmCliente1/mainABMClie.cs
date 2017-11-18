@@ -12,9 +12,12 @@ namespace PagoAgilFrba.AbmCliente1
 {
     public partial class mainABMClie : Form
     {
-        public mainABMClie()
+        Form main_menu;
+        public mainABMClie(Form menu)
         {
+
             InitializeComponent();
+            main_menu = menu;
         }
 
         private void button4_Click(object sender, EventArgs e)
@@ -43,6 +46,13 @@ namespace PagoAgilFrba.AbmCliente1
             AbmCliente1.bajaCliente frm = new AbmCliente1.bajaCliente();
             frm.Show()
             ;
+        }
+
+        private void botonVolver_Click(object sender, EventArgs e)
+        {
+
+            main_menu.Show();
+            this.Close();
         }
     }
 }

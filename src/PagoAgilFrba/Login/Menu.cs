@@ -164,9 +164,14 @@ namespace PagoAgilFrba.Login
 
         private void button_abm_cliente_Click(object sender, EventArgs e)
         {
-            PagoAgilFrba.AbmCliente1.mainABMClie cli = new PagoAgilFrba.AbmCliente1.mainABMClie();
+            PagoAgilFrba.AbmCliente1.mainABMClie cli = new PagoAgilFrba.AbmCliente1.mainABMClie(this);
             this.Hide();
             cli.Show();
+        }
+
+        private void Menu_Load(object sender, EventArgs e)
+        {
+
         }
     }
 }
