@@ -151,43 +151,48 @@ namespace PagoAgilFrba.AbmCliente1
             direccion.Text = "";
             codPostal.Text = "";
             fechaNac.Text = "";
+            comboHabilitado.SelectedItem=null;
         }
 
         private void botonModificar_Click_1(object sender, EventArgs e)
         {
             string bitHabilitado = "null";
             string dni_cadena;
-            if (comboHabilitado.SelectedIndex != -1)
+            if (dniBuscado.Text != "")
             {
-                if (comboHabilitado.Text == "Habilitado")
-                { bitHabilitado = "1"; }
-                else { bitHabilitado = "0"; }
-            }
-            if (dni.Text == "")
-            { dni_cadena = "null"; }
-            else { dni_cadena = dni.Text; };
-            string consulta = "Execute PAGO_AGIL.modificaCliente " + dniBuscado.Text + ", " + dni_cadena + ", '" + apellido.Text + "', '" +
-            nombre.Text + "', '" + telefono.Text + "', '" + fechaNac.Text + "', '" + mail.Text + "', '" + direccion.Text + "', '" +
-            codPostal.Text + "', " + bitHabilitado;
-            conexion connection = new conexion();
-            SqlCommand command = new SqlCommand();
+                if (comboHabilitado.SelectedIndex != -1)
+                {
+                    if (comboHabilitado.Text == "Habilitado")
+                    { bitHabilitado = "1"; }
+                    else { bitHabilitado = "0"; }
+                }
+                if (dni.Text == "")
+                { dni_cadena = "null"; }
+                else { dni_cadena = dni.Text; };
+                string consulta = "Execute PAGO_AGIL.modificaCliente " + dniBuscado.Text + ", " + dni_cadena + ", '" + apellido.Text + "', '" +
+                nombre.Text + "', '" + telefono.Text + "', '" + fechaNac.Text + "', '" + mail.Text + "', '" + direccion.Text + "', '" +
+                codPostal.Text + "', " + bitHabilitado;
+                conexion connection = new conexion();
+                SqlCommand command = new SqlCommand();
 
-            command.CommandText = consulta;
-            command.CommandType = CommandType.Text;
-            command.Connection = connection.abrir_conexion();
+                command.CommandText = consulta;
+                command.CommandType = CommandType.Text;
+                command.Connection = connection.abrir_conexion();
 
-            try
-            {
-                Object reader = command.ExecuteScalar();
-                string reultado = reader.ToString();
-                reader.ToString();
-                MessageBox.Show(reader.ToString(), "Informacion", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                try
+                {
+                    Object reader = command.ExecuteScalar();
+                    string reultado = reader.ToString();
+                    reader.ToString();
+                    MessageBox.Show(reader.ToString(), "Informacion", MessageBoxButtons.OK, MessageBoxIcon.Information);
 
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show("Error: " + ex.Message);
+                }
             }
-            catch (Exception ex)
-            {
-                MessageBox.Show("Error: " + ex.Message);
-            }
+            else { MessageBox.Show("Es necesario completar el DNI buscado"); };
         }
 
         private void button1_Click(object sender, EventArgs e)

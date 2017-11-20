@@ -138,6 +138,8 @@ namespace PagoAgilFrba.AbmCliente1
             mail.Text = "";
             direccion.Text = "";
             codPostal.Text = "";
+            fechaNac.Text = "";
+            comboHabilitado.SelectedItem = null;
         }
 
         private void fechaNac_Click(object sender, EventArgs e)

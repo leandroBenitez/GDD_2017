@@ -227,7 +227,8 @@
             // 
             // dataGridView1
             // 
-            this.dataGridView1.AllowUserToOrderColumns = true;
+            this.dataGridView1.AllowUserToAddRows = false;
+            this.dataGridView1.AllowUserToDeleteRows = false;
             this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dataGridView1.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.Cliente_Dni,
@@ -299,7 +300,7 @@
             // 
             // monthCalendar1
             // 
-            this.monthCalendar1.Location = new System.Drawing.Point(165, 142);
+            this.monthCalendar1.Location = new System.Drawing.Point(152, 130);
             this.monthCalendar1.MaxSelectionCount = 1;
             this.monthCalendar1.Name = "monthCalendar1";
             this.monthCalendar1.TabIndex = 42;
@@ -318,7 +319,7 @@
             // 
             // button2
             // 
-            this.button2.Location = new System.Drawing.Point(346, 115);
+            this.button2.Location = new System.Drawing.Point(332, 109);
             this.button2.Name = "button2";
             this.button2.Size = new System.Drawing.Size(26, 31);
             this.button2.TabIndex = 44;

@@ -991,10 +991,16 @@ GO
 create procedure PAGO_AGIL.nuevoCliente(@DNI int, @apellido nvarchar(255), @nombre nvarchar(255), 
 @telefono nvarchar(255), @fechaNac datetime, @mail nvarchar(255), @direccion nvarchar(255), @codigoPostal nvarchar(255), @habilitado int) as
 	begin
+	declare @validacionCliente int = (select 1 from PAGO_AGIL.Lk_Cliente where Cliente_Dni = @DNI)
+	if @validacionCliente is null
+	begin
 		insert into PAGO_AGIL.Lk_Cliente(Cliente_Dni, Cliente_Apellido, Cliente_Nombre, Cliente_Telefono, Cliente_Fecha_Nac, 
 		Cliente_Mail, Cliente_Direccion, Cliente_Codigo_Postal, Cliente_Habilitado) 
 		values (@DNI, @apellido, @nombre, @telefono, @fechaNac, @mail, @direccion, @codigoPostal, @habilitado)
 		select 'Insertado correctamente' as Resultado
+		end
+		else 
+		select 'El cliente ya existe'
 	end
 	GO
 ;

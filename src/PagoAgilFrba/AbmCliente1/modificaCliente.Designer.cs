@@ -113,6 +113,7 @@
             // 
             // comboHabilitado
             // 
+            this.comboHabilitado.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.comboHabilitado.FormattingEnabled = true;
             this.comboHabilitado.Items.AddRange(new object[] {
             "Habilitado",
@@ -264,6 +265,8 @@
             // 
             // dataGridView1
             // 
+            this.dataGridView1.AllowUserToAddRows = false;
+            this.dataGridView1.AllowUserToDeleteRows = false;
             this.dataGridView1.AllowUserToOrderColumns = true;
             this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dataGridView1.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
@@ -328,7 +331,7 @@
             // 
             // button2
             // 
-            this.button2.Location = new System.Drawing.Point(358, 99);
+            this.button2.Location = new System.Drawing.Point(342, 88);
             this.button2.Name = "button2";
             this.button2.Size = new System.Drawing.Size(26, 31);
             this.button2.TabIndex = 74;
@@ -349,7 +352,7 @@
             // 
             // monthCalendar1
             // 
-            this.monthCalendar1.Location = new System.Drawing.Point(176, 126);
+            this.monthCalendar1.Location = new System.Drawing.Point(154, 113);
             this.monthCalendar1.MaxSelectionCount = 1;
             this.monthCalendar1.Name = "monthCalendar1";
             this.monthCalendar1.TabIndex = 72;
