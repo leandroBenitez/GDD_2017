@@ -111,6 +111,12 @@
     <Compile Include="AbmFactura\auxMod.Designer.cs">
       <DependentUpon>auxMod.cs</DependentUpon>
     </Compile>
+    <Compile Include="AbmFactura\eliminar.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="AbmFactura\eliminar.Designer.cs">
+      <DependentUpon>eliminar.cs</DependentUpon>
+    </Compile>
     <Compile Include="AbmFactura\item.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -182,6 +188,24 @@
     </Compile>
     <Compile Include="AbmSucursal\Modificar.designer.cs">
       <DependentUpon>Modificar.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Devolucion\auxMotivo.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Devolucion\auxMotivo.Designer.cs">
+      <DependentUpon>auxMotivo.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Devolucion\Devolver Factura.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Devolucion\Devolver Factura.Designer.cs">
+      <DependentUpon>Devolver Factura.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Devolucion\motivo.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Devolucion\motivo.Designer.cs">
+      <DependentUpon>motivo.cs</DependentUpon>
     </Compile>
     <Compile Include="Entidades\conexion.cs" />
     <Compile Include="Entidades\Funciones.cs" />
@@ -262,6 +286,9 @@
     <EmbeddedResource Include="AbmFactura\auxMod.resx">
       <DependentUpon>auxMod.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="AbmFactura\eliminar.resx">
+      <DependentUpon>eliminar.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="AbmFactura\item.resx">
       <DependentUpon>item.cs</DependentUpon>
     </EmbeddedResource>
@@ -297,6 +324,15 @@
     </EmbeddedResource>
     <EmbeddedResource Include="AbmSucursal\Modificar.resx">
       <DependentUpon>Modificar.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Devolucion\auxMotivo.resx">
+      <DependentUpon>auxMotivo.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Devolucion\Devolver Factura.resx">
+      <DependentUpon>Devolver Factura.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Devolucion\motivo.resx">
+      <DependentUpon>motivo.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="ListadoEstadistico\estadisticas.resx">
       <DependentUpon>estadisticas.cs</DependentUpon>
