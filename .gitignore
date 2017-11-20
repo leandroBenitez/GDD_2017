@@ -3,3 +3,5 @@
 *.exe
 *.pdb
 PagoAgilFrba/bin/Debug/PagoAgilFrba.exe
+*.cache
+*.txt

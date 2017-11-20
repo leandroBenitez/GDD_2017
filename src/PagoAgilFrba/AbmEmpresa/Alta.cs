@@ -41,35 +41,61 @@ namespace PagoAgilFrba.AbmEmpresa
                     || !textBox_cuit_fin.Text.All(char.IsDigit))
             {
                 MessageBox.Show("CUIT sólo caracteres numéricos", "Informacion", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                textBox_cuit_in.Text = "";
+                textBox_cuit_fin.Text = "";
+                textBox_cuit_medio.Text = "";
+                return;
+            }
+            else if(!textBox_dia.Text.All(char.IsDigit))
+            {
+                MessageBox.Show("Día de cobro sólo números", "Informacion", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                textBox_dia.Text = "";
+                return;
+            }
+            else if (int.Parse(textBox_dia.Text) > 28 || int.Parse(textBox_dia.Text) < 1)
+            {
+                MessageBox.Show("Ingrese un día de cobro entre 1 y 28", "Informacion", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                textBox_dia.Text = "";
                 return;
             }
             else
             {
                 string cuit_formateado = textBox_cuit_in.Text + "-" + textBox_cuit_medio.Text + "-" + textBox_cuit_fin.Text;
-                string cadena = "Execute PAGO_AGIL.Alta_Empresa '" + textBox_nombre.Text + "', '";
-                cadena = cadena + textBox_direccion.Text + "', '";
-                cadena = cadena + cuit_formateado + "', '";
-                cadena = cadena + comboBox_rubro.Text + "'";
-
-                conexion connection = new conexion();
-                SqlCommand command = new SqlCommand();
-
-                command.CommandText = cadena;
-                command.CommandType = CommandType.Text;
-                command.Connection = connection.abrir_conexion();
-
-                try
+                if (ValidaCuit(cuit_formateado))
                 {
-                    Object reader = command.ExecuteScalar();
-                    string resultado = reader.ToString();
-                    tratar_resultado(resultado);
+                    string cadena = "Execute PAGO_AGIL.Alta_Empresa '" + textBox_nombre.Text + "', '";
+                    cadena = cadena + textBox_direccion.Text + "', '";
+                    cadena = cadena + cuit_formateado + "', '";
+                    cadena = cadena + comboBox_rubro.Text + "', '";
+                    cadena = cadena + textBox_dia + "' ";
 
+                    conexion connection = new conexion();
+                    SqlCommand command = new SqlCommand();
+
+                    command.CommandText = cadena;
+                    command.CommandType = CommandType.Text;
+                    command.Connection = connection.abrir_conexion();
+
+                    try
+                    {
+                        Object reader = command.ExecuteScalar();
+                        string resultado = reader.ToString();
+                        tratar_resultado(resultado);
+
+                    }
+                    catch (Exception ex)
+                    {
+                        MessageBox.Show("Error: " + ex.Message);
+                    }
                 }
-                catch (Exception ex)
+                else
                 {
-                    MessageBox.Show("Error: " + ex.Message);
+                    MessageBox.Show("Ingrese un CUIT válido", "Informacion", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    textBox_cuit_in.Text = "";
+                    textBox_cuit_fin.Text = "";
+                    textBox_cuit_medio.Text = "";
+                    return;
                 }
-           
             }
         }
 
@@ -92,6 +118,39 @@ namespace PagoAgilFrba.AbmEmpresa
         {
             main_menu.Show();
             this.Close();
+        }
+
+        public static int CalcularDigitoCuit(string cuit)
+        {
+            int[] mult = new[] { 5, 4, 3, 2, 7, 6, 5, 4, 3, 2 };
+            char[] nums = cuit.ToCharArray();
+            int total = 0;
+            for (int i = 0; i < mult.Length; i++)
+            {
+                 total += int.Parse(nums[i].ToString()) * mult[i];
+            }
+            var resto = total % 11;
+            return resto == 0 ? 0 : resto == 1 ? 9 : 11 - resto;
+        }
+
+        public static bool ValidaCuit(string cuit)
+        {
+            if (cuit == null)
+            {
+                return false;
+            }
+            //Quito los guiones, el cuit resultante debe tener 11 caracteres.
+            cuit = cuit.Replace("-", string.Empty);
+            if (cuit.Length != 11)
+            {
+                return false;
+            }
+            else
+            {
+                int calculado = CalcularDigitoCuit(cuit);
+                int digito = int.Parse(cuit.Substring(10));
+                return calculado == digito;
+            }
         }
     }
 }
