@@ -8,6 +8,14 @@ IF OBJECT_ID('PAGO_AGIL.Rendir') IS NOT NULL
 	DROP PROCEDURE PAGO_AGIL.Rendir;
 Go
 
+IF OBJECT_ID('PAGO_AGIL.eliminar_factura') IS NOT NULL
+	DROP PROCEDURE PAGO_AGIL.eliminar_factura;
+Go
+
+IF OBJECT_ID('PAGO_AGIL.nueva_devolucion') IS NOT NULL
+	DROP PROCEDURE PAGO_AGIL.nueva_devolucion;
+Go
+
 IF OBJECT_ID('PAGO_AGIL.Baja_Rol') IS NOT NULL
 	DROP PROCEDURE PAGO_AGIL.Baja_Rol;
 Go
@@ -381,12 +389,13 @@ Values	('ABM de Rol'),
 		('ABM Facturas'),
 		('Registro de Pago de Facturas'),
 		('Rendicion de Facturas cobradas'),
-		('Listado Estadistico')
+		('Listado Estadistico'),
+		('Devolucion Facturas')
 
 --Carga de Roles x Funcionalidad
 Insert into PAGO_AGIL.Rl_RolxFuncionalidad (Rol_Id, Funcionalidad_Id)
 Values	 (1,1),(1,2),(1,3),(1,4),(1,5),(1,6),(1,7),(1,8) --Administrador
-			  ,(2,2),(2,3)		,(2,5),(2,6)	  ,(2,8) --Cobrador
+			  ,(2,2),(2,3)		,(2,5),(2,6)	  ,(2,8),(2,9) --Cobrador
 
 --Carga de Usuarios
 Insert into PAGO_AGIL.Lk_Usuario (Usuario_Name, Usuario_Password)
@@ -448,11 +457,8 @@ where Sucursal_Nombre is not null
 
 --Carga de Motivo Devolucion
 Insert into  PAGO_AGIL.Dim_Motivo_Dev (Motivo_Dev_Desc) 
-values	 ('Motivo devolucion inventado 1')
-
---Carga de Devoluciones
-Insert into PAGO_AGIL.Ft_Devolucion(Devolucion_Motivo_Id, Devolucion_Fecha, Devolucion_Resp_Id)
-Values (1, GETDATE(), 1)
+values	('Error de cobro'),
+		('Cliente desea retrotraer el pago')
 
 --Carga de Pago
 Insert into PAGO_AGIL.Ft_Pago(	 Pago_Id
@@ -922,11 +928,14 @@ Create procedure [PAGO_AGIL].alta_factura  (@nro int, @alta varchar(50),@venc va
 as
 	declare @dtalta datetime
 	declare @dtvenc datetime
+	declare @empresaID int
+					
 
 	set @dtalta = CONVERT(datetime,@alta,103)
 	set @dtvenc= CONVERT(datetime,@venc,103)
 
-	if exists(select top 1 * from PAGO_AGIL.Lk_Factura where Factura_Nro= @nro)
+	select @empresaID=Empresa_Id from PAGO_AGIL.Dim_Empresa where Empresa_Nombre = @empr
+	if exists(select top 1 * from PAGO_AGIL.Lk_Factura where Factura_Nro= @nro and Factura_Empresa_Id = @empresaID)
 		return -1 -- Nro de Factura existente 
 	else
 		begin
@@ -935,11 +944,9 @@ as
 			else
 				begin
 					declare @clienteID int
-					declare @empresaID int
 					declare @retorno int
 
 					select @clienteID=Cliente_Id from PAGO_AGIL.Lk_Cliente where (Cliente_Nombre+','+Cliente_Apellido) = @clie
-					select @empresaID=Empresa_Id from PAGO_AGIL.Dim_Empresa where Empresa_Nombre = @empr 
 
 					insert into PAGO_AGIL.Lk_Factura(Factura_Nro,Factura_Fecha_Alta,Factura_Fecha_Vencimiento,Factura_Empresa_Id,Factura_Cliente_Id)
 					values (@nro,@dtalta,@dtvenc,@empresaID,@clienteID)
@@ -1191,7 +1198,7 @@ insert into PAGO_AGIL.Ft_Pago(	Pago_Id
 				where us.Usuario_Name like @user))
 GO 
 
-create procedure [PAGO_AGIL].buscar_factura (@numero int,@alta varchar(50),@venc varchar(50),@clie nvarchar(255),@emp nvarchar(100))
+create procedure [PAGO_AGIL].buscar_factura (@numero int,@alta varchar(50),@venc varchar(50),@clie nvarchar(255),@emp nvarchar(100),@estado bit)
 as
 		declare @dtalta datetime
 		declare @dtvenc datetime
@@ -1212,8 +1219,8 @@ if(@numero = 0)
 			inner join PAGO_AGIL.Lk_Cliente c on f.Factura_Cliente_Id = c.Cliente_Id
 			inner join PAGO_AGIL.Dim_Empresa e on f.Factura_Empresa_Id = e.Empresa_Id
 			where f.Factura_Nro > 0 and (c.Cliente_Nombre+ ',' +c.Cliente_Apellido) like '%'+@clie+'%' 
-			and (e.Empresa_Nombre) like '%'+@emp+'%' and f.Factura_Fecha_Alta = @dtalta and f.Factura_Fecha_Vencimiento = @dtvenc
-			and f.Factura_Rendicion_Id is null and f.Factura_Pagado = 0
+			and (e.Empresa_Nombre) like '%'+@emp+'%' and cast(f.Factura_Fecha_Alta as date) = @dtalta and cast(f.Factura_Fecha_Vencimiento as date) = @dtvenc
+			and f.Factura_Rendicion_Id is null and f.Factura_Pagado = @estado
 		end
 	else if (@alta <> '')
 		begin
@@ -1228,8 +1235,8 @@ if(@numero = 0)
 			inner join PAGO_AGIL.Lk_Cliente c on f.Factura_Cliente_Id = c.Cliente_Id
 			inner join PAGO_AGIL.Dim_Empresa e on f.Factura_Empresa_Id = e.Empresa_Id
 			where f.Factura_Nro > 0 and (c.Cliente_Nombre+ ',' +c.Cliente_Apellido) like '%'+@clie+'%' 
-			and (e.Empresa_Nombre) like '%'+@emp+'%' and Factura_Fecha_Alta = @dtalta
-			and f.Factura_Rendicion_Id is null and f.Factura_Pagado = 0
+			and (e.Empresa_Nombre) like '%'+@emp+'%' and cast(f.Factura_Fecha_Alta as date) = @dtalta
+			and f.Factura_Rendicion_Id is null and f.Factura_Pagado = @estado
 		end
 	else if(@venc <> '')
 		begin
@@ -1244,8 +1251,8 @@ if(@numero = 0)
 			inner join PAGO_AGIL.Lk_Cliente c on f.Factura_Cliente_Id = c.Cliente_Id
 			inner join PAGO_AGIL.Dim_Empresa e on f.Factura_Empresa_Id = e.Empresa_Id
 			where f.Factura_Nro > 0 and (c.Cliente_Nombre+ ',' +c.Cliente_Apellido) like '%'+@clie+'%' 
-			and (e.Empresa_Nombre) like '%'+@emp+'%' and Factura_Fecha_Vencimiento = @dtvenc 
-			and f.Factura_Rendicion_Id is null and f.Factura_Pagado = 0
+			and (e.Empresa_Nombre) like '%'+@emp+'%' and cast(f.Factura_Fecha_Vencimiento as date) = @dtvenc 
+			and f.Factura_Rendicion_Id is null and f.Factura_Pagado = @estado
 		end
 	else
 		begin
@@ -1260,7 +1267,7 @@ if(@numero = 0)
 			inner join PAGO_AGIL.Lk_Cliente c on f.Factura_Cliente_Id = c.Cliente_Id
 			inner join PAGO_AGIL.Dim_Empresa e on f.Factura_Empresa_Id = e.Empresa_Id
 			where f.Factura_Nro > 0 and (c.Cliente_Nombre+ ',' +c.Cliente_Apellido) like '%'+@clie+'%' 
-			and (e.Empresa_Nombre) like '%'+@emp+'%' and f.Factura_Rendicion_Id is null and f.Factura_Pagado = 0
+			and (e.Empresa_Nombre) like '%'+@emp+'%' and f.Factura_Rendicion_Id is null and f.Factura_Pagado = @estado
 		end
 else
 	if not exists(select top 1 * from PAGO_AGIL.Lk_Factura where Factura_Nro = @numero)
@@ -1280,8 +1287,8 @@ else
 					inner join PAGO_AGIL.Lk_Cliente c on f.Factura_Cliente_Id = c.Cliente_Id
 					inner join PAGO_AGIL.Dim_Empresa e on f.Factura_Empresa_Id = e.Empresa_Id
 					where f.Factura_Nro = @numero and (c.Cliente_Nombre+ ',' +c.Cliente_Apellido) like '%'+@clie+'%' 
-					and (e.Empresa_Nombre) like '%'+@emp+'%' and Factura_Fecha_Alta = @dtalta and Factura_Fecha_Vencimiento = @dtvenc
-					and f.Factura_Rendicion_Id is null and f.Factura_Pagado = 0
+					and (e.Empresa_Nombre) like '%'+@emp+'%' and cast(f.Factura_Fecha_Alta as date) = @dtalta and cast(f.Factura_Fecha_Vencimiento as date) = @dtvenc
+					and f.Factura_Rendicion_Id is null and f.Factura_Pagado = @estado
 				end
 			else if (@alta <> '')
 				begin
@@ -1296,8 +1303,8 @@ else
 					inner join PAGO_AGIL.Lk_Cliente c on f.Factura_Cliente_Id = c.Cliente_Id
 					inner join PAGO_AGIL.Dim_Empresa e on f.Factura_Empresa_Id = e.Empresa_Id
 					where f.Factura_Nro = @numero and (c.Cliente_Nombre+ ',' +c.Cliente_Apellido) like '%'+@clie+'%' 
-					and (e.Empresa_Nombre) like '%'+@emp+'%' and Factura_Fecha_Alta = @dtalta 
-					and f.Factura_Rendicion_Id is null and f.Factura_Pagado = 0
+					and (e.Empresa_Nombre) like '%'+@emp+'%' and cast(f.Factura_Fecha_Alta as date) = @dtalta
+					and f.Factura_Rendicion_Id is null and f.Factura_Pagado = @estado
 				end
 			else if(@venc <> '')
 				begin
@@ -1312,8 +1319,8 @@ else
 					inner join PAGO_AGIL.Lk_Cliente c on f.Factura_Cliente_Id = c.Cliente_Id
 					inner join PAGO_AGIL.Dim_Empresa e on f.Factura_Empresa_Id = e.Empresa_Id
 					where f.Factura_Nro = @numero and (c.Cliente_Nombre+ ',' +c.Cliente_Apellido) like '%'+@clie+'%'			
-					and (e.Empresa_Nombre) like '%'+@emp+'%' and Factura_Fecha_Vencimiento = @dtvenc 
-					and f.Factura_Rendicion_Id is null and f.Factura_Pagado = 0
+					and (e.Empresa_Nombre) like '%'+@emp+'%' and cast(f.Factura_Fecha_Vencimiento as date) = @dtvenc 
+					and f.Factura_Rendicion_Id is null and f.Factura_Pagado = @estado
 				end
 			else
 				begin
@@ -1329,11 +1336,12 @@ else
 					inner join PAGO_AGIL.Dim_Empresa e on f.Factura_Empresa_Id = e.Empresa_Id
 					where f.Factura_Nro = @numero and (c.Cliente_Nombre+ ',' +c.Cliente_Apellido) like '%'+@clie+'%' 
 					and (e.Empresa_Nombre) like '%'+@emp+'%'
-					and f.Factura_Rendicion_Id is null and f.Factura_Pagado = 0
+					and f.Factura_Rendicion_Id is null and f.Factura_Pagado = @estado
 				end
 		end
 
 Go
+
 
 --Proceso para realizacion de rendiciones
 Create Procedure PAGO_AGIL.Rendir (@fecha varchar(50), @user varchar(100), @empresa int, @periodo varchar(50), @comision int)
@@ -1375,6 +1383,92 @@ from PAGO_AGIL.Lk_Factura as facturas
 where facturas.Factura_Id in (Select Factura_Id from #facturas)
 
 GO
+
+-- Alta de una Devolucion
+create procedure PAGO_AGIL.nueva_devolucion (@idDev_mot int,@desc nvarchar(255),@f varchar(50),@responsable nvarchar(250),@facnro int,@empresa nvarchar(100))
+as
+begin
+	declare @userID int
+	declare @fecha datetime
+	declare @empresaID int
+	declare @facID int
+	declare @idDevolucion int
+
+	select @empresaID = Empresa_Id from Dim_Empresa where Empresa_Nombre = @empresa
+	select @facID=Factura_Id from Lk_Factura where Factura_Nro = @facnro and Factura_Empresa_Id =@empresaID
+
+	if @idDev_mot = 0
+		begin
+			insert into Dim_Motivo_Dev(Motivo_Dev_Desc) values(@desc)
+			set @idDev_mot = @@IDENTITY
+		end
+
+	select distinct @userID=Usuario_Id from Lk_Usuario where Usuario_Name = @responsable
+
+	set @fecha = CONVERT(datetime,@f,103)
+
+	insert into Ft_Devolucion(Devolucion_Motivo_Id,Devolucion_Fecha,Devolucion_Resp_Id) 
+	values	(@idDev_mot,@fecha,@userID)
+	
+	set @idDevolucion = @@IDENTITY
+
+	update Lk_Factura 
+	set Factura_Pagado = 0
+	where Factura_Id = @facID
+
+	insert into Rl_DevolucioxFactura(Id_Devolucion,Id_Factura) values(@idDevolucion,@facID)
+
+end
+
+Go
+
+create procedure PAGO_AGIL.eliminar_factura(@nrofac int , @empresa nvarchar(100))
+as
+begin
+	declare @idEmpresa int
+	declare @idFactura int
+	declare @devId int
+	declare @pagId int
+
+	select @idEmpresa=Empresa_Id from Dim_Empresa where Empresa_Nombre = @empresa
+	select @idFactura=Factura_Id from Lk_Factura where Factura_Nro = @nrofac and Factura_Empresa_Id = @idEmpresa
+	
+	select Id_Devolucion into #devxfact from Rl_DevolucioxFactura where Id_Factura = @idFactura
+	-- Elimino devoluciones asociadas a la factura
+	declare cursor_dev cursor for select Id_Devolucion from #devxfact
+	open cursor_dev;  
+	fetch next from cursor_dev into @devId;
+	while @@FETCH_STATUS = 0
+		begin
+			delete Rl_DevolucioxFactura where Id_Devolucion= @devId
+			delete Ft_Devolucion where Devolucion_Id = @devId
+			fetch next from cursor_dev into @devId;
+		end
+	close cursor_dev;  
+	deallocate cursor_dev;
+	-- Elimino pagos asociados a la factura
+		select Id_Pago into #pagxfact from RL_PagoxFactura where Id_Factura = @idFactura
+
+	declare cursor_pag cursor for select Id_Pago from #pagxfact
+	open cursor_pag;  
+	fetch next from cursor_pag into @pagId;
+	while @@FETCH_STATUS = 0
+		begin
+			delete RL_PagoxFactura where Id_Pago= @pagId
+			delete Ft_Pago where Pago_Id = @pagId
+			fetch next from cursor_pag into @pagId;
+		end
+	close cursor_pag;
+	deallocate cursor_pag;
+	-- Elimino items asociados a la factura
+	delete Lk_Item_Factura where Item_Factura_Nro = @idFactura
+	
+	-- Elimino Factura
+	delete Lk_Factura where Factura_Id = @idFactura
+
+end
+
+Go
 
 --Impresion de resumen de migracion
 Declare @var_Dim_Rol int = (Select Count(1) from PAGO_AGIL.Dim_Rol)
