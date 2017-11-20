@@ -41,6 +41,7 @@ namespace PagoAgilFrba.Login
             button_abm_rol.Hide();//  .Visible = false;
             button_abm_sucursal.Hide();//  .Visible = false;
             button_estadisticas.Hide();//  .Visible = false;
+            button_devolver.Hide();
 
             string cadena = "Select Distinct Funcionalidad from PAGO_AGIL.Vw_User_Info where ";
             cadena = cadena + "Usuario like '" + menu_user + "'";
@@ -80,14 +81,14 @@ namespace PagoAgilFrba.Login
                 {
                     button_abm_cliente.Show();// .Visible = true;
                 }
-                else if (funcion == "ABM de Empresa")                        
+                else if (funcion == "ABM de Empresa")
                 {
                     button_abm_empresa.Show();// .Visible = true;
                 }
                 else if (funcion == "ABM de Sucursal")
                 {
                     button_abm_sucursal.Show();// .Visible = true;
-                }    
+                }
                 else if (funcion == "ABM Facturas")
                 {
                     button_abm_facturas.Show();// .Visible = true;
@@ -95,7 +96,7 @@ namespace PagoAgilFrba.Login
                 else if (funcion == "Registro de Pago de Facturas")
                 {
                     button_pagar.Show();// .Visible = true;
-                }    
+                }
                 else if (funcion == "Rendicion de Facturas cobradas")
                 {
                     button_rendir.Show();// .Visible = true;
@@ -103,6 +104,10 @@ namespace PagoAgilFrba.Login
                 else if (funcion == "Listado Estadistico")
                 {
                     button_estadisticas.Show();// .Visible = true;
+                }
+                else if (funcion == "Devolucion Facturas")
+                {
+                    button_devolver.Show();
                 }
             }
         }
@@ -172,6 +177,13 @@ namespace PagoAgilFrba.Login
         private void Menu_Load(object sender, EventArgs e)
         {
 
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            PagoAgilFrba.Devolucion.DevolverFactura dev = new PagoAgilFrba.Devolucion.DevolverFactura(this,menu_user);
+            this.Hide();
+            dev.Show();
         }
     }
 }

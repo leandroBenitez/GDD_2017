@@ -39,6 +39,7 @@
             this.button_pagar = new System.Windows.Forms.Button();
             this.button_rendir = new System.Windows.Forms.Button();
             this.button_salir = new System.Windows.Forms.Button();
+            this.button_devolver = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // label_fecha
@@ -159,11 +160,23 @@
             this.button_salir.UseVisualStyleBackColor = true;
             this.button_salir.Click += new System.EventHandler(this.button_salir_Click);
             // 
+            // button_devolver
+            // 
+            this.button_devolver.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.button_devolver.Location = new System.Drawing.Point(25, 267);
+            this.button_devolver.Name = "button_devolver";
+            this.button_devolver.Size = new System.Drawing.Size(140, 27);
+            this.button_devolver.TabIndex = 10;
+            this.button_devolver.Text = "Devolver Factura";
+            this.button_devolver.UseVisualStyleBackColor = true;
+            this.button_devolver.Click += new System.EventHandler(this.button1_Click);
+            // 
             // Menu
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(351, 306);
+            this.Controls.Add(this.button_devolver);
             this.Controls.Add(this.button_salir);
             this.Controls.Add(this.button_rendir);
             this.Controls.Add(this.button_pagar);
@@ -197,5 +210,6 @@
         private System.Windows.Forms.Button button_pagar;
         private System.Windows.Forms.Button button_rendir;
         private System.Windows.Forms.Button button_salir;
+        private System.Windows.Forms.Button button_devolver;
     }
 }
