@@ -170,6 +170,22 @@ namespace PagoAgilFrba.AbmFactura
 
         }
 
+        public float getTotal()
+        {
+            return total;
+        }
+        public void setTotal(float n)
+        {
+            total = n;
+        }
+        public int getCount()
+        {
+            return itcount;
+        }
+        public void setCount(int n)
+        {
+            itcount = n;
+        }
 
     }
 }

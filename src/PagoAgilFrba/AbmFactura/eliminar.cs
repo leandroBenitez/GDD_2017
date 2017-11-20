@@ -13,16 +13,16 @@ using System.Windows.Forms;
 
 namespace PagoAgilFrba.AbmFactura
 {
-    public partial class Modificar : Form
+    public partial class eliminar : Form
     {
         private Form anterior;
         private string sfecha;
 
-        public Modificar(Form an)
+        public eliminar(Form an)
         {
             InitializeComponent();
-            sfecha =  ConfigurationManager.AppSettings["DateKey"];
-            pickalta.Value = pickvenc.Value =pickvenc.MinDate;
+            sfecha = ConfigurationManager.AppSettings["DateKey"];
+            pickalta.Value = pickvenc.Value = pickvenc.MinDate;
             string empresasc = "Select distinct emp.Empresa_Nombre from PAGO_AGIL.Dim_Empresa as emp";
             Entidades.Herramientas.llenarComboBox(empresas, empresasc);
             string consultaclientes = "Select (cli.Cliente_Nombre + ',' + cli.Cliente_Apellido) from PAGO_AGIL.Lk_Cliente as cli order by cli.Cliente_Nombre";
@@ -37,7 +37,6 @@ namespace PagoAgilFrba.AbmFactura
             empresas.SelectedIndex = -1;
             clientes.SelectedIndex = -1;
             dataGridView1.Rows.Clear();
-            this.Text = "Modificar Factura";
         }
 
         private void limpiar_Click(object sender, EventArgs e)
@@ -54,8 +53,7 @@ namespace PagoAgilFrba.AbmFactura
             dataGridView1.Rows.Clear();
 
         }
-
-        private void buscarfactura_Click(object sender, EventArgs e)
+        private void buscar_Click(object sender, EventArgs e)
         {
             int num = 0;
             string v;
@@ -64,12 +62,11 @@ namespace PagoAgilFrba.AbmFactura
             if (pickvenc.Value == pickvenc.MinDate) v = ""; else v = pickvenc.Value.ToString();
             if (pickalta.Value == pickvenc.MinDate) a = ""; else a = pickalta.Value.ToString();
             conexion connection = new conexion();
-            /* (@numero int,@alta varchar(50),@venc varchar(50),@clie nvarchar(255),@emp nvarchar(100))*/
             SqlCommand command = new SqlCommand("[PAGO_AGIL].buscar_factura");
             command.CommandType = CommandType.StoredProcedure;
             command.Parameters.AddWithValue("@numero", num);
             command.Parameters.AddWithValue("@alta", a);
-            command.Parameters.AddWithValue("@venc",v);
+            command.Parameters.AddWithValue("@venc", v);
             command.Parameters.AddWithValue("@clie", clientes.Text);
             command.Parameters.AddWithValue("@emp", empresas.Text);
             command.Parameters.AddWithValue("@estado", 0); // facturas NO pagas
@@ -97,9 +94,9 @@ namespace PagoAgilFrba.AbmFactura
                 else
                 {
                     cargar_datos(reader);
-                
+
                 }
-                
+
                 connection.cerrar_conexion(command.Connection);
             }
             catch (Exception ex)
@@ -146,25 +143,42 @@ namespace PagoAgilFrba.AbmFactura
         {
             if (e.RowIndex >= 0 && e.ColumnIndex == 6)
             {
-                
-                DataGridViewRow row = this.dataGridView1.Rows[e.RowIndex];
-                PagoAgilFrba.AbmFactura.auxMod n= new PagoAgilFrba.AbmFactura.auxMod(this,row);
-                n.Show();
-                this.Hide();
-                this.limpiar_Click(sender, e);
+                DialogResult d = MessageBox.Show("  ¿Desea eliminar la Factura?", "Eliminar Factura", MessageBoxButtons.YesNo, MessageBoxIcon.None);
+                if (d == DialogResult.Yes)
+                {
+                    DataGridViewRow row = this.dataGridView1.Rows[e.RowIndex];
+                    int fnum = int.Parse(row.Cells["Numero"].Value.ToString());
+                    string emp = row.Cells["Empresa"].Value.ToString();
+                    conexion connection = new conexion();
+                    //PAGO_AGIL.eliminar_factura(@nrofac int , @empresa nvarchar(100))
+                    SqlCommand command = new SqlCommand("PAGO_AGIL.eliminar_factura");
+                    command.CommandType = CommandType.StoredProcedure;
+                    command.Parameters.AddWithValue("@nrofac", fnum);
+                    command.Parameters.AddWithValue("@empresa", emp);
+                    command.Connection = connection.abrir_conexion();
+                    try
+                    {
 
+                        command.ExecuteNonQuery();
+                        MessageBox.Show("Factura Eliminada", "Eliminar Factura", MessageBoxButtons.OK, MessageBoxIcon.None);
+
+                        connection.cerrar_conexion(command.Connection);
+
+                    }
+                    catch (Exception ex)
+                    {
+                        MessageBox.Show("Error: " + ex.Message);
+                    }
+                }
+                
+                this.limpiar_Click(sender, e);
             }
         }
 
-        private void button1_Click(object sender, EventArgs e)
+        private void cancelar_Click(object sender, EventArgs e)
         {
             anterior.Show();
             this.Close();
-
-        }
-
-        private void label2_Click(object sender, EventArgs e)
-        {
 
         }
 
@@ -177,8 +191,7 @@ namespace PagoAgilFrba.AbmFactura
         {
             pickvenc.Format = DateTimePickerFormat.Short;
         }
-
-
+        
 
     }
 }

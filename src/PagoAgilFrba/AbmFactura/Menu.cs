@@ -38,5 +38,13 @@ namespace PagoAgilFrba.AbmFactura
             ant.Show();
             this.Close();
         }
+
+        private void button3_Click(object sender, EventArgs e)
+        {
+            PagoAgilFrba.AbmFactura.eliminar a = new PagoAgilFrba.AbmFactura.eliminar(this);
+            a.Show();
+            this.Hide();
+
+        }
     }
 }

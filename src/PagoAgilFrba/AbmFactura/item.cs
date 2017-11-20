@@ -33,8 +33,8 @@ namespace PagoAgilFrba.AbmFactura
                 anterior.string_items.Add(nuevo);
                 anterior.itcount++;
                 anterior.total += float.Parse(precioittotal.Text,System.Globalization.CultureInfo.InvariantCulture);
-                anterior.itemcount.Text = "(" + anterior.itcount + ")";
-                anterior.facttotal.Text = anterior.total.ToString();
+                anterior.itemcount.Text = "(" + anterior.getCount()+ ")";
+                anterior.facttotal.Text = anterior.getTotal().ToString();
                 MessageBox.Show("Item agregado", "Item", MessageBoxButtons.OK, MessageBoxIcon.None);
                 anterior.Show();
                 this.Close();
