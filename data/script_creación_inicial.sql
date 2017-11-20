@@ -722,7 +722,7 @@ End
 
 Go
 
--- Registro de Pago, faltan cosas
+-- Registro de Pago
 Create Procedure PAGO_AGIL.Pago  (   @empresa varchar(100)
 									,@fecha_pago varchar(10)
 									,@cliente varchar(100)
@@ -878,10 +878,11 @@ GO
 
 --Dar de Alta Empresa
 
-Create Procedure PAGO_AGIL.Alta_Empresa  (@nombre varchar(100)
+Create Procedure PAGO_AGIL.Alta_Empresa  (	 @nombre varchar(100)
 											,@direccion varchar(100)
 											,@cuit varchar(100)
-											,@rubro varchar(100))
+											,@rubro varchar(100)
+											,@dia_cobro tinyint)
 as
 
 declare @cuit_valido int = 1
@@ -899,12 +900,14 @@ begin
 	insert into PAGO_AGIL.Dim_Empresa (Empresa_Nombre
 									  ,Empresa_Cuit
 									  ,Empresa_Direccion
-									  ,Empresa_Rubro_Id)
+									  ,Empresa_Rubro_Id
+									  ,Empresa_Dia_Rendicion)
 	values  (@nombre
 			,@cuit
 			,@direccion
 			,(select rub.Rubro_Id from PAGO_AGIL.Dim_Rubro as rub
 				where rub.Rubro_Descripcion like @rubro)
+			,@dia_cobro
 			)
 end
 
