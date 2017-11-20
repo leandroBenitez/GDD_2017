@@ -14,9 +14,11 @@ namespace PagoAgilFrba.AbmCliente1
 {
     public partial class bajaCliente : Form
     {
-        public bajaCliente()
+        Form ClienteMenu;
+        public bajaCliente(Form menu)
         {
             InitializeComponent();
+            ClienteMenu = menu;
         }
 
         private void botonBuscar_Click(object sender, EventArgs e)
@@ -137,6 +139,12 @@ namespace PagoAgilFrba.AbmCliente1
             apellido.Text = "";
             nombre.Text = "";
             direccion.Text = "";
+        }
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+            ClienteMenu.Show();
+            this.Close();
         }
 
 

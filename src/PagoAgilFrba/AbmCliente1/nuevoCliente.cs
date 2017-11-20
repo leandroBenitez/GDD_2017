@@ -14,9 +14,11 @@ namespace PagoAgilFrba.AbmCliente1
 {
     public partial class nuevoCliente : Form
     {
-        public nuevoCliente()
+        Form ClienteMenu;
+        public nuevoCliente(Form menu)
         {
             InitializeComponent();
+            ClienteMenu = menu;
         }
 
         private void botonNuevo_Click(object sender, EventArgs e)
@@ -91,6 +93,12 @@ namespace PagoAgilFrba.AbmCliente1
         {
             monthCalendar1.Visible = false;
             button2.Visible = false;
+        }
+
+        private void button3_Click(object sender, EventArgs e)
+        {
+            ClienteMenu.Show();
+            this.Close();
         }
     }
 }

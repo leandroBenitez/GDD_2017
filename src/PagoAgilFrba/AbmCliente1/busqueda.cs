@@ -14,9 +14,11 @@ namespace PagoAgilFrba.AbmCliente1
 {
     public partial class busqueda : Form
     {
-        public busqueda()
+        Form ClienteMenu;
+        public busqueda(Form menu)
         {
             InitializeComponent();
+            ClienteMenu = menu;
         }
 
         private void button1_Click(object sender, EventArgs e)
@@ -72,7 +74,7 @@ namespace PagoAgilFrba.AbmCliente1
 
             if (!string.IsNullOrWhiteSpace(fechaNac.Text))
             {
-                consulta = consulta + "and Cliente_Fecha_Nac LIKE '%" + fechaNac.Text + "%' ";
+                consulta = consulta + "and Cliente_Fecha_Nac = '" + fechaNac.Text + "' ";
             }
 
 
@@ -164,6 +166,12 @@ namespace PagoAgilFrba.AbmCliente1
         {
             monthCalendar1.Visible = false;
             button2.Visible = false;
+        }
+
+        private void button3_Click(object sender, EventArgs e)
+        {
+            ClienteMenu.Show();
+            this.Close();
         }
 
     }

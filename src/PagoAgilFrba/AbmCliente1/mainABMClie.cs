@@ -22,30 +22,30 @@ namespace PagoAgilFrba.AbmCliente1
 
         private void button4_Click(object sender, EventArgs e)
         {
-            AbmCliente1.busqueda frm = new AbmCliente1.busqueda();
-            frm.Show()
-            ;
+            AbmCliente1.busqueda frm = new AbmCliente1.busqueda(this);
+            frm.Show();
+            this.Hide();
         }
 
         private void button1_Click(object sender, EventArgs e)
         {
-            AbmCliente1.nuevoCliente frm = new AbmCliente1.nuevoCliente();
-            frm.Show()
-            ;
+            AbmCliente1.nuevoCliente frm = new AbmCliente1.nuevoCliente(this);
+            frm.Show();
+            this.Hide();
         }
 
         private void button2_Click(object sender, EventArgs e)
         {
-            AbmCliente1.modificaCliente frm = new AbmCliente1.modificaCliente();
-            frm.Show()
-            ;
+            AbmCliente1.modificaCliente frm = new AbmCliente1.modificaCliente(this);
+            frm.Show();
+            this.Hide();
         }
 
         private void button3_Click(object sender, EventArgs e)
         {
-            AbmCliente1.bajaCliente frm = new AbmCliente1.bajaCliente();
-            frm.Show()
-            ;
+            AbmCliente1.bajaCliente frm = new AbmCliente1.bajaCliente(this);
+            frm.Show();
+            this.Hide();
         }
 
         private void botonVolver_Click(object sender, EventArgs e)
@@ -53,6 +53,11 @@ namespace PagoAgilFrba.AbmCliente1
 
             main_menu.Show();
             this.Close();
+        }
+
+        private void mainABMClie_Load(object sender, EventArgs e)
+        {
+
         }
     }
 }
