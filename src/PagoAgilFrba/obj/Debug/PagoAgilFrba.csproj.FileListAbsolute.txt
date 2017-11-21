@@ -39,7 +39,6 @@ C:\Users\Matucha\Documents\1-UTN\GDD\2C-2017\GDD_2017\PagoAgilFrba\obj\Debug\Pag
 C:\Users\CoreBI\Desktop\Tp GDD\GDD_2017\src\PagoAgilFrba\bin\Debug\PagoAgilFrba.exe.config
 C:\Users\CoreBI\Desktop\Tp GDD\GDD_2017\src\PagoAgilFrba\bin\Debug\PagoAgilFrba.exe
 C:\Users\CoreBI\Desktop\Tp GDD\GDD_2017\src\PagoAgilFrba\bin\Debug\PagoAgilFrba.pdb
-C:\Users\CoreBI\Desktop\Tp GDD\GDD_2017\src\PagoAgilFrba\obj\Debug\PagoAgilFrba.csprojResolveAssemblyReference.cache
 C:\Users\CoreBI\Desktop\Tp GDD\GDD_2017\src\PagoAgilFrba\obj\Debug\PagoAgilFrba.AbmCliente1.bajaCliente.resources
 C:\Users\CoreBI\Desktop\Tp GDD\GDD_2017\src\PagoAgilFrba\obj\Debug\PagoAgilFrba.AbmCliente1.busqueda.resources
 C:\Users\CoreBI\Desktop\Tp GDD\GDD_2017\src\PagoAgilFrba\obj\Debug\PagoAgilFrba.AbmCliente1.modificaCliente.resources
