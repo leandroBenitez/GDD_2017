@@ -45,34 +45,34 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="AbmCliente1\busqueda.cs">
+    <Compile Include="AbmCliente\busqueda.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="AbmCliente1\busqueda.Designer.cs">
+    <Compile Include="AbmCliente\busqueda.Designer.cs">
       <DependentUpon>busqueda.cs</DependentUpon>
     </Compile>
-    <Compile Include="AbmCliente1\bajaCliente.cs">
+    <Compile Include="AbmCliente\bajaCliente.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="AbmCliente1\bajaCliente.Designer.cs">
+    <Compile Include="AbmCliente\bajaCliente.Designer.cs">
       <DependentUpon>bajaCliente.cs</DependentUpon>
     </Compile>
-    <Compile Include="AbmCliente1\modificaCliente.cs">
+    <Compile Include="AbmCliente\modificaCliente.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="AbmCliente1\modificaCliente.Designer.cs">
+    <Compile Include="AbmCliente\modificaCliente.Designer.cs">
       <DependentUpon>modificaCliente.cs</DependentUpon>
     </Compile>
-    <Compile Include="AbmCliente1\nuevoCliente.cs">
+    <Compile Include="AbmCliente\nuevoCliente.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="AbmCliente1\nuevoCliente.Designer.cs">
+    <Compile Include="AbmCliente\nuevoCliente.Designer.cs">
       <DependentUpon>nuevoCliente.cs</DependentUpon>
     </Compile>
-    <Compile Include="AbmCliente1\mainABMClie.cs">
+    <Compile Include="AbmCliente\mainABMClie.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="AbmCliente1\mainABMClie.Designer.cs">
+    <Compile Include="AbmCliente\mainABMClie.Designer.cs">
       <DependentUpon>mainABMClie.cs</DependentUpon>
     </Compile>
     <Compile Include="AbmEmpresa\Alta.cs">
@@ -253,19 +253,19 @@
     <Compile Include="Rendicion\Rendicion.Designer.cs">
       <DependentUpon>Rendicion.cs</DependentUpon>
     </Compile>
-    <EmbeddedResource Include="AbmCliente1\bajaCliente.resx">
+    <EmbeddedResource Include="AbmCliente\bajaCliente.resx">
       <DependentUpon>bajaCliente.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="AbmCliente1\busqueda.resx">
+    <EmbeddedResource Include="AbmCliente\busqueda.resx">
       <DependentUpon>busqueda.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="AbmCliente1\modificaCliente.resx">
+    <EmbeddedResource Include="AbmCliente\modificaCliente.resx">
       <DependentUpon>modificaCliente.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="AbmCliente1\nuevoCliente.resx">
+    <EmbeddedResource Include="AbmCliente\nuevoCliente.resx">
       <DependentUpon>nuevoCliente.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="AbmCliente1\mainABMClie.resx">
+    <EmbeddedResource Include="AbmCliente\mainABMClie.resx">
       <DependentUpon>mainABMClie.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="AbmEmpresa\Alta.resx">

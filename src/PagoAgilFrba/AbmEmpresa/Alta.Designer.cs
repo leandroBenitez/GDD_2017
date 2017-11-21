@@ -66,7 +66,7 @@
             this.textBox_direccion.Location = new System.Drawing.Point(166, 155);
             this.textBox_direccion.Name = "textBox_direccion";
             this.textBox_direccion.Size = new System.Drawing.Size(185, 20);
-            this.textBox_direccion.TabIndex = 2;
+            this.textBox_direccion.TabIndex = 4;
             // 
             // comboBox_rubro
             // 
@@ -75,7 +75,7 @@
             this.comboBox_rubro.Location = new System.Drawing.Point(166, 193);
             this.comboBox_rubro.Name = "comboBox_rubro";
             this.comboBox_rubro.Size = new System.Drawing.Size(185, 21);
-            this.comboBox_rubro.TabIndex = 3;
+            this.comboBox_rubro.TabIndex = 5;
             // 
             // label1
             // 
@@ -127,7 +127,7 @@
             this.button_alta.Location = new System.Drawing.Point(273, 268);
             this.button_alta.Name = "button_alta";
             this.button_alta.Size = new System.Drawing.Size(78, 23);
-            this.button_alta.TabIndex = 10;
+            this.button_alta.TabIndex = 8;
             this.button_alta.Text = "Alta";
             this.button_alta.UseVisualStyleBackColor = true;
             this.button_alta.Click += new System.EventHandler(this.button_alta_Click);
@@ -137,14 +137,14 @@
             this.textBox_cuit_fin.Location = new System.Drawing.Point(325, 115);
             this.textBox_cuit_fin.Name = "textBox_cuit_fin";
             this.textBox_cuit_fin.Size = new System.Drawing.Size(26, 20);
-            this.textBox_cuit_fin.TabIndex = 11;
+            this.textBox_cuit_fin.TabIndex = 3;
             // 
             // textBox_cuit_medio
             // 
             this.textBox_cuit_medio.Location = new System.Drawing.Point(214, 115);
             this.textBox_cuit_medio.Name = "textBox_cuit_medio";
             this.textBox_cuit_medio.Size = new System.Drawing.Size(92, 20);
-            this.textBox_cuit_medio.TabIndex = 12;
+            this.textBox_cuit_medio.TabIndex = 2;
             // 
             // label6
             // 
@@ -169,7 +169,7 @@
             this.button_cancelar.Location = new System.Drawing.Point(58, 268);
             this.button_cancelar.Name = "button_cancelar";
             this.button_cancelar.Size = new System.Drawing.Size(78, 23);
-            this.button_cancelar.TabIndex = 15;
+            this.button_cancelar.TabIndex = 7;
             this.button_cancelar.Text = "Cancelar";
             this.button_cancelar.UseVisualStyleBackColor = true;
             this.button_cancelar.Click += new System.EventHandler(this.button_cancelar_Click);
@@ -179,16 +179,16 @@
             this.textBox_dia.Location = new System.Drawing.Point(166, 233);
             this.textBox_dia.Name = "textBox_dia";
             this.textBox_dia.Size = new System.Drawing.Size(26, 20);
-            this.textBox_dia.TabIndex = 16;
+            this.textBox_dia.TabIndex = 6;
             // 
             // label8
             // 
             this.label8.AutoSize = true;
             this.label8.Location = new System.Drawing.Point(58, 236);
             this.label8.Name = "label8";
-            this.label8.Size = new System.Drawing.Size(74, 13);
+            this.label8.Size = new System.Drawing.Size(94, 13);
             this.label8.TabIndex = 17;
-            this.label8.Text = "Día de Cobro:";
+            this.label8.Text = "Día de Rendición:";
             // 
             // Alta
             // 

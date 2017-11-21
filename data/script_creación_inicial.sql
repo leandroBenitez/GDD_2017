@@ -882,7 +882,7 @@ Create Procedure PAGO_AGIL.Alta_Empresa  (	 @nombre varchar(100)
 											,@direccion varchar(100)
 											,@cuit varchar(100)
 											,@rubro varchar(100)
-											,@dia_cobro tinyint)
+											,@dia_cobro varchar(100))
 as
 
 declare @cuit_valido int = 1
@@ -907,7 +907,7 @@ begin
 			,@direccion
 			,(select rub.Rubro_Id from PAGO_AGIL.Dim_Rubro as rub
 				where rub.Rubro_Descripcion like @rubro)
-			,@dia_cobro
+			,cast(@dia_cobro as tinyint)
 			)
 end
 

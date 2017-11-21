@@ -31,7 +31,8 @@ namespace PagoAgilFrba.AbmEmpresa
                  || string.IsNullOrWhiteSpace(textBox_cuit_in.Text)
                  || string.IsNullOrWhiteSpace(textBox_cuit_medio.Text)
                  || string.IsNullOrWhiteSpace(textBox_cuit_fin.Text)
-                 || string.IsNullOrEmpty(comboBox_rubro.Text))
+                 || string.IsNullOrEmpty(comboBox_rubro.Text)
+                 || string.IsNullOrEmpty(textBox_dia.Text))
             {
                 MessageBox.Show("Complete todos los campos", "Informacion", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return;
@@ -67,7 +68,7 @@ namespace PagoAgilFrba.AbmEmpresa
                     cadena = cadena + textBox_direccion.Text + "', '";
                     cadena = cadena + cuit_formateado + "', '";
                     cadena = cadena + comboBox_rubro.Text + "', '";
-                    cadena = cadena + textBox_dia + "' ";
+                    cadena = cadena + textBox_dia.Text + "' ";
 
                     conexion connection = new conexion();
                     SqlCommand command = new SqlCommand();

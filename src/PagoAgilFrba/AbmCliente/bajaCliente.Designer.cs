@@ -39,6 +39,9 @@
             this.label2 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
+            this.label5 = new System.Windows.Forms.Label();
+            this.button1 = new System.Windows.Forms.Button();
+            this.button2 = new System.Windows.Forms.Button();
             this.Cliente_Dni = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Cliente_Apellido = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Cliente_Nombre = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -48,9 +51,6 @@
             this.Cliente_Direccion = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Cliente_Codigo_Postal = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Cliente_Habilitado = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.label5 = new System.Windows.Forms.Label();
-            this.button1 = new System.Windows.Forms.Button();
-            this.button2 = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.SuspendLayout();
             // 
@@ -140,7 +140,8 @@
             // 
             // dataGridView1
             // 
-            this.dataGridView1.AllowUserToOrderColumns = true;
+            this.dataGridView1.AllowUserToAddRows = false;
+            this.dataGridView1.AllowUserToDeleteRows = false;
             this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dataGridView1.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.Cliente_Dni,
@@ -154,53 +155,9 @@
             this.Cliente_Habilitado});
             this.dataGridView1.Location = new System.Drawing.Point(37, 264);
             this.dataGridView1.Name = "dataGridView1";
+            this.dataGridView1.ReadOnly = true;
             this.dataGridView1.Size = new System.Drawing.Size(592, 127);
             this.dataGridView1.TabIndex = 12;
-            // 
-            // Cliente_Dni
-            // 
-            this.Cliente_Dni.HeaderText = "Cliente_Dni";
-            this.Cliente_Dni.Name = "Cliente_Dni";
-            // 
-            // Cliente_Apellido
-            // 
-            this.Cliente_Apellido.HeaderText = "Cliente_Apellido";
-            this.Cliente_Apellido.Name = "Cliente_Apellido";
-            // 
-            // Cliente_Nombre
-            // 
-            this.Cliente_Nombre.HeaderText = "Cliente_Nombre";
-            this.Cliente_Nombre.Name = "Cliente_Nombre";
-            // 
-            // Cliente_Telefono
-            // 
-            this.Cliente_Telefono.HeaderText = "Cliente_Telefono";
-            this.Cliente_Telefono.Name = "Cliente_Telefono";
-            // 
-            // Cliente_Fecha_Nac
-            // 
-            this.Cliente_Fecha_Nac.HeaderText = "Cliente_Fecha_Nac";
-            this.Cliente_Fecha_Nac.Name = "Cliente_Fecha_Nac";
-            // 
-            // Cliente_Mail
-            // 
-            this.Cliente_Mail.HeaderText = "Cliente_Mail";
-            this.Cliente_Mail.Name = "Cliente_Mail";
-            // 
-            // Cliente_Direccion
-            // 
-            this.Cliente_Direccion.HeaderText = "Cliente_Direccion";
-            this.Cliente_Direccion.Name = "Cliente_Direccion";
-            // 
-            // Cliente_Codigo_Postal
-            // 
-            this.Cliente_Codigo_Postal.HeaderText = "Cliente_Codigo_Postal";
-            this.Cliente_Codigo_Postal.Name = "Cliente_Codigo_Postal";
-            // 
-            // Cliente_Habilitado
-            // 
-            this.Cliente_Habilitado.HeaderText = "Cliente_Habilitado";
-            this.Cliente_Habilitado.Name = "Cliente_Habilitado";
             // 
             // label5
             // 
@@ -232,6 +189,60 @@
             this.button2.UseVisualStyleBackColor = true;
             this.button2.Click += new System.EventHandler(this.button2_Click);
             // 
+            // Cliente_Dni
+            // 
+            this.Cliente_Dni.HeaderText = "Dni";
+            this.Cliente_Dni.Name = "Cliente_Dni";
+            this.Cliente_Dni.ReadOnly = true;
+            // 
+            // Cliente_Apellido
+            // 
+            this.Cliente_Apellido.HeaderText = "Apellido";
+            this.Cliente_Apellido.Name = "Cliente_Apellido";
+            this.Cliente_Apellido.ReadOnly = true;
+            // 
+            // Cliente_Nombre
+            // 
+            this.Cliente_Nombre.HeaderText = "Nombre";
+            this.Cliente_Nombre.Name = "Cliente_Nombre";
+            this.Cliente_Nombre.ReadOnly = true;
+            // 
+            // Cliente_Telefono
+            // 
+            this.Cliente_Telefono.HeaderText = "Telefono";
+            this.Cliente_Telefono.Name = "Cliente_Telefono";
+            this.Cliente_Telefono.ReadOnly = true;
+            // 
+            // Cliente_Fecha_Nac
+            // 
+            this.Cliente_Fecha_Nac.HeaderText = "Fecha Nacimiento";
+            this.Cliente_Fecha_Nac.Name = "Cliente_Fecha_Nac";
+            this.Cliente_Fecha_Nac.ReadOnly = true;
+            // 
+            // Cliente_Mail
+            // 
+            this.Cliente_Mail.HeaderText = "Mail";
+            this.Cliente_Mail.Name = "Cliente_Mail";
+            this.Cliente_Mail.ReadOnly = true;
+            // 
+            // Cliente_Direccion
+            // 
+            this.Cliente_Direccion.HeaderText = "Direccion";
+            this.Cliente_Direccion.Name = "Cliente_Direccion";
+            this.Cliente_Direccion.ReadOnly = true;
+            // 
+            // Cliente_Codigo_Postal
+            // 
+            this.Cliente_Codigo_Postal.HeaderText = "Codigo Postal";
+            this.Cliente_Codigo_Postal.Name = "Cliente_Codigo_Postal";
+            this.Cliente_Codigo_Postal.ReadOnly = true;
+            // 
+            // Cliente_Habilitado
+            // 
+            this.Cliente_Habilitado.HeaderText = "Habilitado";
+            this.Cliente_Habilitado.Name = "Cliente_Habilitado";
+            this.Cliente_Habilitado.ReadOnly = true;
+            // 
             // bajaCliente
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -251,6 +262,7 @@
             this.Controls.Add(this.label2);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.dataGridView1);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.Name = "bajaCliente";
             this.Text = "Baja Clientes";
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
@@ -272,6 +284,9 @@
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.DataGridView dataGridView1;
+        private System.Windows.Forms.Label label5;
+        private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.Button button2;
         private System.Windows.Forms.DataGridViewTextBoxColumn Cliente_Dni;
         private System.Windows.Forms.DataGridViewTextBoxColumn Cliente_Apellido;
         private System.Windows.Forms.DataGridViewTextBoxColumn Cliente_Nombre;
@@ -281,8 +296,5 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn Cliente_Direccion;
         private System.Windows.Forms.DataGridViewTextBoxColumn Cliente_Codigo_Postal;
         private System.Windows.Forms.DataGridViewTextBoxColumn Cliente_Habilitado;
-        private System.Windows.Forms.Label label5;
-        private System.Windows.Forms.Button button1;
-        private System.Windows.Forms.Button button2;
     }
 }

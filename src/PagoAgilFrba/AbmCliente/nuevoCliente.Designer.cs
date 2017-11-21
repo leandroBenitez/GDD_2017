@@ -84,6 +84,7 @@
             // 
             // comboHabilitado
             // 
+            this.comboHabilitado.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.comboHabilitado.FormattingEnabled = true;
             this.comboHabilitado.Items.AddRange(new object[] {
             "Habilitado",
@@ -303,6 +304,7 @@
             this.Controls.Add(this.label3);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.label1);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.Name = "nuevoCliente";
             this.Text = "Nuevo Cliente";
             this.ResumeLayout(false);
