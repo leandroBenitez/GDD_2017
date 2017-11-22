@@ -75,6 +75,7 @@
             this.label11 = new System.Windows.Forms.Label();
             this.label12 = new System.Windows.Forms.Label();
             this.dniBuscado = new System.Windows.Forms.TextBox();
+            this.label10 = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.SuspendLayout();
             // 
@@ -473,9 +474,9 @@
             this.label11.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label11.Location = new System.Drawing.Point(35, 9);
             this.label11.Name = "label11";
-            this.label11.Size = new System.Drawing.Size(397, 16);
+            this.label11.Size = new System.Drawing.Size(316, 16);
             this.label11.TabIndex = 94;
-            this.label11.Text = "Seleccione los elementos que desea modificar o buscar";
+            this.label11.Text = "Seleccione los elementos que desea buscar";
             // 
             // label12
             // 
@@ -494,12 +495,27 @@
             this.dniBuscado.Name = "dniBuscado";
             this.dniBuscado.Size = new System.Drawing.Size(85, 20);
             this.dniBuscado.TabIndex = 96;
+            this.dniBuscado.Visible = false;
+            // 
+            // label10
+            // 
+            this.label10.AutoSize = true;
+            this.label10.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label10.Location = new System.Drawing.Point(35, 9);
+            this.label10.Name = "label10";
+            this.label10.Size = new System.Drawing.Size(333, 16);
+            this.label10.TabIndex = 97;
+            this.label10.Text = "Seleccione los elementos que desea modificar";
+            this.label10.Visible = false;
             // 
             // modificaCliente
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(648, 510);
+            this.Controls.Add(this.label10);
+            this.Controls.Add(this.button2);
+            this.Controls.Add(this.monthCalendar1);
             this.Controls.Add(this.dniBuscado);
             this.Controls.Add(this.label12);
             this.Controls.Add(this.label11);
@@ -513,9 +529,7 @@
             this.Controls.Add(this.checkBox8);
             this.Controls.Add(this.checkBox9);
             this.Controls.Add(this.button3);
-            this.Controls.Add(this.button2);
             this.Controls.Add(this.button1);
-            this.Controls.Add(this.monthCalendar1);
             this.Controls.Add(this.fechaNac);
             this.Controls.Add(this.botonModificar);
             this.Controls.Add(this.botonBuscar);
@@ -595,5 +609,6 @@
         private System.Windows.Forms.Label label11;
         private System.Windows.Forms.Label label12;
         private System.Windows.Forms.TextBox dniBuscado;
+        private System.Windows.Forms.Label label10;
     }
 }

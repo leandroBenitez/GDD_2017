@@ -50,6 +50,8 @@ namespace PagoAgilFrba.AbmCliente1
 
         private void botLimpiar_Click_1(object sender, EventArgs e)
         {
+            label10.Visible = true;
+            label11.Visible = false;
             label12.Visible = true;
             string consulta = "Select * from PAGO_AGIL.Lk_Cliente where 1 = 1 ";
             string bitHabilitado = "";
@@ -159,6 +161,7 @@ namespace PagoAgilFrba.AbmCliente1
 
         private void botonModificar_Click_1(object sender, EventArgs e)
         {
+
             string bitHabilitado = "null";
             string dni_cadena;
             if (dniBuscado.Text != "")
