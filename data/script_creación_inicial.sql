@@ -921,10 +921,25 @@ GO
 
 Create Procedure PAGO_AGIL.Baja_Empresa  (@id int)
 as
+	declare @estado bit
+	declare @resultado varchar(100)
+	select @estado = empp.Empresa_Habilitado from PAGO_AGIL.Dim_Empresa as empp
+		where empp.Empresa_Id = @id
 	update emp
 		set emp.Empresa_Habilitado = 0
 	    from PAGO_AGIL.Dim_Empresa as emp
 		where emp.Empresa_Id = @id
+
+	if(@estado = 1)
+	begin
+	set @resultado = 'OK'
+	end
+	else
+	begin
+	set @resultado = 'La empresa ya estaba inactiva'
+	end
+
+Select @resultado as Resultado
 
 GO
 

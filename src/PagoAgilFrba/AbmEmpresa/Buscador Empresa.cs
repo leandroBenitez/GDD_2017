@@ -167,5 +167,17 @@ namespace PagoAgilFrba.AbmEmpresa
             main_menu.Show();
             this.Close();
         }
+
+        private void tratar_resultado(string resultado)
+        {
+            if (resultado.Equals("OK"))
+            {
+                MessageBox.Show("Empresa dada de baja con éxito", "Alta Empresa", MessageBoxButtons.OK, MessageBoxIcon.None);
+            }
+            else
+            {
+                MessageBox.Show(resultado, "Información", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            }
+        }
     }
 }

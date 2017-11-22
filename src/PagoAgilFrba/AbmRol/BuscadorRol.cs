@@ -15,6 +15,7 @@ namespace PagoAgilFrba.AbmRol
     public partial class BuscadorRol : Form
     {
         Form main_menu;
+        string aux;
 
         public BuscadorRol(Form menu)
         {
@@ -55,19 +56,30 @@ namespace PagoAgilFrba.AbmRol
             {
                 columnas[0] = datos[0].ToString();
                 columnas[1] = datos[1].ToString();
-                DataGridViewCheckBoxColumn col = new DataGridViewCheckBoxColumn();
-                string aux = datos[2].ToString();
+                //DataGridViewCheckBoxColumn col = new DataGridViewCheckBoxColumn();
+                //aux = datos[2].ToString();
 
-                if (aux == "True")
+                /*if (aux == "True")
                     columnas[2] = col.TrueValue;
                 else
-                    columnas[2] = col.FalseValue;
+                    columnas[2] = col.FalseValue;*/
 
                 filas.Add(new DataGridViewRow());
                 filas[filas.Count - 1].CreateCells(dataGridView_resultados, columnas);
             }
 
             dataGridView_resultados.Rows.AddRange(filas.ToArray());
+
+            int i = 0;
+            while (datos.Read()) //foreach (DataGridViewRow row in dataGridView_resultados.Rows)
+            {
+                DataGridViewCheckBoxCell chk = (DataGridViewCheckBoxCell)dataGridView_resultados.Rows[i].Cells[2];
+                if (aux == "True")
+                    chk.Value = chk.TrueValue;
+                else
+                    chk.Value = chk.FalseValue;
+                i++;
+            }
         }
 
         private void button_baja_Click(object sender, EventArgs e)
