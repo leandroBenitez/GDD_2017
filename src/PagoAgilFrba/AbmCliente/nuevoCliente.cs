@@ -35,6 +35,17 @@ namespace PagoAgilFrba.AbmCliente1
 
         private void botonNuevo_Click_1(object sender, EventArgs e)
         {
+                        if (
+            dni.Text != ""
+            && apellido.Text != ""
+            && nombre.Text != ""
+            && telefono.Text != ""
+            && mail.Text != ""
+            && direccion.Text != ""
+            && codPostal.Text != ""
+            && fechaNac.Text != ""
+            && comboHabilitado.Text != "")
+            {
             string consulta;
             string bitHabilitado = "";
             if (comboHabilitado.Text == "Habilitado")
@@ -63,6 +74,8 @@ namespace PagoAgilFrba.AbmCliente1
             {
                 MessageBox.Show("Error: " + ex.Message);
             }
+            }
+                else { MessageBox.Show("Todos los campos deben estar completos"); };
         }
 
         private void botonLimpiar_Click_1(object sender, EventArgs e)

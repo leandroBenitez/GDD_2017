@@ -29,7 +29,6 @@
         private void InitializeComponent()
         {
             this.fechaNac = new System.Windows.Forms.TextBox();
-            this.label10 = new System.Windows.Forms.Label();
             this.botonModificar = new System.Windows.Forms.Button();
             this.botonBuscar = new System.Windows.Forms.Button();
             this.comboHabilitado = new System.Windows.Forms.ComboBox();
@@ -86,15 +85,6 @@
             this.fechaNac.ReadOnly = true;
             this.fechaNac.Size = new System.Drawing.Size(114, 20);
             this.fechaNac.TabIndex = 69;
-            // 
-            // label10
-            // 
-            this.label10.AutoSize = true;
-            this.label10.Location = new System.Drawing.Point(458, 201);
-            this.label10.Name = "label10";
-            this.label10.Size = new System.Drawing.Size(129, 13);
-            this.label10.TabIndex = 67;
-            this.label10.Text = "DNI de cliente a modificar";
             // 
             // botonModificar
             // 
@@ -280,7 +270,8 @@
             // 
             this.dataGridView1.AllowUserToAddRows = false;
             this.dataGridView1.AllowUserToDeleteRows = false;
-            this.dataGridView1.AllowUserToOrderColumns = true;
+            this.dataGridView1.AllowUserToResizeColumns = false;
+            this.dataGridView1.AllowUserToResizeRows = false;
             this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dataGridView1.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.Cliente_Dni,
@@ -293,7 +284,9 @@
             this.Cliente_Codigo_Postal,
             this.Cliente_Habilitado});
             this.dataGridView1.Location = new System.Drawing.Point(28, 339);
+            this.dataGridView1.MultiSelect = false;
             this.dataGridView1.Name = "dataGridView1";
+            this.dataGridView1.ReadOnly = true;
             this.dataGridView1.Size = new System.Drawing.Size(593, 127);
             this.dataGridView1.TabIndex = 46;
             this.dataGridView1.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView1_CellContentClick);
@@ -497,7 +490,7 @@
             // 
             // dniBuscado
             // 
-            this.dniBuscado.Location = new System.Drawing.Point(479, 227);
+            this.dniBuscado.Location = new System.Drawing.Point(480, 207);
             this.dniBuscado.Name = "dniBuscado";
             this.dniBuscado.Size = new System.Drawing.Size(85, 20);
             this.dniBuscado.TabIndex = 96;
@@ -524,7 +517,6 @@
             this.Controls.Add(this.button1);
             this.Controls.Add(this.monthCalendar1);
             this.Controls.Add(this.fechaNac);
-            this.Controls.Add(this.label10);
             this.Controls.Add(this.botonModificar);
             this.Controls.Add(this.botonBuscar);
             this.Controls.Add(this.comboHabilitado);
@@ -557,7 +549,6 @@
         #endregion
 
         private System.Windows.Forms.TextBox fechaNac;
-        private System.Windows.Forms.Label label10;
         private System.Windows.Forms.Button botonModificar;
         private System.Windows.Forms.Button botonBuscar;
         private System.Windows.Forms.ComboBox comboHabilitado;
