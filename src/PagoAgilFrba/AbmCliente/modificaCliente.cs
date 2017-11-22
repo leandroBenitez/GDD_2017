@@ -50,6 +50,7 @@ namespace PagoAgilFrba.AbmCliente1
 
         private void botLimpiar_Click_1(object sender, EventArgs e)
         {
+            label12.Visible = true;
             string consulta = "Select * from PAGO_AGIL.Lk_Cliente where 1 = 1 ";
             string bitHabilitado = "";
             if (!string.IsNullOrWhiteSpace(dni.Text))
@@ -218,6 +219,128 @@ namespace PagoAgilFrba.AbmCliente1
         {
             ClienteMenu.Show();
             this.Close();
+        }
+
+        private void checkBox1_CheckedChanged(object sender, EventArgs e)
+        {
+            if (checkBox1.Checked == true)
+            {
+                dni.ReadOnly = false;
+            }
+            else
+            {
+                dni.ReadOnly = true;
+                dni.Text = "";
+            };
+        }
+
+        private void checkBox2_CheckedChanged(object sender, EventArgs e)
+        {
+            if (checkBox2.Checked == true)
+            {
+                apellido.ReadOnly = false;
+            }
+            else
+            {
+                apellido.ReadOnly = true;
+                apellido.Text = "";
+            };
+        }
+
+        private void checkBox3_CheckedChanged(object sender, EventArgs e)
+        {
+            if (checkBox3.Checked == true)
+            {
+                nombre.ReadOnly = false;
+            }
+            else
+            {
+                nombre.ReadOnly = true;
+                nombre.Text = "";
+            };
+        }
+
+        private void checkBox4_CheckedChanged(object sender, EventArgs e)
+        {
+            if (checkBox4.Checked == true)
+            {
+                telefono.ReadOnly = false;
+            }
+            else
+            {
+                telefono.ReadOnly = true;
+                telefono.Text = "";
+            };
+        }
+
+        private void checkBox5_CheckedChanged(object sender, EventArgs e)
+        {
+            if (checkBox5.Checked == true)
+            {
+                button1.Visible = true;
+            }
+            else
+            {
+                button1.Visible = false;
+                fechaNac.Text = "";
+            };
+        }
+
+        private void checkBox6_CheckedChanged(object sender, EventArgs e)
+        {
+            if (checkBox6.Checked == true)
+            {
+                mail.ReadOnly = false;
+            }
+            else
+            {
+                mail.ReadOnly = true;
+                mail.Text = "";
+            };
+        }
+
+        private void checkBox7_CheckedChanged(object sender, EventArgs e)
+        {
+            if (checkBox7.Checked == true)
+            {
+                direccion.ReadOnly = false;
+            }
+            else
+            {
+                direccion.ReadOnly = true;
+                direccion.Text = "";
+            };
+        }
+
+        private void checkBox8_CheckedChanged(object sender, EventArgs e)
+        {
+            if (checkBox8.Checked == true)
+            {
+                codPostal.ReadOnly = false;
+            }
+            else
+            {
+                codPostal.ReadOnly = true;
+                codPostal.Text = "";
+            };
+        }
+
+        private void checkBox9_CheckedChanged(object sender, EventArgs e)
+        {
+            if (checkBox9.Checked == true)
+            {
+                comboHabilitado.Visible = true;
+            }
+            else
+            {
+                comboHabilitado.Visible = false;
+                comboHabilitado.SelectedItem = null;
+            }
+        }
+
+        private void dataGridView1_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+            dniBuscado.Text = dataGridView1[0, e.RowIndex].Value.ToString();
         }
     }
 }

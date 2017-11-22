@@ -157,3 +157,7 @@ C:\Users\susana\Documents\GitHub\GDD_2017\src\PagoAgilFrba\obj\Debug\PagoAgilFrb
 C:\Users\susana\Documents\GitHub\GDD_2017\src\PagoAgilFrba\obj\Debug\PagoAgilFrba.csproj.GenerateResource.Cache
 C:\Users\susana\Documents\GitHub\GDD_2017\src\PagoAgilFrba\obj\Debug\PagoAgilFrba.exe
 C:\Users\susana\Documents\GitHub\GDD_2017\src\PagoAgilFrba\obj\Debug\PagoAgilFrba.pdb
+C:\Users\Fabrizio\Documents\GitHub\GDD_2017\src\PagoAgilFrba\obj\Debug\PagoAgilFrba.AbmFactura.eliminar.resources
+C:\Users\Fabrizio\Documents\GitHub\GDD_2017\src\PagoAgilFrba\obj\Debug\PagoAgilFrba.Devolucion.auxMotivo.resources
+C:\Users\Fabrizio\Documents\GitHub\GDD_2017\src\PagoAgilFrba\obj\Debug\PagoAgilFrba.Devolucion.DevolverFactura.resources
+C:\Users\Fabrizio\Documents\GitHub\GDD_2017\src\PagoAgilFrba\obj\Debug\PagoAgilFrba.Devolucion.motivo.resources
