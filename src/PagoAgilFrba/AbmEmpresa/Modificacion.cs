@@ -9,6 +9,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using PagoAgilFrba.Entidades;
 using System.Data.SqlClient;
+using PagoAgilFrba.AbmEmpresa;
 
 namespace PagoAgilFrba.AbmEmpresa
 {
@@ -19,7 +20,7 @@ namespace PagoAgilFrba.AbmEmpresa
         private string cuit_formateado;
         Form main_menu;
 
-        public Modificacion(int idEmp, string nombre, string cuit, string direccion, string rubro, bool habilitado, Form menu)
+        public Modificacion(int idEmp, string nombre, string cuit, string direccion, string rubro, bool habilitado, string dia_cobro, Form menu)
         {
             InitializeComponent();
             main_menu = menu;
@@ -43,7 +44,8 @@ namespace PagoAgilFrba.AbmEmpresa
                 || string.IsNullOrWhiteSpace(textBox_cuit_in.Text)
                 || string.IsNullOrWhiteSpace(textBox_cuit_medio.Text)
                 || string.IsNullOrWhiteSpace(textBox_cuit_fin.Text)
-                || string.IsNullOrEmpty(comboBox_rubro.Text))
+                || string.IsNullOrEmpty(comboBox_rubro.Text)
+                || string.IsNullOrWhiteSpace(textBox_dia.Text))
             {
                 MessageBox.Show("Complete todos los campos", "Informacion", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return;
@@ -55,6 +57,18 @@ namespace PagoAgilFrba.AbmEmpresa
                 MessageBox.Show("CUIT sólo caracteres numéricos", "Informacion", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return;
             }
+            else if (!textBox_dia.Text.All(char.IsDigit))
+            {
+                MessageBox.Show("Día de rendición sólo números", "Informacion", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                textBox_dia.Text = "";
+                return;
+            }
+            else if (int.Parse(textBox_dia.Text) > 28 || int.Parse(textBox_dia.Text) < 1)
+            {
+                MessageBox.Show("Ingrese un día de rendición entre 1 y 28", "Informacion", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                textBox_dia.Text = "";
+                return;
+            }
             else
             {
                 string hab;
@@ -63,33 +77,35 @@ namespace PagoAgilFrba.AbmEmpresa
                 else
                     hab = "0";
                 cuit_formateado = textBox_cuit_in.Text + "-" + textBox_cuit_medio.Text + "-" + textBox_cuit_fin.Text;
-                string cadena = "Execute PAGO_AGIL.Modificar_Empresa '" + id_emp.ToString() + "', '";
-                cadena = cadena + textBox_nombre.Text + "', '";
-                cadena = cadena + textBox_direccion.Text + "', '";
-                cadena = cadena + cuit_formateado + "', '";
-                cadena = cadena + comboBox_rubro.Text + "', '";
-                cadena = cadena + hab + "' ";
-
-                conexion connection = new conexion();
-                SqlCommand command = new SqlCommand();
-
-                command.CommandText = cadena;
-                command.CommandType = CommandType.Text;
-                command.Connection = connection.abrir_conexion();
-
-                try
+                if (Alta.ValidaCuit(cuit_formateado))
                 {
-                    Object reader = command.ExecuteScalar();
-                    string resultado = reader.ToString();
-                    tratar_resultado(resultado);
+                    string cadena = "Execute PAGO_AGIL.Modificar_Empresa '" + id_emp.ToString() + "', '";
+                    cadena = cadena + textBox_nombre.Text + "', '";
+                    cadena = cadena + textBox_direccion.Text + "', '";
+                    cadena = cadena + cuit_formateado + "', '";
+                    cadena = cadena + comboBox_rubro.Text + "', '";
+                    cadena = cadena + hab + "' ";
+
+                    conexion connection = new conexion();
+                    SqlCommand command = new SqlCommand();
+
+                    command.CommandText = cadena;
+                    command.CommandType = CommandType.Text;
+                    command.Connection = connection.abrir_conexion();
+
+                    try
+                    {
+                        Object reader = command.ExecuteScalar();
+                        string resultado = reader.ToString();
+                        tratar_resultado(resultado);
+
+                    }
+                    catch (Exception ex)
+                    {
+                        MessageBox.Show("Error: " + ex.Message);
+                    }
 
                 }
-                catch (Exception ex)
-                {
-                    MessageBox.Show("Error: " + ex.Message);
-                }
-
-                
             }
         }
         private void tratar_resultado(string resultado)

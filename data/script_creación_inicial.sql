@@ -840,12 +840,13 @@ Go
 
 --Modificar Empresa
 
-Create Procedure PAGO_AGIL.Modificar_Empresa  (@id int
+Create Procedure PAGO_AGIL.Modificar_Empresa  (  @id int
 												,@nombre varchar(100)
 												,@direccion varchar(100)
 												,@cuit varchar(100)
 												,@rubro varchar(100)
-												,@habilitada bit)
+												,@habilitada bit
+												,@dia_cobro varchar(100))
 as
 
 declare @cuit_valido int = 1
@@ -866,6 +867,7 @@ begin
 			,emp.Empresa_Rubro_Id = rub.Rubro_Id
 			,emp.Empresa_Direccion = @direccion
 			,emp.Empresa_Habilitado = @habilitada
+			,emp.Empresa_Dia_Rendicion = cast(@dia_cobro as tinyint)
 	    from PAGO_AGIL.Dim_Empresa as emp
 		inner join PAGO_AGIL.Dim_Rubro as rub
 			on rub.Rubro_Descripcion like @rubro

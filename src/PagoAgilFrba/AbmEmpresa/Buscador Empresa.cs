@@ -20,6 +20,7 @@ namespace PagoAgilFrba.AbmEmpresa
         private string direccion;
         private string rubro;
         private bool habilitado;
+        private string dia_cobro;
         Form main_menu;
 
         public Buscador_Empresa(Form menu)
@@ -81,6 +82,7 @@ namespace PagoAgilFrba.AbmEmpresa
                 columnas[3] = datos["Empresa_Direccion"].ToString();
                 columnas[4] = datos["Rubro"].ToString();
                 columnas[5] = datos["Habilitado"].ToString();
+                columnas[6] = datos["Empresa_Dia_Rendicion"].ToString();
 
                 filas.Add(new DataGridViewRow());
                 filas[filas.Count - 1].CreateCells(dataGridView, columnas);
@@ -107,7 +109,8 @@ namespace PagoAgilFrba.AbmEmpresa
                     habilitado = true;
                 else
                     habilitado = false;
-                PagoAgilFrba.AbmEmpresa.Modificacion modificacion = new PagoAgilFrba.AbmEmpresa.Modificacion(idEmp, nombre, cuit, direccion, rubro, habilitado, this);
+                dia_cobro = row.Cells[6].Value.ToString();
+                PagoAgilFrba.AbmEmpresa.Modificacion modificacion = new PagoAgilFrba.AbmEmpresa.Modificacion(idEmp, nombre, cuit, direccion, rubro, habilitado, dia_cobro, this);
                 this.Hide();
                 modificacion.Show();
 

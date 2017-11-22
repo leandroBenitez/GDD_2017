@@ -50,6 +50,7 @@
             this.textBox_cuit_fin = new System.Windows.Forms.TextBox();
             this.textBox_cuit_in = new System.Windows.Forms.TextBox();
             this.button_atras = new System.Windows.Forms.Button();
+            this.diaCobro = new System.Windows.Forms.DataGridViewTextBoxColumn();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView)).BeginInit();
             this.SuspendLayout();
             // 
@@ -117,8 +118,9 @@
             this.CUIT,
             this.Direccion,
             this.Rubro,
-            this.Habilitada});
-            this.dataGridView.Location = new System.Drawing.Point(12, 117);
+            this.Habilitada,
+            this.diaCobro});
+            this.dataGridView.Location = new System.Drawing.Point(21, 115);
             this.dataGridView.Name = "dataGridView";
             this.dataGridView.ReadOnly = true;
             this.dataGridView.Size = new System.Drawing.Size(539, 150);
@@ -240,6 +242,12 @@
             this.button_atras.UseVisualStyleBackColor = true;
             this.button_atras.Click += new System.EventHandler(this.button_atras_Click);
             // 
+            // diaCobro
+            // 
+            this.diaCobro.HeaderText = "Día de Cobro";
+            this.diaCobro.Name = "diaCobro";
+            this.diaCobro.ReadOnly = true;
+            // 
             // Buscador_Empresa
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -293,5 +301,6 @@
         private System.Windows.Forms.TextBox textBox_cuit_fin;
         private System.Windows.Forms.TextBox textBox_cuit_in;
         private System.Windows.Forms.Button button_atras;
+        private System.Windows.Forms.DataGridViewTextBoxColumn diaCobro;
     }
 }

@@ -44,6 +44,8 @@
             this.textBox_cuit_in = new System.Windows.Forms.TextBox();
             this.checkBox_habilitada = new System.Windows.Forms.CheckBox();
             this.button_cancelar = new System.Windows.Forms.Button();
+            this.label8 = new System.Windows.Forms.Label();
+            this.textBox_dia = new System.Windows.Forms.TextBox();
             this.SuspendLayout();
             // 
             // textBox_nombre
@@ -58,15 +60,16 @@
             this.textBox_direccion.Location = new System.Drawing.Point(166, 155);
             this.textBox_direccion.Name = "textBox_direccion";
             this.textBox_direccion.Size = new System.Drawing.Size(184, 20);
-            this.textBox_direccion.TabIndex = 2;
+            this.textBox_direccion.TabIndex = 4;
             // 
             // comboBox_rubro
             // 
+            this.comboBox_rubro.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.comboBox_rubro.FormattingEnabled = true;
             this.comboBox_rubro.Location = new System.Drawing.Point(166, 193);
             this.comboBox_rubro.Name = "comboBox_rubro";
             this.comboBox_rubro.Size = new System.Drawing.Size(184, 21);
-            this.comboBox_rubro.TabIndex = 3;
+            this.comboBox_rubro.TabIndex = 5;
             // 
             // label1
             // 
@@ -107,7 +110,7 @@
             // label5
             // 
             this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(58, 25);
+            this.label5.Location = new System.Drawing.Point(46, 25);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(48, 13);
             this.label5.TabIndex = 8;
@@ -115,10 +118,10 @@
             // 
             // button_modificacion
             // 
-            this.button_modificacion.Location = new System.Drawing.Point(272, 276);
+            this.button_modificacion.Location = new System.Drawing.Point(271, 316);
             this.button_modificacion.Name = "button_modificacion";
             this.button_modificacion.Size = new System.Drawing.Size(78, 23);
-            this.button_modificacion.TabIndex = 9;
+            this.button_modificacion.TabIndex = 8;
             this.button_modificacion.Text = "Modificar";
             this.button_modificacion.UseVisualStyleBackColor = true;
             this.button_modificacion.Click += new System.EventHandler(this.button_modificacion_Click);
@@ -146,47 +149,65 @@
             this.textBox_cuit_medio.Location = new System.Drawing.Point(213, 115);
             this.textBox_cuit_medio.Name = "textBox_cuit_medio";
             this.textBox_cuit_medio.Size = new System.Drawing.Size(92, 20);
-            this.textBox_cuit_medio.TabIndex = 17;
+            this.textBox_cuit_medio.TabIndex = 2;
             // 
             // textBox_cuit_fin
             // 
             this.textBox_cuit_fin.Location = new System.Drawing.Point(324, 115);
             this.textBox_cuit_fin.Name = "textBox_cuit_fin";
             this.textBox_cuit_fin.Size = new System.Drawing.Size(26, 20);
-            this.textBox_cuit_fin.TabIndex = 16;
+            this.textBox_cuit_fin.TabIndex = 3;
             // 
             // textBox_cuit_in
             // 
             this.textBox_cuit_in.Location = new System.Drawing.Point(165, 115);
             this.textBox_cuit_in.Name = "textBox_cuit_in";
             this.textBox_cuit_in.Size = new System.Drawing.Size(26, 20);
-            this.textBox_cuit_in.TabIndex = 15;
+            this.textBox_cuit_in.TabIndex = 1;
             // 
             // checkBox_habilitada
             // 
             this.checkBox_habilitada.AutoSize = true;
-            this.checkBox_habilitada.Location = new System.Drawing.Point(166, 233);
+            this.checkBox_habilitada.Location = new System.Drawing.Point(165, 273);
             this.checkBox_habilitada.Name = "checkBox_habilitada";
             this.checkBox_habilitada.Size = new System.Drawing.Size(73, 17);
-            this.checkBox_habilitada.TabIndex = 21;
+            this.checkBox_habilitada.TabIndex = 7;
             this.checkBox_habilitada.Text = "Habilitada";
             this.checkBox_habilitada.UseVisualStyleBackColor = true;
             // 
             // button_cancelar
             // 
-            this.button_cancelar.Location = new System.Drawing.Point(58, 276);
+            this.button_cancelar.Location = new System.Drawing.Point(57, 316);
             this.button_cancelar.Name = "button_cancelar";
             this.button_cancelar.Size = new System.Drawing.Size(78, 23);
-            this.button_cancelar.TabIndex = 22;
+            this.button_cancelar.TabIndex = 9;
             this.button_cancelar.Text = "Cancelar";
             this.button_cancelar.UseVisualStyleBackColor = true;
             this.button_cancelar.Click += new System.EventHandler(this.button_cancelar_Click);
+            // 
+            // label8
+            // 
+            this.label8.AutoSize = true;
+            this.label8.Location = new System.Drawing.Point(58, 238);
+            this.label8.Name = "label8";
+            this.label8.Size = new System.Drawing.Size(94, 13);
+            this.label8.TabIndex = 24;
+            this.label8.Text = "Día de Rendición:";
+            // 
+            // textBox_dia
+            // 
+            this.textBox_dia.Location = new System.Drawing.Point(166, 235);
+            this.textBox_dia.Name = "textBox_dia";
+            this.textBox_dia.Size = new System.Drawing.Size(26, 20);
+            this.textBox_dia.TabIndex = 6;
             // 
             // Modificacion
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(382, 335);
+            this.ClientSize = new System.Drawing.Size(382, 375);
+            this.Controls.Add(this.label8);
+            this.Controls.Add(this.textBox_dia);
             this.Controls.Add(this.button_cancelar);
             this.Controls.Add(this.checkBox_habilitada);
             this.Controls.Add(this.label7);
@@ -229,5 +250,7 @@
         private System.Windows.Forms.TextBox textBox_cuit_in;
         private System.Windows.Forms.CheckBox checkBox_habilitada;
         private System.Windows.Forms.Button button_cancelar;
+        private System.Windows.Forms.Label label8;
+        private System.Windows.Forms.TextBox textBox_dia;
     }
 }

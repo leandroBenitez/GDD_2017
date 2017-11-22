@@ -49,13 +49,13 @@ namespace PagoAgilFrba.AbmEmpresa
             }
             else if(!textBox_dia.Text.All(char.IsDigit))
             {
-                MessageBox.Show("Día de cobro sólo números", "Informacion", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                MessageBox.Show("Día de rendición sólo números", "Informacion", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 textBox_dia.Text = "";
                 return;
             }
             else if (int.Parse(textBox_dia.Text) > 28 || int.Parse(textBox_dia.Text) < 1)
             {
-                MessageBox.Show("Ingrese un día de cobro entre 1 y 28", "Informacion", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                MessageBox.Show("Ingrese un día de rendición entre 1 y 28", "Informacion", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 textBox_dia.Text = "";
                 return;
             }
