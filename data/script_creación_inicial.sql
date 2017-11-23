@@ -1013,12 +1013,11 @@ begin
 	end
 
 GO
-
 --Creacion de nuevo cliente
 create procedure PAGO_AGIL.nuevoCliente(@DNI int, @apellido nvarchar(255), @nombre nvarchar(255), 
 @telefono nvarchar(255), @fechaNac datetime, @mail nvarchar(255), @direccion nvarchar(255), @codigoPostal nvarchar(255), @habilitado int) as
 	begin
-	declare @validacionCliente int = (select 1 from PAGO_AGIL.Lk_Cliente where Cliente_Dni = @DNI)
+	declare @validacionCliente int = (select 1 from PAGO_AGIL.Lk_Cliente where Cliente_Mail = @mail)
 	if @validacionCliente is null
 	begin
 		insert into PAGO_AGIL.Lk_Cliente(Cliente_Dni, Cliente_Apellido, Cliente_Nombre, Cliente_Telefono, Cliente_Fecha_Nac, 
@@ -1036,6 +1035,9 @@ create procedure PAGO_AGIL.nuevoCliente(@DNI int, @apellido nvarchar(255), @nomb
 create procedure PAGO_AGIL.modificaCliente(@dni_buscado int, @DNI int, @apellido nvarchar(255), @nombre nvarchar(255), 
 @telefono nvarchar(255), @fechaNac datetime, @mail nvarchar(255), @direccion nvarchar(255), 
 @codigoPostal nvarchar(255), @habilitado int) as
+	begin
+	declare @validacionMail int = (select 1 from PAGO_AGIL.Lk_Cliente where Cliente_Mail = @mail);
+	if @validacionMail!=1
 	begin
 		if @DNI is not null 
 			begin
@@ -1092,6 +1094,10 @@ create procedure PAGO_AGIL.modificaCliente(@dni_buscado int, @DNI int, @apellido
 				where Cliente_Dni =@dni_buscado
 			end
 		select 'Cliente modificado con exito'
+		end
+		else
+		select 'El correo seleccionado ya existe'
+		
 	end
 go
 ;
