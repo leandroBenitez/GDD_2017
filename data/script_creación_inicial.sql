@@ -112,6 +112,9 @@ Go
 IF OBJECT_ID('PAGO_AGIL.Vw_Rendidos') IS NOT NULL
     DROP VIEW PAGO_AGIL.Vw_Rendidos;
 
+IF OBJECT_ID('PAGO_AGIL.Vw_Facturas') IS NOT NULL
+    DROP VIEW PAGO_AGIL.Vw_Facturas;
+
 IF OBJECT_ID('PAGO_AGIL.Vw_User_Info') IS NOT NULL
     DROP VIEW PAGO_AGIL.Vw_User_Info;
 
@@ -520,6 +523,24 @@ Go
 
 
 --Creacion de Views
+--Vista con informacion de facturas
+Create View PAGO_AGIL.Vw_Facturas
+as
+Select	 fac.Factura_Id
+		,cli.Cliente_Nombre + ' ' + cli.Cliente_Apellido as Cliente
+		,emp.Empresa_Nombre as Empresa
+		,fac.Factura_Nro as Numero
+		,fac.Factura_Fecha_Vencimiento as Vencimiento
+		,'$' + Cast(fac.Factura_Total as varchar) as Importe
+		,fac.Factura_Total bruto
+from PAGO_AGIL.Lk_Factura fac
+inner join PAGO_AGIL.Lk_Cliente cli
+	on fac.Factura_Cliente_Id = cli.Cliente_Id
+inner join PAGO_AGIL.Dim_Empresa emp
+	on fac.Factura_Empresa_Id = emp.Empresa_Id
+Go
+
+
 --Creacion de vista con informacion de funcionalidades x usuario
 Create View PAGO_AGIL.Vw_User_Info
 as
@@ -1113,21 +1134,34 @@ GO
 
 Create Procedure PAGO_AGIL.Alta_Rol(@nombre varchar(100))
 as
+declare @resultado varchar(100)
+declare @rol_valido int = 1
 
-Insert into PAGO_AGIL.Dim_Rol(Rol_Desc)
-values (@nombre)
+Select @rol_valido = 0 from PAGO_AGIL.Dim_Rol as rol
+where rol.Rol_Desc like @nombre
 
-update rf
-	set rf.Rol_Id = rol.Rol_Id
-from PAGO_AGIL.Rl_RolxFuncionalidad as rf
-	inner join PAGO_AGIL.Dim_Rol as rol
-	on rol.Rol_Desc like @nombre
-where rf.Rol_id is null
+if(@rol_valido = 1)
+begin
+	Insert into PAGO_AGIL.Dim_Rol(Rol_Desc)
+	values (@nombre)
+
+	update rf
+		set rf.Rol_Id = rol.Rol_Id
+	from PAGO_AGIL.Rl_RolxFuncionalidad as rf
+		inner join PAGO_AGIL.Dim_Rol as rol
+		on rol.Rol_Desc like @nombre
+	where rf.Rol_id is null
+end
+else
+begin
+	set @resultado = 'Error, nombre de rol ya existente'
+end
+
+Select @resultado as Resultado
 
 GO
 
 --Baja Rol
-
 Create Procedure PAGO_AGIL.Baja_Rol (@id_rol int)
 as
 Update rol
@@ -1136,7 +1170,6 @@ Update rol
 
 Delete from PAGO_AGIL.Rl_RolxUsuario 
 where Rol_Id = @id_rol
-
 GO
 
 --Modificacion Rol
@@ -1161,8 +1194,11 @@ begin
 	end
 	else
 	begin
-		insert into PAGO_AGIL.Rl_RolxFuncionalidad (Funcionalidad_Id, Rol_Id)
-		values (@id_funcionalidad, @id_rol)
+		delete from PAGO_AGIL.Rl_RolxFuncionalidad
+			where Funcionalidad_Id = @id_funcionalidad 
+				and Rol_Id = @id_rol
+		--insert into PAGO_AGIL.Rl_RolxFuncionalidad (Funcionalidad_Id, Rol_Id)
+		--values (@id_funcionalidad, @id_rol)
 	end	
 end 
 else

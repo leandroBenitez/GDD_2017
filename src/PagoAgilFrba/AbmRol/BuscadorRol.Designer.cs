@@ -128,13 +128,14 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(295, 291);
+            this.ClientSize = new System.Drawing.Size(289, 293);
             this.Controls.Add(this.button_atras);
             this.Controls.Add(this.button_baja);
             this.Controls.Add(this.button_modificar);
             this.Controls.Add(this.label);
             this.Controls.Add(this.dataGridView_resultados);
             this.Controls.Add(this.label2);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.Name = "BuscadorRol";
             this.Text = "Pago Agil";
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView_resultados)).EndInit();

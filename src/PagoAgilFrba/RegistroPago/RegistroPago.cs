@@ -21,81 +21,140 @@ namespace PagoAgilFrba.RegistroPago
         public RegistroPago(string fecha_sistema, string sucursal, Form menu)
         {
             InitializeComponent();
+            main_menu = menu;
             textBox_fecha_sistema.Text = fecha_sistema;
             textBox_sucursal.Text = sucursal;
             label_cant.Text = "0";
             label_total.Text = "0";
             cantidad_fact = 0;
             monto_total = 0;
-            main_menu = menu;
-            string consulta_empresas = "Select distinct emp.Empresa_Nombre from PAGO_AGIL.Dim_Empresa as emp";
-            Entidades.Herramientas.llenarComboBox(comboBox_empresa, consulta_empresas);
-            string consulta_clientes = "Select (cli.Cliente_Nombre + ' ' + cli.Cliente_Apellido) from PAGO_AGIL.Lk_Cliente as cli";
-            Entidades.Herramientas.llenarComboBox(comboBox_cliente, consulta_clientes);
+            cargar_clientes("");
+            cargar_empresas("");
+            string consulta = "Select Distinct FormaPago_Desc from PAGO_AGIL.Dim_FormaPago";
+            Entidades.Herramientas.llenarComboBox(comboBox_forma, consulta);        
         }
 
-        private void button_registro_Click(object sender, EventArgs e)
+        public void cargar_clientes(string filtro)
         {
-
+            comboBox_cliente.Items.Clear();
+            string consulta = "Select (Cliente_Nombre + ' ' + Cliente_Apellido) from PAGO_AGIL.Lk_Cliente where Cliente_Nombre + ' ' + Cliente_Apellido like '%" + filtro + "%'";
+            Entidades.Herramientas.llenarComboBox(comboBox_cliente, consulta);
         }
 
-        private void button_agregar_Click(object sender, EventArgs e)
+        public void cargar_empresas(string filtro)
         {
-            if (    string.IsNullOrWhiteSpace(textBox_fecha_venc.Text) 
-                 || string.IsNullOrWhiteSpace(textBox_importe.Text)
-                 || string.IsNullOrWhiteSpace(textBox_nro_fact.Text)
-                 || string.IsNullOrEmpty(comboBox_empresa.Text) 
-                 || string.IsNullOrEmpty(comboBox_cliente.Text)
-                 || string.IsNullOrEmpty(comboBox_forma.Text))
-            {
-                MessageBox.Show("Complete todos los campos", "Informacion", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                return;
-            }
-            else
-            { 
-                comboBox_cliente.Enabled = false;
-                comboBox_forma.Enabled = false;
-            }
-
-            string cadena = "Execute PAGO_AGIL.Agregar_Pago '" + comboBox_empresa.Text + "', '" + textBox_fecha_sistema.Text + "', '";
-            
-            conexion connection = new conexion();
-            SqlCommand command = new SqlCommand();
-
-            command.CommandText = cadena;
-            command.CommandType = CommandType.Text;
-            command.Connection = connection.abrir_conexion();
-
-            try
-            {
-                Object reader = command.ExecuteScalar();
-                string resultado = reader.ToString();
-                
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show("Error: " + ex.Message);
-            }
-
-            
-            cantidad_fact++;
-            label_cant.Text = cantidad_fact.ToString();
-
-            monto_total += Int16.Parse(textBox_importe.Text);
-            label_total.Text = monto_total.ToString();
-
-            textBox_nro_fact.Text = "";
-            comboBox_empresa.SelectedIndex = -1;
-            textBox_fecha_venc.Text = "";
-            textBox_importe.Text = "";
-
-
+            comboBox_empresa.Items.Clear();
+            string consulta = "Select Distinct Empresa_Nombre from PAGO_AGIL.Dim_Empresa where Empresa_Nombre like '%" + filtro + "%'";
+            Entidades.Herramientas.llenarComboBox(comboBox_cliente, consulta);
         }
 
         private void button_cancelar_Click(object sender, EventArgs e)
         {
             main_menu.Show();
             this.Close();
+        }
+
+        private void button_buscar_cliente_Click(object sender, EventArgs e)
+        {
+            cargar_clientes(textBox_cliente.Text);
+            comboBox_cliente.DroppedDown = true;
+        }
+
+        private void button_buscar_empresa_Click(object sender, EventArgs e)
+        {
+            cargar_empresas(textBox_empresa.Text);
+            comboBox_empresa.DroppedDown = true;
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            string consulta = "Select * from PAGO_AGIL.Vw_Facturas where 1 = 1 ";
+
+            if (comboBox_cliente.SelectedIndex != -1)
+            {
+                consulta = consulta + "and Cliente like '" + comboBox_cliente.Text + "'";
+            }
+
+            if (comboBox_empresa.SelectedIndex != -1)
+            {
+                consulta = consulta + "and Empresa like '" + comboBox_empresa.Text + "'";                
+            }
+
+            conexion connection = new conexion();
+            SqlCommand command = new SqlCommand();
+
+            command.CommandText = consulta;
+            command.CommandType = CommandType.Text;
+            command.Connection = connection.abrir_conexion();
+
+            try
+            {
+                SqlDataReader reader = command.ExecuteReader();
+                cargar_grid_todos(reader);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Error: " + ex.Message);
+            }
+        }
+
+        public void cargar_grid_todos(SqlDataReader reader)
+        {
+            dataGridView_total.Rows.Clear();
+
+            List<DataGridViewRow> filas = new List<DataGridViewRow>();
+            Object[] columnas = new Object[7];
+
+            while (reader.Read())
+            {
+                columnas[0] = reader[0].ToString();
+                columnas[1] = reader[1].ToString();
+                columnas[2] = reader[2].ToString();
+                columnas[3] = reader[3].ToString();
+                columnas[4] = reader[4].ToString();
+                columnas[5] = reader[5].ToString();
+                columnas[6] = reader[6].ToString();
+
+                filas.Add(new DataGridViewRow());
+                filas[filas.Count - 1].CreateCells(dataGridView_total, columnas);
+            }
+
+            dataGridView_total.Rows.AddRange(filas.ToArray());
+        }
+
+        private void button_agregar_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                DataGridViewRow fila = dataGridView_total.SelectedRows[0];
+
+                List<DataGridViewRow> filas = new List<DataGridViewRow>();
+                Object[] columnas = new Object[7];
+
+                columnas[0] = fila.Cells[0].Value.ToString();
+                columnas[1] = fila.Cells[1].Value.ToString();
+                columnas[2] = fila.Cells[2].Value.ToString();
+                columnas[3] = fila.Cells[3].Value.ToString();
+                columnas[4] = fila.Cells[4].Value.ToString();
+                columnas[5] = fila.Cells[5].Value.ToString();
+                columnas[6] = fila.Cells[6].Value.ToString();
+
+                filas.Add(new DataGridViewRow());
+                filas[filas.Count - 1].CreateCells(dataGridView_total, columnas);
+
+                dataGridView_confirmados.Rows.AddRange(filas.ToArray());
+
+                cantidad_fact++;
+                monto_total = monto_total + float.Parse(fila.Cells[6].Value.ToString());
+                label_cant.Text = cantidad_fact.ToString();
+                label_total.Text = monto_total.ToString();
+
+                comboBox_cliente.Enabled = false;
+            }
+            catch
+            {
+                MessageBox.Show("Debe seleccionar un registro");
+            }
         }
     }
 }
