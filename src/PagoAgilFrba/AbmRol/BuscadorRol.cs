@@ -66,29 +66,6 @@ namespace PagoAgilFrba.AbmRol
             }
             
             dataGridView_resultados.Rows.AddRange(filas.ToArray());
-
-            /*
-            string consulta = "select * from PAGO_AGIL.Dim_Rol";
-            conexion connection = new conexion();
-            SqlCommand command = new SqlCommand();
-
-            command.CommandText = consulta;
-            command.CommandType = CommandType.Text;
-            command.Connection = connection.abrir_conexion();
-            SqlDataReader reader = command.ExecuteReader();
-
-            int i = 0;
-
-            while (reader.Read())
-            {
-                DataGridViewCheckBoxCell chk = (DataGridViewCheckBoxCell)dataGridView_resultados.Rows[i].Cells[2];
-                if (reader[2].ToString() == "True")
-                    chk.Value = chk.TrueValue;
-                else
-                    chk.Value = chk.FalseValue;
-                i++;
-            }
-            dataGridView_resultados.EndEdit();*/
         }
 
         private void button_baja_Click(object sender, EventArgs e)
