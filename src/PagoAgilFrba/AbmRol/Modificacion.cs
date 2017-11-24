@@ -81,8 +81,10 @@ namespace PagoAgilFrba.AbmRol
             foreach (DataGridViewRow row in dataGridView_funcionalidades.Rows)
             {
                 string auxiliar;
-                DataGridViewCheckBoxCell chk = (DataGridViewCheckBoxCell)row.Cells[2];
-                if (chk.Value == chk.TrueValue)
+                //DataGridViewCheckBoxCell chk = (DataGridViewCheckBoxCell)row.Cells[2];
+                    
+                object value = row.Cells[2].Value;
+                if (value != null && (Boolean)value)
                 {
                     auxiliar = "1";
                 }
@@ -102,11 +104,11 @@ namespace PagoAgilFrba.AbmRol
                     command.CommandText = consulta;
                     SqlDataReader reader = command.ExecuteReader();
                 }
-                    catch (Exception ex)
-                    {
-                        MessageBox.Show("Error: " + ex.Message);
-                    }
+                catch (Exception ex)
+                {
+                     MessageBox.Show("Error: " + ex.Message);
                 }
+               }
 
             string auxiliar2;
 

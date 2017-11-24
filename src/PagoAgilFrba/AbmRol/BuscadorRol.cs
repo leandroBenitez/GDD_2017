@@ -93,6 +93,7 @@ namespace PagoAgilFrba.AbmRol
                 {
                     Object reader = command.ExecuteScalar();
 
+
                 }
                 catch (Exception ex)
                 {

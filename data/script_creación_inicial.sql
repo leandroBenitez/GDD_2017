@@ -576,6 +576,7 @@ Select   emp.Empresa_Id
 		,rub.Rubro_Descripcion as Rubro
 		,case emp.Empresa_Habilitado when 0 then 'Inhabilitado'
 		else 'Habilitado' end as Habilitado
+		,Empresa_Dia_Rendicion
 from PAGO_AGIL.Dim_Empresa as emp
 inner join PAGO_AGIL.Dim_Rubro as rub
 	on rub.Rubro_Id = emp.Empresa_Rubro_Id
@@ -1134,7 +1135,7 @@ GO
 
 Create Procedure PAGO_AGIL.Alta_Rol(@nombre varchar(100))
 as
-declare @resultado varchar(100)
+declare @resultado varchar(100) = 'OK'
 declare @rol_valido int = 1
 
 Select @rol_valido = 0 from PAGO_AGIL.Dim_Rol as rol
@@ -1154,6 +1155,8 @@ begin
 end
 else
 begin
+	delete from PAGO_AGIL.Rl_RolxFuncionalidad
+	where Rol_Id is null
 	set @resultado = 'Error, nombre de rol ya existente'
 end
 

@@ -35,12 +35,6 @@
             this.label3 = new System.Windows.Forms.Label();
             this.button_buscar = new System.Windows.Forms.Button();
             this.dataGridView = new System.Windows.Forms.DataGridView();
-            this.Id_empresa = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Nombre = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.CUIT = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Direccion = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Rubro = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Habilitada = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.button_modificar = new System.Windows.Forms.Button();
             this.button_baja = new System.Windows.Forms.Button();
             this.button_limpiar = new System.Windows.Forms.Button();
@@ -50,6 +44,12 @@
             this.textBox_cuit_fin = new System.Windows.Forms.TextBox();
             this.textBox_cuit_in = new System.Windows.Forms.TextBox();
             this.button_atras = new System.Windows.Forms.Button();
+            this.Id_empresa = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.nom = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.cuit_ = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dir = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.rub = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Habilitada = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.diaCobro = new System.Windows.Forms.DataGridViewTextBoxColumn();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView)).BeginInit();
             this.SuspendLayout();
@@ -114,10 +114,10 @@
             this.dataGridView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dataGridView.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.Id_empresa,
-            this.Nombre,
-            this.CUIT,
-            this.Direccion,
-            this.Rubro,
+            this.nom,
+            this.cuit_,
+            this.dir,
+            this.rub,
             this.Habilitada,
             this.diaCobro});
             this.dataGridView.Location = new System.Drawing.Point(21, 115);
@@ -125,43 +125,6 @@
             this.dataGridView.ReadOnly = true;
             this.dataGridView.Size = new System.Drawing.Size(539, 150);
             this.dataGridView.TabIndex = 7;
-            // 
-            // Id_empresa
-            // 
-            this.Id_empresa.HeaderText = "Id_empresa";
-            this.Id_empresa.Name = "Id_empresa";
-            this.Id_empresa.ReadOnly = true;
-            this.Id_empresa.Visible = false;
-            // 
-            // Nombre
-            // 
-            this.Nombre.HeaderText = "Nombre";
-            this.Nombre.Name = "Nombre";
-            this.Nombre.ReadOnly = true;
-            // 
-            // CUIT
-            // 
-            this.CUIT.HeaderText = "CUIT";
-            this.CUIT.Name = "CUIT";
-            this.CUIT.ReadOnly = true;
-            // 
-            // Direccion
-            // 
-            this.Direccion.HeaderText = "Direccion";
-            this.Direccion.Name = "Direccion";
-            this.Direccion.ReadOnly = true;
-            // 
-            // Rubro
-            // 
-            this.Rubro.HeaderText = "Rubro";
-            this.Rubro.Name = "Rubro";
-            this.Rubro.ReadOnly = true;
-            // 
-            // Habilitada
-            // 
-            this.Habilitada.HeaderText = "Habilitada";
-            this.Habilitada.Name = "Habilitada";
-            this.Habilitada.ReadOnly = true;
             // 
             // button_modificar
             // 
@@ -242,9 +205,46 @@
             this.button_atras.UseVisualStyleBackColor = true;
             this.button_atras.Click += new System.EventHandler(this.button_atras_Click);
             // 
+            // Id_empresa
+            // 
+            this.Id_empresa.HeaderText = "Id_empresa";
+            this.Id_empresa.Name = "Id_empresa";
+            this.Id_empresa.ReadOnly = true;
+            this.Id_empresa.Visible = false;
+            // 
+            // nom
+            // 
+            this.nom.HeaderText = "Nombre";
+            this.nom.Name = "nom";
+            this.nom.ReadOnly = true;
+            // 
+            // cuit_
+            // 
+            this.cuit_.HeaderText = "CUIT";
+            this.cuit_.Name = "cuit_";
+            this.cuit_.ReadOnly = true;
+            // 
+            // dir
+            // 
+            this.dir.HeaderText = "Direccion";
+            this.dir.Name = "dir";
+            this.dir.ReadOnly = true;
+            // 
+            // rub
+            // 
+            this.rub.HeaderText = "Rubro";
+            this.rub.Name = "rub";
+            this.rub.ReadOnly = true;
+            // 
+            // Habilitada
+            // 
+            this.Habilitada.HeaderText = "Habilitada";
+            this.Habilitada.Name = "Habilitada";
+            this.Habilitada.ReadOnly = true;
+            // 
             // diaCobro
             // 
-            this.diaCobro.HeaderText = "Día de Cobro";
+            this.diaCobro.HeaderText = "Día de Rendición";
             this.diaCobro.Name = "diaCobro";
             this.diaCobro.ReadOnly = true;
             // 
@@ -286,12 +286,6 @@
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Button button_buscar;
         private System.Windows.Forms.DataGridView dataGridView;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Id_empresa;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Nombre;
-        private System.Windows.Forms.DataGridViewTextBoxColumn CUIT;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Direccion;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Rubro;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Habilitada;
         private System.Windows.Forms.Button button_modificar;
         private System.Windows.Forms.Button button_baja;
         private System.Windows.Forms.Button button_limpiar;
@@ -301,6 +295,12 @@
         private System.Windows.Forms.TextBox textBox_cuit_fin;
         private System.Windows.Forms.TextBox textBox_cuit_in;
         private System.Windows.Forms.Button button_atras;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Id_empresa;
+        private System.Windows.Forms.DataGridViewTextBoxColumn nom;
+        private System.Windows.Forms.DataGridViewTextBoxColumn cuit_;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dir;
+        private System.Windows.Forms.DataGridViewTextBoxColumn rub;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Habilitada;
         private System.Windows.Forms.DataGridViewTextBoxColumn diaCobro;
     }
 }

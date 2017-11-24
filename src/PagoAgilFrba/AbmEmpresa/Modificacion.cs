@@ -32,6 +32,7 @@ namespace PagoAgilFrba.AbmEmpresa
             textBox_cuit_fin.Text = tokens[2];
             checkBox_habilitada.Checked = habilitado;
             id_emp = idEmp;
+            textBox_dia.Text = dia_cobro;
             string consulta = "Select Rubro_Descripcion from PAGO_AGIL.Dim_Rubro";
             Entidades.Herramientas.llenarComboBox(comboBox_rubro, consulta);
             comboBox_rubro.Text = rubro;
@@ -84,7 +85,8 @@ namespace PagoAgilFrba.AbmEmpresa
                     cadena = cadena + textBox_direccion.Text + "', '";
                     cadena = cadena + cuit_formateado + "', '";
                     cadena = cadena + comboBox_rubro.Text + "', '";
-                    cadena = cadena + hab + "' ";
+                    cadena = cadena + hab + "' ,'";
+                    cadena = cadena + textBox_dia.Text + "' ";
 
                     conexion connection = new conexion();
                     SqlCommand command = new SqlCommand();

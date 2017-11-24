@@ -67,8 +67,8 @@ namespace PagoAgilFrba.AbmRol
         {
             foreach (DataGridViewRow row in dataGridView_funcionalidades.Rows)
             {
-                DataGridViewCheckBoxCell chk = (DataGridViewCheckBoxCell)row.Cells[2];
-                if (chk.Value == chk.TrueValue)
+                object value = row.Cells[2].Value;
+                if (value != null && (Boolean)value)
                 {
                     string consulta = "Execute PAGO_AGIL.Rol_Funcionalidad '" + row.Cells[0].Value.ToString() + "'";
                     try
@@ -84,24 +84,41 @@ namespace PagoAgilFrba.AbmRol
                     catch (Exception ex)
                     {
                         MessageBox.Show("Error: " + ex.Message);
+                        return;
                     }
                 }
             }
 
             string consulta2 = "Execute PAGO_AGIL.Alta_Rol '" + textBox_nombre.Text + "'";
+            
+                conexion connection2 = new conexion();
+                SqlCommand command2 = new SqlCommand();
+
+                command2.CommandType = CommandType.Text;
+                command2.Connection = connection2.abrir_conexion();
+                command2.CommandText = consulta2;
             try
             {
-                conexion connection = new conexion();
-                SqlCommand command = new SqlCommand();
-
-                command.CommandType = CommandType.Text;
-                command.Connection = connection.abrir_conexion();
-                command.CommandText = consulta2;
-                SqlDataReader reader = command.ExecuteReader();
+                Object reader = command2.ExecuteScalar();
+                string resultado = reader.ToString();
+                tratar_resultado(resultado);
             }
             catch (Exception ex)
             {
                 MessageBox.Show("Error: " + ex.Message);
+                return;
+            }
+        }
+
+        private void tratar_resultado(string resultado)
+        {
+            if (resultado.Equals("OK"))
+            {
+                MessageBox.Show("Rol dado de alta con éxito", "Alta Rol", MessageBoxButtons.OK, MessageBoxIcon.None);
+            }
+            else
+            {
+                MessageBox.Show(resultado, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
 

@@ -72,7 +72,7 @@ namespace PagoAgilFrba.AbmEmpresa
             dataGridView.Rows.Clear();
 
             List<DataGridViewRow> filas = new List<DataGridViewRow>();
-            Object[] columnas = new Object[6];
+            Object[] columnas = new Object[7];
 
             while (datos.Read())
             {
@@ -142,6 +142,7 @@ namespace PagoAgilFrba.AbmEmpresa
                 try
                 {
                     Object reader = command.ExecuteScalar();
+                    MessageBox.Show("Empresa dada de baja con éxito", "Alta Empresa", MessageBoxButtons.OK, MessageBoxIcon.None);
 
                 }
                 catch (Exception ex)
