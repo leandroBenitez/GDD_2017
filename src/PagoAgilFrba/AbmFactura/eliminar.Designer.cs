@@ -97,7 +97,6 @@
             this.facnum.Size = new System.Drawing.Size(96, 20);
             this.facnum.TabIndex = 37;
             this.facnum.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.num_KeyPress);
-            
             // 
             // label7
             // 
@@ -161,9 +160,9 @@
             this.label5.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label5.Location = new System.Drawing.Point(266, 19);
             this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(355, 15);
+            this.label5.Size = new System.Drawing.Size(348, 15);
             this.label5.TabIndex = 30;
-            this.label5.Text = "Seleccione uno de los elementos que desea modificar";
+            this.label5.Text = "Seleccione uno de los elementos que desea eliminar";
             // 
             // dataGridView1
             // 

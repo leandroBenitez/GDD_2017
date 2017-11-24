@@ -72,7 +72,6 @@
             this.checkBox1 = new System.Windows.Forms.CheckBox();
             this.checkBox8 = new System.Windows.Forms.CheckBox();
             this.checkBox9 = new System.Windows.Forms.CheckBox();
-            this.label11 = new System.Windows.Forms.Label();
             this.label12 = new System.Windows.Forms.Label();
             this.dniBuscado = new System.Windows.Forms.TextBox();
             this.label10 = new System.Windows.Forms.Label();
@@ -143,6 +142,7 @@
             this.mail.ReadOnly = true;
             this.mail.Size = new System.Drawing.Size(114, 20);
             this.mail.TabIndex = 61;
+            this.mail.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.mail_KeyPress);
             // 
             // telefono
             // 
@@ -159,6 +159,7 @@
             this.nombre.ReadOnly = true;
             this.nombre.Size = new System.Drawing.Size(114, 20);
             this.nombre.TabIndex = 59;
+            this.nombre.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.nombre_apellido_KeyPress);
             // 
             // apellido
             // 
@@ -167,6 +168,7 @@
             this.apellido.ReadOnly = true;
             this.apellido.Size = new System.Drawing.Size(114, 20);
             this.apellido.TabIndex = 58;
+            this.apellido.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.nombre_apellido_KeyPress);
             // 
             // dni
             // 
@@ -175,6 +177,7 @@
             this.dni.ReadOnly = true;
             this.dni.Size = new System.Drawing.Size(114, 20);
             this.dni.TabIndex = 57;
+            this.dni.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.dni_KeyPress);
             // 
             // label9
             // 
@@ -290,52 +293,60 @@
             this.dataGridView1.ReadOnly = true;
             this.dataGridView1.Size = new System.Drawing.Size(593, 127);
             this.dataGridView1.TabIndex = 46;
-            this.dataGridView1.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView1_CellContentClick);
             // 
             // Cliente_Dni
             // 
             this.Cliente_Dni.HeaderText = "Cliente_Dni";
             this.Cliente_Dni.Name = "Cliente_Dni";
+            this.Cliente_Dni.ReadOnly = true;
             // 
             // Cliente_Apellido
             // 
             this.Cliente_Apellido.HeaderText = "Cliente_Apellido";
             this.Cliente_Apellido.Name = "Cliente_Apellido";
+            this.Cliente_Apellido.ReadOnly = true;
             // 
             // Cliente_Nombre
             // 
             this.Cliente_Nombre.HeaderText = "Cliente_Nombre";
             this.Cliente_Nombre.Name = "Cliente_Nombre";
+            this.Cliente_Nombre.ReadOnly = true;
             // 
             // Cliente_Telefono
             // 
             this.Cliente_Telefono.HeaderText = "Cliente_Telefono";
             this.Cliente_Telefono.Name = "Cliente_Telefono";
+            this.Cliente_Telefono.ReadOnly = true;
             // 
             // Cliente_Fecha_Nac
             // 
             this.Cliente_Fecha_Nac.HeaderText = "Cliente_Fecha_Nac";
             this.Cliente_Fecha_Nac.Name = "Cliente_Fecha_Nac";
+            this.Cliente_Fecha_Nac.ReadOnly = true;
             // 
             // Cliente_Mail
             // 
             this.Cliente_Mail.HeaderText = "Cliente_Mail";
             this.Cliente_Mail.Name = "Cliente_Mail";
+            this.Cliente_Mail.ReadOnly = true;
             // 
             // Cliente_Direccion
             // 
             this.Cliente_Direccion.HeaderText = "Cliente_Direccion";
             this.Cliente_Direccion.Name = "Cliente_Direccion";
+            this.Cliente_Direccion.ReadOnly = true;
             // 
             // Cliente_Codigo_Postal
             // 
             this.Cliente_Codigo_Postal.HeaderText = "Cliente_Codigo_Postal";
             this.Cliente_Codigo_Postal.Name = "Cliente_Codigo_Postal";
+            this.Cliente_Codigo_Postal.ReadOnly = true;
             // 
             // Cliente_Habilitado
             // 
             this.Cliente_Habilitado.HeaderText = "Cliente_Habilitado";
             this.Cliente_Habilitado.Name = "Cliente_Habilitado";
+            this.Cliente_Habilitado.ReadOnly = true;
             // 
             // button2
             // 
@@ -468,25 +479,15 @@
             this.checkBox9.UseVisualStyleBackColor = true;
             this.checkBox9.CheckedChanged += new System.EventHandler(this.checkBox9_CheckedChanged);
             // 
-            // label11
-            // 
-            this.label11.AutoSize = true;
-            this.label11.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label11.Location = new System.Drawing.Point(35, 9);
-            this.label11.Name = "label11";
-            this.label11.Size = new System.Drawing.Size(316, 16);
-            this.label11.TabIndex = 94;
-            this.label11.Text = "Seleccione los elementos que desea buscar";
-            // 
             // label12
             // 
             this.label12.AutoSize = true;
             this.label12.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label12.Location = new System.Drawing.Point(151, 320);
+            this.label12.Location = new System.Drawing.Point(151, 310);
             this.label12.Name = "label12";
-            this.label12.Size = new System.Drawing.Size(342, 16);
+            this.label12.Size = new System.Drawing.Size(301, 16);
             this.label12.TabIndex = 95;
-            this.label12.Text = "Presione doble click sobre el cliente a modificar";
+            this.label12.Text = "Seleccione el Cliente que desea modificar";
             this.label12.Visible = false;
             // 
             // dniBuscado
@@ -501,11 +502,11 @@
             // 
             this.label10.AutoSize = true;
             this.label10.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label10.Location = new System.Drawing.Point(35, 9);
+            this.label10.Location = new System.Drawing.Point(25, 9);
             this.label10.Name = "label10";
-            this.label10.Size = new System.Drawing.Size(333, 16);
+            this.label10.Size = new System.Drawing.Size(51, 16);
             this.label10.TabIndex = 97;
-            this.label10.Text = "Seleccione los elementos que desea modificar";
+            this.label10.Text = "Filtros";
             this.label10.Visible = false;
             // 
             // modificaCliente
@@ -518,7 +519,6 @@
             this.Controls.Add(this.monthCalendar1);
             this.Controls.Add(this.dniBuscado);
             this.Controls.Add(this.label12);
-            this.Controls.Add(this.label11);
             this.Controls.Add(this.checkBox7);
             this.Controls.Add(this.checkBox6);
             this.Controls.Add(this.checkBox5);
@@ -606,7 +606,6 @@
         private System.Windows.Forms.CheckBox checkBox1;
         private System.Windows.Forms.CheckBox checkBox8;
         private System.Windows.Forms.CheckBox checkBox9;
-        private System.Windows.Forms.Label label11;
         private System.Windows.Forms.Label label12;
         private System.Windows.Forms.TextBox dniBuscado;
         private System.Windows.Forms.Label label10;

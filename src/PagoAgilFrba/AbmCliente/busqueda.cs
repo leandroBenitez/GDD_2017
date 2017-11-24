@@ -142,6 +142,7 @@ namespace PagoAgilFrba.AbmCliente1
             codPostal.Text = "";
             fechaNac.Text = "";
             comboHabilitado.SelectedItem = null;
+            dataGridView1.Rows.Clear();
         }
 
         private void fechaNac_Click(object sender, EventArgs e)
@@ -173,6 +174,32 @@ namespace PagoAgilFrba.AbmCliente1
             ClienteMenu.Show();
             this.Close();
         }
+
+        private void dni_KeyPress(object sender, System.Windows.Forms.KeyPressEventArgs e)
+        {
+            //Controla que el valor ingresado sea un numerico
+            if (!char.IsControl(e.KeyChar) && !char.IsDigit(e.KeyChar))
+            {
+                e.Handled = true;
+            }
+        }
+        private void mail_KeyPress(object sender, System.Windows.Forms.KeyPressEventArgs e)
+        {
+            //Controla que el valor ingresado sea un numerico
+            if (char.IsWhiteSpace(e.KeyChar))
+            {
+                e.Handled = true;
+            }
+        }
+        private void nombre_apellido_KeyPress(object sender, System.Windows.Forms.KeyPressEventArgs e)
+        {
+            //Controla que el valor ingresado sea un numerico
+            if (!char.IsControl(e.KeyChar) && char.IsDigit(e.KeyChar))
+            {
+                e.Handled = true;
+            }
+        }
+
 
     }
 }

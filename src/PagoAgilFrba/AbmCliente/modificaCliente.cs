@@ -15,10 +15,13 @@ namespace PagoAgilFrba.AbmCliente1
     public partial class modificaCliente : Form
     {
         Form ClienteMenu;
+        private string mailSeleccionado ;
         public modificaCliente(Form menu)
         {
+            mailSeleccionado = "" ;
             InitializeComponent();
             ClienteMenu = menu;
+            label10.Visible= true;
         }
 
         private void botLimpiar_Click(object sender, EventArgs e)
@@ -51,7 +54,6 @@ namespace PagoAgilFrba.AbmCliente1
         private void botLimpiar_Click_1(object sender, EventArgs e)
         {
             label10.Visible = true;
-            label11.Visible = false;
             label12.Visible = true;
             string consulta = "Select * from PAGO_AGIL.Lk_Cliente where 1 = 1 ";
             string bitHabilitado = "";
@@ -157,6 +159,7 @@ namespace PagoAgilFrba.AbmCliente1
             codPostal.Text = "";
             fechaNac.Text = "";
             comboHabilitado.SelectedItem=null;
+            dataGridView1.Rows.Clear();
         }
 
         private void botonModificar_Click_1(object sender, EventArgs e)
@@ -164,8 +167,15 @@ namespace PagoAgilFrba.AbmCliente1
 
             string bitHabilitado = "null";
             string dni_cadena;
-            if (dniBuscado.Text != "")
+            if (dataGridView1.SelectedRows.Count == 0)
             {
+                MessageBox.Show("Seleccione un elemento a modificar", "Modificar Cliente", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+            else
+            {
+                DataGridViewRow row = this.dataGridView1.SelectedRows[0];
+                dniBuscado.Text = row.Cells[0].Value.ToString();
+                mailSeleccionado = row.Cells[5].Value.ToString();
                 if (comboHabilitado.SelectedIndex != -1)
                 {
                     if (comboHabilitado.Text == "Habilitado")
@@ -173,32 +183,22 @@ namespace PagoAgilFrba.AbmCliente1
                     else { bitHabilitado = "0"; }
                 }
                 if (dni.Text == "")
-                { dni_cadena = "null"; }
-                else { dni_cadena = dni.Text; };
-                string consulta = "Execute PAGO_AGIL.modificaCliente " + dniBuscado.Text + ", " + dni_cadena + ", '" + apellido.Text + "', '" +
-                nombre.Text + "', '" + telefono.Text + "', '" + fechaNac.Text + "', '" + mail.Text + "', '" + direccion.Text + "', '" +
-                codPostal.Text + "', " + bitHabilitado;
-                conexion connection = new conexion();
-                SqlCommand command = new SqlCommand();
-
-                command.CommandText = consulta;
-                command.CommandType = CommandType.Text;
-                command.Connection = connection.abrir_conexion();
-
-                try
                 {
-                    Object reader = command.ExecuteScalar();
-                    string reultado = reader.ToString();
-                    reader.ToString();
-                    MessageBox.Show(reader.ToString(), "Informacion", MessageBoxButtons.OK, MessageBoxIcon.Information);
-
+                    dni_cadena = "null";
                 }
-                catch (Exception ex)
+                else
                 {
-                    MessageBox.Show("Error: " + ex.Message);
-                }
+                    dni_cadena = dni.Text;
+                };
+                PagoAgilFrba.AbmCliente.aux_modificacion aux = new AbmCliente.aux_modificacion(mailSeleccionado, dniBuscado.Text,
+                  dniBuscado.Text, row.Cells[1].Value.ToString(), row.Cells[2].Value.ToString(), row.Cells[3].Value.ToString(),
+                  row.Cells[4].Value.ToString(), mailSeleccionado, row.Cells[6].Value.ToString(), row.Cells[7].Value.ToString(),
+                  row.Cells[8].Value.ToString(), this);
+                aux.Show();
+                this.botonBuscar_Click_1(sender,e);
+                this.Hide();
+
             }
-            else { MessageBox.Show("Es necesario completar el DNI buscado"); };
         }
 
         private void button1_Click(object sender, EventArgs e)
@@ -341,9 +341,30 @@ namespace PagoAgilFrba.AbmCliente1
             }
         }
 
-        private void dataGridView1_CellContentClick(object sender, DataGridViewCellEventArgs e)
+
+        private void dni_KeyPress(object sender, System.Windows.Forms.KeyPressEventArgs e)
         {
-            dniBuscado.Text = dataGridView1[0, e.RowIndex].Value.ToString();
+            //Controla que el valor ingresado sea un numerico
+            if (!char.IsControl(e.KeyChar) && !char.IsDigit(e.KeyChar))
+            {
+                e.Handled = true;
+            }
+        }
+        private void mail_KeyPress(object sender, System.Windows.Forms.KeyPressEventArgs e)
+        {
+            //Controla que el valor ingresado sea un numerico
+            if (char.IsWhiteSpace(e.KeyChar))
+            {
+                e.Handled = true;
+            }
+        }
+        private void nombre_apellido_KeyPress(object sender, System.Windows.Forms.KeyPressEventArgs e)
+        {
+            //Controla que el valor ingresado sea un numerico
+            if (!char.IsControl(e.KeyChar) && char.IsDigit(e.KeyChar))
+            {
+                e.Handled = true;
+            }
         }
     }
 }

@@ -107,9 +107,16 @@ namespace PagoAgilFrba.AbmCliente1
 
         private void botonDeshabilitar_Click_1(object sender, EventArgs e)
         {
-            if (dni.Text != "")
+            if (dataGridView1.SelectedRows.Count == 0)
             {
-                string consulta = "Execute PAGO_AGIL.bajaCliente " + dni.Text;
+                MessageBox.Show("Debe seleccionar un Cliente para baja", "Baja Cliente", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+            else
+            {
+                DataGridViewRow row = this.dataGridView1.SelectedRows[0];
+                string mail = row.Cells[5].Value.ToString();
+
+                string consulta = "Execute PAGO_AGIL.bajaCliente " + dni.Text +",'"+mail+"'";
                 conexion connection = new conexion();
                 SqlCommand command = new SqlCommand();
 
@@ -130,7 +137,7 @@ namespace PagoAgilFrba.AbmCliente1
                     MessageBox.Show("Error: " + ex.Message);
                 }
             }
-            else { MessageBox.Show("El campo DNI no puede estar vacio"); }
+            
         }
 
         private void button1_Click(object sender, EventArgs e)
@@ -139,6 +146,7 @@ namespace PagoAgilFrba.AbmCliente1
             apellido.Text = "";
             nombre.Text = "";
             direccion.Text = "";
+            dataGridView1.Rows.Clear();
         }
 
         private void button2_Click(object sender, EventArgs e)
@@ -147,6 +155,23 @@ namespace PagoAgilFrba.AbmCliente1
             this.Close();
         }
 
+        private void dni_KeyPress(object sender, System.Windows.Forms.KeyPressEventArgs e)
+        {
+            //Controla que el valor ingresado sea un numerico
+            if (!char.IsControl(e.KeyChar) && !char.IsDigit(e.KeyChar))
+            {
+                e.Handled = true;
+            }
+        }
+
+        private void nombre_apellido_KeyPress(object sender, System.Windows.Forms.KeyPressEventArgs e)
+        {
+            //Controla que el valor ingresado sea un numerico
+            if (!char.IsControl(e.KeyChar) && char.IsDigit(e.KeyChar))
+            {
+                e.Handled = true;
+            }
+        }
 
     }
 }

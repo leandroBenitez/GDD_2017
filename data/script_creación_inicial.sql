@@ -1025,14 +1025,14 @@ as
 go
 
 --Baja de un cliente
-create procedure PAGO_AGIL.bajaCliente(@dni int) as
+create procedure PAGO_AGIL.bajaCliente(@dni int,@mail nvarchar(255)) as
 begin
-	declare @estadoActual int = (select Cliente_Habilitado from PAGO_AGIL.Lk_Cliente where Cliente_Dni = @dni)
+	declare @estadoActual int = (select Cliente_Habilitado from PAGO_AGIL.Lk_Cliente where Cliente_Dni = @dni and Cliente_Mail = @mail)
 	if(@estadoActual = 1)
 		begin
 			update  PAGO_AGIL.Lk_Cliente 
 			set Cliente_Habilitado=0
-			where Cliente_Dni = @dni
+			where Cliente_Dni = @dni and Cliente_Mail = @mail
 			select 'El cliente fue deshabilitado correctamente' as Resultado
 		end
 	else 
@@ -1046,88 +1046,86 @@ create procedure PAGO_AGIL.nuevoCliente(@DNI int, @apellido nvarchar(255), @nomb
 	begin
 	declare @validacionCliente int = (select 1 from PAGO_AGIL.Lk_Cliente where Cliente_Mail = @mail)
 	if @validacionCliente is null
-	begin
-		insert into PAGO_AGIL.Lk_Cliente(Cliente_Dni, Cliente_Apellido, Cliente_Nombre, Cliente_Telefono, Cliente_Fecha_Nac, 
-		Cliente_Mail, Cliente_Direccion, Cliente_Codigo_Postal, Cliente_Habilitado) 
-		values (@DNI, @apellido, @nombre, @telefono, @fechaNac, @mail, @direccion, @codigoPostal, @habilitado)
-		select 'Insertado correctamente' as Resultado
+		begin
+			insert into PAGO_AGIL.Lk_Cliente(Cliente_Dni, Cliente_Apellido, Cliente_Nombre, Cliente_Telefono, Cliente_Fecha_Nac, 
+			Cliente_Mail, Cliente_Direccion, Cliente_Codigo_Postal, Cliente_Habilitado) 
+			values (@DNI, @apellido, @nombre, @telefono, @fechaNac, @mail, @direccion, @codigoPostal, @habilitado)
+			select 'Insertado correctamente' as Resultado
 		end
-		else 
+	else 
 		select 'El cliente ya existe'
 	end
 	GO
 ;
 
 -- Modificacion de cliente
-create procedure PAGO_AGIL.modificaCliente(@dni_buscado int, @DNI int, @apellido nvarchar(255), @nombre nvarchar(255), 
+create procedure PAGO_AGIL.modificaCliente(@mail_buscado nvarchar(255),@dni_buscado int, @DNI int, @apellido nvarchar(255), @nombre nvarchar(255), 
 @telefono nvarchar(255), @fechaNac datetime, @mail nvarchar(255), @direccion nvarchar(255), 
 @codigoPostal nvarchar(255), @habilitado int) as
-	begin
-	declare @validacionMail int = (select 1 from PAGO_AGIL.Lk_Cliente where Cliente_Mail = @mail);
-	if @validacionMail!=1
-	begin
-		if @DNI is not null 
-			begin
-				update PAGO_AGIL.Lk_Cliente 
-				set Cliente_Dni = @DNI
-				where Cliente_Dni =@dni_buscado
-			end
-		if @apellido !=''
-			begin
-				update PAGO_AGIL.Lk_Cliente 
-				set Cliente_Apellido = @apellido
-				where Cliente_Dni =@dni_buscado
-			end
-		if @nombre !=''
-			begin
-				update PAGO_AGIL.Lk_Cliente 
-				set Cliente_Nombre = @nombre
-				where Cliente_Dni =@dni_buscado
-			end
-		if @telefono !=''
-			begin
-				update PAGO_AGIL.Lk_Cliente 
-				set Cliente_Telefono = @telefono
-				where Cliente_Dni =@dni_buscado
-			end
-		if @fechaNac !='' 
-			begin
-				update PAGO_AGIL.Lk_Cliente 
-				set Cliente_Fecha_Nac = @fechaNac
-				where Cliente_Dni =@dni_buscado
-			end
-		if @mail !=''
-			begin
-				update PAGO_AGIL.Lk_Cliente 
-				set Cliente_Mail = @mail
-				where Cliente_Dni =@dni_buscado
-			end
-		if @direccion !=''
-			begin
-				update PAGO_AGIL.Lk_Cliente 
-				set Cliente_Direccion = @direccion
-				where Cliente_Dni =@dni_buscado
-			end
-		if @codigoPostal !=''
-			begin
-				update PAGO_AGIL.Lk_Cliente 
-				set Cliente_Codigo_Postal = @codigoPostal
-				where Cliente_Dni =@dni_buscado
-			end
-		if @habilitado is not null 
-			begin
-				update PAGO_AGIL.Lk_Cliente 
-				set Cliente_Habilitado = @habilitado
-				where Cliente_Dni =@dni_buscado
-			end
-		select 'Cliente modificado con exito'
+begin
+	declare @validacionMail int = (select count(1) from PAGO_AGIL.Lk_Cliente where Cliente_Mail = @mail);
+	if @validacionMail != 0 --No existe un cliente con el nuevo intento de mail
+		begin
+			if @DNI is not null 
+				begin
+					update PAGO_AGIL.Lk_Cliente 
+					set Cliente_Dni = @DNI
+					where Cliente_Dni =@dni_buscado and Cliente_Mail = @mail_buscado
+				end
+			if @apellido !=''
+				begin
+					update PAGO_AGIL.Lk_Cliente 
+					set Cliente_Apellido = @apellido
+					where Cliente_Dni =@dni_buscado and Cliente_Mail = @mail_buscado
+				end
+			if @nombre !=''
+				begin
+					update PAGO_AGIL.Lk_Cliente 
+					set Cliente_Nombre = @nombre
+					where Cliente_Dni =@dni_buscado and Cliente_Mail = @mail_buscado
+				end
+			if @telefono !=''
+				begin
+					update PAGO_AGIL.Lk_Cliente 
+					set Cliente_Telefono = @telefono
+					where Cliente_Dni =@dni_buscado and Cliente_Mail = @mail_buscado
+				end
+			if @fechaNac !='' 
+				begin
+					update PAGO_AGIL.Lk_Cliente 
+					set Cliente_Fecha_Nac = @fechaNac
+					where Cliente_Dni =@dni_buscado and Cliente_Mail = @mail_buscado
+				end
+			if @mail !=''
+				begin
+					update PAGO_AGIL.Lk_Cliente 
+					set Cliente_Mail = @mail
+					where Cliente_Dni =@dni_buscado and Cliente_Mail = @mail_buscado
+				end
+			if @direccion !=''
+				begin
+					update PAGO_AGIL.Lk_Cliente 
+					set Cliente_Direccion = @direccion
+					where Cliente_Dni =@dni_buscado and Cliente_Mail = @mail_buscado
+				end
+			if @codigoPostal !=''
+				begin
+					update PAGO_AGIL.Lk_Cliente 
+					set Cliente_Codigo_Postal = @codigoPostal
+					where Cliente_Dni =@dni_buscado and Cliente_Mail = @mail_buscado
+				end
+			if @habilitado is not null 
+				begin
+					update PAGO_AGIL.Lk_Cliente 
+					set Cliente_Habilitado = @habilitado
+					where Cliente_Dni =@dni_buscado and Cliente_Mail = @mail_buscado
+				end
+			select 'Cliente modificado con exito'
 		end
-		else
-		select 'El correo seleccionado ya existe'
-		
-	end
+	else
+		select 'El nuevo correo ya existe'
+end
 go
-;
 
 --Alta Rol 
 Create Procedure PAGO_AGIL.Rol_Funcionalidad(@id_funcionalidad int)

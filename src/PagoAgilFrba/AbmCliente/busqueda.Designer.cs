@@ -48,11 +48,6 @@
             this.label1 = new System.Windows.Forms.Label();
             this.botLimpiar = new System.Windows.Forms.Button();
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
-            this.fechaNac = new System.Windows.Forms.TextBox();
-            this.monthCalendar1 = new System.Windows.Forms.MonthCalendar();
-            this.button1 = new System.Windows.Forms.Button();
-            this.button2 = new System.Windows.Forms.Button();
-            this.button3 = new System.Windows.Forms.Button();
             this.Cliente_Dni = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Cliente_Apellido = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Cliente_Nombre = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -62,6 +57,11 @@
             this.Cliente_Direccion = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Cliente_Codigo_Postal = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Cliente_Habilitado = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.fechaNac = new System.Windows.Forms.TextBox();
+            this.monthCalendar1 = new System.Windows.Forms.MonthCalendar();
+            this.button1 = new System.Windows.Forms.Button();
+            this.button2 = new System.Windows.Forms.Button();
+            this.button3 = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.SuspendLayout();
             // 
@@ -107,6 +107,7 @@
             this.mail.Name = "mail";
             this.mail.Size = new System.Drawing.Size(114, 20);
             this.mail.TabIndex = 36;
+            this.mail.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.mail_KeyPress);
             // 
             // telefono
             // 
@@ -121,6 +122,7 @@
             this.nombre.Name = "nombre";
             this.nombre.Size = new System.Drawing.Size(114, 20);
             this.nombre.TabIndex = 34;
+            this.nombre.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.nombre_apellido_KeyPress);
             // 
             // apellido
             // 
@@ -128,6 +130,7 @@
             this.apellido.Name = "apellido";
             this.apellido.Size = new System.Drawing.Size(114, 20);
             this.apellido.TabIndex = 33;
+            this.apellido.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.nombre_apellido_KeyPress);
             // 
             // dni
             // 
@@ -135,6 +138,7 @@
             this.dni.Name = "dni";
             this.dni.Size = new System.Drawing.Size(114, 20);
             this.dni.TabIndex = 32;
+            this.dni.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.dni_KeyPress);
             // 
             // label9
             // 
@@ -248,54 +252,6 @@
             this.dataGridView1.Size = new System.Drawing.Size(538, 156);
             this.dataGridView1.TabIndex = 21;
             // 
-            // fechaNac
-            // 
-            this.fechaNac.Location = new System.Drawing.Point(48, 203);
-            this.fechaNac.Name = "fechaNac";
-            this.fechaNac.Size = new System.Drawing.Size(114, 20);
-            this.fechaNac.TabIndex = 41;
-            this.fechaNac.TextChanged += new System.EventHandler(this.fechaNac_Click);
-            // 
-            // monthCalendar1
-            // 
-            this.monthCalendar1.Location = new System.Drawing.Point(152, 94);
-            this.monthCalendar1.MaxSelectionCount = 1;
-            this.monthCalendar1.Name = "monthCalendar1";
-            this.monthCalendar1.TabIndex = 42;
-            this.monthCalendar1.Visible = false;
-            this.monthCalendar1.DateChanged += new System.Windows.Forms.DateRangeEventHandler(this.monthCalendar1_DateChanged);
-            // 
-            // button1
-            // 
-            this.button1.Location = new System.Drawing.Point(51, 227);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(110, 28);
-            this.button1.TabIndex = 43;
-            this.button1.Text = "Elegir fecha";
-            this.button1.UseVisualStyleBackColor = true;
-            this.button1.Click += new System.EventHandler(this.button1_Click_1);
-            // 
-            // button2
-            // 
-            this.button2.Location = new System.Drawing.Point(332, 73);
-            this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(26, 31);
-            this.button2.TabIndex = 44;
-            this.button2.Text = "X";
-            this.button2.UseVisualStyleBackColor = true;
-            this.button2.Visible = false;
-            this.button2.Click += new System.EventHandler(this.button2_Click);
-            // 
-            // button3
-            // 
-            this.button3.Location = new System.Drawing.Point(26, 448);
-            this.button3.Name = "button3";
-            this.button3.Size = new System.Drawing.Size(70, 25);
-            this.button3.TabIndex = 45;
-            this.button3.Text = "Atras";
-            this.button3.UseVisualStyleBackColor = true;
-            this.button3.Click += new System.EventHandler(this.button3_Click);
-            // 
             // Cliente_Dni
             // 
             this.Cliente_Dni.HeaderText = "Dni";
@@ -349,6 +305,54 @@
             this.Cliente_Habilitado.HeaderText = "Habilitado";
             this.Cliente_Habilitado.Name = "Cliente_Habilitado";
             this.Cliente_Habilitado.ReadOnly = true;
+            // 
+            // fechaNac
+            // 
+            this.fechaNac.Location = new System.Drawing.Point(48, 203);
+            this.fechaNac.Name = "fechaNac";
+            this.fechaNac.Size = new System.Drawing.Size(114, 20);
+            this.fechaNac.TabIndex = 41;
+            this.fechaNac.TextChanged += new System.EventHandler(this.fechaNac_Click);
+            // 
+            // monthCalendar1
+            // 
+            this.monthCalendar1.Location = new System.Drawing.Point(152, 94);
+            this.monthCalendar1.MaxSelectionCount = 1;
+            this.monthCalendar1.Name = "monthCalendar1";
+            this.monthCalendar1.TabIndex = 42;
+            this.monthCalendar1.Visible = false;
+            this.monthCalendar1.DateChanged += new System.Windows.Forms.DateRangeEventHandler(this.monthCalendar1_DateChanged);
+            // 
+            // button1
+            // 
+            this.button1.Location = new System.Drawing.Point(51, 227);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(110, 28);
+            this.button1.TabIndex = 43;
+            this.button1.Text = "Elegir fecha";
+            this.button1.UseVisualStyleBackColor = true;
+            this.button1.Click += new System.EventHandler(this.button1_Click_1);
+            // 
+            // button2
+            // 
+            this.button2.Location = new System.Drawing.Point(332, 73);
+            this.button2.Name = "button2";
+            this.button2.Size = new System.Drawing.Size(26, 31);
+            this.button2.TabIndex = 44;
+            this.button2.Text = "X";
+            this.button2.UseVisualStyleBackColor = true;
+            this.button2.Visible = false;
+            this.button2.Click += new System.EventHandler(this.button2_Click);
+            // 
+            // button3
+            // 
+            this.button3.Location = new System.Drawing.Point(26, 448);
+            this.button3.Name = "button3";
+            this.button3.Size = new System.Drawing.Size(70, 25);
+            this.button3.TabIndex = 45;
+            this.button3.Text = "Atras";
+            this.button3.UseVisualStyleBackColor = true;
+            this.button3.Click += new System.EventHandler(this.button3_Click);
             // 
             // busqueda
             // 
