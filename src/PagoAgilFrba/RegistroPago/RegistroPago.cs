@@ -16,14 +16,17 @@ namespace PagoAgilFrba.RegistroPago
     {
         private int cantidad_fact;
         private float monto_total;
+        private string usuario;
         Form main_menu;
 
-        public RegistroPago(string fecha_sistema, string sucursal, Form menu)
+        public RegistroPago(string fecha_sistema, string sucursal, Form menu, string user)
         {
             InitializeComponent();
             main_menu = menu;
             textBox_fecha_sistema.Text = fecha_sistema;
             textBox_sucursal.Text = sucursal;
+            textBox_user.Text = user;
+            usuario = user;
             label_cant.Text = "0";
             label_total.Text = "0";
             cantidad_fact = 0;
@@ -45,11 +48,13 @@ namespace PagoAgilFrba.RegistroPago
         {
             comboBox_empresa.Items.Clear();
             string consulta = "Select Distinct Empresa_Nombre from PAGO_AGIL.Dim_Empresa where Empresa_Nombre like '%" + filtro + "%'";
-            Entidades.Herramientas.llenarComboBox(comboBox_cliente, consulta);
+            Entidades.Herramientas.llenarComboBox(comboBox_empresa, consulta);
         }
 
         private void button_cancelar_Click(object sender, EventArgs e)
         {
+            ejecutar_limpieza();
+            limpiar_base();
             main_menu.Show();
             this.Close();
         }
@@ -68,17 +73,24 @@ namespace PagoAgilFrba.RegistroPago
 
         private void button1_Click(object sender, EventArgs e)
         {
-            string consulta = "Select * from PAGO_AGIL.Vw_Facturas where 1 = 1 ";
+            ejecutar_carga();
+        }
+
+        public void ejecutar_carga()
+        {
+            string consulta = "Select * from PAGO_AGIL.Vw_Facturas where 1 = 1";
 
             if (comboBox_cliente.SelectedIndex != -1)
             {
-                consulta = consulta + "and Cliente like '" + comboBox_cliente.Text + "'";
+                consulta = consulta + " and Cliente like '" + comboBox_cliente.Text + "'";
             }
 
             if (comboBox_empresa.SelectedIndex != -1)
             {
-                consulta = consulta + "and Empresa like '" + comboBox_empresa.Text + "'";                
+                consulta = consulta + " and Empresa like '" + comboBox_empresa.Text + "'";
             }
+
+            consulta = consulta + " and Factura_Pagado = 0";
 
             conexion connection = new conexion();
             SqlCommand command = new SqlCommand();
@@ -95,7 +107,7 @@ namespace PagoAgilFrba.RegistroPago
             catch (Exception ex)
             {
                 MessageBox.Show("Error: " + ex.Message);
-            }
+            }        
         }
 
         public void cargar_grid_todos(SqlDataReader reader)
@@ -127,6 +139,50 @@ namespace PagoAgilFrba.RegistroPago
             try
             {
                 DataGridViewRow fila = dataGridView_total.SelectedRows[0];
+                List<DataGridViewRow> filas = new List<DataGridViewRow>();
+
+                string consulta = "Execute PAGO_AGIL.FacturaPaga '" + textBox_fecha_sistema.Text + "', " + fila.Cells[0].Value.ToString();
+
+                conexion connection = new conexion();
+                SqlCommand command = new SqlCommand();
+
+                command.CommandText = consulta;
+                command.CommandType = CommandType.Text;
+                command.Connection = connection.abrir_conexion();
+
+                SqlDataReader reader = command.ExecuteReader();
+                reader.Read();
+
+                string resultado = reader[0].ToString(); ;
+
+                if (resultado == "Empresa inhabilitada")
+                {
+                    MessageBox.Show("La empresa se encuentra inhabilitada");
+                }
+                else if (resultado == "Factura vencida")
+                {
+                    MessageBox.Show("La factura se encuentra vencida");
+                }
+                else if (resultado == "Monto 0")
+                {
+                    MessageBox.Show("El monto de la factura no es correcto");
+                }
+                else
+                {
+                    agregar_item();
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Debe seleccionar una factura");
+            }
+        }
+
+        public void agregar_item()
+        {
+            try
+            {
+                DataGridViewRow fila = dataGridView_total.SelectedRows[0];
 
                 List<DataGridViewRow> filas = new List<DataGridViewRow>();
                 Object[] columnas = new Object[7];
@@ -150,10 +206,72 @@ namespace PagoAgilFrba.RegistroPago
                 label_total.Text = monto_total.ToString();
 
                 comboBox_cliente.Enabled = false;
+
+                ejecutar_carga();
             }
             catch
             {
                 MessageBox.Show("Debe seleccionar un registro");
+            }        
+        }
+
+        private void button_limpiar_Click(object sender, EventArgs e)
+        {
+            ejecutar_limpieza();
+            limpiar_base();
+        }
+
+        public void limpiar_base()
+        {
+            string consulta = "Execute PAGO_AGIL.LimpiarPagos";
+
+            conexion connection = new conexion();
+            SqlCommand command = new SqlCommand();
+
+            command.CommandText = consulta;
+            command.CommandType = CommandType.Text;
+            command.Connection = connection.abrir_conexion();
+
+            Object reader = command.ExecuteNonQuery();
+        }
+
+        public void ejecutar_limpieza()
+        {
+            dataGridView_total.Rows.Clear();
+            dataGridView_confirmados.Rows.Clear();
+            comboBox_cliente.Enabled = true;
+            cargar_clientes("");
+            cargar_empresas("");
+            textBox_cliente.Text = "";
+            textBox_empresa.Text = "";
+            label_cant.Text = "0";
+            label_total.Text = "0";
+            cantidad_fact = 0;
+            monto_total = 0;
+            comboBox_forma.SelectedIndex = -1;
+        }
+
+        private void button_confirmar_Click(object sender, EventArgs e)
+        {
+            if (comboBox_forma.SelectedIndex == -1)
+            {
+                MessageBox.Show("Seleccione una forma de pago");
+            }
+            else
+            {
+                string consulta = "Execute PAGO_AGIL.RegistrarPago '" + textBox_fecha_sistema.Text + "', '" + monto_total + "', '" + comboBox_forma.Text + "', '" + textBox_sucursal.Text + "', '" + usuario + "'";
+
+                conexion connection = new conexion();
+                SqlCommand command = new SqlCommand();
+
+                command.CommandText = consulta;
+                command.CommandType = CommandType.Text;
+                command.Connection = connection.abrir_conexion();
+
+                Object reader = command.ExecuteNonQuery();
+
+                MessageBox.Show("El pago se ha registrado correctamente");
+                ejecutar_limpieza();
             }
         }
     }

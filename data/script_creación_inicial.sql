@@ -8,6 +8,10 @@ IF OBJECT_ID('PAGO_AGIL.Rendir') IS NOT NULL
 	DROP PROCEDURE PAGO_AGIL.Rendir;
 Go
 
+IF OBJECT_ID('PAGO_AGIL.LimpiarPagos') IS NOT NULL
+	DROP PROCEDURE PAGO_AGIL.LimpiarPagos;
+Go
+
 IF OBJECT_ID('PAGO_AGIL.eliminar_factura') IS NOT NULL
 	DROP PROCEDURE PAGO_AGIL.eliminar_factura;
 Go
@@ -533,6 +537,7 @@ Select	 fac.Factura_Id
 		,fac.Factura_Fecha_Vencimiento as Vencimiento
 		,'$' + Cast(fac.Factura_Total as varchar) as Importe
 		,fac.Factura_Total bruto
+		,fac.Factura_Pagado
 from PAGO_AGIL.Lk_Factura fac
 inner join PAGO_AGIL.Lk_Cliente cli
 	on fac.Factura_Cliente_Id = cli.Cliente_Id
@@ -1219,41 +1224,83 @@ Update rol
 GO
 
 --Alta Registro Pago
-Create Procedure PAGO_AGIL.FacturaPaga (@id_factura int)
-as
-	insert into PAGO_AGIL.RL_PagoxFactura(Id_Factura)
+Create Procedure PAGO_AGIL.FacturaPaga (@fecha_sistema varchar(50), @id_factura int)
+As
+Declare @fecha date
+Declare @emp_habilitado int
+Declare @monto float
+
+Select	 @fecha = Factura_Fecha_Vencimiento 
+		,@monto = Factura_Total
+from PAGO_AGIL.Lk_Factura where Factura_Id = @id_factura
+
+Select @emp_habilitado = Empresa_Habilitado
+from PAGO_AGIL.Dim_Empresa
+inner join PAGO_AGIL.Lk_Factura
+	on Factura_Empresa_Id = Empresa_Id
+
+If (@emp_habilitado = 0)
+Begin
+	Select 'Empresa inhabilitada' as resultado
+End
+Else if (@fecha >= convert(datetime, @fecha_sistema, 103))
+Begin
+	Select 'Factura vencida' as resultado
+End
+Else if @monto <= 0
+Begin
+	Select 'Monto 0' as resultado
+End
+Else
+Begin
+	Update PAGO_AGIL.Lk_Factura
+	Set Factura_Pagado = 1
+	where Factura_Id = @id_factura
+
+	Insert into PAGO_AGIL.RL_PagoxFactura(Id_Factura)
 	values(@id_factura)
-GO
 
-Create Procedure PAGO_AGIL.RegistrarPago( @fecha varchar(20)
-										, @total int
-										, @forma_pago varchar(100)
-										, @sucursal varchar(100)
-										, @user varchar(100))
+	Select 'Agregado' as resultado
+End
+Go
+
+--Registrar el pago definitivo
+Create Procedure PAGO_AGIL.RegistrarPago	( @fecha varchar(50)
+											, @total varchar(50)
+											, @forma_pago varchar(100)
+											, @sucursal varchar(100)
+											, @user varchar(100)	)
 as
-
-declare @pago_id int
-declare @f_pag date = convert(date, @fecha, 101)
-	
-select @pago_id = count(1) - 1 from PAGO_AGIL.Ft_Pago
-insert into PAGO_AGIL.Ft_Pago(	Pago_Id
+Insert into PAGO_AGIL.Ft_Pago(	 Pago_Id
 								,Pago_Fecha
 								,Pago_Item_nro
 								,Pago_Total
 								,Pago_FormaPago_Id
 								,Pago_Sucursal_Id
 								,Pago_Resp_Id)
-	values  (@pago_id
-			,@f_pag
-			,null
-			,@total
-			,(select form.FormaPago_Id from PAGO_AGIL.Dim_FormaPago as form
-				where form.FormaPago_Desc like @forma_pago)
-			,(select suc.Sucursal_Id from PAGO_AGIL.Dim_Sucursal as suc
-				where suc.Sucursal_Nombre like @sucursal)
-			,(select us.Usuario_Id from PAGO_AGIL.Lk_Usuario as us
-				where us.Usuario_Name like @user))
-GO 
+Select	 (Select MAX(Pago_Id) + 1 from PAGO_AGIL.Ft_Pago)  
+		,Convert(date, @fecha, 103)
+		,(Select MAX(Pago_Id) + 1 from PAGO_AGIL.Ft_Pago)
+		,Cast(REPLACE(@total,',','.') as float)
+		,(Select FormaPago_Id from PAGO_AGIL.Dim_FormaPago where FormaPago_Desc like @forma_pago)
+		,(Select Sucursal_Id from PAGO_AGIL.Dim_Sucursal where Sucursal_Nombre like @sucursal)
+		,(select Usuario_Id from PAGO_AGIL.Lk_Usuario where Usuario_Name like @user)
+
+Update PAGO_AGIL.RL_PagoxFactura
+Set Id_Pago = (Select MAX(Pago_Id) from PAGO_AGIL.Ft_Pago)
+where Id_Pago is null
+Go
+
+--Limpiar pago de facturas
+Create Procedure PAGO_AGIL.LimpiarPagos
+as
+	Update PAGO_AGIL.Lk_Factura
+	Set Factura_Pagado = 0
+	where Factura_Id in (Select Id_Factura from PAGO_AGIL.RL_PagoxFactura where Id_Pago is null)
+
+	Delete from PAGO_AGIL.RL_PagoxFactura
+	where Id_Pago is null
+Go
 
 create procedure [PAGO_AGIL].buscar_factura (@numero int,@alta varchar(50),@venc varchar(50),@clie nvarchar(255),@emp nvarchar(100),@estado bit)
 as

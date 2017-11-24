@@ -141,7 +141,7 @@ namespace PagoAgilFrba.Login
 
         private void button_pagar_Click(object sender, EventArgs e)
         {
-            PagoAgilFrba.RegistroPago.RegistroPago menu_reg = new PagoAgilFrba.RegistroPago.RegistroPago(menu_fecha, menu_sucursal, this);
+            PagoAgilFrba.RegistroPago.RegistroPago menu_reg = new PagoAgilFrba.RegistroPago.RegistroPago(menu_fecha, menu_sucursal, this, menu_user);
             this.Hide();
             menu_reg.Show();
         }

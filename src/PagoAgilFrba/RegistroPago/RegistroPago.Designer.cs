@@ -52,9 +52,6 @@
             this.button_buscar_empresa = new System.Windows.Forms.Button();
             this.label12 = new System.Windows.Forms.Label();
             this.dataGridView_total = new System.Windows.Forms.DataGridView();
-            this.dataGridView_confirmados = new System.Windows.Forms.DataGridView();
-            this.button_buscar = new System.Windows.Forms.Button();
-            this.button_limpiar = new System.Windows.Forms.Button();
             this.id = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Cliente = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Empresa = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -62,6 +59,7 @@
             this.Vencimiento = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Importe = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.importe_bruto = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dataGridView_confirmados = new System.Windows.Forms.DataGridView();
             this.id_ = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dataGridViewTextBoxColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dataGridViewTextBoxColumn2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -69,6 +67,10 @@
             this.dataGridViewTextBoxColumn4 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dataGridViewTextBoxColumn5 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.importe_bruto_ = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.button_buscar = new System.Windows.Forms.Button();
+            this.button_limpiar = new System.Windows.Forms.Button();
+            this.label1 = new System.Windows.Forms.Label();
+            this.textBox_user = new System.Windows.Forms.TextBox();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView_total)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView_confirmados)).BeginInit();
             this.SuspendLayout();
@@ -85,10 +87,10 @@
             // 
             this.comboBox_empresa.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.comboBox_empresa.FormattingEnabled = true;
-            this.comboBox_empresa.Location = new System.Drawing.Point(122, 60);
+            this.comboBox_empresa.Location = new System.Drawing.Point(98, 60);
             this.comboBox_empresa.Name = "comboBox_empresa";
-            this.comboBox_empresa.Size = new System.Drawing.Size(147, 21);
-            this.comboBox_empresa.TabIndex = 2;
+            this.comboBox_empresa.Size = new System.Drawing.Size(171, 21);
+            this.comboBox_empresa.TabIndex = 4;
             // 
             // textBox_sucursal
             // 
@@ -101,7 +103,7 @@
             // label4
             // 
             this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(62, 63);
+            this.label4.Location = new System.Drawing.Point(38, 63);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(54, 13);
             this.label4.TabIndex = 10;
@@ -130,9 +132,10 @@
             this.button_confirmar.Location = new System.Drawing.Point(493, 493);
             this.button_confirmar.Name = "button_confirmar";
             this.button_confirmar.Size = new System.Drawing.Size(102, 35);
-            this.button_confirmar.TabIndex = 14;
+            this.button_confirmar.TabIndex = 11;
             this.button_confirmar.Text = "Confirmar Pago";
             this.button_confirmar.UseVisualStyleBackColor = true;
+            this.button_confirmar.Click += new System.EventHandler(this.button_confirmar_Click);
             // 
             // label8
             // 
@@ -149,7 +152,7 @@
             this.button_agregar.Location = new System.Drawing.Point(493, 242);
             this.button_agregar.Name = "button_agregar";
             this.button_agregar.Size = new System.Drawing.Size(102, 24);
-            this.button_agregar.TabIndex = 16;
+            this.button_agregar.TabIndex = 8;
             this.button_agregar.Text = "Agregar Factura";
             this.button_agregar.UseVisualStyleBackColor = true;
             this.button_agregar.Click += new System.EventHandler(this.button_agregar_Click);
@@ -193,7 +196,7 @@
             // label10
             // 
             this.label10.AutoSize = true;
-            this.label10.Location = new System.Drawing.Point(333, 429);
+            this.label10.Location = new System.Drawing.Point(328, 455);
             this.label10.Name = "label10";
             this.label10.Size = new System.Drawing.Size(82, 13);
             this.label10.TabIndex = 24;
@@ -203,7 +206,7 @@
             // 
             this.comboBox_forma.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.comboBox_forma.FormattingEnabled = true;
-            this.comboBox_forma.Location = new System.Drawing.Point(421, 426);
+            this.comboBox_forma.Location = new System.Drawing.Point(416, 452);
             this.comboBox_forma.Name = "comboBox_forma";
             this.comboBox_forma.Size = new System.Drawing.Size(147, 21);
             this.comboBox_forma.TabIndex = 23;
@@ -211,7 +214,7 @@
             // label11
             // 
             this.label11.AutoSize = true;
-            this.label11.Location = new System.Drawing.Point(71, 36);
+            this.label11.Location = new System.Drawing.Point(47, 36);
             this.label11.Name = "label11";
             this.label11.Size = new System.Drawing.Size(45, 13);
             this.label11.TabIndex = 22;
@@ -221,17 +224,17 @@
             // 
             this.comboBox_cliente.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.comboBox_cliente.FormattingEnabled = true;
-            this.comboBox_cliente.Location = new System.Drawing.Point(122, 33);
+            this.comboBox_cliente.Location = new System.Drawing.Point(98, 33);
             this.comboBox_cliente.Name = "comboBox_cliente";
-            this.comboBox_cliente.Size = new System.Drawing.Size(147, 21);
-            this.comboBox_cliente.TabIndex = 21;
+            this.comboBox_cliente.Size = new System.Drawing.Size(171, 21);
+            this.comboBox_cliente.TabIndex = 1;
             // 
             // button_cancelar
             // 
             this.button_cancelar.Location = new System.Drawing.Point(14, 493);
             this.button_cancelar.Name = "button_cancelar";
             this.button_cancelar.Size = new System.Drawing.Size(102, 35);
-            this.button_cancelar.TabIndex = 25;
+            this.button_cancelar.TabIndex = 9;
             this.button_cancelar.Text = "Cancelar";
             this.button_cancelar.UseVisualStyleBackColor = true;
             this.button_cancelar.Click += new System.EventHandler(this.button_cancelar_Click);
@@ -241,21 +244,21 @@
             this.textBox_cliente.Location = new System.Drawing.Point(284, 33);
             this.textBox_cliente.Name = "textBox_cliente";
             this.textBox_cliente.Size = new System.Drawing.Size(116, 20);
-            this.textBox_cliente.TabIndex = 26;
+            this.textBox_cliente.TabIndex = 2;
             // 
             // textBox_empresa
             // 
             this.textBox_empresa.Location = new System.Drawing.Point(284, 60);
             this.textBox_empresa.Name = "textBox_empresa";
             this.textBox_empresa.Size = new System.Drawing.Size(116, 20);
-            this.textBox_empresa.TabIndex = 27;
+            this.textBox_empresa.TabIndex = 5;
             // 
             // button_buscar_cliente
             // 
             this.button_buscar_cliente.Location = new System.Drawing.Point(416, 32);
             this.button_buscar_cliente.Name = "button_buscar_cliente";
             this.button_buscar_cliente.Size = new System.Drawing.Size(102, 22);
-            this.button_buscar_cliente.TabIndex = 28;
+            this.button_buscar_cliente.TabIndex = 3;
             this.button_buscar_cliente.Text = "Buscar cliente";
             this.button_buscar_cliente.UseVisualStyleBackColor = true;
             this.button_buscar_cliente.Click += new System.EventHandler(this.button_buscar_cliente_Click);
@@ -265,7 +268,7 @@
             this.button_buscar_empresa.Location = new System.Drawing.Point(416, 58);
             this.button_buscar_empresa.Name = "button_buscar_empresa";
             this.button_buscar_empresa.Size = new System.Drawing.Size(102, 22);
-            this.button_buscar_empresa.TabIndex = 29;
+            this.button_buscar_empresa.TabIndex = 6;
             this.button_buscar_empresa.Text = "Buscar empresa";
             this.button_buscar_empresa.UseVisualStyleBackColor = true;
             this.button_buscar_empresa.Click += new System.EventHandler(this.button_buscar_empresa_Click);
@@ -298,44 +301,6 @@
             this.dataGridView_total.ReadOnly = true;
             this.dataGridView_total.Size = new System.Drawing.Size(581, 109);
             this.dataGridView_total.TabIndex = 32;
-            // 
-            // dataGridView_confirmados
-            // 
-            this.dataGridView_confirmados.AllowUserToAddRows = false;
-            this.dataGridView_confirmados.AllowUserToDeleteRows = false;
-            this.dataGridView_confirmados.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridView_confirmados.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
-            this.id_,
-            this.dataGridViewTextBoxColumn1,
-            this.dataGridViewTextBoxColumn2,
-            this.dataGridViewTextBoxColumn3,
-            this.dataGridViewTextBoxColumn4,
-            this.dataGridViewTextBoxColumn5,
-            this.importe_bruto_});
-            this.dataGridView_confirmados.Location = new System.Drawing.Point(14, 272);
-            this.dataGridView_confirmados.Name = "dataGridView_confirmados";
-            this.dataGridView_confirmados.ReadOnly = true;
-            this.dataGridView_confirmados.Size = new System.Drawing.Size(581, 104);
-            this.dataGridView_confirmados.TabIndex = 33;
-            // 
-            // button_buscar
-            // 
-            this.button_buscar.Location = new System.Drawing.Point(493, 99);
-            this.button_buscar.Name = "button_buscar";
-            this.button_buscar.Size = new System.Drawing.Size(102, 22);
-            this.button_buscar.TabIndex = 34;
-            this.button_buscar.Text = "Buscar facturas";
-            this.button_buscar.UseVisualStyleBackColor = true;
-            this.button_buscar.Click += new System.EventHandler(this.button1_Click);
-            // 
-            // button_limpiar
-            // 
-            this.button_limpiar.Location = new System.Drawing.Point(248, 493);
-            this.button_limpiar.Name = "button_limpiar";
-            this.button_limpiar.Size = new System.Drawing.Size(102, 35);
-            this.button_limpiar.TabIndex = 35;
-            this.button_limpiar.Text = "Limpiar";
-            this.button_limpiar.UseVisualStyleBackColor = true;
             // 
             // id
             // 
@@ -382,6 +347,25 @@
             this.importe_bruto.ReadOnly = true;
             this.importe_bruto.Visible = false;
             // 
+            // dataGridView_confirmados
+            // 
+            this.dataGridView_confirmados.AllowUserToAddRows = false;
+            this.dataGridView_confirmados.AllowUserToDeleteRows = false;
+            this.dataGridView_confirmados.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dataGridView_confirmados.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.id_,
+            this.dataGridViewTextBoxColumn1,
+            this.dataGridViewTextBoxColumn2,
+            this.dataGridViewTextBoxColumn3,
+            this.dataGridViewTextBoxColumn4,
+            this.dataGridViewTextBoxColumn5,
+            this.importe_bruto_});
+            this.dataGridView_confirmados.Location = new System.Drawing.Point(14, 272);
+            this.dataGridView_confirmados.Name = "dataGridView_confirmados";
+            this.dataGridView_confirmados.ReadOnly = true;
+            this.dataGridView_confirmados.Size = new System.Drawing.Size(581, 104);
+            this.dataGridView_confirmados.TabIndex = 33;
+            // 
             // id_
             // 
             this.id_.HeaderText = "id_";
@@ -427,11 +411,50 @@
             this.importe_bruto_.ReadOnly = true;
             this.importe_bruto_.Visible = false;
             // 
+            // button_buscar
+            // 
+            this.button_buscar.Location = new System.Drawing.Point(493, 99);
+            this.button_buscar.Name = "button_buscar";
+            this.button_buscar.Size = new System.Drawing.Size(102, 22);
+            this.button_buscar.TabIndex = 7;
+            this.button_buscar.Text = "Buscar facturas";
+            this.button_buscar.UseVisualStyleBackColor = true;
+            this.button_buscar.Click += new System.EventHandler(this.button1_Click);
+            // 
+            // button_limpiar
+            // 
+            this.button_limpiar.Location = new System.Drawing.Point(248, 493);
+            this.button_limpiar.Name = "button_limpiar";
+            this.button_limpiar.Size = new System.Drawing.Size(102, 35);
+            this.button_limpiar.TabIndex = 10;
+            this.button_limpiar.Text = "Limpiar";
+            this.button_limpiar.UseVisualStyleBackColor = true;
+            this.button_limpiar.Click += new System.EventHandler(this.button_limpiar_Click);
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(361, 430);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(49, 13);
+            this.label1.TabIndex = 35;
+            this.label1.Text = "Usuario :";
+            // 
+            // textBox_user
+            // 
+            this.textBox_user.Location = new System.Drawing.Point(416, 427);
+            this.textBox_user.Name = "textBox_user";
+            this.textBox_user.ReadOnly = true;
+            this.textBox_user.Size = new System.Drawing.Size(147, 20);
+            this.textBox_user.TabIndex = 34;
+            // 
             // RegistroPago
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(609, 548);
+            this.Controls.Add(this.label1);
+            this.Controls.Add(this.textBox_user);
             this.Controls.Add(this.button_limpiar);
             this.Controls.Add(this.button_buscar);
             this.Controls.Add(this.dataGridView_confirmados);
@@ -512,5 +535,7 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn4;
         private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn5;
         private System.Windows.Forms.DataGridViewTextBoxColumn importe_bruto_;
+        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.TextBox textBox_user;
     }
 }
