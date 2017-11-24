@@ -65,48 +65,55 @@ namespace PagoAgilFrba.AbmRol
 
         private void button_alta_Click(object sender, EventArgs e)
         {
-            foreach (DataGridViewRow row in dataGridView_funcionalidades.Rows)
+            if (string.IsNullOrWhiteSpace(textBox_nombre.Text))
             {
-                object value = row.Cells[2].Value;
-                if (value != null && (Boolean)value)
+                MessageBox.Show("Nombre es un campo requerido", "Informacion", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
+            else
+            {
+                foreach (DataGridViewRow row in dataGridView_funcionalidades.Rows)
                 {
-                    string consulta = "Execute PAGO_AGIL.Rol_Funcionalidad '" + row.Cells[0].Value.ToString() + "'";
-                    try
+                    object value = row.Cells[2].Value;
+                    if (value != null && (Boolean)value)
                     {
-                        conexion connection = new conexion();
-                        SqlCommand command = new SqlCommand();
+                        string consulta = "Execute PAGO_AGIL.Rol_Funcionalidad '" + row.Cells[0].Value.ToString() + "'";
+                        try
+                        {
+                            conexion connection = new conexion();
+                            SqlCommand command = new SqlCommand();
 
-                        command.CommandType = CommandType.Text;
-                        command.Connection = connection.abrir_conexion();
-                        command.CommandText = consulta;
-                        SqlDataReader reader = command.ExecuteReader();
-                    }
-                    catch (Exception ex)
-                    {
-                        MessageBox.Show("Error: " + ex.Message);
-                        return;
+                            command.CommandType = CommandType.Text;
+                            command.Connection = connection.abrir_conexion();
+                            command.CommandText = consulta;
+                            SqlDataReader reader = command.ExecuteReader();
+                        }
+                        catch (Exception ex)
+                        {
+                            MessageBox.Show("Error: " + ex.Message);
+                            return;
+                        }
                     }
                 }
-            }
+                string consulta2 = "Execute PAGO_AGIL.Alta_Rol '" + textBox_nombre.Text + "'";
 
-            string consulta2 = "Execute PAGO_AGIL.Alta_Rol '" + textBox_nombre.Text + "'";
-            
                 conexion connection2 = new conexion();
                 SqlCommand command2 = new SqlCommand();
 
                 command2.CommandType = CommandType.Text;
                 command2.Connection = connection2.abrir_conexion();
                 command2.CommandText = consulta2;
-            try
-            {
-                Object reader = command2.ExecuteScalar();
-                string resultado = reader.ToString();
-                tratar_resultado(resultado);
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show("Error: " + ex.Message);
-                return;
+                try
+                {
+                    Object reader = command2.ExecuteScalar();
+                    string resultado = reader.ToString();
+                    tratar_resultado(resultado);
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show("Error: " + ex.Message);
+                    return;
+                }
             }
         }
 

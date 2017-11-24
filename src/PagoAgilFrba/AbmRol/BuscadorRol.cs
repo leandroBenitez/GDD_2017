@@ -92,7 +92,7 @@ namespace PagoAgilFrba.AbmRol
                 try
                 {
                     Object reader = command.ExecuteScalar();
-
+                    MessageBox.Show("Rol dado de baja con éxito", "Rol", MessageBoxButtons.OK, MessageBoxIcon.None);
 
                 }
                 catch (Exception ex)
@@ -115,9 +115,9 @@ namespace PagoAgilFrba.AbmRol
                 DataGridViewRow row = this.dataGridView_resultados.SelectedRows[0];
                 int idRol = int.Parse(row.Cells[0].Value.ToString());
                 string nombre = row.Cells[1].Value.ToString();
-                DataGridViewCheckBoxCell chk = (DataGridViewCheckBoxCell)row.Cells[2];
                 bool habilitado;
-                if (chk.Value == chk.TrueValue)
+                object value = row.Cells[2].Value;
+                if (value != null && (Boolean)value)
                 {
                     habilitado = true;
                 }

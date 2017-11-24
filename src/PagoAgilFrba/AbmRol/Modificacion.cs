@@ -28,11 +28,10 @@ namespace PagoAgilFrba.AbmRol
         }
         private void llenar_dataViewGrid(int id_rol)
         {
-            string consulta = "select fun.Funcionalidad_Id, fun.Funcionalidad_Desc, 1 from PAGO_AGIL.Dim_Funcionalidad as fun inner join PAGO_AGIL.Rl_RolxFuncionalidad as rf on rf.Funcionalidad_Id = fun.Funcionalidad_Id inner join PAGO_AGIL.Dim_Rol as rol";
-	        consulta = consulta + " on rol.Rol_Id = " + id_rol.ToString() + " ";
-            consulta = consulta + "UNION select fun2.Funcionalidad_Id, fun2.Funcionalidad_Desc, 0 from PAGO_AGIL.Dim_Funcionalidad as fun2 inner join PAGO_AGIL.Rl_RolxFuncionalidad as rf2 ";
-	        consulta = consulta + "on rf2.Funcionalidad_Id = fun2.Funcionalidad_Id inner join PAGO_AGIL.Dim_Rol as rol2 ";
-            consulta = consulta + "on rol2.Rol_Id != " + id_rol.ToString();
+            string consulta = "select distinct fun.Funcionalidad_Id , fun.Funcionalidad_Desc , case when count(rf.Rol_Id) = 0 then '0' else '1' end as Func from PAGO_AGIL.Dim_Funcionalidad as fun ";
+            consulta = consulta + " full outer join PAGO_AGIL.Rl_RolxFuncionalidad as rf ";
+            consulta = consulta + " on rf.Funcionalidad_Id = fun.Funcionalidad_Id and rf.Rol_Id = '";
+            consulta = consulta + main_idRol + "' where Funcionalidad_Desc is not null group by rf.Rol_Id, fun.Funcionalidad_Id, fun.Funcionalidad_Desc";
 	
             conexion connection = new conexion();
             SqlCommand command = new SqlCommand();
@@ -64,7 +63,7 @@ namespace PagoAgilFrba.AbmRol
                 columnas[0] = datos[0].ToString();
                 columnas[1] = datos[1].ToString();
 		
-                if (datos[2].ToString() == "True")
+                if (datos[2].ToString() == "1")
                     columnas[2] = true;
                 else
                     columnas[2] = false;
