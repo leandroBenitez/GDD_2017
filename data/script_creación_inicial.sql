@@ -1195,14 +1195,6 @@ begin
 		where Funcionalidad_Id = @id_funcionalidad 
 		and Rol_Id = @id_rol
 	end
-	else
-	begin
-		delete from PAGO_AGIL.Rl_RolxFuncionalidad
-			where Funcionalidad_Id = @id_funcionalidad 
-				and Rol_Id = @id_rol
-		--insert into PAGO_AGIL.Rl_RolxFuncionalidad (Funcionalidad_Id, Rol_Id)
-		--values (@id_funcionalidad, @id_rol)
-	end	
 end 
 else
 begin 

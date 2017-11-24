@@ -106,6 +106,7 @@ namespace PagoAgilFrba.AbmRol
                 catch (Exception ex)
                 {
                      MessageBox.Show("Error: " + ex.Message);
+                     return;
                 }
                }
 
@@ -131,10 +132,12 @@ namespace PagoAgilFrba.AbmRol
                 command.Connection = connection.abrir_conexion();
                 command.CommandText = consulta2;
                 SqlDataReader reader = command.ExecuteReader();
+                MessageBox.Show("Rol modificado con éxito ", "Rol", MessageBoxButtons.OK, MessageBoxIcon.None);
             }
             catch (Exception ex)
             {
                 MessageBox.Show("Error: " + ex.Message);
+                return;
             }
         }
 
