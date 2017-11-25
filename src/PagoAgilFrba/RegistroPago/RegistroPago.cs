@@ -73,7 +73,14 @@ namespace PagoAgilFrba.RegistroPago
 
         private void button1_Click(object sender, EventArgs e)
         {
-            ejecutar_carga();
+            if(comboBox_cliente.SelectedIndex != -1)
+            {
+                ejecutar_carga();
+            }
+            else
+            {
+                MessageBox.Show("Se debe seleccionar un cliente");
+            }
         }
 
         public void ejecutar_carga()
