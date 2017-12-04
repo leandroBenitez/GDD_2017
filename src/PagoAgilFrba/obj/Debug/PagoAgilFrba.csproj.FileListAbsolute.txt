@@ -162,11 +162,10 @@ C:\Users\Fabrizio\Documents\GitHub\GDD_2017\src\PagoAgilFrba\obj\Debug\PagoAgilF
 C:\Users\Fabrizio\Documents\GitHub\GDD_2017\src\PagoAgilFrba\obj\Debug\PagoAgilFrba.Devolucion.DevolverFactura.resources
 C:\Users\Fabrizio\Documents\GitHub\GDD_2017\src\PagoAgilFrba\obj\Debug\PagoAgilFrba.Devolucion.motivo.resources
 C:\Users\Matucha\Documents\1-UTN\GDD\2C-2017\GDD_2017\src\PagoAgilFrba\bin\Debug\PagoAgilFrba.exe.config
-C:\Users\Matucha\Documents\1-UTN\GDD\2C-2017\GDD_2017\src\PagoAgilFrba\obj\Debug\PagoAgilFrba.exe
-C:\Users\Matucha\Documents\1-UTN\GDD\2C-2017\GDD_2017\src\PagoAgilFrba\obj\Debug\PagoAgilFrba.pdb
 C:\Users\Matucha\Documents\1-UTN\GDD\2C-2017\GDD_2017\src\PagoAgilFrba\bin\Debug\PagoAgilFrba.exe
 C:\Users\Matucha\Documents\1-UTN\GDD\2C-2017\GDD_2017\src\PagoAgilFrba\bin\Debug\PagoAgilFrba.pdb
 C:\Users\Matucha\Documents\1-UTN\GDD\2C-2017\GDD_2017\src\PagoAgilFrba\obj\Debug\PagoAgilFrba.csprojResolveAssemblyReference.cache
+C:\Users\Matucha\Documents\1-UTN\GDD\2C-2017\GDD_2017\src\PagoAgilFrba\obj\Debug\PagoAgilFrba.AbmCliente.aux_modificacion.resources
 C:\Users\Matucha\Documents\1-UTN\GDD\2C-2017\GDD_2017\src\PagoAgilFrba\obj\Debug\PagoAgilFrba.AbmCliente1.bajaCliente.resources
 C:\Users\Matucha\Documents\1-UTN\GDD\2C-2017\GDD_2017\src\PagoAgilFrba\obj\Debug\PagoAgilFrba.AbmCliente1.busqueda.resources
 C:\Users\Matucha\Documents\1-UTN\GDD\2C-2017\GDD_2017\src\PagoAgilFrba\obj\Debug\PagoAgilFrba.AbmCliente1.modificaCliente.resources
@@ -203,4 +202,5 @@ C:\Users\Matucha\Documents\1-UTN\GDD\2C-2017\GDD_2017\src\PagoAgilFrba\obj\Debug
 C:\Users\Matucha\Documents\1-UTN\GDD\2C-2017\GDD_2017\src\PagoAgilFrba\obj\Debug\PagoAgilFrba.RegistroPago.RegistroPago.resources
 C:\Users\Matucha\Documents\1-UTN\GDD\2C-2017\GDD_2017\src\PagoAgilFrba\obj\Debug\PagoAgilFrba.Rendicion.Rendicion.resources
 C:\Users\Matucha\Documents\1-UTN\GDD\2C-2017\GDD_2017\src\PagoAgilFrba\obj\Debug\PagoAgilFrba.csproj.GenerateResource.Cache
-C:\Users\Matucha\Documents\1-UTN\GDD\2C-2017\GDD_2017\src\PagoAgilFrba\obj\Debug\PagoAgilFrba.AbmCliente.aux_modificacion.resources
+C:\Users\Matucha\Documents\1-UTN\GDD\2C-2017\GDD_2017\src\PagoAgilFrba\obj\Debug\PagoAgilFrba.exe
+C:\Users\Matucha\Documents\1-UTN\GDD\2C-2017\GDD_2017\src\PagoAgilFrba\obj\Debug\PagoAgilFrba.pdb

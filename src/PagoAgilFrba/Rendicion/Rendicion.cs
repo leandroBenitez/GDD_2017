@@ -46,7 +46,7 @@ namespace PagoAgilFrba.Rendicion
             }
             if (comboBox_periodo.SelectedIndex != -1)
             {
-                consulta = consulta + "and Periodo = '%" + comboBox_periodo.Text + "%' ";
+                consulta = consulta + "and Periodo = '" + comboBox_periodo.Text + "' ";
             }
             if (combo_rendido.SelectedIndex == 0)
             {
@@ -158,6 +158,7 @@ namespace PagoAgilFrba.Rendicion
             try
             {
                 Object reader = command.ExecuteNonQuery();
+                MessageBox.Show("Rendición Realizada", "Rendicion", MessageBoxButtons.OK, MessageBoxIcon.None);
                 click();
             }
             catch (Exception ex)

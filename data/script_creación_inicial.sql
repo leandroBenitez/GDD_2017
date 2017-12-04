@@ -722,7 +722,7 @@ where	Usuario_Name like @user
 Select @password = 1
 from PAGO_AGIL.Lk_Usuario
 where	Usuario_Name like @user
-	and	Usuario_Password like HASHBYTES('SHA2_256',@pass) 
+	and	Usuario_Password = HASHBYTES('SHA2_256',@pass) 
 
 If @usuario = 0
 	Select 'Inexistente' as Resultado
@@ -1235,13 +1235,13 @@ from PAGO_AGIL.Lk_Factura where Factura_Id = @id_factura
 Select @emp_habilitado = Empresa_Habilitado
 from PAGO_AGIL.Dim_Empresa
 inner join PAGO_AGIL.Lk_Factura
-	on Factura_Empresa_Id = Empresa_Id
+	on Factura_Id=@id_factura and Factura_Empresa_Id = Empresa_Id
 
 If (@emp_habilitado = 0)
 Begin
 	Select 'Empresa inhabilitada' as resultado
 End
-Else if (@fecha >= convert(datetime, @fecha_sistema, 103))
+Else if (@fecha < convert(datetime, @fecha_sistema, 103))
 Begin
 	Select 'Factura vencida' as resultado
 End
