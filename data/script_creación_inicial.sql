@@ -1227,10 +1227,16 @@ As
 Declare @fecha date
 Declare @emp_habilitado int
 Declare @monto float
+Declare @clienteHab int
 
 Select	 @fecha = Factura_Fecha_Vencimiento 
 		,@monto = Factura_Total
-from PAGO_AGIL.Lk_Factura where Factura_Id = @id_factura
+		,@clienteHab = clie.Cliente_Habilitado
+from PAGO_AGIL.Lk_Factura
+inner join PAGO_AGIL.Lk_Cliente clie
+on Factura_Cliente_Id= clie.Cliente_Id
+where Factura_Id = @id_factura
+
 
 Select @emp_habilitado = Empresa_Habilitado
 from PAGO_AGIL.Dim_Empresa
@@ -1240,6 +1246,10 @@ inner join PAGO_AGIL.Lk_Factura
 If (@emp_habilitado = 0)
 Begin
 	Select 'Empresa inhabilitada' as resultado
+End
+If (@clienteHab = 0)
+Begin
+	Select 'Cliente Inhabilitado' as resultado
 End
 Else if (@fecha < convert(datetime, @fecha_sistema, 103))
 Begin

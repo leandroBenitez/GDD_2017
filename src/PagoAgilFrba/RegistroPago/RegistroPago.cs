@@ -174,6 +174,10 @@ namespace PagoAgilFrba.RegistroPago
                 {
                     MessageBox.Show("El monto de la factura no es correcto");
                 }
+                else if (resultado == "Cliente Inhabilitado")
+                {
+                    MessageBox.Show("Cliente inhabilitado, no puede realizar pagos");
+                }
                 else
                 {
                     agregar_item();
