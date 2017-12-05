@@ -108,6 +108,10 @@ namespace PagoAgilFrba.AbmEmpresa
                     }
 
                 }
+                else
+                {
+                    MessageBox.Show("   Composición de CUIT no válida", "Informacion", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                }
             }
         }
         private void tratar_resultado(string resultado)
