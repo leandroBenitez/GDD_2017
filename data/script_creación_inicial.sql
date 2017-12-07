@@ -1064,14 +1064,8 @@ create procedure PAGO_AGIL.modificaCliente(@mail_buscado nvarchar(255),@dni_busc
 @codigoPostal nvarchar(255), @habilitado int) as
 begin
 	declare @validacionMail int = (select count(1) from PAGO_AGIL.Lk_Cliente where Cliente_Mail = @mail);
-	if @validacionMail != 0 --No existe un cliente con el nuevo intento de mail
+	if @validacionMail = 0 --No existe un cliente con el nuevo intento de mail
 		begin
-			if @DNI is not null 
-				begin
-					update PAGO_AGIL.Lk_Cliente 
-					set Cliente_Dni = @DNI
-					where Cliente_Dni =@dni_buscado and Cliente_Mail = @mail_buscado
-				end
 			if @apellido !=''
 				begin
 					update PAGO_AGIL.Lk_Cliente 
@@ -1096,12 +1090,6 @@ begin
 					set Cliente_Fecha_Nac = @fechaNac
 					where Cliente_Dni =@dni_buscado and Cliente_Mail = @mail_buscado
 				end
-			if @mail !=''
-				begin
-					update PAGO_AGIL.Lk_Cliente 
-					set Cliente_Mail = @mail
-					where Cliente_Dni =@dni_buscado and Cliente_Mail = @mail_buscado
-				end
 			if @direccion !=''
 				begin
 					update PAGO_AGIL.Lk_Cliente 
@@ -1118,6 +1106,19 @@ begin
 				begin
 					update PAGO_AGIL.Lk_Cliente 
 					set Cliente_Habilitado = @habilitado
+					where Cliente_Dni =@dni_buscado and Cliente_Mail = @mail_buscado
+				end
+			if @DNI is not null 
+				begin
+					update PAGO_AGIL.Lk_Cliente 
+					set Cliente_Dni = @DNI
+					where Cliente_Dni =@dni_buscado and Cliente_Mail = @mail_buscado
+					set @dni_buscado = @DNI
+				end
+			if @mail !=''
+				begin
+					update PAGO_AGIL.Lk_Cliente 
+					set Cliente_Mail = @mail
 					where Cliente_Dni =@dni_buscado and Cliente_Mail = @mail_buscado
 				end
 			select 'Cliente modificado con exito'

@@ -115,6 +115,7 @@
             this.telefono.Name = "telefono";
             this.telefono.Size = new System.Drawing.Size(114, 20);
             this.telefono.TabIndex = 35;
+            this.telefono.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.telefono_KeyPress);
             // 
             // nombre
             // 
@@ -310,6 +311,7 @@
             // 
             this.fechaNac.Location = new System.Drawing.Point(48, 203);
             this.fechaNac.Name = "fechaNac";
+            this.fechaNac.ReadOnly = true;
             this.fechaNac.Size = new System.Drawing.Size(114, 20);
             this.fechaNac.TabIndex = 41;
             this.fechaNac.TextChanged += new System.EventHandler(this.fechaNac_Click);

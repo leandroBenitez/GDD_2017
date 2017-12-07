@@ -64,6 +64,10 @@ namespace PagoAgilFrba.AbmCliente
             {
                 MessageBox.Show("No puede haber campos vacíos");
             }
+            else if (!validarMail())
+            {
+                MessageBox.Show("El mail debe contener 1 '@'", "Modificacion", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
             else
             {
                 if (viejo_dni != dni.Text)
@@ -90,6 +94,10 @@ namespace PagoAgilFrba.AbmCliente
                 {
                     viejo_mail = mail.Text;
                 }
+                else
+                {
+                    viejo_mail = "";
+                }
                 if (viejo_dire != direccion.Text)
                 {
                     viejo_dire = direccion.Text;
@@ -115,7 +123,12 @@ namespace PagoAgilFrba.AbmCliente
                     string reultado = reader.ToString();
                     reader.ToString();
                     MessageBox.Show(reader.ToString(), "Informacion", MessageBoxButtons.OK, MessageBoxIcon.Information);
-
+                    if (reader.ToString().Contains("exito"))
+                    {
+                        anterior.Show();
+                        this.Close();
+                    }
+                
                 }
                 catch (Exception ex)
                 {
@@ -182,6 +195,20 @@ namespace PagoAgilFrba.AbmCliente
             monthCalendar1.Visible = false;
             button2.Visible = false;
         }
+        private void telefono_KeyPress(object sender, System.Windows.Forms.KeyPressEventArgs e)
+        {
+            //Controla que el valor ingresado sea un numerico con/sin guiones
+            if (char.IsWhiteSpace(e.KeyChar) || (!char.IsDigit(e.KeyChar) && !(e.KeyChar.ToString() == "-") && !char.IsControl(e.KeyChar)))
+            {
+                e.Handled = true;
+            }
+        }
 
+        private bool validarMail()
+        {
+            int cant = mail.Text.Count(m => m == '@');
+            if (cant == 1) return true;
+            else return false;
+        }
     }
 }

@@ -199,6 +199,14 @@ namespace PagoAgilFrba.AbmCliente1
                 e.Handled = true;
             }
         }
+        private void telefono_KeyPress(object sender, System.Windows.Forms.KeyPressEventArgs e)
+        {
+            //Controla que el valor ingresado sea un numerico con/sin guiones
+            if (char.IsWhiteSpace(e.KeyChar) || (!char.IsDigit(e.KeyChar) && !(e.KeyChar.ToString() == "-") && !char.IsControl(e.KeyChar)))
+            {
+                e.Handled = true;
+            }
+        }
 
 
     }

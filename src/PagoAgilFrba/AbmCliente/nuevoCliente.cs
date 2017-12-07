@@ -52,6 +52,13 @@ namespace PagoAgilFrba.AbmCliente1
             { bitHabilitado = "1"; }
             else { bitHabilitado = "0"; }
 
+            if (!validarMail())
+            {
+                MessageBox.Show("El e-mail debe contener 1 '@'", "Nuevo Cliente", MessageBoxButtons.OK, MessageBoxIcon.None);
+                return;
+            }
+
+
             consulta = "Execute PAGO_AGIL.nuevoCliente " + dni.Text + ", '" + apellido.Text + "', '" +
             nombre.Text + "', '" + telefono.Text + "', '" + fechaNac.Text + "', '" + mail.Text + "', '" + direccion.Text + "', '" +
             codPostal.Text + "', " + bitHabilitado;
@@ -132,11 +139,28 @@ namespace PagoAgilFrba.AbmCliente1
         }
         private void nombre_apellido_KeyPress(object sender, System.Windows.Forms.KeyPressEventArgs e)
         {
-            //Controla que el valor ingresado sea un numerico
+            //Controla que el valor ingresado no sea un numerico
             if (!char.IsControl(e.KeyChar) && char.IsDigit(e.KeyChar))
             {
                 e.Handled = true;
             }
         }
+
+        private void telefono_KeyPress(object sender, System.Windows.Forms.KeyPressEventArgs e)
+        {
+            //Controla que el valor ingresado sea un numerico con/sin guiones
+            if (char.IsWhiteSpace(e.KeyChar) || (!char.IsDigit(e.KeyChar) && !(e.KeyChar.ToString() == "-") && !char.IsControl(e.KeyChar)))
+            {
+                e.Handled = true;
+            }
+        }
+
+        private bool validarMail()
+        {
+            int cant = mail.Text.Count(m => m == '@');
+            if (cant == 1) return true;
+            else return false;
+        }
+
     }
 }

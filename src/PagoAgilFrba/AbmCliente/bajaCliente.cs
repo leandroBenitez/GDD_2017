@@ -115,8 +115,8 @@ namespace PagoAgilFrba.AbmCliente1
             {
                 DataGridViewRow row = this.dataGridView1.SelectedRows[0];
                 string mail = row.Cells[5].Value.ToString();
-
-                string consulta = "Execute PAGO_AGIL.bajaCliente " + dni.Text +",'"+mail+"'";
+                string dniT = row.Cells[0].Value.ToString();
+                string consulta = "Execute PAGO_AGIL.bajaCliente " + dniT +",'"+mail+"'";
                 conexion connection = new conexion();
                 SqlCommand command = new SqlCommand();
 

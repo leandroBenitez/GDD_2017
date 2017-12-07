@@ -119,6 +119,7 @@
             this.telefono.Name = "telefono";
             this.telefono.Size = new System.Drawing.Size(114, 20);
             this.telefono.TabIndex = 106;
+            this.telefono.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.telefono_KeyPress);
             // 
             // nombre
             // 

@@ -151,6 +151,7 @@
             this.telefono.ReadOnly = true;
             this.telefono.Size = new System.Drawing.Size(114, 20);
             this.telefono.TabIndex = 60;
+            this.telefono.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.telefono_KeyPress);
             // 
             // nombre
             // 
@@ -488,7 +489,6 @@
             this.label12.Size = new System.Drawing.Size(301, 16);
             this.label12.TabIndex = 95;
             this.label12.Text = "Seleccione el Cliente que desea modificar";
-            this.label12.Visible = false;
             // 
             // dniBuscado
             // 
