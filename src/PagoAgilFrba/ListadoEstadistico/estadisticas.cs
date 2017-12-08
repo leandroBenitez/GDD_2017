@@ -46,7 +46,7 @@ namespace PagoAgilFrba.ListadoEstadistico
 
                 if (combo_listado.SelectedIndex == 0)
                 {
-                    consulta = "Select * from PAGO_AGIL.Vw_FactPagadas";
+                    consulta = "Select TOP 5 * from PAGO_AGIL.Vw_FactPagadas";
                     dataGridView.Columns[0].HeaderText = "Empresa";
                     dataGridView.Columns[1].HeaderText = "Rubro";
                     dataGridView.Columns[2].HeaderText = "CUIT";
@@ -54,7 +54,7 @@ namespace PagoAgilFrba.ListadoEstadistico
                 }
                 else if (combo_listado.SelectedIndex == 1)
                 {
-                    consulta = "Select * from PAGO_AGIL.Vw_MayoresRendidos";
+                    consulta = "Select TOP 5 * from PAGO_AGIL.Vw_MayoresRendidos";
                     dataGridView.Columns[0].HeaderText = "Empresa";
                     dataGridView.Columns[1].HeaderText = "Rubro";
                     dataGridView.Columns[2].HeaderText = "CUIT";
@@ -62,7 +62,7 @@ namespace PagoAgilFrba.ListadoEstadistico
                 }
                 else if (combo_listado.SelectedIndex == 2)
                 {
-                    consulta = "Select * from PAGO_AGIL.Vw_MayoresPagados";
+                    consulta = "Select TOP 5 * from PAGO_AGIL.Vw_MayoresPagados";
                     dataGridView.Columns[0].HeaderText = "Cliente";
                     dataGridView.Columns[1].HeaderText = "DNI";
                     dataGridView.Columns[2].HeaderText = "Fec Nac";
@@ -70,7 +70,7 @@ namespace PagoAgilFrba.ListadoEstadistico
                 }
                 else
                 {
-                    consulta = "Select * from PAGO_AGIL.Vw_MayoresPagadosPorcen";
+                    consulta = "Select TOP 5 * from PAGO_AGIL.Vw_MayoresPagadosPorcen";
                     dataGridView.Columns[0].HeaderText = "Cliente";
                     dataGridView.Columns[1].HeaderText = "DNI";
                     dataGridView.Columns[2].HeaderText = "Fec Nac";

@@ -31,6 +31,10 @@ namespace PagoAgilFrba.AbmEmpresa
             textBox_cuit_medio.Text = tokens[1];
             textBox_cuit_fin.Text = tokens[2];
             checkBox_habilitada.Checked = habilitado;
+            if (habilitado)
+            {
+                checkBox_habilitada.Enabled = false;
+            }
             id_emp = idEmp;
             textBox_dia.Text = dia_cobro;
             string consulta = "Select Rubro_Descripcion from PAGO_AGIL.Dim_Rubro";

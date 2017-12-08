@@ -607,7 +607,7 @@ inner join PAGO_AGIL.Lk_Factura as fac
 		on pag.Pago_Id = rlp.Id_Pago
 	left join PAGO_AGIL.Ft_Rendicion as ren
 			on fac.Factura_Rendicion_Id = ren.Rendicion_Id
-where fac.Factura_Pagado = 1
+where	fac.Factura_Pagado = 1
 group by emp.Empresa_Id
 		,emp.Empresa_Nombre
 		,emp.Empresa_Dia_Rendicion
@@ -619,8 +619,7 @@ Go
 --Vista 1: Porcentaje de facturas pagadas por empresa
 Create view [PAGO_AGIL].[Vw_FactPagadas]
 as
-	Select	 Top 5
-			 emp.Empresa_Nombre as Empresa
+	Select	 emp.Empresa_Nombre as Empresa
 			,rub.Rubro_Descripcion as Rubro
 			,emp.Empresa_Cuit Cuit
 			,(SUM(Case when fac.Factura_Pagado = 1 then 1 else 0 end) * 100) / Count(1) as Porcentaje
@@ -642,8 +641,7 @@ Go
 --Vista 2: Mayores montos rendidos por empresa
 Create view [PAGO_AGIL].[Vw_MayoresRendidos]
 as
-	Select	 Top 5
-			 emp.Empresa_Nombre as Empresa
+	Select	 emp.Empresa_Nombre as Empresa
 			,rub.Rubro_Descripcion as Rubro
 			,emp.Empresa_Cuit Cuit
 			,SUM(FAC.Factura_Total) Rendidos
@@ -666,8 +664,7 @@ Go
 --Vista 3: Ranking cantidad de pagos por clientes
 Create view [PAGO_AGIL].[Vw_MayoresPagados]
 as
-	Select	 Top 5
-			 Concat(cli.Cliente_Nombre,' ',cli.Cliente_Apellido) Cliente
+	Select	 Concat(cli.Cliente_Nombre,' ',cli.Cliente_Apellido) Cliente
 			,cli.Cliente_Dni DNI
 			,cli.Cliente_Fecha_Nac Fec_Nac
 			,Count(fac.Factura_Id) Pagos
@@ -688,8 +685,7 @@ Go
 --Vista 4: Porcentaje de facturas pagadas por cliente
 Create view [PAGO_AGIL].[Vw_MayoresPagadosPorcen]
 as
-	Select	 Top 5
-			 Concat(cli.Cliente_Nombre,' ',cli.Cliente_Apellido) Cliente
+	Select	 Concat(cli.Cliente_Nombre,' ',cli.Cliente_Apellido) Cliente
 			,cli.Cliente_Dni DNI
 			,cli.Cliente_Fecha_Nac Fec_Nac
 			,(SUM(Case when fac.Factura_Pagado = 1 then 1 else 0 end) * 100) / Count(1) as Porcentaje
@@ -948,22 +944,38 @@ GO
 
 Create Procedure PAGO_AGIL.Baja_Empresa  (@id int)
 as
-	declare @estado bit
+	declare @estado int
 	declare @resultado varchar(100)
+	declare @pag int
+
 	select @estado = empp.Empresa_Habilitado from PAGO_AGIL.Dim_Empresa as empp
 		where empp.Empresa_Id = @id
-	update emp
-		set emp.Empresa_Habilitado = 0
-	    from PAGO_AGIL.Dim_Empresa as emp
-		where emp.Empresa_Id = @id
+
+	select @pag = 2 from PAGO_AGIL.Lk_Factura 
+					where	Factura_Empresa_Id = @id
+							and	Factura_Pagado = 1
+							and Factura_Rendicion_Id is null
+	if(@pag = 2)
+		set @estado = 2
 
 	if(@estado = 1)
 	begin
-	set @resultado = 'OK'
+		update emp
+		set emp.Empresa_Habilitado = 0
+	    from PAGO_AGIL.Dim_Empresa as emp
+		where emp.Empresa_Id = @id
+	set @resultado = 'Empresa dada de baja exitosamente'
 	end
 	else
 	begin
-	set @resultado = 'La empresa ya estaba inactiva'
+		if(@estado = 0)
+		begin
+		set @resultado = 'La empresa ya estaba inactiva'
+		end
+		else
+		begin
+		set @resultado = 'No se puede dar de baja empresa, hay facturas pagas no rendidas'
+		end
 	end
 
 Select @resultado as Resultado
@@ -1383,9 +1395,10 @@ if(@numero = 0)
 			and (e.Empresa_Nombre) like '%'+@emp+'%' and f.Factura_Rendicion_Id is null and f.Factura_Pagado = @estado
 		end
 else
-	if not exists(select top 1 * from PAGO_AGIL.Lk_Factura where Factura_Nro = @numero)
-		select -1 -- factura inexistente
-	else
+--	if not exists(select top 1 * from PAGO_AGIL.Lk_Factura where Factura_Nro = @numero)
+--		select -1 -- factura inexistente
+--	else
+	if exists(select top 1 * from PAGO_AGIL.Lk_Factura where Factura_Nro = @numero)
 		begin
 			if(@alta <> '' and @venc <> '')
 				begin

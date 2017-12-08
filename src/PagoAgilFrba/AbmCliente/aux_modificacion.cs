@@ -52,7 +52,7 @@ namespace PagoAgilFrba.AbmCliente
             }
             else
             {
-                bit = "1";
+                bit = "0";
                 button5.Enabled = true;
             }
         }

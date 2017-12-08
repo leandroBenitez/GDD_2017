@@ -133,6 +133,10 @@ namespace PagoAgilFrba.Rendicion
                 {
                     MessageBox.Show("Esta empresa solo rinde los dias " + dia_rendicion + " de cada mes");
                 }
+                else if (chequear_empresa_inhabilitada(id_empresa))
+                {
+                    MessageBox.Show("Esta empresa no se encuentra habilitada");
+                }
                 else
                 {
                     realizar_rendicion(id_empresa, periodo);
@@ -174,6 +178,25 @@ namespace PagoAgilFrba.Rendicion
             combo_rendido.SelectedIndex = -1;
             comboBox_comision.SelectedIndex = -1;
             dataGridView.Rows.Clear();
+        }
+
+        public bool chequear_empresa_inhabilitada(string id_empresa)
+        {
+            string consulta = "Select Empresa_Habilitado from PAGO_AGIL.Dim_Empresa where Empresa_Id = '"+ id_empresa +"'";
+
+            conexion connection = new conexion();
+            SqlCommand command = new SqlCommand();
+
+            command.CommandText = consulta;
+            command.CommandType = CommandType.Text;
+            command.Connection = connection.abrir_conexion();
+
+            Object reader = command.ExecuteScalar();
+
+                if (reader.ToString() == "False")
+                    return true;
+                else
+                    return false;
         }
     }
 }

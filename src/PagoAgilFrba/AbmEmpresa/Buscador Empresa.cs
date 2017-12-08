@@ -142,7 +142,7 @@ namespace PagoAgilFrba.AbmEmpresa
                 try
                 {
                     Object reader = command.ExecuteScalar();
-                    MessageBox.Show("Empresa dada de baja con éxito", "Alta Empresa", MessageBoxButtons.OK, MessageBoxIcon.None);
+                    MessageBox.Show(reader.ToString(),"Baja/Modificacion Empresa", MessageBoxButtons.OK, MessageBoxIcon.None);
 
                 }
                 catch (Exception ex)
@@ -161,6 +161,7 @@ namespace PagoAgilFrba.AbmEmpresa
             textBox_cuit_in.Text = "";
             textBox_cuit_fin.Text = "";
             textBox_cuit_medio.Text = "";
+            combo_rubro.SelectedIndex = -1;
         }
 
         private void button_atras_Click(object sender, EventArgs e)
